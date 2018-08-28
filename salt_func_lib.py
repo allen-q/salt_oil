@@ -202,7 +202,7 @@ x_final, m_final = transformed['image'], transformed['mask']'''
 class SaltDataset(Dataset):
     """Face Landmarks dataset."""
 
-    def __init__(self, np_img, np_mask, df_depth, mean_img, img_out_size=101, transform=None):
+    def __init__(self, np_img, np_mask, df_depth, mean_img, out_size=101, out_ch=1, transform=None):
         """
         Args:
             data_dir (string): Path to the image files.
@@ -214,7 +214,8 @@ class SaltDataset(Dataset):
         self.np_mask = np_mask.clip(0,1)
         self.df_depth = df_depth
         self.mean_img = mean_img
-        self.img_out_size = img_out_size
+        self.out_size = out_size
+        self.out_ch = out_ch
         self.transform = transform
 
     def __len__(self):
@@ -238,8 +239,10 @@ class SaltDataset(Dataset):
         #print(X.dtype)
         X = np.moveaxis(X, -1,0)
 
-        pad_size = self.img_out_size - self.np_img.shape[2]
-        X = np.pad(X, [(0, 0),(0, pad_size), (0, pad_size)], mode='constant')
+        pad_size = self.out_size - self.np_img.shape[2]
+        pad_first = pad_size//2
+        pad_last = pad_size - pad_first
+        X = np.pad(X, [(0, 0),(pad_first, pad_last), (pad_first, pad_last)], mode='reflect')
         #print(X.dtype)
 
         d = self.df_depth.iloc[idx,0]
@@ -247,6 +250,7 @@ class SaltDataset(Dataset):
         #from boxx import g
         #g()
         X = torch.from_numpy(X).float().type(dtype)
+        X = X.repeat(self.out_ch,1,1)
         y = torch.from_numpy(y).float().squeeze().type(dtype)
 
         return (X,y,d,idx)
@@ -428,7 +432,7 @@ def adjust_predictions(zero_mask_cut_off, X, y_pred, y=None):
     y_pred_adj = np.r_[[e if e.sum()>zero_mask_cut_off else np.zeros_like(e) for e in y_pred_adj]]
 
     if y is not None:
-        print(f'IOU score before: {calc_mean_iou(y_pred, y)}, IOU Score after:{calc_mean_iou(y_pred_adj, y)}')
+        log.info(f'IOU score before: {calc_mean_iou(y_pred, y)}, IOU Score after:{calc_mean_iou(y_pred_adj, y)}')
 
     return y_pred_adj
 
@@ -518,9 +522,11 @@ def save_model_state_to_chunks(epoch, model_state, optim_state, scheduler_state,
 
 
 def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_name, other_data={}, num_epochs=25, print_every=2, push_every=None, log=get_logger('SaltNet')):
-    args = [e.shape if isinstance(e, (torch.Tensor, np.ndarray)) else e for e in locals()]
+    #args = locals()
+    #args = {k:v.shape if isinstance(v, (torch.Tensor, np.ndarray)) else v for k,v in args.items()}
+    #args = {k:v.shape if isinstance(v, (torch.Tensor, np.ndarray)) else v for k,v in args.items()}
     log.info('Start Training...')
-    log.info('Passed parameters: {}'.format(args))
+    #log.info('Passed parameters: {}'.format(args))
 
     start = time.time()
 
@@ -578,7 +584,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
                         np.mean(all_losses[-print_every:]), np.mean(all_losses), iou_batch, iou_acc, iter_count, epoch, timeSince(start))
                     )
                     X_orig = X_train[X_id[0]].squeeze()
-                    X_tsfm = X_batch[0].squeeze().cpu().detach().numpy()[:101,:101] + X_train_mean_img.squeeze()
+                    X_tsfm = X_batch[0,0].squeeze().cpu().detach().numpy()[13:114,13:114] + X_train_mean_img.squeeze()
                     #X_tsfm = X_batch[0][X_batch[0].sum((1,2)).argmax()].squeeze().cpu().detach().numpy()[:101,:101] + X_train_mean_img.squeeze()
 
                     y_orig = y_train[X_id[0]].squeeze()
@@ -634,7 +640,8 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
 def push_to_git():
     log.info('Pushing model state to git.')
     get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")
-    get_ipython().system('git add --all')
+    get_ipython().system('git add *.log')
+    get_ipython().system('git add *.csv')
     get_ipython().system('git commit -m "save model state."')
     get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_oil.git --all --force')
     #get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filter cat -- --all')
