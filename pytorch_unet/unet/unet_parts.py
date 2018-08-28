@@ -3,6 +3,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import math
+import torch.utils.model_zoo as model_zoo
 
 
 class double_conv(nn.Module):
@@ -49,24 +51,24 @@ class down(nn.Module):
 
 
 class up(nn.Module):
-    def __init__(self, in_ch, out_ch, trans_in_ch, bilinear=True):
+    def __init__(self, in_ch, out_ch, bilinear=False):
         super(up, self).__init__()
 
         #  would be a nice idea if the upsampling could be learned too,
         #  but my machine do not have enough memory to handle all those weights
-        #print(f'in_ch:{in_ch}, out_ch:{out_ch}')
+												 
         if bilinear:
             print('Using bilinear for upsampling')
             self.upscale = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
         else:
             print('Using transpose conv for upsampling')
-            #self.upscale = nn.ConvTranspose2d(in_ch//2, in_ch//2, 2, stride=2)
-            self.upscale = nn.ConvTranspose2d(trans_in_ch, trans_in_ch, 2, stride=2)
+            self.upscale = nn.ConvTranspose2d(in_ch//2, in_ch//2, 2, stride=2)
+																					
 
         self.conv = double_conv(in_ch, out_ch)
 
     def forward(self, x1, x2):
-        #print(f'in: {x1.shape}, {x2.shape}')
+        print(f'in: {x1.shape}, {x2.shape}')
         x1 = self.upscale(x1)
         diffX = x1.size()[2] - x2.size()[2]
         diffY = x1.size()[3] - x2.size()[3]
@@ -74,7 +76,7 @@ class up(nn.Module):
                         diffY // 2, int(diffY / 2)))
         x = torch.cat([x2, x1], dim=1)
         x = self.conv(x)
-        #print(f'out: {x.shape}')
+        print(f'out: {x.shape}')
         return x
 
 
@@ -90,16 +92,17 @@ class outconv(nn.Module):
         return x[:,:,:101,:101].squeeze()
 
 
-import torch.nn as nn
-import math
-import torch.utils.model_zoo as model_zoo
+					 
+		   
+										 
+
 
 def conv3x3(in_planes, out_planes, stride=1):
     """3x3 convolution with padding"""
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
                      padding=1, bias=False)
-
-
+    
+    
 class BasicBlock(nn.Module):
     expansion = 1
 
@@ -130,8 +133,8 @@ class BasicBlock(nn.Module):
         out = self.relu(out)
 
         return out
-
-
+    
+    
 class Bottleneck(nn.Module):
     expansion = 4
 
@@ -169,9 +172,9 @@ class Bottleneck(nn.Module):
         out = self.relu(out)
 
         return out
-
-
-
+    
+  
+    
 class ResNet(nn.Module):
 
     def __init__(self, block, layers, num_classes=1000):
@@ -238,7 +241,7 @@ def resnet18(pretrained=False, **kwargs):
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
-
+    
     model = ResNet(BasicBlock, [2, 2, 2, 2], **kwargs)
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet18']))
@@ -248,9 +251,19 @@ def resnet18(pretrained=False, **kwargs):
 def resnet18unet(bilinear=True, **kwargs):
     """Constructs a ResNet-18 Unet model.
     Args:
-
+        
     """
     model = UResNet(BasicBlock, [2, 2, 2, 2], bilinear=bilinear, **kwargs)
+
+    return model
+
+
+def resnet50unet(bilinear=True, **kwargs):
+    """Constructs a ResNet-18 Unet model.
+    Args:
+        
+    """    
+    model = UResNet(BasicBlock, [3, 4, 6, 3], bilinear=bilinear, **kwargs)
 
     return model
 
@@ -266,17 +279,17 @@ class UResNet(nn.Module):
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU(inplace=True)
         #self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
-        self.layer1 = self._make_layer(block, 64, layers[0])
-        self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
-        self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
+        self.layer1 = self._make_layer(block, 128, layers[0])
+        self.layer2 = self._make_layer(block, 256, layers[1], stride=2)
+        self.layer3 = self._make_layer(block, 512, layers[2], stride=2)
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
         #self.avgpool = nn.AvgPool2d(7, stride=1)
         #self.fc = nn.Linear(512 * block.expansion, num_classes)
         self.outc = outconv(64, num_classes)
-        self.up1 = up(768, 256, 512, bilinear=bilinear)
-        self.up2 = up(384, 128, 256, bilinear=bilinear)
-        self.up3 = up(192, 64, 128, bilinear=bilinear)
-        self.up4 = up(128, 64, 64, bilinear=bilinear)
+        self.up1 = up(1024, 256, bilinear=bilinear)
+        self.up2 = up(512, 128, bilinear=bilinear)
+        self.up3 = up(256, 64, bilinear=bilinear)
+        self.up4 = up(128, 64, bilinear=bilinear)
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
@@ -310,11 +323,11 @@ class UResNet(nn.Module):
         x3 = self.layer2(x2)
         x4 = self.layer3(x3)
         x5 = self.layer4(x4)
-
+        
         x = self.up1(x5, x4)
         x = self.up2(x, x3)
         x = self.up3(x, x2)
         x = self.up4(x, x1)
         x = self.outc(x)
-
+        
         return x
