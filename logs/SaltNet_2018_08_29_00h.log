@@ -697,3 +697,65 @@
 28/08/2018 17:54:21 - SaltNet - INFO - val Mean IOU: 0.6718, Mean Acc: 0.9303 at epoch 60
 28/08/2018 17:54:23 - SaltNet - INFO - ['Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-1-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-2-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-3-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-4-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-5-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-6-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-7-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-8-Of-8']
 28/08/2018 17:54:23 - SaltNet - INFO - Pushing model state to git.
+28/08/2018 17:54:32 - SaltNet - INFO - Epoch 61/249
+28/08/2018 17:54:32 - SaltNet - INFO - --------------------
+28/08/2018 17:55:11 - SaltNet - INFO - Batch Loss: 0.2039, Running loss: 0.3139, Batch IOU: 0.7750, Batch Acc: 0.9323 at iter 6000, epoch 61, Time: 195m 45s
+28/08/2018 17:56:41 - SaltNet - INFO - Batch Loss: 0.2130, Running loss: 0.3132, Batch IOU: 0.6625, Batch Acc: 0.8799 at iter 6050, epoch 61, Time: 197m 15s
+28/08/2018 17:57:29 - SaltNet - INFO - train Mean IOU: 0.7301, Mean Acc: 0.9131 at epoch 61
+28/08/2018 17:57:41 - SaltNet - INFO - val Mean IOU: 0.6690, Mean Acc: 0.9312 at epoch 61
+28/08/2018 17:57:41 - SaltNet - INFO - Epoch 62/249
+28/08/2018 17:57:41 - SaltNet - INFO - --------------------
+28/08/2018 17:58:24 - SaltNet - INFO - Batch Loss: 0.2032, Running loss: 0.3121, Batch IOU: 0.7156, Batch Acc: 0.8884 at iter 6100, epoch 62, Time: 198m 57s
+28/08/2018 17:59:54 - SaltNet - INFO - Batch Loss: 0.2101, Running loss: 0.3115, Batch IOU: 0.6937, Batch Acc: 0.8959 at iter 6150, epoch 62, Time: 200m 27s
+28/08/2018 18:00:38 - SaltNet - INFO - train Mean IOU: 0.7305, Mean Acc: 0.9145 at epoch 62
+28/08/2018 18:00:49 - SaltNet - INFO - val Mean IOU: 0.6712, Mean Acc: 0.9315 at epoch 62
+28/08/2018 18:00:49 - SaltNet - INFO - Epoch 63/249
+28/08/2018 18:00:49 - SaltNet - INFO - --------------------
+28/08/2018 18:01:36 - SaltNet - INFO - Batch Loss: 0.1956, Running loss: 0.3103, Batch IOU: 0.7125, Batch Acc: 0.8376 at iter 6200, epoch 63, Time: 202m 9s
+28/08/2018 18:03:05 - SaltNet - INFO - Batch Loss: 0.1854, Running loss: 0.3095, Batch IOU: 0.7156, Batch Acc: 0.9007 at iter 6250, epoch 63, Time: 203m 39s
+28/08/2018 18:03:46 - SaltNet - INFO - train Mean IOU: 0.7352, Mean Acc: 0.9187 at epoch 63
+28/08/2018 18:03:58 - SaltNet - INFO - val Mean IOU: 0.6705, Mean Acc: 0.9299 at epoch 63
+28/08/2018 18:03:58 - SaltNet - INFO - Epoch 64/249
+28/08/2018 18:03:58 - SaltNet - INFO - --------------------
+28/08/2018 18:04:48 - SaltNet - INFO - Batch Loss: 0.2049, Running loss: 0.3086, Batch IOU: 0.6938, Batch Acc: 0.8982 at iter 6300, epoch 64, Time: 205m 21s
+28/08/2018 18:06:18 - SaltNet - INFO - Batch Loss: 0.2058, Running loss: 0.3080, Batch IOU: 0.7344, Batch Acc: 0.9817 at iter 6350, epoch 64, Time: 206m 51s
+28/08/2018 18:06:54 - SaltNet - INFO - train Mean IOU: 0.7269, Mean Acc: 0.9174 at epoch 64
+28/08/2018 18:07:06 - SaltNet - INFO - val Mean IOU: 0.6723, Mean Acc: 0.9318 at epoch 64
+28/08/2018 18:07:06 - SaltNet - INFO - Epoch 65/249
+28/08/2018 18:07:06 - SaltNet - INFO - --------------------
+28/08/2018 18:08:00 - SaltNet - INFO - Batch Loss: 0.2045, Running loss: 0.3070, Batch IOU: 0.7156, Batch Acc: 0.9621 at iter 6400, epoch 65, Time: 208m 33s
+28/08/2018 18:09:30 - SaltNet - INFO - Batch Loss: 0.2132, Running loss: 0.3064, Batch IOU: 0.6375, Batch Acc: 0.8626 at iter 6450, epoch 65, Time: 210m 3s
+28/08/2018 18:10:03 - SaltNet - INFO - train Mean IOU: 0.7361, Mean Acc: 0.9133 at epoch 65
+28/08/2018 18:10:15 - SaltNet - INFO - val Mean IOU: 0.6718, Mean Acc: 0.9323 at epoch 65
+28/08/2018 18:10:15 - SaltNet - INFO - Epoch 66/249
+28/08/2018 18:10:15 - SaltNet - INFO - --------------------
+28/08/2018 18:11:12 - SaltNet - INFO - Batch Loss: 0.1909, Running loss: 0.3054, Batch IOU: 0.6813, Batch Acc: 0.9323 at iter 6500, epoch 66, Time: 211m 46s
+28/08/2018 18:12:42 - SaltNet - INFO - Batch Loss: 0.2027, Running loss: 0.3047, Batch IOU: 0.7156, Batch Acc: 0.8649 at iter 6550, epoch 66, Time: 213m 16s
+28/08/2018 18:13:12 - SaltNet - INFO - train Mean IOU: 0.7268, Mean Acc: 0.9163 at epoch 66
+28/08/2018 18:13:23 - SaltNet - INFO - val Mean IOU: 0.6735, Mean Acc: 0.9306 at epoch 66
+28/08/2018 18:13:23 - SaltNet - INFO - Epoch 67/249
+28/08/2018 18:13:23 - SaltNet - INFO - --------------------
+28/08/2018 18:14:24 - SaltNet - INFO - Batch Loss: 0.2054, Running loss: 0.3038, Batch IOU: 0.6719, Batch Acc: 0.9413 at iter 6600, epoch 67, Time: 214m 58s
+28/08/2018 18:15:54 - SaltNet - INFO - Batch Loss: 0.2035, Running loss: 0.3032, Batch IOU: 0.7844, Batch Acc: 0.9140 at iter 6650, epoch 67, Time: 216m 28s
+28/08/2018 18:16:20 - SaltNet - INFO - train Mean IOU: 0.7335, Mean Acc: 0.9183 at epoch 67
+28/08/2018 18:16:32 - SaltNet - INFO - val Mean IOU: 0.6679, Mean Acc: 0.9297 at epoch 67
+28/08/2018 18:16:32 - SaltNet - INFO - Epoch 68/249
+28/08/2018 18:16:32 - SaltNet - INFO - --------------------
+28/08/2018 18:17:36 - SaltNet - INFO - Batch Loss: 0.1941, Running loss: 0.3023, Batch IOU: 0.6656, Batch Acc: 0.9377 at iter 6700, epoch 68, Time: 218m 10s
+28/08/2018 18:19:06 - SaltNet - INFO - Batch Loss: 0.2040, Running loss: 0.3017, Batch IOU: 0.8156, Batch Acc: 0.9329 at iter 6750, epoch 68, Time: 219m 40s
+28/08/2018 18:19:29 - SaltNet - INFO - train Mean IOU: 0.7285, Mean Acc: 0.9150 at epoch 68
+28/08/2018 18:19:41 - SaltNet - INFO - val Mean IOU: 0.6744, Mean Acc: 0.9308 at epoch 68
+28/08/2018 18:19:41 - SaltNet - INFO - Epoch 69/249
+28/08/2018 18:19:41 - SaltNet - INFO - --------------------
+28/08/2018 18:20:49 - SaltNet - INFO - Batch Loss: 0.2006, Running loss: 0.3008, Batch IOU: 0.6937, Batch Acc: 0.9139 at iter 6800, epoch 69, Time: 221m 22s
+28/08/2018 18:22:18 - SaltNet - INFO - Batch Loss: 0.2012, Running loss: 0.3002, Batch IOU: 0.7750, Batch Acc: 0.9444 at iter 6850, epoch 69, Time: 222m 52s
+28/08/2018 18:22:37 - SaltNet - INFO - train Mean IOU: 0.7215, Mean Acc: 0.9135 at epoch 69
+28/08/2018 18:22:49 - SaltNet - INFO - val Mean IOU: 0.6727, Mean Acc: 0.9322 at epoch 69
+28/08/2018 18:22:49 - SaltNet - INFO - Epoch 70/249
+28/08/2018 18:22:49 - SaltNet - INFO - --------------------
+28/08/2018 18:24:01 - SaltNet - INFO - Batch Loss: 0.1993, Running loss: 0.2993, Batch IOU: 0.7063, Batch Acc: 0.9559 at iter 6900, epoch 70, Time: 224m 34s
+28/08/2018 18:25:31 - SaltNet - INFO - Batch Loss: 0.1816, Running loss: 0.2986, Batch IOU: 0.8000, Batch Acc: 0.9379 at iter 6950, epoch 70, Time: 226m 4s
+28/08/2018 18:25:46 - SaltNet - INFO - train Mean IOU: 0.7397, Mean Acc: 0.9235 at epoch 70
+28/08/2018 18:25:58 - SaltNet - INFO - val Mean IOU: 0.6653, Mean Acc: 0.9328 at epoch 70
+28/08/2018 18:26:00 - SaltNet - INFO - ['Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-1-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-2-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-3-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-4-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-5-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-6-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-7-Of-8', 'Unet_Resnet18_trans_conv_remove_all_black_masks_2018_08_29_00_39_26.ckp-chunk-8-Of-8']
+28/08/2018 18:26:00 - SaltNet - INFO - Pushing model state to git.
