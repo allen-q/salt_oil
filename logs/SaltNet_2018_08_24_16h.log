@@ -1,0 +1,1622 @@
+24/08/2018 16:18:54 - SaltNet - INFO - Start Training...
+24/08/2018 16:18:54 - SaltNet - INFO - Passed parameters: {'push_every': None, 'print_every': 2, 'num_epochs': 4, 'model_save_name': 'Unet_Data_Augmentation_2018_08_24_16_18_16.ckp', 'scheduler': <torch.optim.lr_scheduler.StepLR object at 0x00000206879F3940>, 'optimizer': Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0
+), 'criterion': BCELoss(), 'dataloaders': {'train': <torch.utils.data.dataloader.DataLoader object at 0x00000206829B9A90>, 'val': <torch.utils.data.dataloader.DataLoader object at 0x00000206829B9CC0>}, 'model': UResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (outc): outconv(
+    (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (sig): Sigmoid()
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up3): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up4): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+)}
+24/08/2018 16:18:54 - SaltNet - INFO - Epoch 0/3
+24/08/2018 16:18:54 - SaltNet - INFO - --------------------
+24/08/2018 16:20:59 - SaltNet - INFO - Start Training...
+24/08/2018 16:20:59 - SaltNet - INFO - Passed parameters: {'push_every': None, 'print_every': 2, 'num_epochs': 4, 'model_save_name': 'Unet_Data_Augmentation_2018_08_24_16_20_50.ckp', 'scheduler': <torch.optim.lr_scheduler.StepLR object at 0x000001DB72936048>, 'optimizer': Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0
+), 'criterion': BCELoss(), 'dataloaders': {'train': <torch.utils.data.dataloader.DataLoader object at 0x000001DB6A62A358>, 'val': <torch.utils.data.dataloader.DataLoader object at 0x000001DB6A62A1D0>}, 'model': UResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (outc): outconv(
+    (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (sig): Sigmoid()
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up3): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up4): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+)}
+24/08/2018 16:20:59 - SaltNet - INFO - Epoch 0/3
+24/08/2018 16:20:59 - SaltNet - INFO - --------------------
+24/08/2018 16:22:20 - SaltNet - INFO - Start Training...
+24/08/2018 16:22:20 - SaltNet - INFO - Passed parameters: {'push_every': None, 'print_every': 2, 'num_epochs': 4, 'model_save_name': 'Unet_Data_Augmentation_2018_08_24_16_22_17.ckp', 'scheduler': <torch.optim.lr_scheduler.StepLR object at 0x000001D6BB738160>, 'optimizer': Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0
+), 'criterion': BCELoss(), 'dataloaders': {'train': <torch.utils.data.dataloader.DataLoader object at 0x000001D6AB54F780>, 'val': <torch.utils.data.dataloader.DataLoader object at 0x000001D6B66CA0B8>}, 'model': UResNet(
+  (conv1): Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (outc): outconv(
+    (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (sig): Sigmoid()
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up3): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up4): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+)}
+24/08/2018 16:22:20 - SaltNet - INFO - Epoch 0/3
+24/08/2018 16:22:20 - SaltNet - INFO - --------------------
+24/08/2018 16:22:37 - SaltNet - INFO - Batch Loss is 1.9464, Running loss is 1.9464, Batch IOU is 0.0000 at iter 2, epoch 0, Time: 0m 16s
+24/08/2018 16:23:47 - SaltNet - INFO - Start Training...
+24/08/2018 16:23:47 - SaltNet - INFO - Passed parameters: {'push_every': None, 'print_every': 2, 'num_epochs': 4, 'model_save_name': 'Unet_Data_Augmentation_2018_08_24_16_23_46.ckp', 'scheduler': <torch.optim.lr_scheduler.StepLR object at 0x000001D6807D2160>, 'optimizer': Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0
+), 'criterion': BCELoss(), 'dataloaders': {'train': <torch.utils.data.dataloader.DataLoader object at 0x000001D6AB54F780>, 'val': <torch.utils.data.dataloader.DataLoader object at 0x000001D6B66CA0B8>}, 'model': UResNet(
+  (conv1): Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (outc): outconv(
+    (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (sig): Sigmoid()
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up3): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up4): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+)}
+24/08/2018 16:23:47 - SaltNet - INFO - Epoch 0/3
+24/08/2018 16:23:47 - SaltNet - INFO - --------------------
+24/08/2018 16:24:03 - SaltNet - INFO - Batch Loss is 1.0588, Running loss is 1.0588, Batch IOU is 0.0000 at iter 2, epoch 0, Time: 0m 16s
+24/08/2018 16:24:18 - SaltNet - INFO - Batch Loss is 2.6353, Running loss is 1.8470, Batch IOU is 0.0000 at iter 4, epoch 0, Time: 0m 30s
+24/08/2018 16:24:19 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 16:24:33 - SaltNet - INFO - val Mean IOU is 0.4375 at epoch 0
+24/08/2018 16:26:32 - SaltNet - INFO - Start Training...
+24/08/2018 16:26:32 - SaltNet - INFO - Passed parameters: {'push_every': None, 'print_every': 2, 'num_epochs': 4, 'model_save_name': 'Unet_Data_Augmentation_2018_08_24_16_26_30.ckp', 'scheduler': <torch.optim.lr_scheduler.StepLR object at 0x000001D697D619E8>, 'optimizer': Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0
+), 'criterion': BCELoss(), 'dataloaders': {'train': <torch.utils.data.dataloader.DataLoader object at 0x000001D6807D2518>, 'val': <torch.utils.data.dataloader.DataLoader object at 0x000001D681DF0550>}, 'model': UResNet(
+  (conv1): Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (outc): outconv(
+    (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (sig): Sigmoid()
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up3): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up4): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+)}
+24/08/2018 16:26:32 - SaltNet - INFO - Epoch 0/3
+24/08/2018 16:26:32 - SaltNet - INFO - --------------------
+24/08/2018 16:26:41 - SaltNet - INFO - Batch Loss is 4.0540, Running loss is 4.0540, Batch IOU is 0.0000 at iter 2, epoch 0, Time: 0m 8s
+24/08/2018 16:26:42 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 16:26:46 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 0
+24/08/2018 16:26:46 - SaltNet - INFO - Epoch 1/3
+24/08/2018 16:26:46 - SaltNet - INFO - --------------------
+24/08/2018 16:26:56 - SaltNet - INFO - Batch Loss is 1.8528, Running loss is 8.1182, Batch IOU is 0.0000 at iter 4, epoch 1, Time: 0m 24s
+24/08/2018 16:26:58 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 1
+24/08/2018 16:27:04 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 1
+24/08/2018 16:27:04 - SaltNet - INFO - Epoch 2/3
+24/08/2018 16:27:04 - SaltNet - INFO - --------------------
+24/08/2018 16:27:15 - SaltNet - INFO - Batch Loss is 0.9742, Running loss is 10.0366, Batch IOU is 0.1500 at iter 6, epoch 2, Time: 0m 42s
+24/08/2018 16:27:17 - SaltNet - INFO - train Mean IOU is 0.0750 at epoch 2
+24/08/2018 16:27:23 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 2
+24/08/2018 16:27:23 - SaltNet - INFO - Epoch 3/3
+24/08/2018 16:27:23 - SaltNet - INFO - --------------------
+24/08/2018 16:27:35 - SaltNet - INFO - Batch Loss is 1.2751, Running loss is 10.9022, Batch IOU is 0.0000 at iter 8, epoch 3, Time: 1m 2s
+24/08/2018 16:27:36 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 3
+24/08/2018 16:27:42 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 3
+24/08/2018 16:27:42 - SaltNet - INFO - --------------------
+24/08/2018 16:27:42 - SaltNet - INFO - Training complete in 1m 10s
+24/08/2018 16:27:42 - SaltNet - INFO - Best val IOU: 0.000000
+24/08/2018 16:29:07 - SaltNet - INFO - Start Training...
+24/08/2018 16:29:07 - SaltNet - INFO - Passed parameters: {'push_every': None, 'print_every': 2, 'num_epochs': 100, 'model_save_name': 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp', 'scheduler': <torch.optim.lr_scheduler.StepLR object at 0x000001D6BB6FD470>, 'optimizer': Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0
+), 'criterion': BCELoss(), 'dataloaders': {'train': <torch.utils.data.dataloader.DataLoader object at 0x000001D6BB6F6978>, 'val': <torch.utils.data.dataloader.DataLoader object at 0x000001D6A23DEF98>}, 'model': UResNet(
+  (conv1): Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (outc): outconv(
+    (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (sig): Sigmoid()
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up3): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up4): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+)}
+24/08/2018 16:29:07 - SaltNet - INFO - Epoch 0/99
+24/08/2018 16:29:07 - SaltNet - INFO - --------------------
+24/08/2018 16:29:18 - SaltNet - INFO - Batch Loss is 2.8804, Running loss is 2.8804, Batch IOU is 0.0000 at iter 2, epoch 0, Time: 0m 11s
+24/08/2018 16:29:19 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 16:29:24 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 0
+24/08/2018 16:29:24 - SaltNet - INFO - Epoch 1/99
+24/08/2018 16:29:24 - SaltNet - INFO - --------------------
+24/08/2018 16:29:34 - SaltNet - INFO - Batch Loss is 1.1415, Running loss is 4.5190, Batch IOU is 0.0000 at iter 4, epoch 1, Time: 0m 27s
+24/08/2018 16:29:35 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 1
+24/08/2018 16:29:40 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 1
+24/08/2018 16:29:40 - SaltNet - INFO - Epoch 2/99
+24/08/2018 16:29:40 - SaltNet - INFO - --------------------
+24/08/2018 16:29:51 - SaltNet - INFO - Batch Loss is 0.8450, Running loss is 7.7277, Batch IOU is 0.0000 at iter 6, epoch 2, Time: 0m 44s
+24/08/2018 16:29:52 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 2
+24/08/2018 16:29:57 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 2
+24/08/2018 16:29:57 - SaltNet - INFO - Epoch 3/99
+24/08/2018 16:29:57 - SaltNet - INFO - --------------------
+24/08/2018 16:30:08 - SaltNet - INFO - Batch Loss is 0.5219, Running loss is 6.1059, Batch IOU is 0.0000 at iter 8, epoch 3, Time: 1m 1s
+24/08/2018 16:30:09 - SaltNet - INFO - train Mean IOU is 0.1000 at epoch 3
+24/08/2018 16:30:14 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 3
+24/08/2018 16:30:14 - SaltNet - INFO - Epoch 4/99
+24/08/2018 16:30:14 - SaltNet - INFO - --------------------
+24/08/2018 16:30:24 - SaltNet - INFO - Batch Loss is 0.1986, Running loss is 5.1704, Batch IOU is 0.0000 at iter 10, epoch 4, Time: 1m 17s
+24/08/2018 16:30:25 - SaltNet - INFO - train Mean IOU is 0.2250 at epoch 4
+24/08/2018 16:30:30 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 4
+24/08/2018 16:30:30 - SaltNet - INFO - Epoch 5/99
+24/08/2018 16:30:30 - SaltNet - INFO - --------------------
+24/08/2018 16:30:41 - SaltNet - INFO - Batch Loss is 0.2928, Running loss is 5.9724, Batch IOU is 0.5000 at iter 12, epoch 5, Time: 1m 33s
+24/08/2018 16:30:41 - SaltNet - INFO - train Mean IOU is 0.4500 at epoch 5
+24/08/2018 16:30:46 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 5
+24/08/2018 16:30:46 - SaltNet - INFO - Epoch 6/99
+24/08/2018 16:30:46 - SaltNet - INFO - --------------------
+24/08/2018 16:30:57 - SaltNet - INFO - Batch Loss is 0.1152, Running loss is 6.8798, Batch IOU is 0.9500 at iter 14, epoch 6, Time: 1m 50s
+24/08/2018 16:30:58 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 6
+24/08/2018 16:31:02 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 6
+24/08/2018 16:31:02 - SaltNet - INFO - Epoch 7/99
+24/08/2018 16:31:02 - SaltNet - INFO - --------------------
+24/08/2018 16:31:13 - SaltNet - INFO - Batch Loss is 0.1970, Running loss is 6.3888, Batch IOU is 0.0000 at iter 16, epoch 7, Time: 2m 5s
+24/08/2018 16:31:13 - SaltNet - INFO - train Mean IOU is 0.2000 at epoch 7
+24/08/2018 16:31:18 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 7
+24/08/2018 16:31:18 - SaltNet - INFO - Epoch 8/99
+24/08/2018 16:31:18 - SaltNet - INFO - --------------------
+24/08/2018 16:31:29 - SaltNet - INFO - Batch Loss is 0.2975, Running loss is 5.8129, Batch IOU is 0.2000 at iter 18, epoch 8, Time: 2m 22s
+24/08/2018 16:31:30 - SaltNet - INFO - train Mean IOU is 0.1000 at epoch 8
+24/08/2018 16:31:34 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 8
+24/08/2018 16:31:34 - SaltNet - INFO - Epoch 9/99
+24/08/2018 16:31:34 - SaltNet - INFO - --------------------
+24/08/2018 16:31:45 - SaltNet - INFO - Batch Loss is 0.1083, Running loss is 5.3680, Batch IOU is 0.0000 at iter 20, epoch 9, Time: 2m 38s
+24/08/2018 16:31:46 - SaltNet - INFO - train Mean IOU is 0.2750 at epoch 9
+24/08/2018 16:31:51 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 9
+24/08/2018 16:31:51 - SaltNet - INFO - Epoch 10/99
+24/08/2018 16:31:51 - SaltNet - INFO - --------------------
+24/08/2018 16:32:02 - SaltNet - INFO - Batch Loss is 0.1298, Running loss is 5.0114, Batch IOU is 0.1000 at iter 22, epoch 10, Time: 2m 55s
+24/08/2018 16:32:03 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 10
+24/08/2018 16:32:07 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 10
+24/08/2018 16:32:07 - SaltNet - INFO - Epoch 11/99
+24/08/2018 16:32:07 - SaltNet - INFO - --------------------
+24/08/2018 16:32:18 - SaltNet - INFO - Batch Loss is 0.0907, Running loss is 4.6610, Batch IOU is 0.5500 at iter 24, epoch 11, Time: 3m 11s
+24/08/2018 16:32:19 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 11
+24/08/2018 16:32:25 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 11
+24/08/2018 16:32:25 - SaltNet - INFO - Epoch 12/99
+24/08/2018 16:32:25 - SaltNet - INFO - --------------------
+24/08/2018 16:32:35 - SaltNet - INFO - Batch Loss is 0.0816, Running loss is 4.3410, Batch IOU is 0.1000 at iter 26, epoch 12, Time: 3m 28s
+24/08/2018 16:32:36 - SaltNet - INFO - train Mean IOU is 0.5500 at epoch 12
+24/08/2018 16:32:41 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 12
+24/08/2018 16:32:41 - SaltNet - INFO - Epoch 13/99
+24/08/2018 16:32:41 - SaltNet - INFO - --------------------
+24/08/2018 16:32:51 - SaltNet - INFO - Batch Loss is 0.0649, Running loss is 4.0628, Batch IOU is 0.2000 at iter 28, epoch 13, Time: 3m 44s
+24/08/2018 16:32:52 - SaltNet - INFO - train Mean IOU is 0.6000 at epoch 13
+24/08/2018 16:32:57 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 13
+24/08/2018 16:32:57 - SaltNet - INFO - Epoch 14/99
+24/08/2018 16:32:57 - SaltNet - INFO - --------------------
+24/08/2018 16:33:07 - SaltNet - INFO - Batch Loss is 0.0458, Running loss is 3.8173, Batch IOU is 0.5000 at iter 30, epoch 14, Time: 4m 0s
+24/08/2018 16:33:08 - SaltNet - INFO - train Mean IOU is 0.6250 at epoch 14
+24/08/2018 16:33:13 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 14
+24/08/2018 16:33:13 - SaltNet - INFO - Epoch 15/99
+24/08/2018 16:33:13 - SaltNet - INFO - --------------------
+24/08/2018 16:33:23 - SaltNet - INFO - Batch Loss is 0.0597, Running loss is 3.5976, Batch IOU is 1.0000 at iter 32, epoch 15, Time: 4m 15s
+24/08/2018 16:33:23 - SaltNet - INFO - train Mean IOU is 0.6500 at epoch 15
+24/08/2018 16:33:28 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 15
+24/08/2018 16:33:28 - SaltNet - INFO - Epoch 16/99
+24/08/2018 16:33:28 - SaltNet - INFO - --------------------
+24/08/2018 16:33:38 - SaltNet - INFO - Batch Loss is 0.0504, Running loss is 3.4014, Batch IOU is 1.0000 at iter 34, epoch 16, Time: 4m 31s
+24/08/2018 16:33:39 - SaltNet - INFO - train Mean IOU is 0.6750 at epoch 16
+24/08/2018 16:33:45 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 16
+24/08/2018 16:33:45 - SaltNet - INFO - Epoch 17/99
+24/08/2018 16:33:45 - SaltNet - INFO - --------------------
+24/08/2018 16:33:58 - SaltNet - INFO - Batch Loss is 0.0425, Running loss is 3.2248, Batch IOU is 0.8000 at iter 36, epoch 17, Time: 4m 51s
+24/08/2018 16:34:00 - SaltNet - INFO - train Mean IOU is 0.6750 at epoch 17
+24/08/2018 16:34:05 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 17
+24/08/2018 16:34:05 - SaltNet - INFO - Epoch 18/99
+24/08/2018 16:34:05 - SaltNet - INFO - --------------------
+24/08/2018 16:34:16 - SaltNet - INFO - Batch Loss is 0.0305, Running loss is 3.0675, Batch IOU is 0.8500 at iter 38, epoch 18, Time: 5m 8s
+24/08/2018 16:34:16 - SaltNet - INFO - train Mean IOU is 0.7250 at epoch 18
+24/08/2018 16:34:21 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 18
+24/08/2018 16:34:24 - SaltNet - INFO - ['Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-1-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-2-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-3-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-4-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-5-Of-5']
+24/08/2018 16:34:24 - SaltNet - INFO - Best Val Mean IOU so far: 0.25
+24/08/2018 16:34:25 - SaltNet - INFO - Epoch 19/99
+24/08/2018 16:34:25 - SaltNet - INFO - --------------------
+24/08/2018 16:34:34 - SaltNet - INFO - Batch Loss is 0.0310, Running loss is 2.9289, Batch IOU is 1.0000 at iter 40, epoch 19, Time: 5m 27s
+24/08/2018 16:34:35 - SaltNet - INFO - train Mean IOU is 0.7000 at epoch 19
+24/08/2018 16:34:39 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 19
+24/08/2018 16:34:39 - SaltNet - INFO - Epoch 20/99
+24/08/2018 16:34:39 - SaltNet - INFO - --------------------
+24/08/2018 16:34:49 - SaltNet - INFO - Batch Loss is 0.1385, Running loss is 2.8073, Batch IOU is 0.5000 at iter 42, epoch 20, Time: 5m 41s
+24/08/2018 16:34:49 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 20
+24/08/2018 16:34:55 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 20
+24/08/2018 16:34:55 - SaltNet - INFO - Epoch 21/99
+24/08/2018 16:34:55 - SaltNet - INFO - --------------------
+24/08/2018 16:35:10 - SaltNet - INFO - Batch Loss is 0.0252, Running loss is 2.6882, Batch IOU is 0.5500 at iter 44, epoch 21, Time: 6m 2s
+24/08/2018 16:35:11 - SaltNet - INFO - train Mean IOU is 0.7750 at epoch 21
+24/08/2018 16:35:16 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 21
+24/08/2018 16:35:16 - SaltNet - INFO - Epoch 22/99
+24/08/2018 16:35:16 - SaltNet - INFO - --------------------
+24/08/2018 16:35:28 - SaltNet - INFO - Batch Loss is 0.0675, Running loss is 2.5772, Batch IOU is 0.6500 at iter 46, epoch 22, Time: 6m 21s
+24/08/2018 16:35:29 - SaltNet - INFO - train Mean IOU is 0.6500 at epoch 22
+24/08/2018 16:35:35 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 22
+24/08/2018 16:35:35 - SaltNet - INFO - Epoch 23/99
+24/08/2018 16:35:35 - SaltNet - INFO - --------------------
+24/08/2018 16:35:46 - SaltNet - INFO - Batch Loss is 0.0330, Running loss is 2.4751, Batch IOU is 1.0000 at iter 48, epoch 23, Time: 6m 39s
+24/08/2018 16:35:47 - SaltNet - INFO - train Mean IOU is 0.7500 at epoch 23
+24/08/2018 16:35:52 - SaltNet - INFO - val Mean IOU is 0.2750 at epoch 23
+24/08/2018 16:35:56 - SaltNet - INFO - ['Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-1-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-2-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-3-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-4-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-5-Of-5']
+24/08/2018 16:35:56 - SaltNet - INFO - Best Val Mean IOU so far: 0.275
+24/08/2018 16:35:57 - SaltNet - INFO - Epoch 24/99
+24/08/2018 16:35:57 - SaltNet - INFO - --------------------
+24/08/2018 16:36:08 - SaltNet - INFO - Batch Loss is 0.0402, Running loss is 2.3801, Batch IOU is 0.7500 at iter 50, epoch 24, Time: 7m 1s
+24/08/2018 16:36:09 - SaltNet - INFO - train Mean IOU is 0.7000 at epoch 24
+24/08/2018 16:36:14 - SaltNet - INFO - val Mean IOU is 0.2750 at epoch 24
+24/08/2018 16:36:14 - SaltNet - INFO - Epoch 25/99
+24/08/2018 16:36:14 - SaltNet - INFO - --------------------
+24/08/2018 16:36:25 - SaltNet - INFO - Batch Loss is 0.0262, Running loss is 2.2918, Batch IOU is 1.0000 at iter 52, epoch 25, Time: 7m 18s
+24/08/2018 16:36:26 - SaltNet - INFO - train Mean IOU is 0.7250 at epoch 25
+24/08/2018 16:36:31 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 25
+24/08/2018 16:36:31 - SaltNet - INFO - Epoch 26/99
+24/08/2018 16:36:31 - SaltNet - INFO - --------------------
+24/08/2018 16:36:42 - SaltNet - INFO - Batch Loss is 0.0232, Running loss is 2.2100, Batch IOU is 0.8500 at iter 54, epoch 26, Time: 7m 35s
+24/08/2018 16:36:44 - SaltNet - INFO - train Mean IOU is 0.7500 at epoch 26
+24/08/2018 16:36:48 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 26
+24/08/2018 16:36:48 - SaltNet - INFO - Epoch 27/99
+24/08/2018 16:36:48 - SaltNet - INFO - --------------------
+24/08/2018 16:37:00 - SaltNet - INFO - Batch Loss is 0.0190, Running loss is 2.1342, Batch IOU is 0.7500 at iter 56, epoch 27, Time: 7m 53s
+24/08/2018 16:37:01 - SaltNet - INFO - train Mean IOU is 0.8250 at epoch 27
+24/08/2018 16:37:06 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 27
+24/08/2018 16:37:10 - SaltNet - INFO - ['Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-1-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-2-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-3-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-4-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-5-Of-5']
+24/08/2018 16:37:10 - SaltNet - INFO - Best Val Mean IOU so far: 0.5
+24/08/2018 16:37:10 - SaltNet - INFO - Epoch 28/99
+24/08/2018 16:37:10 - SaltNet - INFO - --------------------
+24/08/2018 16:37:24 - SaltNet - INFO - Batch Loss is 0.0209, Running loss is 2.0640, Batch IOU is 0.5500 at iter 58, epoch 28, Time: 8m 17s
+24/08/2018 16:37:25 - SaltNet - INFO - train Mean IOU is 0.7750 at epoch 28
+24/08/2018 16:37:29 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 28
+24/08/2018 16:37:29 - SaltNet - INFO - Epoch 29/99
+24/08/2018 16:37:29 - SaltNet - INFO - --------------------
+24/08/2018 16:37:42 - SaltNet - INFO - Batch Loss is 0.0357, Running loss is 1.9992, Batch IOU is 0.8000 at iter 60, epoch 29, Time: 8m 35s
+24/08/2018 16:37:43 - SaltNet - INFO - train Mean IOU is 0.7000 at epoch 29
+24/08/2018 16:37:47 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 29
+24/08/2018 16:37:47 - SaltNet - INFO - Epoch 30/99
+24/08/2018 16:37:47 - SaltNet - INFO - --------------------
+24/08/2018 16:37:59 - SaltNet - INFO - Batch Loss is 0.0255, Running loss is 1.9386, Batch IOU is 0.8500 at iter 62, epoch 30, Time: 8m 52s
+24/08/2018 16:38:00 - SaltNet - INFO - train Mean IOU is 0.8000 at epoch 30
+24/08/2018 16:38:05 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 30
+24/08/2018 16:38:05 - SaltNet - INFO - Epoch 31/99
+24/08/2018 16:38:05 - SaltNet - INFO - --------------------
+24/08/2018 16:38:19 - SaltNet - INFO - Batch Loss is 0.0181, Running loss is 1.8818, Batch IOU is 0.6500 at iter 64, epoch 31, Time: 9m 12s
+24/08/2018 16:38:20 - SaltNet - INFO - train Mean IOU is 0.8250 at epoch 31
+24/08/2018 16:38:27 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 31
+24/08/2018 16:38:27 - SaltNet - INFO - Epoch 32/99
+24/08/2018 16:38:27 - SaltNet - INFO - --------------------
+24/08/2018 16:38:41 - SaltNet - INFO - Batch Loss is 0.0275, Running loss is 1.8287, Batch IOU is 0.8500 at iter 66, epoch 32, Time: 9m 33s
+24/08/2018 16:38:42 - SaltNet - INFO - train Mean IOU is 0.8500 at epoch 32
+24/08/2018 16:38:48 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 32
+24/08/2018 16:38:48 - SaltNet - INFO - Epoch 33/99
+24/08/2018 16:38:48 - SaltNet - INFO - --------------------
+24/08/2018 16:38:59 - SaltNet - INFO - Batch Loss is 0.0187, Running loss is 1.7786, Batch IOU is 0.8000 at iter 68, epoch 33, Time: 9m 52s
+24/08/2018 16:39:00 - SaltNet - INFO - train Mean IOU is 0.8500 at epoch 33
+24/08/2018 16:39:08 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 33
+24/08/2018 16:39:08 - SaltNet - INFO - Epoch 34/99
+24/08/2018 16:39:08 - SaltNet - INFO - --------------------
+24/08/2018 16:39:20 - SaltNet - INFO - Batch Loss is 0.0218, Running loss is 1.7315, Batch IOU is 0.5000 at iter 70, epoch 34, Time: 10m 13s
+24/08/2018 16:39:21 - SaltNet - INFO - train Mean IOU is 0.7500 at epoch 34
+24/08/2018 16:39:27 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 34
+24/08/2018 16:39:27 - SaltNet - INFO - Epoch 35/99
+24/08/2018 16:39:27 - SaltNet - INFO - --------------------
+24/08/2018 16:39:40 - SaltNet - INFO - Batch Loss is 0.0271, Running loss is 1.6872, Batch IOU is 0.8000 at iter 72, epoch 35, Time: 10m 33s
+24/08/2018 16:39:41 - SaltNet - INFO - train Mean IOU is 0.7750 at epoch 35
+24/08/2018 16:39:47 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 35
+24/08/2018 16:39:47 - SaltNet - INFO - Epoch 36/99
+24/08/2018 16:39:47 - SaltNet - INFO - --------------------
+24/08/2018 16:40:04 - SaltNet - INFO - Batch Loss is 0.0214, Running loss is 1.6447, Batch IOU is 0.8500 at iter 74, epoch 36, Time: 10m 57s
+24/08/2018 16:40:07 - SaltNet - INFO - train Mean IOU is 0.8500 at epoch 36
+24/08/2018 16:40:12 - SaltNet - INFO - val Mean IOU is 0.5250 at epoch 36
+24/08/2018 16:40:15 - SaltNet - INFO - ['Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-1-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-2-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-3-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-4-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-5-Of-5']
+24/08/2018 16:40:15 - SaltNet - INFO - Best Val Mean IOU so far: 0.525
+24/08/2018 16:40:16 - SaltNet - INFO - Epoch 37/99
+24/08/2018 16:40:16 - SaltNet - INFO - --------------------
+24/08/2018 16:40:28 - SaltNet - INFO - Batch Loss is 0.0148, Running loss is 1.6040, Batch IOU is 0.8000 at iter 76, epoch 37, Time: 11m 21s
+24/08/2018 16:40:29 - SaltNet - INFO - train Mean IOU is 0.8750 at epoch 37
+24/08/2018 16:40:34 - SaltNet - INFO - val Mean IOU is 0.5250 at epoch 37
+24/08/2018 16:40:34 - SaltNet - INFO - Epoch 38/99
+24/08/2018 16:40:34 - SaltNet - INFO - --------------------
+24/08/2018 16:40:45 - SaltNet - INFO - Batch Loss is 0.0127, Running loss is 1.5654, Batch IOU is 1.0000 at iter 78, epoch 38, Time: 11m 37s
+24/08/2018 16:40:46 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 38
+24/08/2018 16:40:50 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 38
+24/08/2018 16:40:50 - SaltNet - INFO - Epoch 39/99
+24/08/2018 16:40:50 - SaltNet - INFO - --------------------
+24/08/2018 16:41:00 - SaltNet - INFO - Batch Loss is 0.0143, Running loss is 1.5288, Batch IOU is 0.8000 at iter 80, epoch 39, Time: 11m 53s
+24/08/2018 16:41:01 - SaltNet - INFO - train Mean IOU is 0.9000 at epoch 39
+24/08/2018 16:41:06 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 39
+24/08/2018 16:41:06 - SaltNet - INFO - Epoch 40/99
+24/08/2018 16:41:06 - SaltNet - INFO - --------------------
+24/08/2018 16:41:18 - SaltNet - INFO - Batch Loss is 0.0196, Running loss is 1.4944, Batch IOU is 0.9000 at iter 82, epoch 40, Time: 12m 10s
+24/08/2018 16:41:18 - SaltNet - INFO - train Mean IOU is 0.8250 at epoch 40
+24/08/2018 16:41:24 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 40
+24/08/2018 16:41:24 - SaltNet - INFO - Epoch 41/99
+24/08/2018 16:41:24 - SaltNet - INFO - --------------------
+24/08/2018 16:41:34 - SaltNet - INFO - Batch Loss is 0.0146, Running loss is 1.4619, Batch IOU is 0.8000 at iter 84, epoch 41, Time: 12m 27s
+24/08/2018 16:41:35 - SaltNet - INFO - train Mean IOU is 0.8750 at epoch 41
+24/08/2018 16:41:40 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 41
+24/08/2018 16:41:40 - SaltNet - INFO - Epoch 42/99
+24/08/2018 16:41:40 - SaltNet - INFO - --------------------
+24/08/2018 16:41:50 - SaltNet - INFO - Batch Loss is 0.0109, Running loss is 1.4313, Batch IOU is 0.8500 at iter 86, epoch 42, Time: 12m 43s
+24/08/2018 16:41:51 - SaltNet - INFO - train Mean IOU is 0.9000 at epoch 42
+24/08/2018 16:41:55 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 42
+24/08/2018 16:41:55 - SaltNet - INFO - Epoch 43/99
+24/08/2018 16:41:55 - SaltNet - INFO - --------------------
+24/08/2018 16:42:07 - SaltNet - INFO - Batch Loss is 0.0123, Running loss is 1.4025, Batch IOU is 1.0000 at iter 88, epoch 43, Time: 13m 0s
+24/08/2018 16:42:08 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 43
+24/08/2018 16:42:13 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 43
+24/08/2018 16:42:13 - SaltNet - INFO - Epoch 44/99
+24/08/2018 16:42:13 - SaltNet - INFO - --------------------
+24/08/2018 16:42:28 - SaltNet - INFO - Batch Loss is 0.0131, Running loss is 1.3753, Batch IOU is 0.8500 at iter 90, epoch 44, Time: 13m 21s
+24/08/2018 16:42:29 - SaltNet - INFO - train Mean IOU is 0.8750 at epoch 44
+24/08/2018 16:42:34 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 44
+24/08/2018 16:42:34 - SaltNet - INFO - Epoch 45/99
+24/08/2018 16:42:34 - SaltNet - INFO - --------------------
+24/08/2018 16:42:45 - SaltNet - INFO - Batch Loss is 0.0113, Running loss is 1.3492, Batch IOU is 0.9000 at iter 92, epoch 45, Time: 13m 38s
+24/08/2018 16:42:46 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 45
+24/08/2018 16:42:51 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 45
+24/08/2018 16:42:51 - SaltNet - INFO - Epoch 46/99
+24/08/2018 16:42:51 - SaltNet - INFO - --------------------
+24/08/2018 16:43:02 - SaltNet - INFO - Batch Loss is 0.0097, Running loss is 1.3242, Batch IOU is 1.0000 at iter 94, epoch 46, Time: 13m 55s
+24/08/2018 16:43:02 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 46
+24/08/2018 16:43:07 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 46
+24/08/2018 16:43:07 - SaltNet - INFO - Epoch 47/99
+24/08/2018 16:43:07 - SaltNet - INFO - --------------------
+24/08/2018 16:43:20 - SaltNet - INFO - Batch Loss is 0.0082, Running loss is 1.3003, Batch IOU is 1.0000 at iter 96, epoch 47, Time: 14m 12s
+24/08/2018 16:43:21 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 47
+24/08/2018 16:43:26 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 47
+24/08/2018 16:43:26 - SaltNet - INFO - Epoch 48/99
+24/08/2018 16:43:26 - SaltNet - INFO - --------------------
+24/08/2018 16:43:38 - SaltNet - INFO - Batch Loss is 0.0081, Running loss is 1.2773, Batch IOU is 0.9500 at iter 98, epoch 48, Time: 14m 31s
+24/08/2018 16:43:39 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 48
+24/08/2018 16:43:45 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 48
+24/08/2018 16:43:45 - SaltNet - INFO - Epoch 49/99
+24/08/2018 16:43:45 - SaltNet - INFO - --------------------
+24/08/2018 16:43:55 - SaltNet - INFO - Batch Loss is 0.0073, Running loss is 1.2554, Batch IOU is 1.0000 at iter 100, epoch 49, Time: 14m 47s
+24/08/2018 16:43:56 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 49
+24/08/2018 16:44:01 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 49
+24/08/2018 16:44:01 - SaltNet - INFO - Epoch 50/99
+24/08/2018 16:44:01 - SaltNet - INFO - --------------------
+24/08/2018 16:44:12 - SaltNet - INFO - Batch Loss is 0.0123, Running loss is 1.2346, Batch IOU is 0.9500 at iter 102, epoch 50, Time: 15m 5s
+24/08/2018 16:44:13 - SaltNet - INFO - train Mean IOU is 0.9000 at epoch 50
+24/08/2018 16:44:17 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 50
+24/08/2018 16:44:17 - SaltNet - INFO - Epoch 51/99
+24/08/2018 16:44:17 - SaltNet - INFO - --------------------
+24/08/2018 16:44:28 - SaltNet - INFO - Batch Loss is 0.0077, Running loss is 1.2145, Batch IOU is 1.0000 at iter 104, epoch 51, Time: 15m 21s
+24/08/2018 16:44:29 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 51
+24/08/2018 16:44:35 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 51
+24/08/2018 16:44:35 - SaltNet - INFO - Epoch 52/99
+24/08/2018 16:44:35 - SaltNet - INFO - --------------------
+24/08/2018 16:44:47 - SaltNet - INFO - Batch Loss is 0.0065, Running loss is 1.1953, Batch IOU is 1.0000 at iter 106, epoch 52, Time: 15m 39s
+24/08/2018 16:44:47 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 52
+24/08/2018 16:44:52 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 52
+24/08/2018 16:44:52 - SaltNet - INFO - Epoch 53/99
+24/08/2018 16:44:52 - SaltNet - INFO - --------------------
+24/08/2018 16:45:05 - SaltNet - INFO - Batch Loss is 0.0075, Running loss is 1.1767, Batch IOU is 0.9000 at iter 108, epoch 53, Time: 15m 58s
+24/08/2018 16:45:06 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 53
+24/08/2018 16:45:11 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 53
+24/08/2018 16:45:11 - SaltNet - INFO - Epoch 54/99
+24/08/2018 16:45:11 - SaltNet - INFO - --------------------
+24/08/2018 16:45:26 - SaltNet - INFO - Batch Loss is 0.0074, Running loss is 1.1589, Batch IOU is 0.9000 at iter 110, epoch 54, Time: 16m 19s
+24/08/2018 16:45:28 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 54
+24/08/2018 16:45:34 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 54
+24/08/2018 16:45:34 - SaltNet - INFO - Epoch 55/99
+24/08/2018 16:45:34 - SaltNet - INFO - --------------------
+24/08/2018 16:45:46 - SaltNet - INFO - Batch Loss is 0.0102, Running loss is 1.1418, Batch IOU is 0.9000 at iter 112, epoch 55, Time: 16m 39s
+24/08/2018 16:45:47 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 55
+24/08/2018 16:45:52 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 55
+24/08/2018 16:45:52 - SaltNet - INFO - Epoch 56/99
+24/08/2018 16:45:52 - SaltNet - INFO - --------------------
+24/08/2018 16:46:03 - SaltNet - INFO - Batch Loss is 0.0063, Running loss is 1.1252, Batch IOU is 1.0000 at iter 114, epoch 56, Time: 16m 56s
+24/08/2018 16:46:04 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 56
+24/08/2018 16:46:10 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 56
+24/08/2018 16:46:10 - SaltNet - INFO - Epoch 57/99
+24/08/2018 16:46:10 - SaltNet - INFO - --------------------
+24/08/2018 16:46:22 - SaltNet - INFO - Batch Loss is 0.0063, Running loss is 1.1092, Batch IOU is 1.0000 at iter 116, epoch 57, Time: 17m 15s
+24/08/2018 16:46:23 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 57
+24/08/2018 16:46:29 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 57
+24/08/2018 16:46:29 - SaltNet - INFO - Epoch 58/99
+24/08/2018 16:46:29 - SaltNet - INFO - --------------------
+24/08/2018 16:46:43 - SaltNet - INFO - Batch Loss is 0.0090, Running loss is 1.0938, Batch IOU is 0.9500 at iter 118, epoch 58, Time: 17m 36s
+24/08/2018 16:46:44 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 58
+24/08/2018 16:46:49 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 58
+24/08/2018 16:46:49 - SaltNet - INFO - Epoch 59/99
+24/08/2018 16:46:49 - SaltNet - INFO - --------------------
+24/08/2018 16:47:01 - SaltNet - INFO - Batch Loss is 0.0071, Running loss is 1.0788, Batch IOU is 1.0000 at iter 120, epoch 59, Time: 17m 54s
+24/08/2018 16:47:02 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 59
+24/08/2018 16:47:07 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 59
+24/08/2018 16:47:07 - SaltNet - INFO - Epoch 60/99
+24/08/2018 16:47:07 - SaltNet - INFO - --------------------
+24/08/2018 16:47:19 - SaltNet - INFO - Batch Loss is 0.0084, Running loss is 1.0644, Batch IOU is 0.9000 at iter 122, epoch 60, Time: 18m 12s
+24/08/2018 16:47:20 - SaltNet - INFO - train Mean IOU is 0.9250 at epoch 60
+24/08/2018 16:47:25 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 60
+24/08/2018 16:47:25 - SaltNet - INFO - Epoch 61/99
+24/08/2018 16:47:25 - SaltNet - INFO - --------------------
+24/08/2018 16:47:36 - SaltNet - INFO - Batch Loss is 0.0080, Running loss is 1.0504, Batch IOU is 0.9500 at iter 124, epoch 61, Time: 18m 29s
+24/08/2018 16:47:37 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 61
+24/08/2018 16:47:42 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 61
+24/08/2018 16:47:42 - SaltNet - INFO - Epoch 62/99
+24/08/2018 16:47:42 - SaltNet - INFO - --------------------
+24/08/2018 16:47:53 - SaltNet - INFO - Batch Loss is 0.0065, Running loss is 1.0369, Batch IOU is 1.0000 at iter 126, epoch 62, Time: 18m 46s
+24/08/2018 16:47:54 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 62
+24/08/2018 16:47:59 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 62
+24/08/2018 16:47:59 - SaltNet - INFO - Epoch 63/99
+24/08/2018 16:47:59 - SaltNet - INFO - --------------------
+24/08/2018 16:48:10 - SaltNet - INFO - Batch Loss is 0.0071, Running loss is 1.0237, Batch IOU is 1.0000 at iter 128, epoch 63, Time: 19m 3s
+24/08/2018 16:48:11 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 63
+24/08/2018 16:48:15 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 63
+24/08/2018 16:48:15 - SaltNet - INFO - Epoch 64/99
+24/08/2018 16:48:15 - SaltNet - INFO - --------------------
+24/08/2018 16:48:29 - SaltNet - INFO - Batch Loss is 0.0074, Running loss is 1.0110, Batch IOU is 0.9500 at iter 130, epoch 64, Time: 19m 22s
+24/08/2018 16:48:30 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 64
+24/08/2018 16:48:34 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 64
+24/08/2018 16:48:34 - SaltNet - INFO - Epoch 65/99
+24/08/2018 16:48:34 - SaltNet - INFO - --------------------
+24/08/2018 16:48:47 - SaltNet - INFO - Batch Loss is 0.0070, Running loss is 0.9987, Batch IOU is 1.0000 at iter 132, epoch 65, Time: 19m 39s
+24/08/2018 16:48:48 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 65
+24/08/2018 16:48:54 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 65
+24/08/2018 16:48:54 - SaltNet - INFO - Epoch 66/99
+24/08/2018 16:48:54 - SaltNet - INFO - --------------------
+24/08/2018 16:49:08 - SaltNet - INFO - Batch Loss is 0.0069, Running loss is 0.9867, Batch IOU is 0.9500 at iter 134, epoch 66, Time: 20m 1s
+24/08/2018 16:49:09 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 66
+24/08/2018 16:49:14 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 66
+24/08/2018 16:49:14 - SaltNet - INFO - Epoch 67/99
+24/08/2018 16:49:14 - SaltNet - INFO - --------------------
+24/08/2018 16:49:28 - SaltNet - INFO - Batch Loss is 0.0070, Running loss is 0.9751, Batch IOU is 0.9500 at iter 136, epoch 67, Time: 20m 21s
+24/08/2018 16:49:29 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 67
+24/08/2018 16:49:35 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 67
+24/08/2018 16:49:35 - SaltNet - INFO - Epoch 68/99
+24/08/2018 16:49:35 - SaltNet - INFO - --------------------
+24/08/2018 16:49:48 - SaltNet - INFO - Batch Loss is 0.0068, Running loss is 0.9638, Batch IOU is 0.9500 at iter 138, epoch 68, Time: 20m 41s
+24/08/2018 16:49:49 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 68
+24/08/2018 16:49:55 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 68
+24/08/2018 16:49:55 - SaltNet - INFO - Epoch 69/99
+24/08/2018 16:49:55 - SaltNet - INFO - --------------------
+24/08/2018 16:50:08 - SaltNet - INFO - Batch Loss is 0.0068, Running loss is 0.9528, Batch IOU is 1.0000 at iter 140, epoch 69, Time: 21m 1s
+24/08/2018 16:50:09 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 69
+24/08/2018 16:50:16 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 69
+24/08/2018 16:50:16 - SaltNet - INFO - Epoch 70/99
+24/08/2018 16:50:16 - SaltNet - INFO - --------------------
+24/08/2018 16:50:31 - SaltNet - INFO - Batch Loss is 0.0064, Running loss is 0.9422, Batch IOU is 1.0000 at iter 142, epoch 70, Time: 21m 23s
+24/08/2018 16:50:31 - SaltNet - INFO - train Mean IOU is 1.0000 at epoch 70
+24/08/2018 16:50:36 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 70
+24/08/2018 16:50:36 - SaltNet - INFO - Epoch 71/99
+24/08/2018 16:50:36 - SaltNet - INFO - --------------------
+24/08/2018 16:50:50 - SaltNet - INFO - Batch Loss is 0.0066, Running loss is 0.9318, Batch IOU is 1.0000 at iter 144, epoch 71, Time: 21m 42s
+24/08/2018 16:50:51 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 71
+24/08/2018 16:50:58 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 71
+24/08/2018 16:50:58 - SaltNet - INFO - Epoch 72/99
+24/08/2018 16:50:58 - SaltNet - INFO - --------------------
+24/08/2018 16:51:11 - SaltNet - INFO - Batch Loss is 0.0065, Running loss is 0.9217, Batch IOU is 0.9500 at iter 146, epoch 72, Time: 22m 4s
+24/08/2018 16:51:12 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 72
+24/08/2018 16:51:18 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 72
+24/08/2018 16:51:18 - SaltNet - INFO - Epoch 73/99
+24/08/2018 16:51:18 - SaltNet - INFO - --------------------
+24/08/2018 16:51:31 - SaltNet - INFO - Batch Loss is 0.0061, Running loss is 0.9119, Batch IOU is 1.0000 at iter 148, epoch 73, Time: 22m 23s
+24/08/2018 16:51:31 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 73
+24/08/2018 16:51:36 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 73
+24/08/2018 16:51:36 - SaltNet - INFO - Epoch 74/99
+24/08/2018 16:51:36 - SaltNet - INFO - --------------------
+24/08/2018 16:51:48 - SaltNet - INFO - Batch Loss is 0.0060, Running loss is 0.9023, Batch IOU is 1.0000 at iter 150, epoch 74, Time: 22m 41s
+24/08/2018 16:51:49 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 74
+24/08/2018 16:51:55 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 74
+24/08/2018 16:51:55 - SaltNet - INFO - Epoch 75/99
+24/08/2018 16:51:55 - SaltNet - INFO - --------------------
+24/08/2018 16:52:08 - SaltNet - INFO - Batch Loss is 0.0060, Running loss is 0.8929, Batch IOU is 0.9500 at iter 152, epoch 75, Time: 23m 1s
+24/08/2018 16:52:09 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 75
+24/08/2018 16:52:14 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 75
+24/08/2018 16:52:14 - SaltNet - INFO - Epoch 76/99
+24/08/2018 16:52:14 - SaltNet - INFO - --------------------
+24/08/2018 16:52:30 - SaltNet - INFO - Batch Loss is 0.0058, Running loss is 0.8838, Batch IOU is 1.0000 at iter 154, epoch 76, Time: 23m 22s
+24/08/2018 16:52:31 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 76
+24/08/2018 16:52:36 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 76
+24/08/2018 16:52:36 - SaltNet - INFO - Epoch 77/99
+24/08/2018 16:52:36 - SaltNet - INFO - --------------------
+24/08/2018 16:52:50 - SaltNet - INFO - Batch Loss is 0.0058, Running loss is 0.8749, Batch IOU is 1.0000 at iter 156, epoch 77, Time: 23m 43s
+24/08/2018 16:52:51 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 77
+24/08/2018 16:52:57 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 77
+24/08/2018 16:52:57 - SaltNet - INFO - Epoch 78/99
+24/08/2018 16:52:57 - SaltNet - INFO - --------------------
+24/08/2018 16:53:13 - SaltNet - INFO - Batch Loss is 0.0072, Running loss is 0.8662, Batch IOU is 0.9000 at iter 158, epoch 78, Time: 24m 6s
+24/08/2018 16:53:15 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 78
+24/08/2018 16:53:22 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 78
+24/08/2018 16:53:22 - SaltNet - INFO - Epoch 79/99
+24/08/2018 16:53:22 - SaltNet - INFO - --------------------
+24/08/2018 16:53:34 - SaltNet - INFO - Batch Loss is 0.0056, Running loss is 0.8578, Batch IOU is 1.0000 at iter 160, epoch 79, Time: 24m 27s
+24/08/2018 16:53:35 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 79
+24/08/2018 16:53:41 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 79
+24/08/2018 16:53:41 - SaltNet - INFO - Epoch 80/99
+24/08/2018 16:53:41 - SaltNet - INFO - --------------------
+24/08/2018 16:53:56 - SaltNet - INFO - Batch Loss is 0.0063, Running loss is 0.8496, Batch IOU is 1.0000 at iter 162, epoch 80, Time: 24m 49s
+24/08/2018 16:53:57 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 80
+24/08/2018 16:54:03 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 80
+24/08/2018 16:54:03 - SaltNet - INFO - Epoch 81/99
+24/08/2018 16:54:03 - SaltNet - INFO - --------------------
+24/08/2018 16:54:20 - SaltNet - INFO - Batch Loss is 0.0063, Running loss is 0.8416, Batch IOU is 0.9500 at iter 164, epoch 81, Time: 25m 13s
+24/08/2018 16:54:21 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 81
+24/08/2018 16:54:28 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 81
+24/08/2018 16:54:28 - SaltNet - INFO - Epoch 82/99
+24/08/2018 16:54:28 - SaltNet - INFO - --------------------
+24/08/2018 16:54:40 - SaltNet - INFO - Batch Loss is 0.0071, Running loss is 0.8338, Batch IOU is 0.9000 at iter 166, epoch 82, Time: 25m 33s
+24/08/2018 16:54:41 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 82
+24/08/2018 16:54:46 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 82
+24/08/2018 16:54:46 - SaltNet - INFO - Epoch 83/99
+24/08/2018 16:54:46 - SaltNet - INFO - --------------------
+24/08/2018 16:54:59 - SaltNet - INFO - Batch Loss is 0.0055, Running loss is 0.8262, Batch IOU is 0.9500 at iter 168, epoch 83, Time: 25m 52s
+24/08/2018 16:55:01 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 83
+24/08/2018 16:55:07 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 83
+24/08/2018 16:55:07 - SaltNet - INFO - Epoch 84/99
+24/08/2018 16:55:07 - SaltNet - INFO - --------------------
+24/08/2018 16:55:22 - SaltNet - INFO - Batch Loss is 0.0055, Running loss is 0.8187, Batch IOU is 0.9500 at iter 170, epoch 84, Time: 26m 14s
+24/08/2018 16:55:23 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 84
+24/08/2018 16:55:29 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 84
+24/08/2018 16:55:29 - SaltNet - INFO - Epoch 85/99
+24/08/2018 16:55:29 - SaltNet - INFO - --------------------
+24/08/2018 16:55:41 - SaltNet - INFO - Batch Loss is 0.0055, Running loss is 0.8114, Batch IOU is 1.0000 at iter 172, epoch 85, Time: 26m 34s
+24/08/2018 16:55:42 - SaltNet - INFO - train Mean IOU is 1.0000 at epoch 85
+24/08/2018 16:55:48 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 85
+24/08/2018 16:55:48 - SaltNet - INFO - Epoch 86/99
+24/08/2018 16:55:48 - SaltNet - INFO - --------------------
+24/08/2018 16:56:01 - SaltNet - INFO - Batch Loss is 0.0067, Running loss is 0.8043, Batch IOU is 1.0000 at iter 174, epoch 86, Time: 26m 54s
+24/08/2018 16:56:02 - SaltNet - INFO - train Mean IOU is 0.9500 at epoch 86
+24/08/2018 16:56:07 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 86
+24/08/2018 16:56:07 - SaltNet - INFO - Epoch 87/99
+24/08/2018 16:56:07 - SaltNet - INFO - --------------------
+24/08/2018 16:56:19 - SaltNet - INFO - Batch Loss is 0.0054, Running loss is 0.7973, Batch IOU is 1.0000 at iter 176, epoch 87, Time: 27m 12s
+24/08/2018 16:56:20 - SaltNet - INFO - train Mean IOU is 1.0000 at epoch 87
+24/08/2018 16:56:25 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 87
+24/08/2018 16:56:25 - SaltNet - INFO - Epoch 88/99
+24/08/2018 16:56:25 - SaltNet - INFO - --------------------
+24/08/2018 16:56:38 - SaltNet - INFO - Batch Loss is 0.0065, Running loss is 0.7905, Batch IOU is 1.0000 at iter 178, epoch 88, Time: 27m 31s
+24/08/2018 16:56:38 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 88
+24/08/2018 16:56:43 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 88
+24/08/2018 16:56:43 - SaltNet - INFO - Epoch 89/99
+24/08/2018 16:56:43 - SaltNet - INFO - --------------------
+24/08/2018 16:56:56 - SaltNet - INFO - Batch Loss is 0.0061, Running loss is 0.7838, Batch IOU is 1.0000 at iter 180, epoch 89, Time: 27m 48s
+24/08/2018 16:56:56 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 89
+24/08/2018 16:57:03 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 89
+24/08/2018 16:57:03 - SaltNet - INFO - Epoch 90/99
+24/08/2018 16:57:03 - SaltNet - INFO - --------------------
+24/08/2018 16:57:13 - SaltNet - INFO - Batch Loss is 0.0061, Running loss is 0.7773, Batch IOU is 1.0000 at iter 182, epoch 90, Time: 28m 6s
+24/08/2018 16:57:14 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 90
+24/08/2018 16:57:19 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 90
+24/08/2018 16:57:19 - SaltNet - INFO - Epoch 91/99
+24/08/2018 16:57:19 - SaltNet - INFO - --------------------
+24/08/2018 16:57:31 - SaltNet - INFO - Batch Loss is 0.0054, Running loss is 0.7710, Batch IOU is 1.0000 at iter 184, epoch 91, Time: 28m 24s
+24/08/2018 16:57:32 - SaltNet - INFO - train Mean IOU is 1.0000 at epoch 91
+24/08/2018 16:57:37 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 91
+24/08/2018 16:57:37 - SaltNet - INFO - Epoch 92/99
+24/08/2018 16:57:37 - SaltNet - INFO - --------------------
+24/08/2018 16:57:47 - SaltNet - INFO - Batch Loss is 0.0061, Running loss is 0.7647, Batch IOU is 1.0000 at iter 186, epoch 92, Time: 28m 40s
+24/08/2018 16:57:48 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 92
+24/08/2018 16:57:53 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 92
+24/08/2018 16:57:53 - SaltNet - INFO - Epoch 93/99
+24/08/2018 16:57:53 - SaltNet - INFO - --------------------
+24/08/2018 16:58:07 - SaltNet - INFO - Batch Loss is 0.0062, Running loss is 0.7587, Batch IOU is 0.9500 at iter 188, epoch 93, Time: 29m 0s
+24/08/2018 16:58:08 - SaltNet - INFO - train Mean IOU is 0.9750 at epoch 93
+24/08/2018 16:58:14 - SaltNet - INFO - val Mean IOU is 0.5000 at epoch 93
+24/08/2018 16:58:14 - SaltNet - INFO - Epoch 94/99
+24/08/2018 16:58:14 - SaltNet - INFO - --------------------
+24/08/2018 17:30:09 - SaltNet - INFO - Start Training...
+24/08/2018 17:30:09 - SaltNet - INFO - Passed parameters: {'push_every': None, 'print_every': 2, 'num_epochs': 100, 'model_save_name': 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp', 'scheduler': <torch.optim.lr_scheduler.StepLR object at 0x000001D6806DA358>, 'optimizer': Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0
+), 'criterion': BCELoss(), 'dataloaders': {'train': <torch.utils.data.dataloader.DataLoader object at 0x000001D681DF0F28>, 'val': <torch.utils.data.dataloader.DataLoader object at 0x000001D681DF0DA0>}, 'model': UResNet(
+  (conv1): Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (outc): outconv(
+    (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (sig): Sigmoid()
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(384, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up3): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+  (up4): up(
+    (up): Upsample(scale_factor=2, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace)
+      )
+    )
+  )
+)}
+24/08/2018 17:30:10 - SaltNet - INFO - Epoch 0/99
+24/08/2018 17:30:10 - SaltNet - INFO - --------------------
+24/08/2018 17:30:18 - SaltNet - INFO - Batch Loss is 6.3178, Running loss is 6.3178, Batch IOU is 0.0000 at iter 2, epoch 0, Time: 0m 9s
+24/08/2018 17:30:19 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 17:30:23 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 0
+24/08/2018 17:30:23 - SaltNet - INFO - Epoch 1/99
+24/08/2018 17:30:23 - SaltNet - INFO - --------------------
+24/08/2018 17:30:30 - SaltNet - INFO - Batch Loss is 2.3461, Running loss is 6.0145, Batch IOU is 0.0000 at iter 4, epoch 1, Time: 0m 21s
+24/08/2018 17:30:32 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 1
+24/08/2018 17:30:36 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 1
+24/08/2018 17:30:36 - SaltNet - INFO - Epoch 2/99
+24/08/2018 17:30:36 - SaltNet - INFO - --------------------
+24/08/2018 17:30:43 - SaltNet - INFO - Batch Loss is 1.3156, Running loss is 5.3510, Batch IOU is 0.0000 at iter 6, epoch 2, Time: 0m 34s
+24/08/2018 17:30:44 - SaltNet - INFO - train Mean IOU is 0.1500 at epoch 2
+24/08/2018 17:30:47 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 2
+24/08/2018 17:30:47 - SaltNet - INFO - Epoch 3/99
+24/08/2018 17:30:47 - SaltNet - INFO - --------------------
+24/08/2018 17:30:55 - SaltNet - INFO - Batch Loss is 0.8308, Running loss is 6.6107, Batch IOU is 0.0000 at iter 8, epoch 3, Time: 0m 46s
+24/08/2018 17:30:56 - SaltNet - INFO - train Mean IOU is 0.2000 at epoch 3
+24/08/2018 17:30:59 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 3
+24/08/2018 17:30:59 - SaltNet - INFO - Epoch 4/99
+24/08/2018 17:30:59 - SaltNet - INFO - --------------------
+24/08/2018 17:31:07 - SaltNet - INFO - Batch Loss is 0.7046, Running loss is 6.2305, Batch IOU is 0.0000 at iter 10, epoch 4, Time: 0m 57s
+24/08/2018 17:31:07 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 4
+24/08/2018 17:31:11 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 4
+24/08/2018 17:31:11 - SaltNet - INFO - Epoch 5/99
+24/08/2018 17:31:11 - SaltNet - INFO - --------------------
+24/08/2018 17:31:18 - SaltNet - INFO - Batch Loss is 0.4093, Running loss is 6.0901, Batch IOU is 0.0000 at iter 12, epoch 5, Time: 1m 9s
+24/08/2018 17:31:19 - SaltNet - INFO - train Mean IOU is 0.0500 at epoch 5
+24/08/2018 17:31:22 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 5
+24/08/2018 17:31:22 - SaltNet - INFO - Epoch 6/99
+24/08/2018 17:31:22 - SaltNet - INFO - --------------------
+24/08/2018 17:31:30 - SaltNet - INFO - Batch Loss is 0.2723, Running loss is 7.0845, Batch IOU is 0.0000 at iter 14, epoch 6, Time: 1m 20s
+24/08/2018 17:31:30 - SaltNet - INFO - train Mean IOU is 0.1750 at epoch 6
+24/08/2018 17:31:34 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 6
+24/08/2018 17:31:34 - SaltNet - INFO - Epoch 7/99
+24/08/2018 17:31:34 - SaltNet - INFO - --------------------
+24/08/2018 17:31:42 - SaltNet - INFO - Batch Loss is 0.9785, Running loss is 7.8610, Batch IOU is 0.0500 at iter 16, epoch 7, Time: 1m 32s
+24/08/2018 17:31:42 - SaltNet - INFO - train Mean IOU is 0.0250 at epoch 7
+24/08/2018 17:31:46 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 7
+24/08/2018 17:31:46 - SaltNet - INFO - Epoch 8/99
+24/08/2018 17:31:46 - SaltNet - INFO - --------------------
+24/08/2018 17:31:54 - SaltNet - INFO - Batch Loss is 0.1904, Running loss is 8.4091, Batch IOU is 0.0000 at iter 18, epoch 8, Time: 1m 45s
+24/08/2018 17:31:55 - SaltNet - INFO - train Mean IOU is 0.2250 at epoch 8
+24/08/2018 17:31:59 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 8
+24/08/2018 17:31:59 - SaltNet - INFO - Epoch 9/99
+24/08/2018 17:31:59 - SaltNet - INFO - --------------------
+24/08/2018 17:32:07 - SaltNet - INFO - Batch Loss is 0.1569, Running loss is 8.8319, Batch IOU is 0.0000 at iter 20, epoch 9, Time: 1m 58s
+24/08/2018 17:32:08 - SaltNet - INFO - train Mean IOU is 0.4750 at epoch 9
+24/08/2018 17:32:12 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 9
+24/08/2018 17:32:12 - SaltNet - INFO - Epoch 10/99
+24/08/2018 17:32:12 - SaltNet - INFO - --------------------
+24/08/2018 17:32:21 - SaltNet - INFO - Batch Loss is 0.1612, Running loss is 9.1302, Batch IOU is 0.5000 at iter 22, epoch 10, Time: 2m 11s
+24/08/2018 17:32:22 - SaltNet - INFO - train Mean IOU is 0.4750 at epoch 10
+24/08/2018 17:32:25 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 10
+24/08/2018 17:32:25 - SaltNet - INFO - Epoch 11/99
+24/08/2018 17:32:25 - SaltNet - INFO - --------------------
+24/08/2018 17:32:35 - SaltNet - INFO - Batch Loss is 0.1067, Running loss is 9.1492, Batch IOU is 0.5000 at iter 24, epoch 11, Time: 2m 26s
+24/08/2018 17:32:36 - SaltNet - INFO - train Mean IOU is 0.4750 at epoch 11
+24/08/2018 17:32:40 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 11
+24/08/2018 17:32:40 - SaltNet - INFO - Epoch 12/99
+24/08/2018 17:32:40 - SaltNet - INFO - --------------------
+24/08/2018 17:32:50 - SaltNet - INFO - Batch Loss is 0.1526, Running loss is 8.4456, Batch IOU is 0.4500 at iter 26, epoch 12, Time: 2m 40s
+24/08/2018 17:32:50 - SaltNet - INFO - train Mean IOU is 0.2500 at epoch 12
+24/08/2018 17:32:54 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 12
+24/08/2018 17:32:54 - SaltNet - INFO - Epoch 13/99
+24/08/2018 17:32:54 - SaltNet - INFO - --------------------
+24/08/2018 17:33:03 - SaltNet - INFO - Batch Loss is 0.1256, Running loss is 7.8364, Batch IOU is 0.5000 at iter 28, epoch 13, Time: 2m 54s
+24/08/2018 17:33:04 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 13
+24/08/2018 17:33:08 - SaltNet - INFO - val Mean IOU is 0.7500 at epoch 13
+24/08/2018 17:33:11 - SaltNet - INFO - ['Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-1-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-2-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-3-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-4-Of-5', 'Unet_Data_Augmentation_2018_08_24_16_28_59.ckp-chunk-5-Of-5']
+24/08/2018 17:33:11 - SaltNet - INFO - Best Val Mean IOU so far: 0.75
+24/08/2018 17:33:12 - SaltNet - INFO - Epoch 14/99
+24/08/2018 17:33:12 - SaltNet - INFO - --------------------
+24/08/2018 17:33:20 - SaltNet - INFO - Batch Loss is 0.1735, Running loss is 7.3136, Batch IOU is 0.0000 at iter 30, epoch 14, Time: 3m 10s
+24/08/2018 17:33:21 - SaltNet - INFO - train Mean IOU is 0.4250 at epoch 14
+24/08/2018 17:33:24 - SaltNet - INFO - val Mean IOU is 0.7500 at epoch 14
+24/08/2018 17:33:24 - SaltNet - INFO - Epoch 15/99
+24/08/2018 17:33:24 - SaltNet - INFO - --------------------
+24/08/2018 17:33:33 - SaltNet - INFO - Batch Loss is 0.1556, Running loss is 6.8581, Batch IOU is 0.5000 at iter 32, epoch 15, Time: 3m 24s
+24/08/2018 17:33:34 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 15
+24/08/2018 17:33:38 - SaltNet - INFO - val Mean IOU is 0.7500 at epoch 15
+24/08/2018 17:33:38 - SaltNet - INFO - Epoch 16/99
+24/08/2018 17:33:38 - SaltNet - INFO - --------------------

@@ -1,0 +1,1246 @@
+24/08/2018 14:10:16 - SaltNet - INFO - Start Training...
+24/08/2018 14:10:16 - SaltNet - INFO - Passed parameters: ['log', 'push_every', 'print_every', 'num_epochs', 'other_data', 'model_save_name', 'scheduler', 'optimizer', 'criterion', 'dataloaders', 'model']
+24/08/2018 14:10:16 - SaltNet - INFO - Epoch 0/19
+24/08/2018 14:10:16 - SaltNet - INFO - --------------------
+24/08/2018 14:10:16 - SaltNet - INFO - Batch Loss is 1.6160, Running loss is 1.6160, Batch IOU is 0.0000 at iter 2, epoch 0, Time: 0m 0s
+24/08/2018 14:10:16 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:10:17 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:10:17 - SaltNet - INFO - Epoch 1/19
+24/08/2018 14:10:17 - SaltNet - INFO - --------------------
+24/08/2018 14:10:17 - SaltNet - INFO - Batch Loss is 1.1478, Running loss is 1.0978, Batch IOU is 0.0000 at iter 4, epoch 1, Time: 0m 1s
+24/08/2018 14:10:17 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 1
+24/08/2018 14:10:17 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 1
+24/08/2018 14:10:17 - SaltNet - INFO - Epoch 2/19
+24/08/2018 14:10:17 - SaltNet - INFO - --------------------
+24/08/2018 14:10:17 - SaltNet - INFO - Batch Loss is 0.7846, Running loss is 1.4129, Batch IOU is 0.1500 at iter 6, epoch 2, Time: 0m 1s
+24/08/2018 14:10:18 - SaltNet - INFO - train Mean IOU is 0.0750 at epoch 2
+24/08/2018 14:10:18 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 2
+24/08/2018 14:10:18 - SaltNet - INFO - Epoch 3/19
+24/08/2018 14:10:18 - SaltNet - INFO - --------------------
+24/08/2018 14:10:18 - SaltNet - INFO - Batch Loss is 0.3477, Running loss is 1.5254, Batch IOU is 0.0000 at iter 8, epoch 3, Time: 0m 2s
+24/08/2018 14:10:19 - SaltNet - INFO - train Mean IOU is 0.2000 at epoch 3
+24/08/2018 14:10:19 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 3
+24/08/2018 14:10:19 - SaltNet - INFO - Epoch 4/19
+24/08/2018 14:10:19 - SaltNet - INFO - --------------------
+24/08/2018 14:10:19 - SaltNet - INFO - Batch Loss is 0.1729, Running loss is 1.3990, Batch IOU is 0.4500 at iter 10, epoch 4, Time: 0m 3s
+24/08/2018 14:10:20 - SaltNet - INFO - train Mean IOU is 0.2250 at epoch 4
+24/08/2018 14:10:20 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 4
+24/08/2018 14:10:20 - SaltNet - INFO - Epoch 5/19
+24/08/2018 14:10:20 - SaltNet - INFO - --------------------
+24/08/2018 14:10:20 - SaltNet - INFO - Batch Loss is 0.3404, Running loss is 1.3406, Batch IOU is 0.0500 at iter 12, epoch 5, Time: 0m 4s
+24/08/2018 14:10:21 - SaltNet - INFO - train Mean IOU is 0.0250 at epoch 5
+24/08/2018 14:10:21 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 5
+24/08/2018 14:10:21 - SaltNet - INFO - Epoch 6/19
+24/08/2018 14:10:21 - SaltNet - INFO - --------------------
+24/08/2018 14:10:21 - SaltNet - INFO - Batch Loss is 0.1314, Running loss is 1.5671, Batch IOU is 0.0000 at iter 14, epoch 6, Time: 0m 5s
+24/08/2018 14:10:21 - SaltNet - INFO - train Mean IOU is 0.2250 at epoch 6
+24/08/2018 14:10:21 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 6
+24/08/2018 14:10:21 - SaltNet - INFO - Epoch 7/19
+24/08/2018 14:10:21 - SaltNet - INFO - --------------------
+24/08/2018 14:10:22 - SaltNet - INFO - Batch Loss is 0.0843, Running loss is 1.7390, Batch IOU is 0.6500 at iter 16, epoch 7, Time: 0m 5s
+24/08/2018 14:10:22 - SaltNet - INFO - train Mean IOU is 0.3250 at epoch 7
+24/08/2018 14:10:22 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 7
+24/08/2018 14:10:22 - SaltNet - INFO - Epoch 8/19
+24/08/2018 14:10:22 - SaltNet - INFO - --------------------
+24/08/2018 14:10:22 - SaltNet - INFO - Batch Loss is 0.0882, Running loss is 1.9110, Batch IOU is 0.1500 at iter 18, epoch 8, Time: 0m 6s
+24/08/2018 14:10:23 - SaltNet - INFO - train Mean IOU is 0.3000 at epoch 8
+24/08/2018 14:10:23 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 8
+24/08/2018 14:10:23 - SaltNet - INFO - Epoch 9/19
+24/08/2018 14:10:23 - SaltNet - INFO - --------------------
+24/08/2018 14:10:23 - SaltNet - INFO - Batch Loss is 0.1509, Running loss is 2.0751, Batch IOU is 0.4500 at iter 20, epoch 9, Time: 0m 7s
+24/08/2018 14:10:24 - SaltNet - INFO - train Mean IOU is 0.2250 at epoch 9
+24/08/2018 14:10:24 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 9
+24/08/2018 14:10:24 - SaltNet - INFO - Epoch 10/19
+24/08/2018 14:10:24 - SaltNet - INFO - --------------------
+24/08/2018 14:10:24 - SaltNet - INFO - Batch Loss is 0.0859, Running loss is 2.2781, Batch IOU is 0.5000 at iter 22, epoch 10, Time: 0m 8s
+24/08/2018 14:10:25 - SaltNet - INFO - train Mean IOU is 0.2500 at epoch 10
+24/08/2018 14:10:25 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 10
+24/08/2018 14:10:25 - SaltNet - INFO - Epoch 11/19
+24/08/2018 14:10:25 - SaltNet - INFO - --------------------
+24/08/2018 14:10:25 - SaltNet - INFO - Batch Loss is 0.0470, Running loss is 2.4799, Batch IOU is 0.7500 at iter 24, epoch 11, Time: 0m 9s
+24/08/2018 14:10:26 - SaltNet - INFO - train Mean IOU is 0.7000 at epoch 11
+24/08/2018 14:10:26 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 11
+24/08/2018 14:10:26 - SaltNet - INFO - Epoch 12/19
+24/08/2018 14:10:26 - SaltNet - INFO - --------------------
+24/08/2018 14:10:26 - SaltNet - INFO - Batch Loss is 0.0527, Running loss is 2.6486, Batch IOU is 1.0000 at iter 26, epoch 12, Time: 0m 10s
+24/08/2018 14:10:26 - SaltNet - INFO - train Mean IOU is 0.6000 at epoch 12
+24/08/2018 14:10:26 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 12
+24/08/2018 14:10:26 - SaltNet - INFO - Epoch 13/19
+24/08/2018 14:10:26 - SaltNet - INFO - --------------------
+24/08/2018 14:10:27 - SaltNet - INFO - Batch Loss is 0.0427, Running loss is 2.7988, Batch IOU is 0.2500 at iter 28, epoch 13, Time: 0m 10s
+24/08/2018 14:10:27 - SaltNet - INFO - train Mean IOU is 0.6250 at epoch 13
+24/08/2018 14:10:27 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 13
+24/08/2018 14:10:27 - SaltNet - INFO - Epoch 14/19
+24/08/2018 14:10:27 - SaltNet - INFO - --------------------
+24/08/2018 14:10:27 - SaltNet - INFO - Batch Loss is 0.0679, Running loss is 2.9238, Batch IOU is 0.8000 at iter 30, epoch 14, Time: 0m 11s
+24/08/2018 14:10:28 - SaltNet - INFO - train Mean IOU is 0.6500 at epoch 14
+24/08/2018 14:10:28 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 14
+24/08/2018 14:10:28 - SaltNet - INFO - Epoch 15/19
+24/08/2018 14:10:28 - SaltNet - INFO - --------------------
+24/08/2018 14:10:28 - SaltNet - INFO - Batch Loss is 0.0317, Running loss is 3.0743, Batch IOU is 0.8500 at iter 32, epoch 15, Time: 0m 12s
+24/08/2018 14:10:29 - SaltNet - INFO - train Mean IOU is 0.7250 at epoch 15
+24/08/2018 14:10:29 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 15
+24/08/2018 14:10:29 - SaltNet - INFO - Epoch 16/19
+24/08/2018 14:10:29 - SaltNet - INFO - --------------------
+24/08/2018 14:10:29 - SaltNet - INFO - Batch Loss is 0.0432, Running loss is 3.2373, Batch IOU is 1.0000 at iter 34, epoch 16, Time: 0m 13s
+24/08/2018 14:10:30 - SaltNet - INFO - train Mean IOU is 0.6000 at epoch 16
+24/08/2018 14:10:30 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 16
+24/08/2018 14:10:30 - SaltNet - INFO - Epoch 17/19
+24/08/2018 14:10:30 - SaltNet - INFO - --------------------
+24/08/2018 14:10:30 - SaltNet - INFO - Batch Loss is 0.0327, Running loss is 3.3646, Batch IOU is 0.8000 at iter 36, epoch 17, Time: 0m 14s
+24/08/2018 14:10:30 - SaltNet - INFO - train Mean IOU is 0.7500 at epoch 17
+24/08/2018 14:10:31 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 17
+24/08/2018 14:10:31 - SaltNet - INFO - Epoch 18/19
+24/08/2018 14:10:31 - SaltNet - INFO - --------------------
+24/08/2018 14:10:31 - SaltNet - INFO - Batch Loss is 0.0329, Running loss is 3.4432, Batch IOU is 0.8000 at iter 38, epoch 18, Time: 0m 15s
+24/08/2018 14:10:31 - SaltNet - INFO - train Mean IOU is 0.4250 at epoch 18
+24/08/2018 14:10:31 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 18
+24/08/2018 14:10:31 - SaltNet - INFO - Epoch 19/19
+24/08/2018 14:10:31 - SaltNet - INFO - --------------------
+24/08/2018 14:10:31 - SaltNet - INFO - Batch Loss is 0.0221, Running loss is 3.4890, Batch IOU is 1.0000 at iter 40, epoch 19, Time: 0m 15s
+24/08/2018 14:10:32 - SaltNet - INFO - train Mean IOU is 0.7500 at epoch 19
+24/08/2018 14:10:32 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 19
+24/08/2018 14:10:32 - SaltNet - INFO - --------------------
+24/08/2018 14:10:32 - SaltNet - INFO - Training complete in 0m 17s
+24/08/2018 14:10:32 - SaltNet - INFO - Best val IOU: 0.000000
+24/08/2018 14:11:35 - SaltNet - INFO - Start Training...
+24/08/2018 14:11:35 - SaltNet - INFO - Passed parameters: ['log', 'push_every', 'print_every', 'num_epochs', 'other_data', 'model_save_name', 'scheduler', 'optimizer', 'criterion', 'dataloaders', 'model']
+24/08/2018 14:11:35 - SaltNet - INFO - Epoch 0/149
+24/08/2018 14:11:35 - SaltNet - INFO - --------------------
+24/08/2018 14:11:36 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:11:36 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:13:14 - SaltNet - INFO - Start Training...
+24/08/2018 14:13:14 - SaltNet - INFO - Passed parameters: ['log', 'push_every', 'print_every', 'num_epochs', 'other_data', 'model_save_name', 'scheduler', 'optimizer', 'criterion', 'dataloaders', 'model']
+24/08/2018 14:13:14 - SaltNet - INFO - Epoch 0/149
+24/08/2018 14:13:14 - SaltNet - INFO - --------------------
+24/08/2018 14:13:15 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:13:15 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:18:21 - SaltNet - INFO - Start Training...
+24/08/2018 14:18:21 - SaltNet - INFO - Passed parameters: ['log', 'push_every', 'print_every', 'num_epochs', 'other_data', 'model_save_name', 'scheduler', 'optimizer', 'criterion', 'dataloaders', 'model']
+24/08/2018 14:18:21 - SaltNet - INFO - Epoch 0/149
+24/08/2018 14:18:21 - SaltNet - INFO - --------------------
+24/08/2018 14:18:21 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:18:21 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 0
+24/08/2018 14:18:21 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 14:18:34 - SaltNet - INFO - Epoch 1/149
+24/08/2018 14:18:34 - SaltNet - INFO - --------------------
+24/08/2018 14:18:35 - SaltNet - INFO - train Mean IOU is 0.0000 at epoch 1
+24/08/2018 14:18:35 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 1
+24/08/2018 14:18:35 - SaltNet - INFO - Epoch 2/149
+24/08/2018 14:18:35 - SaltNet - INFO - --------------------
+24/08/2018 14:18:35 - SaltNet - INFO - train Mean IOU is 0.0500 at epoch 2
+24/08/2018 14:18:35 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 2
+24/08/2018 14:18:35 - SaltNet - INFO - Epoch 3/149
+24/08/2018 14:18:35 - SaltNet - INFO - --------------------
+24/08/2018 14:18:35 - SaltNet - INFO - train Mean IOU is 0.2250 at epoch 3
+24/08/2018 14:18:35 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 3
+24/08/2018 14:18:35 - SaltNet - INFO - Epoch 4/149
+24/08/2018 14:18:35 - SaltNet - INFO - --------------------
+24/08/2018 14:18:35 - SaltNet - INFO - train Mean IOU is 0.2500 at epoch 4
+24/08/2018 14:18:35 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 4
+24/08/2018 14:18:35 - SaltNet - INFO - Epoch 5/149
+24/08/2018 14:18:35 - SaltNet - INFO - --------------------
+24/08/2018 14:18:36 - SaltNet - INFO - train Mean IOU is 0.2250 at epoch 5
+24/08/2018 14:18:36 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 5
+24/08/2018 14:18:36 - SaltNet - INFO - Epoch 6/149
+24/08/2018 14:18:36 - SaltNet - INFO - --------------------
+24/08/2018 14:18:36 - SaltNet - INFO - train Mean IOU is 0.2500 at epoch 6
+24/08/2018 14:18:36 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 6
+24/08/2018 14:18:36 - SaltNet - INFO - Epoch 7/149
+24/08/2018 14:18:36 - SaltNet - INFO - --------------------
+24/08/2018 14:18:36 - SaltNet - INFO - train Mean IOU is 0.2500 at epoch 7
+24/08/2018 14:18:36 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 7
+24/08/2018 14:18:36 - SaltNet - INFO - Epoch 8/149
+24/08/2018 14:18:36 - SaltNet - INFO - --------------------
+24/08/2018 14:18:36 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 8
+24/08/2018 14:18:36 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 8
+24/08/2018 14:18:36 - SaltNet - INFO - Epoch 9/149
+24/08/2018 14:18:36 - SaltNet - INFO - --------------------
+24/08/2018 14:18:37 - SaltNet - INFO - train Mean IOU is 0.5500 at epoch 9
+24/08/2018 14:18:37 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 9
+24/08/2018 14:18:37 - SaltNet - INFO - Epoch 10/149
+24/08/2018 14:18:37 - SaltNet - INFO - --------------------
+24/08/2018 14:18:37 - SaltNet - INFO - train Mean IOU is 0.5250 at epoch 10
+24/08/2018 14:18:37 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 10
+24/08/2018 14:18:37 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 14:18:48 - SaltNet - INFO - Epoch 11/149
+24/08/2018 14:18:48 - SaltNet - INFO - --------------------
+24/08/2018 14:18:48 - SaltNet - INFO - train Mean IOU is 0.6000 at epoch 11
+24/08/2018 14:18:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 11
+24/08/2018 14:18:49 - SaltNet - INFO - Epoch 12/149
+24/08/2018 14:18:49 - SaltNet - INFO - --------------------
+24/08/2018 14:18:49 - SaltNet - INFO - train Mean IOU is 0.7000 at epoch 12
+24/08/2018 14:18:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 12
+24/08/2018 14:18:49 - SaltNet - INFO - Epoch 13/149
+24/08/2018 14:18:49 - SaltNet - INFO - --------------------
+24/08/2018 14:18:49 - SaltNet - INFO - train Mean IOU is 0.6500 at epoch 13
+24/08/2018 14:18:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 13
+24/08/2018 14:18:49 - SaltNet - INFO - Epoch 14/149
+24/08/2018 14:18:49 - SaltNet - INFO - --------------------
+24/08/2018 14:18:49 - SaltNet - INFO - train Mean IOU is 0.7500 at epoch 14
+24/08/2018 14:18:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 14
+24/08/2018 14:18:49 - SaltNet - INFO - Epoch 15/149
+24/08/2018 14:18:49 - SaltNet - INFO - --------------------
+24/08/2018 14:18:49 - SaltNet - INFO - train Mean IOU is 0.7000 at epoch 15
+24/08/2018 14:18:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 15
+24/08/2018 14:18:49 - SaltNet - INFO - Epoch 16/149
+24/08/2018 14:18:49 - SaltNet - INFO - --------------------
+24/08/2018 14:18:50 - SaltNet - INFO - train Mean IOU is 0.8500 at epoch 16
+24/08/2018 14:18:50 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 16
+24/08/2018 14:18:50 - SaltNet - INFO - Epoch 17/149
+24/08/2018 14:18:50 - SaltNet - INFO - --------------------
+24/08/2018 14:18:50 - SaltNet - INFO - train Mean IOU is 0.3500 at epoch 17
+24/08/2018 14:18:50 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 17
+24/08/2018 14:18:50 - SaltNet - INFO - Epoch 18/149
+24/08/2018 14:18:50 - SaltNet - INFO - --------------------
+24/08/2018 14:18:50 - SaltNet - INFO - train Mean IOU is 0.5750 at epoch 18
+24/08/2018 14:18:50 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 18
+24/08/2018 14:18:50 - SaltNet - INFO - Epoch 19/149
+24/08/2018 14:18:50 - SaltNet - INFO - --------------------
+24/08/2018 14:18:50 - SaltNet - INFO - train Mean IOU is 0.1000 at epoch 19
+24/08/2018 14:18:50 - SaltNet - INFO - val Mean IOU is 0.7500 at epoch 19
+24/08/2018 14:18:51 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:18:51 - SaltNet - INFO - Best Val Mean IOU so far: 0.75
+24/08/2018 14:18:52 - SaltNet - INFO - Epoch 20/149
+24/08/2018 14:18:52 - SaltNet - INFO - --------------------
+24/08/2018 14:18:52 - SaltNet - INFO - train Mean IOU is 0.3250 at epoch 20
+24/08/2018 14:18:52 - SaltNet - INFO - val Mean IOU is 0.7500 at epoch 20
+24/08/2018 14:18:53 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:18:53 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 14:19:47 - SaltNet - INFO - Epoch 21/149
+24/08/2018 14:19:47 - SaltNet - INFO - --------------------
+24/08/2018 14:19:47 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 21
+24/08/2018 14:19:48 - SaltNet - INFO - val Mean IOU is 0.7500 at epoch 21
+24/08/2018 14:19:48 - SaltNet - INFO - Epoch 22/149
+24/08/2018 14:19:48 - SaltNet - INFO - --------------------
+24/08/2018 14:19:48 - SaltNet - INFO - train Mean IOU is 0.5500 at epoch 22
+24/08/2018 14:19:48 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 22
+24/08/2018 14:19:48 - SaltNet - INFO - Epoch 23/149
+24/08/2018 14:19:48 - SaltNet - INFO - --------------------
+24/08/2018 14:19:48 - SaltNet - INFO - train Mean IOU is 0.5250 at epoch 23
+24/08/2018 14:19:48 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 23
+24/08/2018 14:19:48 - SaltNet - INFO - Epoch 24/149
+24/08/2018 14:19:48 - SaltNet - INFO - --------------------
+24/08/2018 14:19:48 - SaltNet - INFO - Batch Loss is 0.5010, Running loss is 2.0900, Batch IOU is 0.5000 at iter 50, epoch 24, Time: 1m 27s
+24/08/2018 14:19:49 - SaltNet - INFO - train Mean IOU is 0.4750 at epoch 24
+24/08/2018 14:19:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 24
+24/08/2018 14:19:49 - SaltNet - INFO - Epoch 25/149
+24/08/2018 14:19:49 - SaltNet - INFO - --------------------
+24/08/2018 14:19:49 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 25
+24/08/2018 14:19:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 25
+24/08/2018 14:19:49 - SaltNet - INFO - Epoch 26/149
+24/08/2018 14:19:49 - SaltNet - INFO - --------------------
+24/08/2018 14:19:49 - SaltNet - INFO - train Mean IOU is 0.5000 at epoch 26
+24/08/2018 14:19:49 - SaltNet - INFO - val Mean IOU is 0.0000 at epoch 26
+24/08/2018 14:19:49 - SaltNet - INFO - Epoch 27/149
+24/08/2018 14:19:49 - SaltNet - INFO - --------------------
+24/08/2018 14:19:50 - SaltNet - INFO - train Mean IOU is 0.3500 at epoch 27
+24/08/2018 14:19:50 - SaltNet - INFO - val Mean IOU is 0.0250 at epoch 27
+24/08/2018 14:19:50 - SaltNet - INFO - Epoch 28/149
+24/08/2018 14:19:50 - SaltNet - INFO - --------------------
+24/08/2018 14:19:50 - SaltNet - INFO - train Mean IOU is 0.3250 at epoch 28
+24/08/2018 14:19:50 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 28
+24/08/2018 14:19:50 - SaltNet - INFO - Epoch 29/149
+24/08/2018 14:19:50 - SaltNet - INFO - --------------------
+24/08/2018 14:19:50 - SaltNet - INFO - train Mean IOU is 0.3500 at epoch 29
+24/08/2018 14:19:50 - SaltNet - INFO - val Mean IOU is 0.2500 at epoch 29
+24/08/2018 14:19:50 - SaltNet - INFO - Epoch 30/149
+24/08/2018 14:19:50 - SaltNet - INFO - --------------------
+24/08/2018 14:20:47 - SaltNet - INFO - Start Training...
+24/08/2018 14:20:47 - SaltNet - INFO - Passed parameters: ['log', 'push_every', 'print_every', 'num_epochs', 'other_data', 'model_save_name', 'scheduler', 'optimizer', 'criterion', 'dataloaders', 'model']
+24/08/2018 14:20:47 - SaltNet - INFO - Epoch 0/149
+24/08/2018 14:20:47 - SaltNet - INFO - --------------------
+24/08/2018 14:21:46 - SaltNet - INFO - Batch Loss is 0.6926, Running loss is 0.6926, Batch IOU is 0.1063 at iter 50, epoch 0, Time: 0m 58s
+24/08/2018 14:22:45 - SaltNet - INFO - Batch Loss is 0.4446, Running loss is 0.5686, Batch IOU is 0.3688 at iter 100, epoch 0, Time: 1m 57s
+24/08/2018 14:22:46 - SaltNet - INFO - train Mean IOU is 0.1278 at epoch 0
+24/08/2018 14:22:53 - SaltNet - INFO - val Mean IOU is 0.3350 at epoch 0
+24/08/2018 14:22:54 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:22:54 - SaltNet - INFO - Best Val Mean IOU so far: 0.335
+24/08/2018 14:22:55 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:22:55 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 14:23:49 - SaltNet - INFO - Epoch 1/149
+24/08/2018 14:23:49 - SaltNet - INFO - --------------------
+24/08/2018 14:24:49 - SaltNet - INFO - Batch Loss is 0.4205, Running loss is 0.4990, Batch IOU is 0.2000 at iter 150, epoch 1, Time: 4m 1s
+24/08/2018 14:25:48 - SaltNet - INFO - Batch Loss is 0.4118, Running loss is 0.4796, Batch IOU is 0.5062 at iter 200, epoch 1, Time: 5m 0s
+24/08/2018 14:25:49 - SaltNet - INFO - train Mean IOU is 0.2807 at epoch 1
+24/08/2018 14:25:57 - SaltNet - INFO - val Mean IOU is 0.4211 at epoch 1
+24/08/2018 14:25:58 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:25:58 - SaltNet - INFO - Best Val Mean IOU so far: 0.42112499999999997
+24/08/2018 14:25:58 - SaltNet - INFO - Epoch 2/149
+24/08/2018 14:25:58 - SaltNet - INFO - --------------------
+24/08/2018 14:26:56 - SaltNet - INFO - Batch Loss is 0.3908, Running loss is 0.4548, Batch IOU is 0.2938 at iter 250, epoch 2, Time: 6m 9s
+24/08/2018 14:27:55 - SaltNet - INFO - Batch Loss is 0.3685, Running loss is 0.4425, Batch IOU is 0.3719 at iter 300, epoch 2, Time: 7m 7s
+24/08/2018 14:27:56 - SaltNet - INFO - train Mean IOU is 0.4061 at epoch 2
+24/08/2018 14:28:04 - SaltNet - INFO - val Mean IOU is 0.3942 at epoch 2
+24/08/2018 14:28:04 - SaltNet - INFO - Epoch 3/149
+24/08/2018 14:28:04 - SaltNet - INFO - --------------------
+24/08/2018 14:29:02 - SaltNet - INFO - Batch Loss is 0.3546, Running loss is 0.4255, Batch IOU is 0.4562 at iter 350, epoch 3, Time: 8m 14s
+24/08/2018 14:30:01 - SaltNet - INFO - Batch Loss is 0.3430, Running loss is 0.4168, Batch IOU is 0.4531 at iter 400, epoch 3, Time: 9m 13s
+24/08/2018 14:30:02 - SaltNet - INFO - train Mean IOU is 0.4675 at epoch 3
+24/08/2018 14:30:10 - SaltNet - INFO - val Mean IOU is 0.5078 at epoch 3
+24/08/2018 14:30:11 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:30:11 - SaltNet - INFO - Best Val Mean IOU so far: 0.50775
+24/08/2018 14:30:11 - SaltNet - INFO - Epoch 4/149
+24/08/2018 14:30:11 - SaltNet - INFO - --------------------
+24/08/2018 14:31:09 - SaltNet - INFO - Batch Loss is 0.3453, Running loss is 0.4087, Batch IOU is 0.4563 at iter 450, epoch 4, Time: 10m 22s
+24/08/2018 14:32:08 - SaltNet - INFO - Batch Loss is 0.3388, Running loss is 0.4029, Batch IOU is 0.5344 at iter 500, epoch 4, Time: 11m 20s
+24/08/2018 14:32:09 - SaltNet - INFO - train Mean IOU is 0.4911 at epoch 4
+24/08/2018 14:32:17 - SaltNet - INFO - val Mean IOU is 0.5245 at epoch 4
+24/08/2018 14:32:18 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:32:18 - SaltNet - INFO - Best Val Mean IOU so far: 0.5245
+24/08/2018 14:32:18 - SaltNet - INFO - Epoch 5/149
+24/08/2018 14:32:18 - SaltNet - INFO - --------------------
+24/08/2018 14:33:17 - SaltNet - INFO - Batch Loss is 0.3470, Running loss is 0.3963, Batch IOU is 0.5531 at iter 550, epoch 5, Time: 12m 29s
+24/08/2018 14:34:15 - SaltNet - INFO - Batch Loss is 0.3162, Running loss is 0.3908, Batch IOU is 0.5656 at iter 600, epoch 5, Time: 13m 27s
+24/08/2018 14:34:16 - SaltNet - INFO - train Mean IOU is 0.5226 at epoch 5
+24/08/2018 14:34:24 - SaltNet - INFO - val Mean IOU is 0.5459 at epoch 5
+24/08/2018 14:34:25 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:34:25 - SaltNet - INFO - Best Val Mean IOU so far: 0.545875
+24/08/2018 14:34:25 - SaltNet - INFO - Epoch 6/149
+24/08/2018 14:34:25 - SaltNet - INFO - --------------------
+24/08/2018 14:35:24 - SaltNet - INFO - Batch Loss is 0.3237, Running loss is 0.3835, Batch IOU is 0.5688 at iter 650, epoch 6, Time: 14m 36s
+24/08/2018 14:36:22 - SaltNet - INFO - Batch Loss is 0.2888, Running loss is 0.3779, Batch IOU is 0.4375 at iter 700, epoch 6, Time: 15m 34s
+24/08/2018 14:36:23 - SaltNet - INFO - train Mean IOU is 0.5390 at epoch 6
+24/08/2018 14:36:31 - SaltNet - INFO - val Mean IOU is 0.4146 at epoch 6
+24/08/2018 14:36:31 - SaltNet - INFO - Epoch 7/149
+24/08/2018 14:36:31 - SaltNet - INFO - --------------------
+24/08/2018 14:37:29 - SaltNet - INFO - Batch Loss is 0.3107, Running loss is 0.3728, Batch IOU is 0.5656 at iter 750, epoch 7, Time: 16m 42s
+24/08/2018 14:38:28 - SaltNet - INFO - Batch Loss is 0.2949, Running loss is 0.3688, Batch IOU is 0.4875 at iter 800, epoch 7, Time: 17m 40s
+24/08/2018 14:38:29 - SaltNet - INFO - train Mean IOU is 0.5473 at epoch 7
+24/08/2018 14:38:37 - SaltNet - INFO - val Mean IOU is 0.5428 at epoch 7
+24/08/2018 14:38:37 - SaltNet - INFO - Epoch 8/149
+24/08/2018 14:38:37 - SaltNet - INFO - --------------------
+24/08/2018 14:39:35 - SaltNet - INFO - Batch Loss is 0.2932, Running loss is 0.3628, Batch IOU is 0.5469 at iter 850, epoch 8, Time: 18m 47s
+24/08/2018 14:40:34 - SaltNet - INFO - Batch Loss is 0.2857, Running loss is 0.3593, Batch IOU is 0.4875 at iter 900, epoch 8, Time: 19m 46s
+24/08/2018 14:40:35 - SaltNet - INFO - train Mean IOU is 0.5644 at epoch 8
+24/08/2018 14:40:43 - SaltNet - INFO - val Mean IOU is 0.5864 at epoch 8
+24/08/2018 14:40:44 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:40:44 - SaltNet - INFO - Best Val Mean IOU so far: 0.586375
+24/08/2018 14:40:44 - SaltNet - INFO - Epoch 9/149
+24/08/2018 14:40:44 - SaltNet - INFO - --------------------
+24/08/2018 14:41:45 - SaltNet - INFO - Batch Loss is 0.3011, Running loss is 0.3542, Batch IOU is 0.5156 at iter 950, epoch 9, Time: 20m 57s
+24/08/2018 14:42:43 - SaltNet - INFO - Batch Loss is 0.2650, Running loss is 0.3506, Batch IOU is 0.5563 at iter 1000, epoch 9, Time: 21m 55s
+24/08/2018 14:42:44 - SaltNet - INFO - train Mean IOU is 0.5625 at epoch 9
+24/08/2018 14:42:52 - SaltNet - INFO - val Mean IOU is 0.5825 at epoch 9
+24/08/2018 14:42:52 - SaltNet - INFO - Epoch 10/149
+24/08/2018 14:42:52 - SaltNet - INFO - --------------------
+24/08/2018 14:43:50 - SaltNet - INFO - Batch Loss is 0.2827, Running loss is 0.3464, Batch IOU is 0.5406 at iter 1050, epoch 10, Time: 23m 2s
+24/08/2018 14:44:49 - SaltNet - INFO - Batch Loss is 0.2784, Running loss is 0.3439, Batch IOU is 0.7312 at iter 1100, epoch 10, Time: 24m 1s
+24/08/2018 14:44:50 - SaltNet - INFO - train Mean IOU is 0.5717 at epoch 10
+24/08/2018 14:44:58 - SaltNet - INFO - val Mean IOU is 0.5995 at epoch 10
+24/08/2018 14:44:59 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:44:59 - SaltNet - INFO - Best Val Mean IOU so far: 0.5995
+24/08/2018 14:45:00 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:45:00 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 14:45:54 - SaltNet - INFO - Epoch 11/149
+24/08/2018 14:45:54 - SaltNet - INFO - --------------------
+24/08/2018 14:46:54 - SaltNet - INFO - Batch Loss is 0.2854, Running loss is 0.3405, Batch IOU is 0.5969 at iter 1150, epoch 11, Time: 26m 6s
+24/08/2018 14:47:53 - SaltNet - INFO - Batch Loss is 0.2561, Running loss is 0.3377, Batch IOU is 0.8156 at iter 1200, epoch 11, Time: 27m 5s
+24/08/2018 14:47:54 - SaltNet - INFO - train Mean IOU is 0.5863 at epoch 11
+24/08/2018 14:48:02 - SaltNet - INFO - val Mean IOU is 0.5877 at epoch 11
+24/08/2018 14:48:02 - SaltNet - INFO - Epoch 12/149
+24/08/2018 14:48:02 - SaltNet - INFO - --------------------
+24/08/2018 14:49:01 - SaltNet - INFO - Batch Loss is 0.2788, Running loss is 0.3350, Batch IOU is 0.6625 at iter 1250, epoch 12, Time: 28m 13s
+24/08/2018 14:50:02 - SaltNet - INFO - Batch Loss is 0.2448, Running loss is 0.3321, Batch IOU is 0.7500 at iter 1300, epoch 12, Time: 29m 14s
+24/08/2018 14:50:03 - SaltNet - INFO - train Mean IOU is 0.5977 at epoch 12
+24/08/2018 14:50:11 - SaltNet - INFO - val Mean IOU is 0.6362 at epoch 12
+24/08/2018 14:50:12 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:50:12 - SaltNet - INFO - Best Val Mean IOU so far: 0.63625
+24/08/2018 14:50:12 - SaltNet - INFO - Epoch 13/149
+24/08/2018 14:50:12 - SaltNet - INFO - --------------------
+24/08/2018 14:51:10 - SaltNet - INFO - Batch Loss is 0.2524, Running loss is 0.3284, Batch IOU is 0.6094 at iter 1350, epoch 13, Time: 30m 22s
+24/08/2018 14:52:09 - SaltNet - INFO - Batch Loss is 0.2553, Running loss is 0.3263, Batch IOU is 0.7031 at iter 1400, epoch 13, Time: 31m 21s
+24/08/2018 14:52:10 - SaltNet - INFO - train Mean IOU is 0.6061 at epoch 13
+24/08/2018 14:52:18 - SaltNet - INFO - val Mean IOU is 0.6344 at epoch 13
+24/08/2018 14:52:18 - SaltNet - INFO - Epoch 14/149
+24/08/2018 14:52:18 - SaltNet - INFO - --------------------
+24/08/2018 14:53:17 - SaltNet - INFO - Batch Loss is 0.2525, Running loss is 0.3231, Batch IOU is 0.5469 at iter 1450, epoch 14, Time: 32m 29s
+24/08/2018 14:54:17 - SaltNet - INFO - Batch Loss is 0.2460, Running loss is 0.3210, Batch IOU is 0.5063 at iter 1500, epoch 14, Time: 33m 29s
+24/08/2018 14:54:18 - SaltNet - INFO - train Mean IOU is 0.6002 at epoch 14
+24/08/2018 14:54:26 - SaltNet - INFO - val Mean IOU is 0.6558 at epoch 14
+24/08/2018 14:54:27 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 14:54:27 - SaltNet - INFO - Best Val Mean IOU so far: 0.65575
+24/08/2018 14:54:27 - SaltNet - INFO - Epoch 15/149
+24/08/2018 14:54:27 - SaltNet - INFO - --------------------
+24/08/2018 14:55:27 - SaltNet - INFO - Batch Loss is 0.2450, Running loss is 0.3175, Batch IOU is 0.7281 at iter 1550, epoch 15, Time: 34m 39s
+24/08/2018 14:56:25 - SaltNet - INFO - Batch Loss is 0.2491, Running loss is 0.3158, Batch IOU is 0.6219 at iter 1600, epoch 15, Time: 35m 37s
+24/08/2018 14:56:26 - SaltNet - INFO - train Mean IOU is 0.6129 at epoch 15
+24/08/2018 14:56:34 - SaltNet - INFO - val Mean IOU is 0.6150 at epoch 15
+24/08/2018 14:56:34 - SaltNet - INFO - Epoch 16/149
+24/08/2018 14:56:34 - SaltNet - INFO - --------------------
+24/08/2018 14:57:32 - SaltNet - INFO - Batch Loss is 0.2288, Running loss is 0.3128, Batch IOU is 0.5656 at iter 1650, epoch 16, Time: 36m 45s
+24/08/2018 14:58:31 - SaltNet - INFO - Batch Loss is 0.2351, Running loss is 0.3110, Batch IOU is 0.7000 at iter 1700, epoch 16, Time: 37m 43s
+24/08/2018 14:58:32 - SaltNet - INFO - train Mean IOU is 0.6248 at epoch 16
+24/08/2018 14:58:40 - SaltNet - INFO - val Mean IOU is 0.6525 at epoch 16
+24/08/2018 14:58:40 - SaltNet - INFO - Epoch 17/149
+24/08/2018 14:58:40 - SaltNet - INFO - --------------------
+24/08/2018 14:59:41 - SaltNet - INFO - Batch Loss is 0.2391, Running loss is 0.3082, Batch IOU is 0.5875 at iter 1750, epoch 17, Time: 38m 53s
+24/08/2018 15:00:39 - SaltNet - INFO - Batch Loss is 0.2311, Running loss is 0.3064, Batch IOU is 0.5906 at iter 1800, epoch 17, Time: 39m 51s
+24/08/2018 15:00:40 - SaltNet - INFO - train Mean IOU is 0.6309 at epoch 17
+24/08/2018 15:00:48 - SaltNet - INFO - val Mean IOU is 0.5361 at epoch 17
+24/08/2018 15:00:48 - SaltNet - INFO - Epoch 18/149
+24/08/2018 15:00:48 - SaltNet - INFO - --------------------
+24/08/2018 15:01:46 - SaltNet - INFO - Batch Loss is 0.2269, Running loss is 0.3040, Batch IOU is 0.6594 at iter 1850, epoch 18, Time: 40m 58s
+24/08/2018 15:02:45 - SaltNet - INFO - Batch Loss is 0.2344, Running loss is 0.3025, Batch IOU is 0.7250 at iter 1900, epoch 18, Time: 41m 57s
+24/08/2018 15:02:46 - SaltNet - INFO - train Mean IOU is 0.6269 at epoch 18
+24/08/2018 15:02:54 - SaltNet - INFO - val Mean IOU is 0.6041 at epoch 18
+24/08/2018 15:02:54 - SaltNet - INFO - Epoch 19/149
+24/08/2018 15:02:54 - SaltNet - INFO - --------------------
+24/08/2018 15:03:52 - SaltNet - INFO - Batch Loss is 0.2361, Running loss is 0.3005, Batch IOU is 0.7719 at iter 1950, epoch 19, Time: 43m 4s
+24/08/2018 15:04:53 - SaltNet - INFO - Batch Loss is 0.2271, Running loss is 0.2990, Batch IOU is 0.5781 at iter 2000, epoch 19, Time: 44m 5s
+24/08/2018 15:04:54 - SaltNet - INFO - train Mean IOU is 0.6378 at epoch 19
+24/08/2018 15:05:02 - SaltNet - INFO - val Mean IOU is 0.6717 at epoch 19
+24/08/2018 15:05:03 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:05:03 - SaltNet - INFO - Best Val Mean IOU so far: 0.67175
+24/08/2018 15:05:03 - SaltNet - INFO - Epoch 20/149
+24/08/2018 15:05:03 - SaltNet - INFO - --------------------
+24/08/2018 15:06:01 - SaltNet - INFO - Batch Loss is 0.2233, Running loss is 0.2967, Batch IOU is 0.6844 at iter 2050, epoch 20, Time: 45m 13s
+24/08/2018 15:07:00 - SaltNet - INFO - Batch Loss is 0.2264, Running loss is 0.2953, Batch IOU is 0.6188 at iter 2100, epoch 20, Time: 46m 12s
+24/08/2018 15:07:01 - SaltNet - INFO - train Mean IOU is 0.6431 at epoch 20
+24/08/2018 15:07:09 - SaltNet - INFO - val Mean IOU is 0.6815 at epoch 20
+24/08/2018 15:07:10 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:07:10 - SaltNet - INFO - Best Val Mean IOU so far: 0.6815000000000001
+24/08/2018 15:07:11 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:07:11 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 15:08:05 - SaltNet - INFO - Epoch 21/149
+24/08/2018 15:08:05 - SaltNet - INFO - --------------------
+24/08/2018 15:09:03 - SaltNet - INFO - Batch Loss is 0.2169, Running loss is 0.2930, Batch IOU is 0.7406 at iter 2150, epoch 21, Time: 48m 15s
+24/08/2018 15:10:02 - SaltNet - INFO - Batch Loss is 0.2377, Running loss is 0.2920, Batch IOU is 0.7531 at iter 2200, epoch 21, Time: 49m 14s
+24/08/2018 15:10:03 - SaltNet - INFO - train Mean IOU is 0.6347 at epoch 21
+24/08/2018 15:10:11 - SaltNet - INFO - val Mean IOU is 0.6446 at epoch 21
+24/08/2018 15:10:11 - SaltNet - INFO - Epoch 22/149
+24/08/2018 15:10:11 - SaltNet - INFO - --------------------
+24/08/2018 15:11:10 - SaltNet - INFO - Batch Loss is 0.2361, Running loss is 0.2905, Batch IOU is 0.6594 at iter 2250, epoch 22, Time: 50m 22s
+24/08/2018 15:12:11 - SaltNet - INFO - Batch Loss is 0.2159, Running loss is 0.2892, Batch IOU is 0.7281 at iter 2300, epoch 22, Time: 51m 23s
+24/08/2018 15:12:12 - SaltNet - INFO - train Mean IOU is 0.6450 at epoch 22
+24/08/2018 15:12:20 - SaltNet - INFO - val Mean IOU is 0.6579 at epoch 22
+24/08/2018 15:12:20 - SaltNet - INFO - Epoch 23/149
+24/08/2018 15:12:20 - SaltNet - INFO - --------------------
+24/08/2018 15:13:18 - SaltNet - INFO - Batch Loss is 0.2397, Running loss is 0.2876, Batch IOU is 0.6813 at iter 2350, epoch 23, Time: 52m 30s
+24/08/2018 15:14:17 - SaltNet - INFO - Batch Loss is 0.2157, Running loss is 0.2864, Batch IOU is 0.6125 at iter 2400, epoch 23, Time: 53m 29s
+24/08/2018 15:14:18 - SaltNet - INFO - train Mean IOU is 0.6435 at epoch 23
+24/08/2018 15:14:26 - SaltNet - INFO - val Mean IOU is 0.6546 at epoch 23
+24/08/2018 15:14:26 - SaltNet - INFO - Epoch 24/149
+24/08/2018 15:14:26 - SaltNet - INFO - --------------------
+24/08/2018 15:15:24 - SaltNet - INFO - Batch Loss is 0.2186, Running loss is 0.2847, Batch IOU is 0.5562 at iter 2450, epoch 24, Time: 54m 36s
+24/08/2018 15:16:22 - SaltNet - INFO - Batch Loss is 0.2573, Running loss is 0.2842, Batch IOU is 0.5531 at iter 2500, epoch 24, Time: 55m 35s
+24/08/2018 15:16:23 - SaltNet - INFO - train Mean IOU is 0.6298 at epoch 24
+24/08/2018 15:16:31 - SaltNet - INFO - val Mean IOU is 0.5508 at epoch 24
+24/08/2018 15:16:31 - SaltNet - INFO - Epoch 25/149
+24/08/2018 15:16:31 - SaltNet - INFO - --------------------
+24/08/2018 15:17:29 - SaltNet - INFO - Batch Loss is 0.2330, Running loss is 0.2831, Batch IOU is 0.5375 at iter 2550, epoch 25, Time: 56m 41s
+24/08/2018 15:18:28 - SaltNet - INFO - Batch Loss is 0.2164, Running loss is 0.2821, Batch IOU is 0.6625 at iter 2600, epoch 25, Time: 57m 40s
+24/08/2018 15:18:29 - SaltNet - INFO - train Mean IOU is 0.6403 at epoch 25
+24/08/2018 15:18:37 - SaltNet - INFO - val Mean IOU is 0.6219 at epoch 25
+24/08/2018 15:18:37 - SaltNet - INFO - Epoch 26/149
+24/08/2018 15:18:37 - SaltNet - INFO - --------------------
+24/08/2018 15:19:35 - SaltNet - INFO - Batch Loss is 0.2320, Running loss is 0.2810, Batch IOU is 0.5000 at iter 2650, epoch 26, Time: 58m 47s
+24/08/2018 15:20:34 - SaltNet - INFO - Batch Loss is 0.2016, Running loss is 0.2798, Batch IOU is 0.6188 at iter 2700, epoch 26, Time: 59m 46s
+24/08/2018 15:20:35 - SaltNet - INFO - train Mean IOU is 0.6419 at epoch 26
+24/08/2018 15:20:43 - SaltNet - INFO - val Mean IOU is 0.6255 at epoch 26
+24/08/2018 15:20:43 - SaltNet - INFO - Epoch 27/149
+24/08/2018 15:20:43 - SaltNet - INFO - --------------------
+24/08/2018 15:21:41 - SaltNet - INFO - Batch Loss is 0.2141, Running loss is 0.2784, Batch IOU is 0.7094 at iter 2750, epoch 27, Time: 60m 53s
+24/08/2018 15:22:40 - SaltNet - INFO - Batch Loss is 0.2126, Running loss is 0.2775, Batch IOU is 0.7156 at iter 2800, epoch 27, Time: 61m 52s
+24/08/2018 15:22:41 - SaltNet - INFO - train Mean IOU is 0.6461 at epoch 27
+24/08/2018 15:22:49 - SaltNet - INFO - val Mean IOU is 0.6591 at epoch 27
+24/08/2018 15:22:49 - SaltNet - INFO - Epoch 28/149
+24/08/2018 15:22:49 - SaltNet - INFO - --------------------
+24/08/2018 15:23:47 - SaltNet - INFO - Batch Loss is 0.1889, Running loss is 0.2756, Batch IOU is 0.6375 at iter 2850, epoch 28, Time: 62m 59s
+24/08/2018 15:24:46 - SaltNet - INFO - Batch Loss is 0.2182, Running loss is 0.2748, Batch IOU is 0.8250 at iter 2900, epoch 28, Time: 63m 58s
+24/08/2018 15:24:47 - SaltNet - INFO - train Mean IOU is 0.6668 at epoch 28
+24/08/2018 15:24:54 - SaltNet - INFO - val Mean IOU is 0.6945 at epoch 28
+24/08/2018 15:24:55 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:24:55 - SaltNet - INFO - Best Val Mean IOU so far: 0.6945
+24/08/2018 15:24:55 - SaltNet - INFO - Epoch 29/149
+24/08/2018 15:24:55 - SaltNet - INFO - --------------------
+24/08/2018 15:25:55 - SaltNet - INFO - Batch Loss is 0.1982, Running loss is 0.2732, Batch IOU is 0.7063 at iter 2950, epoch 29, Time: 65m 7s
+24/08/2018 15:26:54 - SaltNet - INFO - Batch Loss is 0.2051, Running loss is 0.2723, Batch IOU is 0.5719 at iter 3000, epoch 29, Time: 66m 6s
+24/08/2018 15:26:55 - SaltNet - INFO - train Mean IOU is 0.6669 at epoch 29
+24/08/2018 15:27:03 - SaltNet - INFO - val Mean IOU is 0.7011 at epoch 29
+24/08/2018 15:27:03 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:27:03 - SaltNet - INFO - Best Val Mean IOU so far: 0.701125
+24/08/2018 15:27:04 - SaltNet - INFO - Epoch 30/149
+24/08/2018 15:27:04 - SaltNet - INFO - --------------------
+24/08/2018 15:28:04 - SaltNet - INFO - Batch Loss is 0.2025, Running loss is 0.2708, Batch IOU is 0.6469 at iter 3050, epoch 30, Time: 67m 16s
+24/08/2018 15:29:03 - SaltNet - INFO - Batch Loss is 0.2158, Running loss is 0.2701, Batch IOU is 0.6156 at iter 3100, epoch 30, Time: 68m 15s
+24/08/2018 15:29:04 - SaltNet - INFO - train Mean IOU is 0.6746 at epoch 30
+24/08/2018 15:29:12 - SaltNet - INFO - val Mean IOU is 0.7040 at epoch 30
+24/08/2018 15:29:12 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:29:12 - SaltNet - INFO - Best Val Mean IOU so far: 0.7040000000000001
+24/08/2018 15:29:14 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:29:14 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 15:30:08 - SaltNet - INFO - Epoch 31/149
+24/08/2018 15:30:08 - SaltNet - INFO - --------------------
+24/08/2018 15:31:06 - SaltNet - INFO - Batch Loss is 0.1954, Running loss is 0.2685, Batch IOU is 0.7188 at iter 3150, epoch 31, Time: 70m 18s
+24/08/2018 15:32:05 - SaltNet - INFO - Batch Loss is 0.2000, Running loss is 0.2677, Batch IOU is 0.6938 at iter 3200, epoch 31, Time: 71m 17s
+24/08/2018 15:32:06 - SaltNet - INFO - train Mean IOU is 0.6784 at epoch 31
+24/08/2018 15:32:14 - SaltNet - INFO - val Mean IOU is 0.6911 at epoch 31
+24/08/2018 15:32:14 - SaltNet - INFO - Epoch 32/149
+24/08/2018 15:32:14 - SaltNet - INFO - --------------------
+24/08/2018 15:33:12 - SaltNet - INFO - Batch Loss is 0.2191, Running loss is 0.2666, Batch IOU is 0.5813 at iter 3250, epoch 32, Time: 72m 24s
+24/08/2018 15:34:11 - SaltNet - INFO - Batch Loss is 0.2118, Running loss is 0.2659, Batch IOU is 0.6062 at iter 3300, epoch 32, Time: 73m 23s
+24/08/2018 15:34:12 - SaltNet - INFO - train Mean IOU is 0.6621 at epoch 32
+24/08/2018 15:34:20 - SaltNet - INFO - val Mean IOU is 0.6475 at epoch 32
+24/08/2018 15:34:20 - SaltNet - INFO - Epoch 33/149
+24/08/2018 15:34:20 - SaltNet - INFO - --------------------
+24/08/2018 15:35:18 - SaltNet - INFO - Batch Loss is 0.1918, Running loss is 0.2646, Batch IOU is 0.6594 at iter 3350, epoch 33, Time: 74m 30s
+24/08/2018 15:36:17 - SaltNet - INFO - Batch Loss is 0.2085, Running loss is 0.2639, Batch IOU is 0.6406 at iter 3400, epoch 33, Time: 75m 29s
+24/08/2018 15:36:18 - SaltNet - INFO - train Mean IOU is 0.6815 at epoch 33
+24/08/2018 15:36:26 - SaltNet - INFO - val Mean IOU is 0.6971 at epoch 33
+24/08/2018 15:36:26 - SaltNet - INFO - Epoch 34/149
+24/08/2018 15:36:26 - SaltNet - INFO - --------------------
+24/08/2018 15:37:24 - SaltNet - INFO - Batch Loss is 0.2093, Running loss is 0.2628, Batch IOU is 0.7656 at iter 3450, epoch 34, Time: 76m 36s
+24/08/2018 15:38:23 - SaltNet - INFO - Batch Loss is 0.1871, Running loss is 0.2620, Batch IOU is 0.6281 at iter 3500, epoch 34, Time: 77m 35s
+24/08/2018 15:38:24 - SaltNet - INFO - train Mean IOU is 0.6790 at epoch 34
+24/08/2018 15:38:31 - SaltNet - INFO - val Mean IOU is 0.7061 at epoch 34
+24/08/2018 15:38:32 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:38:32 - SaltNet - INFO - Best Val Mean IOU so far: 0.7061250000000001
+24/08/2018 15:38:33 - SaltNet - INFO - Epoch 35/149
+24/08/2018 15:38:33 - SaltNet - INFO - --------------------
+24/08/2018 15:39:31 - SaltNet - INFO - Batch Loss is 0.1983, Running loss is 0.2609, Batch IOU is 0.7125 at iter 3550, epoch 35, Time: 78m 43s
+24/08/2018 15:40:30 - SaltNet - INFO - Batch Loss is 0.1869, Running loss is 0.2601, Batch IOU is 0.7937 at iter 3600, epoch 35, Time: 79m 42s
+24/08/2018 15:40:31 - SaltNet - INFO - train Mean IOU is 0.6918 at epoch 35
+24/08/2018 15:40:39 - SaltNet - INFO - val Mean IOU is 0.6465 at epoch 35
+24/08/2018 15:40:39 - SaltNet - INFO - Epoch 36/149
+24/08/2018 15:40:39 - SaltNet - INFO - --------------------
+24/08/2018 15:41:37 - SaltNet - INFO - Batch Loss is 0.1923, Running loss is 0.2592, Batch IOU is 0.7344 at iter 3650, epoch 36, Time: 80m 49s
+24/08/2018 15:42:36 - SaltNet - INFO - Batch Loss is 0.2072, Running loss is 0.2586, Batch IOU is 0.7437 at iter 3700, epoch 36, Time: 81m 48s
+24/08/2018 15:42:37 - SaltNet - INFO - train Mean IOU is 0.6742 at epoch 36
+24/08/2018 15:42:44 - SaltNet - INFO - val Mean IOU is 0.6497 at epoch 36
+24/08/2018 15:42:44 - SaltNet - INFO - Epoch 37/149
+24/08/2018 15:42:44 - SaltNet - INFO - --------------------
+24/08/2018 15:43:43 - SaltNet - INFO - Batch Loss is 0.2110, Running loss is 0.2577, Batch IOU is 0.7344 at iter 3750, epoch 37, Time: 82m 55s
+24/08/2018 15:44:41 - SaltNet - INFO - Batch Loss is 0.1971, Running loss is 0.2571, Batch IOU is 0.5969 at iter 3800, epoch 37, Time: 83m 53s
+24/08/2018 15:44:42 - SaltNet - INFO - train Mean IOU is 0.6788 at epoch 37
+24/08/2018 15:44:50 - SaltNet - INFO - val Mean IOU is 0.6959 at epoch 37
+24/08/2018 15:44:50 - SaltNet - INFO - Epoch 38/149
+24/08/2018 15:44:50 - SaltNet - INFO - --------------------
+24/08/2018 15:45:48 - SaltNet - INFO - Batch Loss is 0.1811, Running loss is 0.2560, Batch IOU is 0.7875 at iter 3850, epoch 38, Time: 85m 0s
+24/08/2018 15:46:47 - SaltNet - INFO - Batch Loss is 0.1785, Running loss is 0.2552, Batch IOU is 0.5781 at iter 3900, epoch 38, Time: 85m 59s
+24/08/2018 15:46:48 - SaltNet - INFO - train Mean IOU is 0.6806 at epoch 38
+24/08/2018 15:46:56 - SaltNet - INFO - val Mean IOU is 0.7093 at epoch 38
+24/08/2018 15:46:57 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:46:57 - SaltNet - INFO - Best Val Mean IOU so far: 0.7092500000000002
+24/08/2018 15:46:57 - SaltNet - INFO - Epoch 39/149
+24/08/2018 15:46:57 - SaltNet - INFO - --------------------
+24/08/2018 15:47:55 - SaltNet - INFO - Batch Loss is 0.2021, Running loss is 0.2542, Batch IOU is 0.7500 at iter 3950, epoch 39, Time: 87m 7s
+24/08/2018 15:48:54 - SaltNet - INFO - Batch Loss is 0.1953, Running loss is 0.2537, Batch IOU is 0.6031 at iter 4000, epoch 39, Time: 88m 6s
+24/08/2018 15:48:55 - SaltNet - INFO - train Mean IOU is 0.6823 at epoch 39
+24/08/2018 15:49:03 - SaltNet - INFO - val Mean IOU is 0.6561 at epoch 39
+24/08/2018 15:49:03 - SaltNet - INFO - Epoch 40/149
+24/08/2018 15:49:03 - SaltNet - INFO - --------------------
+24/08/2018 15:50:01 - SaltNet - INFO - Batch Loss is 0.1935, Running loss is 0.2529, Batch IOU is 0.6594 at iter 4050, epoch 40, Time: 89m 13s
+24/08/2018 15:51:00 - SaltNet - INFO - Batch Loss is 0.1835, Running loss is 0.2523, Batch IOU is 0.8094 at iter 4100, epoch 40, Time: 90m 12s
+24/08/2018 15:51:01 - SaltNet - INFO - train Mean IOU is 0.6848 at epoch 40
+24/08/2018 15:51:09 - SaltNet - INFO - val Mean IOU is 0.7025 at epoch 40
+24/08/2018 15:51:09 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 15:51:09 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 15:52:03 - SaltNet - INFO - Epoch 41/149
+24/08/2018 15:52:03 - SaltNet - INFO - --------------------
+24/08/2018 15:53:01 - SaltNet - INFO - Batch Loss is 0.1974, Running loss is 0.2514, Batch IOU is 0.6781 at iter 4150, epoch 41, Time: 92m 13s
+24/08/2018 15:54:00 - SaltNet - INFO - Batch Loss is 0.1970, Running loss is 0.2508, Batch IOU is 0.6000 at iter 4200, epoch 41, Time: 93m 12s
+24/08/2018 15:54:01 - SaltNet - INFO - train Mean IOU is 0.6770 at epoch 41
+24/08/2018 15:54:09 - SaltNet - INFO - val Mean IOU is 0.7091 at epoch 41
+24/08/2018 15:54:09 - SaltNet - INFO - Epoch 42/149
+24/08/2018 15:54:09 - SaltNet - INFO - --------------------
+24/08/2018 15:55:07 - SaltNet - INFO - Batch Loss is 0.1961, Running loss is 0.2500, Batch IOU is 0.5938 at iter 4250, epoch 42, Time: 94m 19s
+24/08/2018 15:56:06 - SaltNet - INFO - Batch Loss is 0.1817, Running loss is 0.2493, Batch IOU is 0.7219 at iter 4300, epoch 42, Time: 95m 18s
+24/08/2018 15:56:07 - SaltNet - INFO - train Mean IOU is 0.6797 at epoch 42
+24/08/2018 15:56:15 - SaltNet - INFO - val Mean IOU is 0.6929 at epoch 42
+24/08/2018 15:56:15 - SaltNet - INFO - Epoch 43/149
+24/08/2018 15:56:15 - SaltNet - INFO - --------------------
+24/08/2018 15:57:13 - SaltNet - INFO - Batch Loss is 0.1940, Running loss is 0.2485, Batch IOU is 0.6406 at iter 4350, epoch 43, Time: 96m 25s
+24/08/2018 15:58:12 - SaltNet - INFO - Batch Loss is 0.1810, Running loss is 0.2479, Batch IOU is 0.7031 at iter 4400, epoch 43, Time: 97m 24s
+24/08/2018 15:58:13 - SaltNet - INFO - train Mean IOU is 0.6935 at epoch 43
+24/08/2018 15:58:21 - SaltNet - INFO - val Mean IOU is 0.6860 at epoch 43
+24/08/2018 15:58:21 - SaltNet - INFO - Epoch 44/149
+24/08/2018 15:58:21 - SaltNet - INFO - --------------------
+24/08/2018 15:59:19 - SaltNet - INFO - Batch Loss is 0.1713, Running loss is 0.2469, Batch IOU is 0.7031 at iter 4450, epoch 44, Time: 98m 31s
+24/08/2018 16:00:18 - SaltNet - INFO - Batch Loss is 0.2033, Running loss is 0.2466, Batch IOU is 0.6750 at iter 4500, epoch 44, Time: 99m 30s
+24/08/2018 16:00:19 - SaltNet - INFO - train Mean IOU is 0.6882 at epoch 44
+24/08/2018 16:00:27 - SaltNet - INFO - val Mean IOU is 0.6687 at epoch 44
+24/08/2018 16:00:27 - SaltNet - INFO - Epoch 45/149
+24/08/2018 16:00:27 - SaltNet - INFO - --------------------
+24/08/2018 16:01:25 - SaltNet - INFO - Batch Loss is 0.1733, Running loss is 0.2456, Batch IOU is 0.7000 at iter 4550, epoch 45, Time: 100m 37s
+24/08/2018 16:02:24 - SaltNet - INFO - Batch Loss is 0.1994, Running loss is 0.2452, Batch IOU is 0.7875 at iter 4600, epoch 45, Time: 101m 36s
+24/08/2018 16:02:25 - SaltNet - INFO - train Mean IOU is 0.6848 at epoch 45
+24/08/2018 16:02:32 - SaltNet - INFO - val Mean IOU is 0.6196 at epoch 45
+24/08/2018 16:02:32 - SaltNet - INFO - Epoch 46/149
+24/08/2018 16:02:32 - SaltNet - INFO - --------------------
+24/08/2018 16:03:31 - SaltNet - INFO - Batch Loss is 0.1895, Running loss is 0.2448, Batch IOU is 0.6938 at iter 4650, epoch 46, Time: 102m 43s
+24/08/2018 16:04:29 - SaltNet - INFO - Batch Loss is 0.1737, Running loss is 0.2442, Batch IOU is 0.6719 at iter 4700, epoch 46, Time: 103m 42s
+24/08/2018 16:04:31 - SaltNet - INFO - train Mean IOU is 0.6952 at epoch 46
+24/08/2018 16:04:38 - SaltNet - INFO - val Mean IOU is 0.7135 at epoch 46
+24/08/2018 16:04:39 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:04:39 - SaltNet - INFO - Best Val Mean IOU so far: 0.7134999999999999
+24/08/2018 16:04:39 - SaltNet - INFO - Epoch 47/149
+24/08/2018 16:04:40 - SaltNet - INFO - --------------------
+24/08/2018 16:05:38 - SaltNet - INFO - Batch Loss is 0.1747, Running loss is 0.2433, Batch IOU is 0.6500 at iter 4750, epoch 47, Time: 104m 50s
+24/08/2018 16:06:36 - SaltNet - INFO - Batch Loss is 0.1637, Running loss is 0.2426, Batch IOU is 0.7812 at iter 4800, epoch 47, Time: 105m 49s
+24/08/2018 16:06:37 - SaltNet - INFO - train Mean IOU is 0.6995 at epoch 47
+24/08/2018 16:06:45 - SaltNet - INFO - val Mean IOU is 0.6924 at epoch 47
+24/08/2018 16:06:45 - SaltNet - INFO - Epoch 48/149
+24/08/2018 16:06:45 - SaltNet - INFO - --------------------
+24/08/2018 16:07:43 - SaltNet - INFO - Batch Loss is 0.1706, Running loss is 0.2418, Batch IOU is 0.7188 at iter 4850, epoch 48, Time: 106m 55s
+24/08/2018 16:08:42 - SaltNet - INFO - Batch Loss is 0.1844, Running loss is 0.2413, Batch IOU is 0.7125 at iter 4900, epoch 48, Time: 107m 54s
+24/08/2018 16:08:43 - SaltNet - INFO - train Mean IOU is 0.6971 at epoch 48
+24/08/2018 16:08:51 - SaltNet - INFO - val Mean IOU is 0.6950 at epoch 48
+24/08/2018 16:08:51 - SaltNet - INFO - Epoch 49/149
+24/08/2018 16:08:51 - SaltNet - INFO - --------------------
+24/08/2018 16:09:49 - SaltNet - INFO - Batch Loss is 0.1823, Running loss is 0.2405, Batch IOU is 0.7094 at iter 4950, epoch 49, Time: 109m 1s
+24/08/2018 16:10:48 - SaltNet - INFO - Batch Loss is 0.1811, Running loss is 0.2400, Batch IOU is 0.7312 at iter 5000, epoch 49, Time: 110m 0s
+24/08/2018 16:10:49 - SaltNet - INFO - train Mean IOU is 0.7049 at epoch 49
+24/08/2018 16:10:57 - SaltNet - INFO - val Mean IOU is 0.6987 at epoch 49
+24/08/2018 16:10:57 - SaltNet - INFO - Epoch 50/149
+24/08/2018 16:10:57 - SaltNet - INFO - --------------------
+24/08/2018 16:11:55 - SaltNet - INFO - Batch Loss is 0.1636, Running loss is 0.2391, Batch IOU is 0.6281 at iter 5050, epoch 50, Time: 111m 7s
+24/08/2018 16:12:54 - SaltNet - INFO - Batch Loss is 0.1552, Running loss is 0.2385, Batch IOU is 0.8656 at iter 5100, epoch 50, Time: 112m 6s
+24/08/2018 16:12:55 - SaltNet - INFO - train Mean IOU is 0.7147 at epoch 50
+24/08/2018 16:13:03 - SaltNet - INFO - val Mean IOU is 0.7154 at epoch 50
+24/08/2018 16:13:03 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:13:03 - SaltNet - INFO - Best Val Mean IOU so far: 0.715375
+24/08/2018 16:13:05 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:13:05 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 16:14:00 - SaltNet - INFO - Epoch 51/149
+24/08/2018 16:14:00 - SaltNet - INFO - --------------------
+24/08/2018 16:14:58 - SaltNet - INFO - Batch Loss is 0.1366, Running loss is 0.2374, Batch IOU is 0.6656 at iter 5150, epoch 51, Time: 114m 10s
+24/08/2018 16:15:57 - SaltNet - INFO - Batch Loss is 0.1538, Running loss is 0.2368, Batch IOU is 0.7688 at iter 5200, epoch 51, Time: 115m 9s
+24/08/2018 16:15:58 - SaltNet - INFO - train Mean IOU is 0.7237 at epoch 51
+24/08/2018 16:16:06 - SaltNet - INFO - val Mean IOU is 0.7322 at epoch 51
+24/08/2018 16:16:07 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:16:07 - SaltNet - INFO - Best Val Mean IOU so far: 0.73225
+24/08/2018 16:16:07 - SaltNet - INFO - Epoch 52/149
+24/08/2018 16:16:07 - SaltNet - INFO - --------------------
+24/08/2018 16:17:05 - SaltNet - INFO - Batch Loss is 0.1545, Running loss is 0.2359, Batch IOU is 0.7594 at iter 5250, epoch 52, Time: 116m 17s
+24/08/2018 16:18:04 - SaltNet - INFO - Batch Loss is 0.1430, Running loss is 0.2352, Batch IOU is 0.6844 at iter 5300, epoch 52, Time: 117m 16s
+24/08/2018 16:18:05 - SaltNet - INFO - train Mean IOU is 0.7307 at epoch 52
+24/08/2018 16:18:13 - SaltNet - INFO - val Mean IOU is 0.7306 at epoch 52
+24/08/2018 16:18:13 - SaltNet - INFO - Epoch 53/149
+24/08/2018 16:18:13 - SaltNet - INFO - --------------------
+24/08/2018 16:19:11 - SaltNet - INFO - Batch Loss is 0.1445, Running loss is 0.2342, Batch IOU is 0.7688 at iter 5350, epoch 53, Time: 118m 23s
+24/08/2018 16:20:10 - SaltNet - INFO - Batch Loss is 0.1405, Running loss is 0.2335, Batch IOU is 0.7562 at iter 5400, epoch 53, Time: 119m 22s
+24/08/2018 16:20:11 - SaltNet - INFO - train Mean IOU is 0.7406 at epoch 53
+24/08/2018 16:20:19 - SaltNet - INFO - val Mean IOU is 0.7374 at epoch 53
+24/08/2018 16:20:19 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:20:20 - SaltNet - INFO - Best Val Mean IOU so far: 0.7373750000000001
+24/08/2018 16:20:20 - SaltNet - INFO - Epoch 54/149
+24/08/2018 16:20:20 - SaltNet - INFO - --------------------
+24/08/2018 16:21:18 - SaltNet - INFO - Batch Loss is 0.1412, Running loss is 0.2325, Batch IOU is 0.7937 at iter 5450, epoch 54, Time: 120m 30s
+24/08/2018 16:22:19 - SaltNet - INFO - Batch Loss is 0.1417, Running loss is 0.2319, Batch IOU is 0.7469 at iter 5500, epoch 54, Time: 121m 31s
+24/08/2018 16:22:20 - SaltNet - INFO - train Mean IOU is 0.7308 at epoch 54
+24/08/2018 16:22:28 - SaltNet - INFO - val Mean IOU is 0.7376 at epoch 54
+24/08/2018 16:22:29 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:22:29 - SaltNet - INFO - Best Val Mean IOU so far: 0.7376249999999999
+24/08/2018 16:22:29 - SaltNet - INFO - Epoch 55/149
+24/08/2018 16:22:29 - SaltNet - INFO - --------------------
+24/08/2018 16:23:27 - SaltNet - INFO - Batch Loss is 0.1426, Running loss is 0.2309, Batch IOU is 0.5531 at iter 5550, epoch 55, Time: 122m 40s
+24/08/2018 16:24:26 - SaltNet - INFO - Batch Loss is 0.1387, Running loss is 0.2303, Batch IOU is 0.6750 at iter 5600, epoch 55, Time: 123m 38s
+24/08/2018 16:24:27 - SaltNet - INFO - train Mean IOU is 0.7355 at epoch 55
+24/08/2018 16:24:35 - SaltNet - INFO - val Mean IOU is 0.7471 at epoch 55
+24/08/2018 16:24:36 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:24:36 - SaltNet - INFO - Best Val Mean IOU so far: 0.747125
+24/08/2018 16:24:36 - SaltNet - INFO - Epoch 56/149
+24/08/2018 16:24:36 - SaltNet - INFO - --------------------
+24/08/2018 16:25:34 - SaltNet - INFO - Batch Loss is 0.1491, Running loss is 0.2294, Batch IOU is 0.7125 at iter 5650, epoch 56, Time: 124m 46s
+24/08/2018 16:26:33 - SaltNet - INFO - Batch Loss is 0.1338, Running loss is 0.2287, Batch IOU is 0.7563 at iter 5700, epoch 56, Time: 125m 45s
+24/08/2018 16:26:34 - SaltNet - INFO - train Mean IOU is 0.7381 at epoch 56
+24/08/2018 16:26:42 - SaltNet - INFO - val Mean IOU is 0.7441 at epoch 56
+24/08/2018 16:26:42 - SaltNet - INFO - Epoch 57/149
+24/08/2018 16:26:42 - SaltNet - INFO - --------------------
+24/08/2018 16:27:40 - SaltNet - INFO - Batch Loss is 0.1284, Running loss is 0.2278, Batch IOU is 0.7750 at iter 5750, epoch 57, Time: 126m 52s
+24/08/2018 16:28:39 - SaltNet - INFO - Batch Loss is 0.1501, Running loss is 0.2272, Batch IOU is 0.8594 at iter 5800, epoch 57, Time: 127m 51s
+24/08/2018 16:28:40 - SaltNet - INFO - train Mean IOU is 0.7448 at epoch 57
+24/08/2018 16:28:48 - SaltNet - INFO - val Mean IOU is 0.7290 at epoch 57
+24/08/2018 16:28:48 - SaltNet - INFO - Epoch 58/149
+24/08/2018 16:28:48 - SaltNet - INFO - --------------------
+24/08/2018 16:29:46 - SaltNet - INFO - Batch Loss is 0.1371, Running loss is 0.2264, Batch IOU is 0.7250 at iter 5850, epoch 58, Time: 128m 58s
+24/08/2018 16:30:45 - SaltNet - INFO - Batch Loss is 0.1461, Running loss is 0.2258, Batch IOU is 0.7625 at iter 5900, epoch 58, Time: 129m 57s
+24/08/2018 16:30:46 - SaltNet - INFO - train Mean IOU is 0.7425 at epoch 58
+24/08/2018 16:30:54 - SaltNet - INFO - val Mean IOU is 0.7441 at epoch 58
+24/08/2018 16:30:54 - SaltNet - INFO - Epoch 59/149
+24/08/2018 16:30:54 - SaltNet - INFO - --------------------
+24/08/2018 16:31:52 - SaltNet - INFO - Batch Loss is 0.1386, Running loss is 0.2250, Batch IOU is 0.6344 at iter 5950, epoch 59, Time: 131m 4s
+24/08/2018 16:32:51 - SaltNet - INFO - Batch Loss is 0.1287, Running loss is 0.2243, Batch IOU is 0.6781 at iter 6000, epoch 59, Time: 132m 3s
+24/08/2018 16:32:52 - SaltNet - INFO - train Mean IOU is 0.7438 at epoch 59
+24/08/2018 16:33:00 - SaltNet - INFO - val Mean IOU is 0.7429 at epoch 59
+24/08/2018 16:33:00 - SaltNet - INFO - Epoch 60/149
+24/08/2018 16:33:00 - SaltNet - INFO - --------------------
+24/08/2018 16:33:58 - SaltNet - INFO - Batch Loss is 0.1436, Running loss is 0.2235, Batch IOU is 0.7312 at iter 6050, epoch 60, Time: 133m 10s
+24/08/2018 16:34:57 - SaltNet - INFO - Batch Loss is 0.1289, Running loss is 0.2229, Batch IOU is 0.8562 at iter 6100, epoch 60, Time: 134m 9s
+24/08/2018 16:34:58 - SaltNet - INFO - train Mean IOU is 0.7437 at epoch 60
+24/08/2018 16:35:05 - SaltNet - INFO - val Mean IOU is 0.7310 at epoch 60
+24/08/2018 16:35:06 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:35:06 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 16:36:03 - SaltNet - INFO - Epoch 61/149
+24/08/2018 16:36:03 - SaltNet - INFO - --------------------
+24/08/2018 16:37:01 - SaltNet - INFO - Batch Loss is 0.1323, Running loss is 0.2221, Batch IOU is 0.7937 at iter 6150, epoch 61, Time: 136m 14s
+24/08/2018 16:38:00 - SaltNet - INFO - Batch Loss is 0.1267, Running loss is 0.2215, Batch IOU is 0.7719 at iter 6200, epoch 61, Time: 137m 12s
+24/08/2018 16:38:02 - SaltNet - INFO - train Mean IOU is 0.7535 at epoch 61
+24/08/2018 16:38:09 - SaltNet - INFO - val Mean IOU is 0.7378 at epoch 61
+24/08/2018 16:38:09 - SaltNet - INFO - Epoch 62/149
+24/08/2018 16:38:09 - SaltNet - INFO - --------------------
+24/08/2018 16:39:08 - SaltNet - INFO - Batch Loss is 0.1254, Running loss is 0.2207, Batch IOU is 0.6375 at iter 6250, epoch 62, Time: 138m 20s
+24/08/2018 16:40:06 - SaltNet - INFO - Batch Loss is 0.1416, Running loss is 0.2202, Batch IOU is 0.7031 at iter 6300, epoch 62, Time: 139m 18s
+24/08/2018 16:40:07 - SaltNet - INFO - train Mean IOU is 0.7466 at epoch 62
+24/08/2018 16:40:15 - SaltNet - INFO - val Mean IOU is 0.7529 at epoch 62
+24/08/2018 16:40:16 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:40:16 - SaltNet - INFO - Best Val Mean IOU so far: 0.752875
+24/08/2018 16:40:16 - SaltNet - INFO - Epoch 63/149
+24/08/2018 16:40:16 - SaltNet - INFO - --------------------
+24/08/2018 16:41:15 - SaltNet - INFO - Batch Loss is 0.1422, Running loss is 0.2194, Batch IOU is 0.7594 at iter 6350, epoch 63, Time: 140m 27s
+24/08/2018 16:42:13 - SaltNet - INFO - Batch Loss is 0.1212, Running loss is 0.2188, Batch IOU is 0.6719 at iter 6400, epoch 63, Time: 141m 25s
+24/08/2018 16:42:14 - SaltNet - INFO - train Mean IOU is 0.7433 at epoch 63
+24/08/2018 16:42:22 - SaltNet - INFO - val Mean IOU is 0.7415 at epoch 63
+24/08/2018 16:42:22 - SaltNet - INFO - Epoch 64/149
+24/08/2018 16:42:22 - SaltNet - INFO - --------------------
+24/08/2018 16:43:20 - SaltNet - INFO - Batch Loss is 0.1319, Running loss is 0.2181, Batch IOU is 0.7500 at iter 6450, epoch 64, Time: 142m 32s
+24/08/2018 16:44:19 - SaltNet - INFO - Batch Loss is 0.1303, Running loss is 0.2175, Batch IOU is 0.7063 at iter 6500, epoch 64, Time: 143m 31s
+24/08/2018 16:44:20 - SaltNet - INFO - train Mean IOU is 0.7422 at epoch 64
+24/08/2018 16:44:28 - SaltNet - INFO - val Mean IOU is 0.7375 at epoch 64
+24/08/2018 16:44:28 - SaltNet - INFO - Epoch 65/149
+24/08/2018 16:44:28 - SaltNet - INFO - --------------------
+24/08/2018 16:45:26 - SaltNet - INFO - Batch Loss is 0.1281, Running loss is 0.2168, Batch IOU is 0.7937 at iter 6550, epoch 65, Time: 144m 38s
+24/08/2018 16:46:25 - SaltNet - INFO - Batch Loss is 0.1314, Running loss is 0.2163, Batch IOU is 0.7063 at iter 6600, epoch 65, Time: 145m 37s
+24/08/2018 16:46:26 - SaltNet - INFO - train Mean IOU is 0.7523 at epoch 65
+24/08/2018 16:46:34 - SaltNet - INFO - val Mean IOU is 0.7429 at epoch 65
+24/08/2018 16:46:34 - SaltNet - INFO - Epoch 66/149
+24/08/2018 16:46:34 - SaltNet - INFO - --------------------
+24/08/2018 16:47:32 - SaltNet - INFO - Batch Loss is 0.1259, Running loss is 0.2156, Batch IOU is 0.6750 at iter 6650, epoch 66, Time: 146m 44s
+24/08/2018 16:48:31 - SaltNet - INFO - Batch Loss is 0.1305, Running loss is 0.2150, Batch IOU is 0.7094 at iter 6700, epoch 66, Time: 147m 43s
+24/08/2018 16:48:32 - SaltNet - INFO - train Mean IOU is 0.7509 at epoch 66
+24/08/2018 16:48:40 - SaltNet - INFO - val Mean IOU is 0.7529 at epoch 66
+24/08/2018 16:48:40 - SaltNet - INFO - Epoch 67/149
+24/08/2018 16:48:40 - SaltNet - INFO - --------------------
+24/08/2018 16:49:38 - SaltNet - INFO - Batch Loss is 0.1321, Running loss is 0.2143, Batch IOU is 0.6063 at iter 6750, epoch 67, Time: 148m 50s
+24/08/2018 16:50:37 - SaltNet - INFO - Batch Loss is 0.1358, Running loss is 0.2139, Batch IOU is 0.7500 at iter 6800, epoch 67, Time: 149m 49s
+24/08/2018 16:50:38 - SaltNet - INFO - train Mean IOU is 0.7462 at epoch 67
+24/08/2018 16:50:46 - SaltNet - INFO - val Mean IOU is 0.7449 at epoch 67
+24/08/2018 16:50:46 - SaltNet - INFO - Epoch 68/149
+24/08/2018 16:50:46 - SaltNet - INFO - --------------------
+24/08/2018 16:51:44 - SaltNet - INFO - Batch Loss is 0.1157, Running loss is 0.2131, Batch IOU is 0.7031 at iter 6850, epoch 68, Time: 150m 56s
+24/08/2018 16:52:43 - SaltNet - INFO - Batch Loss is 0.1318, Running loss is 0.2126, Batch IOU is 0.7281 at iter 6900, epoch 68, Time: 151m 55s
+24/08/2018 16:52:44 - SaltNet - INFO - train Mean IOU is 0.7443 at epoch 68
+24/08/2018 16:52:51 - SaltNet - INFO - val Mean IOU is 0.7445 at epoch 68
+24/08/2018 16:52:51 - SaltNet - INFO - Epoch 69/149
+24/08/2018 16:52:51 - SaltNet - INFO - --------------------
+24/08/2018 16:53:50 - SaltNet - INFO - Batch Loss is 0.1272, Running loss is 0.2119, Batch IOU is 0.7375 at iter 6950, epoch 69, Time: 153m 2s
+24/08/2018 16:54:49 - SaltNet - INFO - Batch Loss is 0.1266, Running loss is 0.2115, Batch IOU is 0.8594 at iter 7000, epoch 69, Time: 154m 1s
+24/08/2018 16:54:50 - SaltNet - INFO - train Mean IOU is 0.7569 at epoch 69
+24/08/2018 16:54:57 - SaltNet - INFO - val Mean IOU is 0.7389 at epoch 69
+24/08/2018 16:54:57 - SaltNet - INFO - Epoch 70/149
+24/08/2018 16:54:57 - SaltNet - INFO - --------------------
+24/08/2018 16:55:56 - SaltNet - INFO - Batch Loss is 0.1255, Running loss is 0.2108, Batch IOU is 0.8094 at iter 7050, epoch 70, Time: 155m 8s
+24/08/2018 16:56:54 - SaltNet - INFO - Batch Loss is 0.1322, Running loss is 0.2104, Batch IOU is 0.6969 at iter 7100, epoch 70, Time: 156m 7s
+24/08/2018 16:56:56 - SaltNet - INFO - train Mean IOU is 0.7432 at epoch 70
+24/08/2018 16:57:03 - SaltNet - INFO - val Mean IOU is 0.7322 at epoch 70
+24/08/2018 16:57:04 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 16:57:04 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 16:57:58 - SaltNet - INFO - Epoch 71/149
+24/08/2018 16:57:58 - SaltNet - INFO - --------------------
+24/08/2018 16:58:57 - SaltNet - INFO - Batch Loss is 0.1240, Running loss is 0.2097, Batch IOU is 0.8312 at iter 7150, epoch 71, Time: 158m 9s
+24/08/2018 16:59:55 - SaltNet - INFO - Batch Loss is 0.1250, Running loss is 0.2093, Batch IOU is 0.6219 at iter 7200, epoch 71, Time: 159m 8s
+24/08/2018 16:59:57 - SaltNet - INFO - train Mean IOU is 0.7404 at epoch 71
+24/08/2018 17:00:04 - SaltNet - INFO - val Mean IOU is 0.7472 at epoch 71
+24/08/2018 17:00:04 - SaltNet - INFO - Epoch 72/149
+24/08/2018 17:00:05 - SaltNet - INFO - --------------------
+24/08/2018 17:01:03 - SaltNet - INFO - Batch Loss is 0.1165, Running loss is 0.2086, Batch IOU is 0.7094 at iter 7250, epoch 72, Time: 160m 15s
+24/08/2018 17:02:01 - SaltNet - INFO - Batch Loss is 0.1339, Running loss is 0.2082, Batch IOU is 0.7937 at iter 7300, epoch 72, Time: 161m 14s
+24/08/2018 17:02:02 - SaltNet - INFO - train Mean IOU is 0.7491 at epoch 72
+24/08/2018 17:02:10 - SaltNet - INFO - val Mean IOU is 0.7486 at epoch 72
+24/08/2018 17:02:10 - SaltNet - INFO - Epoch 73/149
+24/08/2018 17:02:10 - SaltNet - INFO - --------------------
+24/08/2018 17:03:09 - SaltNet - INFO - Batch Loss is 0.1209, Running loss is 0.2075, Batch IOU is 0.7875 at iter 7350, epoch 73, Time: 162m 21s
+24/08/2018 17:04:07 - SaltNet - INFO - Batch Loss is 0.1223, Running loss is 0.2071, Batch IOU is 0.7719 at iter 7400, epoch 73, Time: 163m 20s
+24/08/2018 17:04:08 - SaltNet - INFO - train Mean IOU is 0.7532 at epoch 73
+24/08/2018 17:04:16 - SaltNet - INFO - val Mean IOU is 0.7411 at epoch 73
+24/08/2018 17:04:16 - SaltNet - INFO - Epoch 74/149
+24/08/2018 17:04:16 - SaltNet - INFO - --------------------
+24/08/2018 17:05:15 - SaltNet - INFO - Batch Loss is 0.1277, Running loss is 0.2065, Batch IOU is 0.7531 at iter 7450, epoch 74, Time: 164m 27s
+24/08/2018 17:06:13 - SaltNet - INFO - Batch Loss is 0.1296, Running loss is 0.2061, Batch IOU is 0.8156 at iter 7500, epoch 74, Time: 165m 25s
+24/08/2018 17:06:14 - SaltNet - INFO - train Mean IOU is 0.7478 at epoch 74
+24/08/2018 17:06:22 - SaltNet - INFO - val Mean IOU is 0.7389 at epoch 74
+24/08/2018 17:06:22 - SaltNet - INFO - Epoch 75/149
+24/08/2018 17:06:22 - SaltNet - INFO - --------------------
+24/08/2018 17:07:20 - SaltNet - INFO - Batch Loss is 0.1309, Running loss is 0.2056, Batch IOU is 0.7875 at iter 7550, epoch 75, Time: 166m 32s
+24/08/2018 17:08:19 - SaltNet - INFO - Batch Loss is 0.1259, Running loss is 0.2052, Batch IOU is 0.8281 at iter 7600, epoch 75, Time: 167m 31s
+24/08/2018 17:08:20 - SaltNet - INFO - train Mean IOU is 0.7505 at epoch 75
+24/08/2018 17:08:28 - SaltNet - INFO - val Mean IOU is 0.7560 at epoch 75
+24/08/2018 17:08:29 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 17:08:29 - SaltNet - INFO - Best Val Mean IOU so far: 0.7559999999999999
+24/08/2018 17:08:29 - SaltNet - INFO - Epoch 76/149
+24/08/2018 17:08:29 - SaltNet - INFO - --------------------
+24/08/2018 17:09:27 - SaltNet - INFO - Batch Loss is 0.1284, Running loss is 0.2046, Batch IOU is 0.9000 at iter 7650, epoch 76, Time: 168m 40s
+24/08/2018 17:10:26 - SaltNet - INFO - Batch Loss is 0.1212, Running loss is 0.2042, Batch IOU is 0.8375 at iter 7700, epoch 76, Time: 169m 38s
+24/08/2018 17:10:27 - SaltNet - INFO - train Mean IOU is 0.7638 at epoch 76
+24/08/2018 17:10:35 - SaltNet - INFO - val Mean IOU is 0.7449 at epoch 76
+24/08/2018 17:10:35 - SaltNet - INFO - Epoch 77/149
+24/08/2018 17:10:35 - SaltNet - INFO - --------------------
+24/08/2018 17:11:33 - SaltNet - INFO - Batch Loss is 0.1169, Running loss is 0.2035, Batch IOU is 0.7188 at iter 7750, epoch 77, Time: 170m 45s
+24/08/2018 17:12:32 - SaltNet - INFO - Batch Loss is 0.1244, Running loss is 0.2031, Batch IOU is 0.7312 at iter 7800, epoch 77, Time: 171m 44s
+24/08/2018 17:12:33 - SaltNet - INFO - train Mean IOU is 0.7596 at epoch 77
+24/08/2018 17:12:41 - SaltNet - INFO - val Mean IOU is 0.7436 at epoch 77
+24/08/2018 17:12:41 - SaltNet - INFO - Epoch 78/149
+24/08/2018 17:12:41 - SaltNet - INFO - --------------------
+24/08/2018 17:13:39 - SaltNet - INFO - Batch Loss is 0.1194, Running loss is 0.2026, Batch IOU is 0.6562 at iter 7850, epoch 78, Time: 172m 51s
+24/08/2018 17:14:38 - SaltNet - INFO - Batch Loss is 0.1271, Running loss is 0.2022, Batch IOU is 0.9000 at iter 7900, epoch 78, Time: 173m 50s
+24/08/2018 17:14:39 - SaltNet - INFO - train Mean IOU is 0.7634 at epoch 78
+24/08/2018 17:14:47 - SaltNet - INFO - val Mean IOU is 0.7476 at epoch 78
+24/08/2018 17:14:47 - SaltNet - INFO - Epoch 79/149
+24/08/2018 17:14:47 - SaltNet - INFO - --------------------
+24/08/2018 17:15:45 - SaltNet - INFO - Batch Loss is 0.1220, Running loss is 0.2017, Batch IOU is 0.7469 at iter 7950, epoch 79, Time: 174m 57s
+24/08/2018 17:16:44 - SaltNet - INFO - Batch Loss is 0.1226, Running loss is 0.2013, Batch IOU is 0.8750 at iter 8000, epoch 79, Time: 175m 56s
+24/08/2018 17:16:45 - SaltNet - INFO - train Mean IOU is 0.7604 at epoch 79
+24/08/2018 17:16:53 - SaltNet - INFO - val Mean IOU is 0.7460 at epoch 79
+24/08/2018 17:16:53 - SaltNet - INFO - Epoch 80/149
+24/08/2018 17:16:53 - SaltNet - INFO - --------------------
+24/08/2018 17:17:51 - SaltNet - INFO - Batch Loss is 0.1270, Running loss is 0.2008, Batch IOU is 0.7906 at iter 8050, epoch 80, Time: 177m 3s
+24/08/2018 17:18:50 - SaltNet - INFO - Batch Loss is 0.1233, Running loss is 0.2004, Batch IOU is 0.6781 at iter 8100, epoch 80, Time: 178m 2s
+24/08/2018 17:18:51 - SaltNet - INFO - train Mean IOU is 0.7609 at epoch 80
+24/08/2018 17:18:59 - SaltNet - INFO - val Mean IOU is 0.7515 at epoch 80
+24/08/2018 17:19:00 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 17:19:00 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 17:19:53 - SaltNet - INFO - Epoch 81/149
+24/08/2018 17:19:53 - SaltNet - INFO - --------------------
+24/08/2018 17:20:52 - SaltNet - INFO - Batch Loss is 0.1165, Running loss is 0.1998, Batch IOU is 0.8094 at iter 8150, epoch 81, Time: 180m 4s
+24/08/2018 17:21:50 - SaltNet - INFO - Batch Loss is 0.1163, Running loss is 0.1994, Batch IOU is 0.7875 at iter 8200, epoch 81, Time: 181m 3s
+24/08/2018 17:21:52 - SaltNet - INFO - train Mean IOU is 0.7646 at epoch 81
+24/08/2018 17:21:59 - SaltNet - INFO - val Mean IOU is 0.7526 at epoch 81
+24/08/2018 17:21:59 - SaltNet - INFO - Epoch 82/149
+24/08/2018 17:21:59 - SaltNet - INFO - --------------------
+24/08/2018 17:22:58 - SaltNet - INFO - Batch Loss is 0.1159, Running loss is 0.1989, Batch IOU is 0.7063 at iter 8250, epoch 82, Time: 182m 10s
+24/08/2018 17:23:57 - SaltNet - INFO - Batch Loss is 0.1072, Running loss is 0.1985, Batch IOU is 0.6094 at iter 8300, epoch 82, Time: 183m 9s
+24/08/2018 17:23:58 - SaltNet - INFO - train Mean IOU is 0.7674 at epoch 82
+24/08/2018 17:24:05 - SaltNet - INFO - val Mean IOU is 0.7529 at epoch 82
+24/08/2018 17:24:05 - SaltNet - INFO - Epoch 83/149
+24/08/2018 17:24:05 - SaltNet - INFO - --------------------
+24/08/2018 17:25:04 - SaltNet - INFO - Batch Loss is 0.1319, Running loss is 0.1981, Batch IOU is 0.7969 at iter 8350, epoch 83, Time: 184m 16s
+24/08/2018 17:26:03 - SaltNet - INFO - Batch Loss is 0.1267, Running loss is 0.1977, Batch IOU is 0.8594 at iter 8400, epoch 83, Time: 185m 15s
+24/08/2018 17:26:04 - SaltNet - INFO - train Mean IOU is 0.7466 at epoch 83
+24/08/2018 17:26:11 - SaltNet - INFO - val Mean IOU is 0.7453 at epoch 83
+24/08/2018 17:26:11 - SaltNet - INFO - Epoch 84/149
+24/08/2018 17:26:11 - SaltNet - INFO - --------------------
+24/08/2018 17:27:10 - SaltNet - INFO - Batch Loss is 0.1145, Running loss is 0.1972, Batch IOU is 0.7344 at iter 8450, epoch 84, Time: 186m 22s
+24/08/2018 17:28:08 - SaltNet - INFO - Batch Loss is 0.1192, Running loss is 0.1969, Batch IOU is 0.7688 at iter 8500, epoch 84, Time: 187m 20s
+24/08/2018 17:28:09 - SaltNet - INFO - train Mean IOU is 0.7576 at epoch 84
+24/08/2018 17:28:17 - SaltNet - INFO - val Mean IOU is 0.7333 at epoch 84
+24/08/2018 17:28:17 - SaltNet - INFO - Epoch 85/149
+24/08/2018 17:28:17 - SaltNet - INFO - --------------------
+24/08/2018 17:29:16 - SaltNet - INFO - Batch Loss is 0.1171, Running loss is 0.1964, Batch IOU is 0.8375 at iter 8550, epoch 85, Time: 188m 28s
+24/08/2018 17:30:14 - SaltNet - INFO - Batch Loss is 0.1250, Running loss is 0.1961, Batch IOU is 0.7656 at iter 8600, epoch 85, Time: 189m 26s
+24/08/2018 17:30:15 - SaltNet - INFO - train Mean IOU is 0.7539 at epoch 85
+24/08/2018 17:30:23 - SaltNet - INFO - val Mean IOU is 0.7590 at epoch 85
+24/08/2018 17:30:24 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 17:30:24 - SaltNet - INFO - Best Val Mean IOU so far: 0.759
+24/08/2018 17:30:24 - SaltNet - INFO - Epoch 86/149
+24/08/2018 17:30:24 - SaltNet - INFO - --------------------
+24/08/2018 17:31:23 - SaltNet - INFO - Batch Loss is 0.1261, Running loss is 0.1956, Batch IOU is 0.7844 at iter 8650, epoch 86, Time: 190m 35s
+24/08/2018 17:32:21 - SaltNet - INFO - Batch Loss is 0.1083, Running loss is 0.1952, Batch IOU is 0.6938 at iter 8700, epoch 86, Time: 191m 33s
+24/08/2018 17:32:23 - SaltNet - INFO - train Mean IOU is 0.7531 at epoch 86
+24/08/2018 17:32:30 - SaltNet - INFO - val Mean IOU is 0.7569 at epoch 86
+24/08/2018 17:32:30 - SaltNet - INFO - Epoch 87/149
+24/08/2018 17:32:30 - SaltNet - INFO - --------------------
+24/08/2018 17:33:29 - SaltNet - INFO - Batch Loss is 0.1163, Running loss is 0.1947, Batch IOU is 0.8375 at iter 8750, epoch 87, Time: 192m 41s
+24/08/2018 17:34:27 - SaltNet - INFO - Batch Loss is 0.1154, Running loss is 0.1944, Batch IOU is 0.6906 at iter 8800, epoch 87, Time: 193m 40s
+24/08/2018 17:34:28 - SaltNet - INFO - train Mean IOU is 0.7564 at epoch 87
+24/08/2018 17:34:36 - SaltNet - INFO - val Mean IOU is 0.7579 at epoch 87
+24/08/2018 17:34:36 - SaltNet - INFO - Epoch 88/149
+24/08/2018 17:34:36 - SaltNet - INFO - --------------------
+24/08/2018 17:35:34 - SaltNet - INFO - Batch Loss is 0.1024, Running loss is 0.1939, Batch IOU is 0.7688 at iter 8850, epoch 88, Time: 194m 47s
+24/08/2018 17:36:33 - SaltNet - INFO - Batch Loss is 0.1256, Running loss is 0.1936, Batch IOU is 0.7219 at iter 8900, epoch 88, Time: 195m 45s
+24/08/2018 17:36:34 - SaltNet - INFO - train Mean IOU is 0.7594 at epoch 88
+24/08/2018 17:36:42 - SaltNet - INFO - val Mean IOU is 0.7472 at epoch 88
+24/08/2018 17:36:42 - SaltNet - INFO - Epoch 89/149
+24/08/2018 17:36:42 - SaltNet - INFO - --------------------
+24/08/2018 17:37:40 - SaltNet - INFO - Batch Loss is 0.1166, Running loss is 0.1931, Batch IOU is 0.7563 at iter 8950, epoch 89, Time: 196m 52s
+24/08/2018 17:38:39 - SaltNet - INFO - Batch Loss is 0.1075, Running loss is 0.1927, Batch IOU is 0.6219 at iter 9000, epoch 89, Time: 197m 51s
+24/08/2018 17:38:40 - SaltNet - INFO - train Mean IOU is 0.7625 at epoch 89
+24/08/2018 17:38:48 - SaltNet - INFO - val Mean IOU is 0.7556 at epoch 89
+24/08/2018 17:38:48 - SaltNet - INFO - Epoch 90/149
+24/08/2018 17:38:48 - SaltNet - INFO - --------------------
+24/08/2018 17:39:46 - SaltNet - INFO - Batch Loss is 0.1065, Running loss is 0.1923, Batch IOU is 0.7312 at iter 9050, epoch 90, Time: 198m 58s
+24/08/2018 17:40:45 - SaltNet - INFO - Batch Loss is 0.1274, Running loss is 0.1920, Batch IOU is 0.8313 at iter 9100, epoch 90, Time: 199m 57s
+24/08/2018 17:40:46 - SaltNet - INFO - train Mean IOU is 0.7542 at epoch 90
+24/08/2018 17:40:54 - SaltNet - INFO - val Mean IOU is 0.7491 at epoch 90
+24/08/2018 17:40:55 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 17:40:55 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 17:41:50 - SaltNet - INFO - Epoch 91/149
+24/08/2018 17:41:50 - SaltNet - INFO - --------------------
+24/08/2018 17:42:48 - SaltNet - INFO - Batch Loss is 0.1186, Running loss is 0.1915, Batch IOU is 0.8000 at iter 9150, epoch 91, Time: 202m 0s
+24/08/2018 17:43:47 - SaltNet - INFO - Batch Loss is 0.1140, Running loss is 0.1912, Batch IOU is 0.8000 at iter 9200, epoch 91, Time: 202m 59s
+24/08/2018 17:43:48 - SaltNet - INFO - train Mean IOU is 0.7607 at epoch 91
+24/08/2018 17:43:56 - SaltNet - INFO - val Mean IOU is 0.7569 at epoch 91
+24/08/2018 17:43:56 - SaltNet - INFO - Epoch 92/149
+24/08/2018 17:43:56 - SaltNet - INFO - --------------------
+24/08/2018 17:44:54 - SaltNet - INFO - Batch Loss is 0.1195, Running loss is 0.1908, Batch IOU is 0.7750 at iter 9250, epoch 92, Time: 204m 6s
+24/08/2018 17:45:53 - SaltNet - INFO - Batch Loss is 0.1132, Running loss is 0.1904, Batch IOU is 0.7719 at iter 9300, epoch 92, Time: 205m 5s
+24/08/2018 17:45:54 - SaltNet - INFO - train Mean IOU is 0.7462 at epoch 92
+24/08/2018 17:46:02 - SaltNet - INFO - val Mean IOU is 0.7623 at epoch 92
+24/08/2018 17:46:02 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 17:46:03 - SaltNet - INFO - Best Val Mean IOU so far: 0.7622500000000001
+24/08/2018 17:46:03 - SaltNet - INFO - Epoch 93/149
+24/08/2018 17:46:03 - SaltNet - INFO - --------------------
+24/08/2018 17:47:01 - SaltNet - INFO - Batch Loss is 0.1071, Running loss is 0.1900, Batch IOU is 0.7812 at iter 9350, epoch 93, Time: 206m 13s
+24/08/2018 17:48:00 - SaltNet - INFO - Batch Loss is 0.1290, Running loss is 0.1897, Batch IOU is 0.7219 at iter 9400, epoch 93, Time: 207m 12s
+24/08/2018 17:48:01 - SaltNet - INFO - train Mean IOU is 0.7520 at epoch 93
+24/08/2018 17:48:09 - SaltNet - INFO - val Mean IOU is 0.7566 at epoch 93
+24/08/2018 17:48:09 - SaltNet - INFO - Epoch 94/149
+24/08/2018 17:48:09 - SaltNet - INFO - --------------------
+24/08/2018 17:49:07 - SaltNet - INFO - Batch Loss is 0.1079, Running loss is 0.1893, Batch IOU is 0.6406 at iter 9450, epoch 94, Time: 208m 19s
+24/08/2018 17:50:06 - SaltNet - INFO - Batch Loss is 0.1242, Running loss is 0.1890, Batch IOU is 0.6625 at iter 9500, epoch 94, Time: 209m 18s
+24/08/2018 17:50:07 - SaltNet - INFO - train Mean IOU is 0.7616 at epoch 94
+24/08/2018 17:50:15 - SaltNet - INFO - val Mean IOU is 0.7656 at epoch 94
+24/08/2018 17:50:15 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 17:50:15 - SaltNet - INFO - Best Val Mean IOU so far: 0.765625
+24/08/2018 17:50:16 - SaltNet - INFO - Epoch 95/149
+24/08/2018 17:50:16 - SaltNet - INFO - --------------------
+24/08/2018 17:51:14 - SaltNet - INFO - Batch Loss is 0.1224, Running loss is 0.1886, Batch IOU is 0.6906 at iter 9550, epoch 95, Time: 210m 26s
+24/08/2018 17:52:13 - SaltNet - INFO - Batch Loss is 0.1216, Running loss is 0.1883, Batch IOU is 0.8281 at iter 9600, epoch 95, Time: 211m 25s
+24/08/2018 17:52:14 - SaltNet - INFO - train Mean IOU is 0.7529 at epoch 95
+24/08/2018 17:52:22 - SaltNet - INFO - val Mean IOU is 0.7620 at epoch 95
+24/08/2018 17:52:22 - SaltNet - INFO - Epoch 96/149
+24/08/2018 17:52:22 - SaltNet - INFO - --------------------
+24/08/2018 17:53:20 - SaltNet - INFO - Batch Loss is 0.1072, Running loss is 0.1879, Batch IOU is 0.8594 at iter 9650, epoch 96, Time: 212m 32s
+24/08/2018 17:54:19 - SaltNet - INFO - Batch Loss is 0.1168, Running loss is 0.1876, Batch IOU is 0.8031 at iter 9700, epoch 96, Time: 213m 31s
+24/08/2018 17:54:20 - SaltNet - INFO - train Mean IOU is 0.7551 at epoch 96
+24/08/2018 17:54:28 - SaltNet - INFO - val Mean IOU is 0.7635 at epoch 96
+24/08/2018 17:54:28 - SaltNet - INFO - Epoch 97/149
+24/08/2018 17:54:28 - SaltNet - INFO - --------------------
+24/08/2018 17:55:26 - SaltNet - INFO - Batch Loss is 0.1058, Running loss is 0.1872, Batch IOU is 0.7031 at iter 9750, epoch 97, Time: 214m 38s
+24/08/2018 17:56:25 - SaltNet - INFO - Batch Loss is 0.1150, Running loss is 0.1869, Batch IOU is 0.7875 at iter 9800, epoch 97, Time: 215m 37s
+24/08/2018 17:56:26 - SaltNet - INFO - train Mean IOU is 0.7651 at epoch 97
+24/08/2018 17:56:34 - SaltNet - INFO - val Mean IOU is 0.7557 at epoch 97
+24/08/2018 17:56:34 - SaltNet - INFO - Epoch 98/149
+24/08/2018 17:56:34 - SaltNet - INFO - --------------------
+24/08/2018 17:57:32 - SaltNet - INFO - Batch Loss is 0.1143, Running loss is 0.1865, Batch IOU is 0.7625 at iter 9850, epoch 98, Time: 216m 44s
+24/08/2018 17:58:31 - SaltNet - INFO - Batch Loss is 0.1050, Running loss is 0.1862, Batch IOU is 0.7781 at iter 9900, epoch 98, Time: 217m 43s
+24/08/2018 17:58:32 - SaltNet - INFO - train Mean IOU is 0.7675 at epoch 98
+24/08/2018 17:58:40 - SaltNet - INFO - val Mean IOU is 0.7494 at epoch 98
+24/08/2018 17:58:40 - SaltNet - INFO - Epoch 99/149
+24/08/2018 17:58:40 - SaltNet - INFO - --------------------
+24/08/2018 17:59:38 - SaltNet - INFO - Batch Loss is 0.1138, Running loss is 0.1858, Batch IOU is 0.7188 at iter 9950, epoch 99, Time: 218m 50s
+24/08/2018 18:00:37 - SaltNet - INFO - Batch Loss is 0.1057, Running loss is 0.1855, Batch IOU is 0.8406 at iter 10000, epoch 99, Time: 219m 49s
+24/08/2018 18:00:38 - SaltNet - INFO - train Mean IOU is 0.7654 at epoch 99
+24/08/2018 18:00:46 - SaltNet - INFO - val Mean IOU is 0.7569 at epoch 99
+24/08/2018 18:00:46 - SaltNet - INFO - Epoch 100/149
+24/08/2018 18:00:46 - SaltNet - INFO - --------------------
+24/08/2018 18:01:44 - SaltNet - INFO - Batch Loss is 0.1069, Running loss is 0.1851, Batch IOU is 0.7844 at iter 10050, epoch 100, Time: 220m 56s
+24/08/2018 18:02:43 - SaltNet - INFO - Batch Loss is 0.0959, Running loss is 0.1848, Batch IOU is 0.7250 at iter 10100, epoch 100, Time: 221m 55s
+24/08/2018 18:02:44 - SaltNet - INFO - train Mean IOU is 0.7784 at epoch 100
+24/08/2018 18:02:52 - SaltNet - INFO - val Mean IOU is 0.7626 at epoch 100
+24/08/2018 18:02:52 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 18:02:52 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 18:03:53 - SaltNet - INFO - Epoch 101/149
+24/08/2018 18:03:53 - SaltNet - INFO - --------------------
+24/08/2018 18:04:51 - SaltNet - INFO - Batch Loss is 0.1058, Running loss is 0.1844, Batch IOU is 0.6937 at iter 10150, epoch 101, Time: 224m 3s
+24/08/2018 18:05:50 - SaltNet - INFO - Batch Loss is 0.0975, Running loss is 0.1840, Batch IOU is 0.7188 at iter 10200, epoch 101, Time: 225m 2s
+24/08/2018 18:05:51 - SaltNet - INFO - train Mean IOU is 0.7735 at epoch 101
+24/08/2018 18:05:59 - SaltNet - INFO - val Mean IOU is 0.7608 at epoch 101
+24/08/2018 18:05:59 - SaltNet - INFO - Epoch 102/149
+24/08/2018 18:05:59 - SaltNet - INFO - --------------------
+24/08/2018 18:06:57 - SaltNet - INFO - Batch Loss is 0.1044, Running loss is 0.1836, Batch IOU is 0.7906 at iter 10250, epoch 102, Time: 226m 9s
+24/08/2018 18:07:56 - SaltNet - INFO - Batch Loss is 0.0918, Running loss is 0.1833, Batch IOU is 0.7812 at iter 10300, epoch 102, Time: 227m 8s
+24/08/2018 18:07:57 - SaltNet - INFO - train Mean IOU is 0.7756 at epoch 102
+24/08/2018 18:08:04 - SaltNet - INFO - val Mean IOU is 0.7601 at epoch 102
+24/08/2018 18:08:04 - SaltNet - INFO - Epoch 103/149
+24/08/2018 18:08:04 - SaltNet - INFO - --------------------
+24/08/2018 18:09:03 - SaltNet - INFO - Batch Loss is 0.1035, Running loss is 0.1829, Batch IOU is 0.7250 at iter 10350, epoch 103, Time: 228m 15s
+24/08/2018 18:10:02 - SaltNet - INFO - Batch Loss is 0.0959, Running loss is 0.1826, Batch IOU is 0.7969 at iter 10400, epoch 103, Time: 229m 14s
+24/08/2018 18:10:03 - SaltNet - INFO - train Mean IOU is 0.7732 at epoch 103
+24/08/2018 18:10:10 - SaltNet - INFO - val Mean IOU is 0.7574 at epoch 103
+24/08/2018 18:10:10 - SaltNet - INFO - Epoch 104/149
+24/08/2018 18:10:10 - SaltNet - INFO - --------------------
+24/08/2018 18:11:09 - SaltNet - INFO - Batch Loss is 0.0937, Running loss is 0.1821, Batch IOU is 0.7625 at iter 10450, epoch 104, Time: 230m 21s
+24/08/2018 18:12:08 - SaltNet - INFO - Batch Loss is 0.1056, Running loss is 0.1819, Batch IOU is 0.8031 at iter 10500, epoch 104, Time: 231m 20s
+24/08/2018 18:12:09 - SaltNet - INFO - train Mean IOU is 0.7767 at epoch 104
+24/08/2018 18:12:16 - SaltNet - INFO - val Mean IOU is 0.7594 at epoch 104
+24/08/2018 18:12:16 - SaltNet - INFO - Epoch 105/149
+24/08/2018 18:12:16 - SaltNet - INFO - --------------------
+24/08/2018 18:13:15 - SaltNet - INFO - Batch Loss is 0.0987, Running loss is 0.1815, Batch IOU is 0.7875 at iter 10550, epoch 105, Time: 232m 27s
+24/08/2018 18:14:13 - SaltNet - INFO - Batch Loss is 0.1013, Running loss is 0.1812, Batch IOU is 0.8031 at iter 10600, epoch 105, Time: 233m 25s
+24/08/2018 18:14:15 - SaltNet - INFO - train Mean IOU is 0.7704 at epoch 105
+24/08/2018 18:14:22 - SaltNet - INFO - val Mean IOU is 0.7630 at epoch 105
+24/08/2018 18:14:22 - SaltNet - INFO - Epoch 106/149
+24/08/2018 18:14:22 - SaltNet - INFO - --------------------
+24/08/2018 18:15:21 - SaltNet - INFO - Batch Loss is 0.1007, Running loss is 0.1808, Batch IOU is 0.8719 at iter 10650, epoch 106, Time: 234m 33s
+24/08/2018 18:16:19 - SaltNet - INFO - Batch Loss is 0.0930, Running loss is 0.1805, Batch IOU is 0.7562 at iter 10700, epoch 106, Time: 235m 31s
+24/08/2018 18:16:20 - SaltNet - INFO - train Mean IOU is 0.7798 at epoch 106
+24/08/2018 18:16:28 - SaltNet - INFO - val Mean IOU is 0.7553 at epoch 106
+24/08/2018 18:16:28 - SaltNet - INFO - Epoch 107/149
+24/08/2018 18:16:28 - SaltNet - INFO - --------------------
+24/08/2018 18:17:26 - SaltNet - INFO - Batch Loss is 0.1082, Running loss is 0.1801, Batch IOU is 0.6219 at iter 10750, epoch 107, Time: 236m 39s
+24/08/2018 18:18:25 - SaltNet - INFO - Batch Loss is 0.0941, Running loss is 0.1798, Batch IOU is 0.7281 at iter 10800, epoch 107, Time: 237m 37s
+24/08/2018 18:18:26 - SaltNet - INFO - train Mean IOU is 0.7752 at epoch 107
+24/08/2018 18:18:34 - SaltNet - INFO - val Mean IOU is 0.7609 at epoch 107
+24/08/2018 18:18:34 - SaltNet - INFO - Epoch 108/149
+24/08/2018 18:18:34 - SaltNet - INFO - --------------------
+24/08/2018 18:19:32 - SaltNet - INFO - Batch Loss is 0.0915, Running loss is 0.1794, Batch IOU is 0.7906 at iter 10850, epoch 108, Time: 238m 44s
+24/08/2018 18:20:31 - SaltNet - INFO - Batch Loss is 0.1022, Running loss is 0.1792, Batch IOU is 0.7125 at iter 10900, epoch 108, Time: 239m 43s
+24/08/2018 18:20:32 - SaltNet - INFO - train Mean IOU is 0.7703 at epoch 108
+24/08/2018 18:20:40 - SaltNet - INFO - val Mean IOU is 0.7594 at epoch 108
+24/08/2018 18:20:40 - SaltNet - INFO - Epoch 109/149
+24/08/2018 18:20:40 - SaltNet - INFO - --------------------
+24/08/2018 18:21:38 - SaltNet - INFO - Batch Loss is 0.0964, Running loss is 0.1788, Batch IOU is 0.7437 at iter 10950, epoch 109, Time: 240m 50s
+24/08/2018 18:22:37 - SaltNet - INFO - Batch Loss is 0.0957, Running loss is 0.1785, Batch IOU is 0.7625 at iter 11000, epoch 109, Time: 241m 49s
+24/08/2018 18:22:38 - SaltNet - INFO - train Mean IOU is 0.7798 at epoch 109
+24/08/2018 18:22:46 - SaltNet - INFO - val Mean IOU is 0.7597 at epoch 109
+24/08/2018 18:22:46 - SaltNet - INFO - Epoch 110/149
+24/08/2018 18:22:46 - SaltNet - INFO - --------------------
+24/08/2018 18:23:44 - SaltNet - INFO - Batch Loss is 0.0967, Running loss is 0.1781, Batch IOU is 0.8687 at iter 11050, epoch 110, Time: 242m 56s
+24/08/2018 18:24:43 - SaltNet - INFO - Batch Loss is 0.0949, Running loss is 0.1778, Batch IOU is 0.7437 at iter 11100, epoch 110, Time: 243m 55s
+24/08/2018 18:24:44 - SaltNet - INFO - train Mean IOU is 0.7766 at epoch 110
+24/08/2018 18:24:52 - SaltNet - INFO - val Mean IOU is 0.7604 at epoch 110
+24/08/2018 18:24:53 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 18:24:53 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 18:25:48 - SaltNet - INFO - Epoch 111/149
+24/08/2018 18:25:48 - SaltNet - INFO - --------------------
+24/08/2018 18:26:46 - SaltNet - INFO - Batch Loss is 0.0956, Running loss is 0.1775, Batch IOU is 0.9062 at iter 11150, epoch 111, Time: 245m 58s
+24/08/2018 18:27:45 - SaltNet - INFO - Batch Loss is 0.0889, Running loss is 0.1772, Batch IOU is 0.7688 at iter 11200, epoch 111, Time: 246m 57s
+24/08/2018 18:27:46 - SaltNet - INFO - train Mean IOU is 0.7810 at epoch 111
+24/08/2018 18:27:54 - SaltNet - INFO - val Mean IOU is 0.7645 at epoch 111
+24/08/2018 18:27:54 - SaltNet - INFO - Epoch 112/149
+24/08/2018 18:27:54 - SaltNet - INFO - --------------------
+24/08/2018 18:28:52 - SaltNet - INFO - Batch Loss is 0.0985, Running loss is 0.1768, Batch IOU is 0.7625 at iter 11250, epoch 112, Time: 248m 4s
+24/08/2018 18:29:51 - SaltNet - INFO - Batch Loss is 0.0972, Running loss is 0.1766, Batch IOU is 0.7250 at iter 11300, epoch 112, Time: 249m 3s
+24/08/2018 18:29:52 - SaltNet - INFO - train Mean IOU is 0.7800 at epoch 112
+24/08/2018 18:30:00 - SaltNet - INFO - val Mean IOU is 0.7606 at epoch 112
+24/08/2018 18:30:00 - SaltNet - INFO - Epoch 113/149
+24/08/2018 18:30:00 - SaltNet - INFO - --------------------
+24/08/2018 18:30:58 - SaltNet - INFO - Batch Loss is 0.0838, Running loss is 0.1762, Batch IOU is 0.6500 at iter 11350, epoch 113, Time: 250m 10s
+24/08/2018 18:31:57 - SaltNet - INFO - Batch Loss is 0.1064, Running loss is 0.1759, Batch IOU is 0.7625 at iter 11400, epoch 113, Time: 251m 9s
+24/08/2018 18:31:58 - SaltNet - INFO - train Mean IOU is 0.7777 at epoch 113
+24/08/2018 18:32:06 - SaltNet - INFO - val Mean IOU is 0.7565 at epoch 113
+24/08/2018 18:32:06 - SaltNet - INFO - Epoch 114/149
+24/08/2018 18:32:06 - SaltNet - INFO - --------------------
+24/08/2018 18:33:04 - SaltNet - INFO - Batch Loss is 0.0935, Running loss is 0.1756, Batch IOU is 0.7594 at iter 11450, epoch 114, Time: 252m 16s
+24/08/2018 18:34:03 - SaltNet - INFO - Batch Loss is 0.1042, Running loss is 0.1754, Batch IOU is 0.8500 at iter 11500, epoch 114, Time: 253m 15s
+24/08/2018 18:34:04 - SaltNet - INFO - train Mean IOU is 0.7759 at epoch 114
+24/08/2018 18:34:12 - SaltNet - INFO - val Mean IOU is 0.7585 at epoch 114
+24/08/2018 18:34:12 - SaltNet - INFO - Epoch 115/149
+24/08/2018 18:34:12 - SaltNet - INFO - --------------------
+24/08/2018 18:35:10 - SaltNet - INFO - Batch Loss is 0.0949, Running loss is 0.1750, Batch IOU is 0.7875 at iter 11550, epoch 115, Time: 254m 22s
+24/08/2018 18:36:09 - SaltNet - INFO - Batch Loss is 0.0913, Running loss is 0.1747, Batch IOU is 0.8531 at iter 11600, epoch 115, Time: 255m 21s
+24/08/2018 18:36:10 - SaltNet - INFO - train Mean IOU is 0.7790 at epoch 115
+24/08/2018 18:36:18 - SaltNet - INFO - val Mean IOU is 0.7662 at epoch 115
+24/08/2018 18:36:19 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 18:36:19 - SaltNet - INFO - Best Val Mean IOU so far: 0.76625
+24/08/2018 18:36:19 - SaltNet - INFO - Epoch 116/149
+24/08/2018 18:36:19 - SaltNet - INFO - --------------------
+24/08/2018 18:37:18 - SaltNet - INFO - Batch Loss is 0.0943, Running loss is 0.1744, Batch IOU is 0.8031 at iter 11650, epoch 116, Time: 256m 30s
+24/08/2018 18:38:16 - SaltNet - INFO - Batch Loss is 0.0895, Running loss is 0.1741, Batch IOU is 0.7125 at iter 11700, epoch 116, Time: 257m 28s
+24/08/2018 18:38:17 - SaltNet - INFO - train Mean IOU is 0.7767 at epoch 116
+24/08/2018 18:38:25 - SaltNet - INFO - val Mean IOU is 0.7626 at epoch 116
+24/08/2018 18:38:25 - SaltNet - INFO - Epoch 117/149
+24/08/2018 18:38:25 - SaltNet - INFO - --------------------
+24/08/2018 18:39:24 - SaltNet - INFO - Batch Loss is 0.0891, Running loss is 0.1738, Batch IOU is 0.6938 at iter 11750, epoch 117, Time: 258m 36s
+24/08/2018 18:40:22 - SaltNet - INFO - Batch Loss is 0.1032, Running loss is 0.1736, Batch IOU is 0.8969 at iter 11800, epoch 117, Time: 259m 34s
+24/08/2018 18:40:23 - SaltNet - INFO - train Mean IOU is 0.7755 at epoch 117
+24/08/2018 18:40:31 - SaltNet - INFO - val Mean IOU is 0.7586 at epoch 117
+24/08/2018 18:40:31 - SaltNet - INFO - Epoch 118/149
+24/08/2018 18:40:31 - SaltNet - INFO - --------------------
+24/08/2018 18:41:30 - SaltNet - INFO - Batch Loss is 0.0895, Running loss is 0.1732, Batch IOU is 0.7375 at iter 11850, epoch 118, Time: 260m 42s
+24/08/2018 18:42:28 - SaltNet - INFO - Batch Loss is 0.0909, Running loss is 0.1729, Batch IOU is 0.7969 at iter 11900, epoch 118, Time: 261m 40s
+24/08/2018 18:42:29 - SaltNet - INFO - train Mean IOU is 0.7775 at epoch 118
+24/08/2018 18:42:37 - SaltNet - INFO - val Mean IOU is 0.7579 at epoch 118
+24/08/2018 18:42:37 - SaltNet - INFO - Epoch 119/149
+24/08/2018 18:42:37 - SaltNet - INFO - --------------------
+24/08/2018 18:43:35 - SaltNet - INFO - Batch Loss is 0.0946, Running loss is 0.1727, Batch IOU is 0.7000 at iter 11950, epoch 119, Time: 262m 47s
+24/08/2018 18:44:34 - SaltNet - INFO - Batch Loss is 0.0916, Running loss is 0.1724, Batch IOU is 0.8281 at iter 12000, epoch 119, Time: 263m 46s
+24/08/2018 18:44:35 - SaltNet - INFO - train Mean IOU is 0.7691 at epoch 119
+24/08/2018 18:44:43 - SaltNet - INFO - val Mean IOU is 0.7595 at epoch 119
+24/08/2018 18:44:43 - SaltNet - INFO - Epoch 120/149
+24/08/2018 18:44:43 - SaltNet - INFO - --------------------
+24/08/2018 18:45:41 - SaltNet - INFO - Batch Loss is 0.0909, Running loss is 0.1721, Batch IOU is 0.8313 at iter 12050, epoch 120, Time: 264m 53s
+24/08/2018 18:46:40 - SaltNet - INFO - Batch Loss is 0.0999, Running loss is 0.1718, Batch IOU is 0.7937 at iter 12100, epoch 120, Time: 265m 52s
+24/08/2018 18:46:41 - SaltNet - INFO - train Mean IOU is 0.7761 at epoch 120
+24/08/2018 18:46:49 - SaltNet - INFO - val Mean IOU is 0.7595 at epoch 120
+24/08/2018 18:46:50 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 18:46:50 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 18:47:45 - SaltNet - INFO - Epoch 121/149
+24/08/2018 18:47:45 - SaltNet - INFO - --------------------
+24/08/2018 18:48:43 - SaltNet - INFO - Batch Loss is 0.0893, Running loss is 0.1715, Batch IOU is 0.8531 at iter 12150, epoch 121, Time: 267m 55s
+24/08/2018 18:49:42 - SaltNet - INFO - Batch Loss is 0.1043, Running loss is 0.1713, Batch IOU is 0.7812 at iter 12200, epoch 121, Time: 268m 54s
+24/08/2018 18:49:43 - SaltNet - INFO - train Mean IOU is 0.7711 at epoch 121
+24/08/2018 18:49:51 - SaltNet - INFO - val Mean IOU is 0.7531 at epoch 121
+24/08/2018 18:49:51 - SaltNet - INFO - Epoch 122/149
+24/08/2018 18:49:51 - SaltNet - INFO - --------------------
+24/08/2018 18:50:49 - SaltNet - INFO - Batch Loss is 0.0922, Running loss is 0.1710, Batch IOU is 0.8250 at iter 12250, epoch 122, Time: 270m 1s
+24/08/2018 18:51:48 - SaltNet - INFO - Batch Loss is 0.0879, Running loss is 0.1708, Batch IOU is 0.8375 at iter 12300, epoch 122, Time: 271m 0s
+24/08/2018 18:51:49 - SaltNet - INFO - train Mean IOU is 0.7788 at epoch 122
+24/08/2018 18:51:57 - SaltNet - INFO - val Mean IOU is 0.7664 at epoch 122
+24/08/2018 18:51:58 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 18:51:58 - SaltNet - INFO - Best Val Mean IOU so far: 0.766375
+24/08/2018 18:51:58 - SaltNet - INFO - Epoch 123/149
+24/08/2018 18:51:58 - SaltNet - INFO - --------------------
+24/08/2018 18:52:56 - SaltNet - INFO - Batch Loss is 0.0922, Running loss is 0.1705, Batch IOU is 0.8719 at iter 12350, epoch 123, Time: 272m 9s
+24/08/2018 18:53:55 - SaltNet - INFO - Batch Loss is 0.0906, Running loss is 0.1702, Batch IOU is 0.8094 at iter 12400, epoch 123, Time: 273m 7s
+24/08/2018 18:53:56 - SaltNet - INFO - train Mean IOU is 0.7828 at epoch 123
+24/08/2018 18:54:04 - SaltNet - INFO - val Mean IOU is 0.7560 at epoch 123
+24/08/2018 18:54:04 - SaltNet - INFO - Epoch 124/149
+24/08/2018 18:54:04 - SaltNet - INFO - --------------------
+24/08/2018 18:55:02 - SaltNet - INFO - Batch Loss is 0.0940, Running loss is 0.1699, Batch IOU is 0.8562 at iter 12450, epoch 124, Time: 274m 15s
+24/08/2018 18:56:01 - SaltNet - INFO - Batch Loss is 0.0892, Running loss is 0.1697, Batch IOU is 0.7719 at iter 12500, epoch 124, Time: 275m 14s
+24/08/2018 18:56:02 - SaltNet - INFO - train Mean IOU is 0.7718 at epoch 124
+24/08/2018 18:56:10 - SaltNet - INFO - val Mean IOU is 0.7575 at epoch 124
+24/08/2018 18:56:10 - SaltNet - INFO - Epoch 125/149
+24/08/2018 18:56:10 - SaltNet - INFO - --------------------
+24/08/2018 18:57:09 - SaltNet - INFO - Batch Loss is 0.0874, Running loss is 0.1694, Batch IOU is 0.8687 at iter 12550, epoch 125, Time: 276m 21s
+24/08/2018 18:58:07 - SaltNet - INFO - Batch Loss is 0.0913, Running loss is 0.1692, Batch IOU is 0.8250 at iter 12600, epoch 125, Time: 277m 19s
+24/08/2018 18:58:08 - SaltNet - INFO - train Mean IOU is 0.7812 at epoch 125
+24/08/2018 18:58:16 - SaltNet - INFO - val Mean IOU is 0.7634 at epoch 125
+24/08/2018 18:58:16 - SaltNet - INFO - Epoch 126/149
+24/08/2018 18:58:16 - SaltNet - INFO - --------------------
+24/08/2018 18:59:14 - SaltNet - INFO - Batch Loss is 0.0946, Running loss is 0.1689, Batch IOU is 0.7719 at iter 12650, epoch 126, Time: 278m 27s
+24/08/2018 19:00:13 - SaltNet - INFO - Batch Loss is 0.0912, Running loss is 0.1687, Batch IOU is 0.7500 at iter 12700, epoch 126, Time: 279m 25s
+24/08/2018 19:00:14 - SaltNet - INFO - train Mean IOU is 0.7774 at epoch 126
+24/08/2018 19:00:22 - SaltNet - INFO - val Mean IOU is 0.7686 at epoch 126
+24/08/2018 19:00:23 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 19:00:23 - SaltNet - INFO - Best Val Mean IOU so far: 0.7686250000000001
+24/08/2018 19:00:23 - SaltNet - INFO - Epoch 127/149
+24/08/2018 19:00:23 - SaltNet - INFO - --------------------
+24/08/2018 19:01:22 - SaltNet - INFO - Batch Loss is 0.0871, Running loss is 0.1684, Batch IOU is 0.6781 at iter 12750, epoch 127, Time: 280m 34s
+24/08/2018 19:02:20 - SaltNet - INFO - Batch Loss is 0.0921, Running loss is 0.1681, Batch IOU is 0.8625 at iter 12800, epoch 127, Time: 281m 33s
+24/08/2018 19:02:21 - SaltNet - INFO - train Mean IOU is 0.7801 at epoch 127
+24/08/2018 19:02:29 - SaltNet - INFO - val Mean IOU is 0.7612 at epoch 127
+24/08/2018 19:02:29 - SaltNet - INFO - Epoch 128/149
+24/08/2018 19:02:29 - SaltNet - INFO - --------------------
+24/08/2018 19:03:28 - SaltNet - INFO - Batch Loss is 0.0965, Running loss is 0.1679, Batch IOU is 0.7656 at iter 12850, epoch 128, Time: 282m 40s
+24/08/2018 19:04:26 - SaltNet - INFO - Batch Loss is 0.0852, Running loss is 0.1676, Batch IOU is 0.7250 at iter 12900, epoch 128, Time: 283m 38s
+24/08/2018 19:04:27 - SaltNet - INFO - train Mean IOU is 0.7775 at epoch 128
+24/08/2018 19:04:35 - SaltNet - INFO - val Mean IOU is 0.7621 at epoch 128
+24/08/2018 19:04:35 - SaltNet - INFO - Epoch 129/149
+24/08/2018 19:04:35 - SaltNet - INFO - --------------------
+24/08/2018 19:05:33 - SaltNet - INFO - Batch Loss is 0.0869, Running loss is 0.1674, Batch IOU is 0.8313 at iter 12950, epoch 129, Time: 284m 46s
+24/08/2018 19:06:32 - SaltNet - INFO - Batch Loss is 0.0914, Running loss is 0.1671, Batch IOU is 0.8125 at iter 13000, epoch 129, Time: 285m 44s
+24/08/2018 19:06:33 - SaltNet - INFO - train Mean IOU is 0.7833 at epoch 129
+24/08/2018 19:06:41 - SaltNet - INFO - val Mean IOU is 0.7571 at epoch 129
+24/08/2018 19:06:41 - SaltNet - INFO - Epoch 130/149
+24/08/2018 19:06:41 - SaltNet - INFO - --------------------
+24/08/2018 19:07:39 - SaltNet - INFO - Batch Loss is 0.0868, Running loss is 0.1669, Batch IOU is 0.7656 at iter 13050, epoch 130, Time: 286m 51s
+24/08/2018 19:08:38 - SaltNet - INFO - Batch Loss is 0.1046, Running loss is 0.1667, Batch IOU is 0.7281 at iter 13100, epoch 130, Time: 287m 50s
+24/08/2018 19:08:39 - SaltNet - INFO - train Mean IOU is 0.7778 at epoch 130
+24/08/2018 19:08:47 - SaltNet - INFO - val Mean IOU is 0.7550 at epoch 130
+24/08/2018 19:08:48 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 19:08:48 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 19:09:43 - SaltNet - INFO - Epoch 131/149
+24/08/2018 19:09:43 - SaltNet - INFO - --------------------
+24/08/2018 19:10:42 - SaltNet - INFO - Batch Loss is 0.0809, Running loss is 0.1664, Batch IOU is 0.6188 at iter 13150, epoch 131, Time: 289m 54s
+24/08/2018 19:11:41 - SaltNet - INFO - Batch Loss is 0.1031, Running loss is 0.1662, Batch IOU is 0.7094 at iter 13200, epoch 131, Time: 290m 53s
+24/08/2018 19:11:42 - SaltNet - INFO - train Mean IOU is 0.7752 at epoch 131
+24/08/2018 19:11:50 - SaltNet - INFO - val Mean IOU is 0.7560 at epoch 131
+24/08/2018 19:11:50 - SaltNet - INFO - Epoch 132/149
+24/08/2018 19:11:50 - SaltNet - INFO - --------------------
+24/08/2018 19:12:48 - SaltNet - INFO - Batch Loss is 0.0931, Running loss is 0.1660, Batch IOU is 0.8031 at iter 13250, epoch 132, Time: 292m 0s
+24/08/2018 19:13:47 - SaltNet - INFO - Batch Loss is 0.0875, Running loss is 0.1657, Batch IOU is 0.8219 at iter 13300, epoch 132, Time: 292m 59s
+24/08/2018 19:13:48 - SaltNet - INFO - train Mean IOU is 0.7815 at epoch 132
+24/08/2018 19:13:55 - SaltNet - INFO - val Mean IOU is 0.7612 at epoch 132
+24/08/2018 19:13:55 - SaltNet - INFO - Epoch 133/149
+24/08/2018 19:13:55 - SaltNet - INFO - --------------------
+24/08/2018 19:14:54 - SaltNet - INFO - Batch Loss is 0.0916, Running loss is 0.1655, Batch IOU is 0.7469 at iter 13350, epoch 133, Time: 294m 6s
+24/08/2018 19:15:52 - SaltNet - INFO - Batch Loss is 0.0867, Running loss is 0.1652, Batch IOU is 0.7594 at iter 13400, epoch 133, Time: 295m 4s
+24/08/2018 19:15:54 - SaltNet - INFO - train Mean IOU is 0.7831 at epoch 133
+24/08/2018 19:16:01 - SaltNet - INFO - val Mean IOU is 0.7586 at epoch 133
+24/08/2018 19:16:01 - SaltNet - INFO - Epoch 134/149
+24/08/2018 19:16:01 - SaltNet - INFO - --------------------
+24/08/2018 19:17:00 - SaltNet - INFO - Batch Loss is 0.0815, Running loss is 0.1650, Batch IOU is 0.8906 at iter 13450, epoch 134, Time: 296m 12s
+24/08/2018 19:17:58 - SaltNet - INFO - Batch Loss is 0.0910, Running loss is 0.1648, Batch IOU is 0.7656 at iter 13500, epoch 134, Time: 297m 10s
+24/08/2018 19:17:59 - SaltNet - INFO - train Mean IOU is 0.7792 at epoch 134
+24/08/2018 19:18:07 - SaltNet - INFO - val Mean IOU is 0.7579 at epoch 134
+24/08/2018 19:18:07 - SaltNet - INFO - Epoch 135/149
+24/08/2018 19:18:07 - SaltNet - INFO - --------------------
+24/08/2018 19:19:05 - SaltNet - INFO - Batch Loss is 0.0838, Running loss is 0.1645, Batch IOU is 0.7344 at iter 13550, epoch 135, Time: 298m 17s
+24/08/2018 19:20:04 - SaltNet - INFO - Batch Loss is 0.0905, Running loss is 0.1643, Batch IOU is 0.7063 at iter 13600, epoch 135, Time: 299m 16s
+24/08/2018 19:20:05 - SaltNet - INFO - train Mean IOU is 0.7740 at epoch 135
+24/08/2018 19:20:13 - SaltNet - INFO - val Mean IOU is 0.7601 at epoch 135
+24/08/2018 19:20:13 - SaltNet - INFO - Epoch 136/149
+24/08/2018 19:20:13 - SaltNet - INFO - --------------------
+24/08/2018 19:21:11 - SaltNet - INFO - Batch Loss is 0.0888, Running loss is 0.1640, Batch IOU is 0.7906 at iter 13650, epoch 136, Time: 300m 23s
+24/08/2018 19:22:10 - SaltNet - INFO - Batch Loss is 0.0949, Running loss is 0.1638, Batch IOU is 0.9094 at iter 13700, epoch 136, Time: 301m 23s
+24/08/2018 19:22:11 - SaltNet - INFO - train Mean IOU is 0.7806 at epoch 136
+24/08/2018 19:22:19 - SaltNet - INFO - val Mean IOU is 0.7606 at epoch 136
+24/08/2018 19:22:19 - SaltNet - INFO - Epoch 137/149
+24/08/2018 19:22:19 - SaltNet - INFO - --------------------
+24/08/2018 19:23:18 - SaltNet - INFO - Batch Loss is 0.0861, Running loss is 0.1636, Batch IOU is 0.8000 at iter 13750, epoch 137, Time: 302m 30s
+24/08/2018 19:24:16 - SaltNet - INFO - Batch Loss is 0.0870, Running loss is 0.1634, Batch IOU is 0.7812 at iter 13800, epoch 137, Time: 303m 28s
+24/08/2018 19:24:17 - SaltNet - INFO - train Mean IOU is 0.7781 at epoch 137
+24/08/2018 19:24:25 - SaltNet - INFO - val Mean IOU is 0.7571 at epoch 137
+24/08/2018 19:24:25 - SaltNet - INFO - Epoch 138/149
+24/08/2018 19:24:25 - SaltNet - INFO - --------------------
+24/08/2018 19:25:23 - SaltNet - INFO - Batch Loss is 0.0906, Running loss is 0.1632, Batch IOU is 0.8250 at iter 13850, epoch 138, Time: 304m 35s
+24/08/2018 19:26:22 - SaltNet - INFO - Batch Loss is 0.0933, Running loss is 0.1629, Batch IOU is 0.7594 at iter 13900, epoch 138, Time: 305m 34s
+24/08/2018 19:26:23 - SaltNet - INFO - train Mean IOU is 0.7795 at epoch 138
+24/08/2018 19:26:31 - SaltNet - INFO - val Mean IOU is 0.7671 at epoch 138
+24/08/2018 19:26:31 - SaltNet - INFO - Epoch 139/149
+24/08/2018 19:26:31 - SaltNet - INFO - --------------------
+24/08/2018 19:27:29 - SaltNet - INFO - Batch Loss is 0.0955, Running loss is 0.1627, Batch IOU is 0.7156 at iter 13950, epoch 139, Time: 306m 41s
+24/08/2018 19:28:28 - SaltNet - INFO - Batch Loss is 0.0884, Running loss is 0.1625, Batch IOU is 0.7375 at iter 14000, epoch 139, Time: 307m 40s
+24/08/2018 19:28:29 - SaltNet - INFO - train Mean IOU is 0.7795 at epoch 139
+24/08/2018 19:28:37 - SaltNet - INFO - val Mean IOU is 0.7632 at epoch 139
+24/08/2018 19:28:37 - SaltNet - INFO - Epoch 140/149
+24/08/2018 19:28:37 - SaltNet - INFO - --------------------
+24/08/2018 19:29:35 - SaltNet - INFO - Batch Loss is 0.0888, Running loss is 0.1623, Batch IOU is 0.7312 at iter 14050, epoch 140, Time: 308m 47s
+24/08/2018 19:30:34 - SaltNet - INFO - Batch Loss is 0.0961, Running loss is 0.1621, Batch IOU is 0.7281 at iter 14100, epoch 140, Time: 309m 46s
+24/08/2018 19:30:35 - SaltNet - INFO - train Mean IOU is 0.7773 at epoch 140
+24/08/2018 19:30:43 - SaltNet - INFO - val Mean IOU is 0.7654 at epoch 140
+24/08/2018 19:30:44 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 19:30:44 - SaltNet - INFO - Pushing model state to git.
+24/08/2018 19:31:38 - SaltNet - INFO - Epoch 141/149
+24/08/2018 19:31:38 - SaltNet - INFO - --------------------
+24/08/2018 19:32:37 - SaltNet - INFO - Batch Loss is 0.0849, Running loss is 0.1619, Batch IOU is 0.7312 at iter 14150, epoch 141, Time: 311m 49s
+24/08/2018 19:33:35 - SaltNet - INFO - Batch Loss is 0.0925, Running loss is 0.1617, Batch IOU is 0.6656 at iter 14200, epoch 141, Time: 312m 48s
+24/08/2018 19:33:37 - SaltNet - INFO - train Mean IOU is 0.7764 at epoch 141
+24/08/2018 19:33:44 - SaltNet - INFO - val Mean IOU is 0.7699 at epoch 141
+24/08/2018 19:33:45 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 19:33:45 - SaltNet - INFO - Best Val Mean IOU so far: 0.769875
+24/08/2018 19:33:46 - SaltNet - INFO - Epoch 142/149
+24/08/2018 19:33:46 - SaltNet - INFO - --------------------
+24/08/2018 19:34:44 - SaltNet - INFO - Batch Loss is 0.0902, Running loss is 0.1615, Batch IOU is 0.7375 at iter 14250, epoch 142, Time: 313m 56s
+24/08/2018 19:35:46 - SaltNet - INFO - Batch Loss is 0.0859, Running loss is 0.1613, Batch IOU is 0.8156 at iter 14300, epoch 142, Time: 314m 58s
+24/08/2018 19:35:47 - SaltNet - INFO - train Mean IOU is 0.7831 at epoch 142
+24/08/2018 19:35:55 - SaltNet - INFO - val Mean IOU is 0.7647 at epoch 142
+24/08/2018 19:35:55 - SaltNet - INFO - Epoch 143/149
+24/08/2018 19:35:55 - SaltNet - INFO - --------------------
+24/08/2018 19:36:53 - SaltNet - INFO - Batch Loss is 0.0909, Running loss is 0.1611, Batch IOU is 0.7156 at iter 14350, epoch 143, Time: 316m 5s
+24/08/2018 19:37:52 - SaltNet - INFO - Batch Loss is 0.0899, Running loss is 0.1609, Batch IOU is 0.6719 at iter 14400, epoch 143, Time: 317m 4s
+24/08/2018 19:37:53 - SaltNet - INFO - train Mean IOU is 0.7792 at epoch 143
+24/08/2018 19:38:01 - SaltNet - INFO - val Mean IOU is 0.7647 at epoch 143
+24/08/2018 19:38:01 - SaltNet - INFO - Epoch 144/149
+24/08/2018 19:38:01 - SaltNet - INFO - --------------------
+24/08/2018 19:38:59 - SaltNet - INFO - Batch Loss is 0.0864, Running loss is 0.1606, Batch IOU is 0.7781 at iter 14450, epoch 144, Time: 318m 11s
+24/08/2018 19:39:58 - SaltNet - INFO - Batch Loss is 0.0935, Running loss is 0.1605, Batch IOU is 0.6937 at iter 14500, epoch 144, Time: 319m 10s
+24/08/2018 19:39:59 - SaltNet - INFO - train Mean IOU is 0.7817 at epoch 144
+24/08/2018 19:40:07 - SaltNet - INFO - val Mean IOU is 0.7664 at epoch 144
+24/08/2018 19:40:07 - SaltNet - INFO - Epoch 145/149
+24/08/2018 19:40:07 - SaltNet - INFO - --------------------
+24/08/2018 19:41:05 - SaltNet - INFO - Batch Loss is 0.0957, Running loss is 0.1603, Batch IOU is 0.7875 at iter 14550, epoch 145, Time: 320m 17s
+24/08/2018 19:42:04 - SaltNet - INFO - Batch Loss is 0.0807, Running loss is 0.1601, Batch IOU is 0.8562 at iter 14600, epoch 145, Time: 321m 16s
+24/08/2018 19:42:05 - SaltNet - INFO - train Mean IOU is 0.7829 at epoch 145
+24/08/2018 19:42:13 - SaltNet - INFO - val Mean IOU is 0.7682 at epoch 145
+24/08/2018 19:42:13 - SaltNet - INFO - Epoch 146/149
+24/08/2018 19:42:13 - SaltNet - INFO - --------------------
+24/08/2018 19:43:11 - SaltNet - INFO - Batch Loss is 0.0832, Running loss is 0.1598, Batch IOU is 0.8281 at iter 14650, epoch 146, Time: 322m 23s
+24/08/2018 19:44:10 - SaltNet - INFO - Batch Loss is 0.0851, Running loss is 0.1596, Batch IOU is 0.7437 at iter 14700, epoch 146, Time: 323m 22s
+24/08/2018 19:44:11 - SaltNet - INFO - train Mean IOU is 0.7861 at epoch 146
+24/08/2018 19:44:19 - SaltNet - INFO - val Mean IOU is 0.7699 at epoch 146
+24/08/2018 19:44:20 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 19:44:20 - SaltNet - INFO - Best Val Mean IOU so far: 0.7698750000000001
+24/08/2018 19:44:20 - SaltNet - INFO - Epoch 147/149
+24/08/2018 19:44:20 - SaltNet - INFO - --------------------
+24/08/2018 19:45:18 - SaltNet - INFO - Batch Loss is 0.0967, Running loss is 0.1594, Batch IOU is 0.8750 at iter 14750, epoch 147, Time: 324m 30s
+24/08/2018 19:46:17 - SaltNet - INFO - Batch Loss is 0.0784, Running loss is 0.1592, Batch IOU is 0.8969 at iter 14800, epoch 147, Time: 325m 29s
+24/08/2018 19:46:18 - SaltNet - INFO - train Mean IOU is 0.7771 at epoch 147
+24/08/2018 19:46:26 - SaltNet - INFO - val Mean IOU is 0.7699 at epoch 147
+24/08/2018 19:46:26 - SaltNet - INFO - Epoch 148/149
+24/08/2018 19:46:26 - SaltNet - INFO - --------------------
+24/08/2018 19:47:24 - SaltNet - INFO - Batch Loss is 0.0878, Running loss is 0.1590, Batch IOU is 0.8187 at iter 14850, epoch 148, Time: 326m 36s
+24/08/2018 19:48:23 - SaltNet - INFO - Batch Loss is 0.0894, Running loss is 0.1588, Batch IOU is 0.8844 at iter 14900, epoch 148, Time: 327m 35s
+24/08/2018 19:48:24 - SaltNet - INFO - train Mean IOU is 0.7825 at epoch 148
+24/08/2018 19:48:32 - SaltNet - INFO - val Mean IOU is 0.7643 at epoch 148
+24/08/2018 19:48:32 - SaltNet - INFO - Epoch 149/149
+24/08/2018 19:48:32 - SaltNet - INFO - --------------------
+24/08/2018 19:49:30 - SaltNet - INFO - Batch Loss is 0.0843, Running loss is 0.1586, Batch IOU is 0.6688 at iter 14950, epoch 149, Time: 328m 42s
+24/08/2018 19:50:29 - SaltNet - INFO - Batch Loss is 0.0823, Running loss is 0.1584, Batch IOU is 0.7906 at iter 15000, epoch 149, Time: 329m 41s
+24/08/2018 19:50:30 - SaltNet - INFO - train Mean IOU is 0.7843 at epoch 149
+24/08/2018 19:50:38 - SaltNet - INFO - val Mean IOU is 0.7662 at epoch 149
+24/08/2018 19:50:39 - SaltNet - INFO - ['Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-1-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-2-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-3-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-4-Of-5', 'Unet_Resnet18_2018_08_25_00_11_35.ckp-chunk-5-Of-5']
+24/08/2018 19:50:39 - SaltNet - INFO - Pushing model state to git.
