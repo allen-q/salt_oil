@@ -621,3 +621,37 @@
 29/08/2018 05:13:34 - SaltNet - INFO - val Mean IOU: 0.7320, Mean Acc: 0.9365 at epoch 90
 29/08/2018 05:13:36 - SaltNet - INFO - ['Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-1-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-2-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-3-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-4-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-5-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-6-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-7-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-8-Of-8']
 29/08/2018 05:13:36 - SaltNet - INFO - Pushing model state to git.
+29/08/2018 05:13:46 - SaltNet - INFO - Epoch 91/99
+29/08/2018 05:13:46 - SaltNet - INFO - --------------------
+29/08/2018 05:15:08 - SaltNet - INFO - Batch Loss: 0.1171, Running loss: 0.2225, Batch IOU: 0.8062, Batch Acc: 0.9549 at iter 9150, epoch 91, Time: 273m 54s
+29/08/2018 05:16:30 - SaltNet - INFO - Batch Loss: 0.1358, Running loss: 0.2221, Batch IOU: 0.6250, Batch Acc: 0.9278 at iter 9200, epoch 91, Time: 275m 16s
+29/08/2018 05:16:31 - SaltNet - INFO - train Mean IOU: 0.7209, Mean Acc: 0.9458 at epoch 91
+29/08/2018 05:16:43 - SaltNet - INFO - val Mean IOU: 0.7372, Mean Acc: 0.9392 at epoch 91
+29/08/2018 05:16:43 - SaltNet - INFO - Epoch 92/99
+29/08/2018 05:16:43 - SaltNet - INFO - --------------------
+29/08/2018 05:18:04 - SaltNet - INFO - Batch Loss: 0.1144, Running loss: 0.2215, Batch IOU: 0.7312, Batch Acc: 0.9469 at iter 9250, epoch 92, Time: 276m 51s
+29/08/2018 05:19:27 - SaltNet - INFO - Batch Loss: 0.1162, Running loss: 0.2211, Batch IOU: 0.7000, Batch Acc: 0.9297 at iter 9300, epoch 92, Time: 278m 13s
+29/08/2018 05:19:28 - SaltNet - INFO - train Mean IOU: 0.7165, Mean Acc: 0.9488 at epoch 92
+29/08/2018 05:19:40 - SaltNet - INFO - val Mean IOU: 0.7236, Mean Acc: 0.9351 at epoch 92
+29/08/2018 05:19:40 - SaltNet - INFO - Epoch 93/99
+29/08/2018 05:19:40 - SaltNet - INFO - --------------------
+29/08/2018 05:21:03 - SaltNet - INFO - Batch Loss: 0.1180, Running loss: 0.2206, Batch IOU: 0.6281, Batch Acc: 0.9227 at iter 9350, epoch 93, Time: 279m 49s
+29/08/2018 05:22:28 - SaltNet - INFO - Batch Loss: 0.1156, Running loss: 0.2201, Batch IOU: 0.6281, Batch Acc: 0.9579 at iter 9400, epoch 93, Time: 281m 14s
+29/08/2018 05:22:29 - SaltNet - INFO - train Mean IOU: 0.7190, Mean Acc: 0.9486 at epoch 93
+29/08/2018 05:22:41 - SaltNet - INFO - val Mean IOU: 0.7405, Mean Acc: 0.9403 at epoch 93
+29/08/2018 05:22:41 - SaltNet - INFO - Epoch 94/99
+29/08/2018 05:22:41 - SaltNet - INFO - --------------------
+29/08/2018 05:24:04 - SaltNet - INFO - Batch Loss: 0.1210, Running loss: 0.2196, Batch IOU: 0.7125, Batch Acc: 0.9541 at iter 9450, epoch 94, Time: 282m 50s
+29/08/2018 05:25:27 - SaltNet - INFO - Batch Loss: 0.1151, Running loss: 0.2191, Batch IOU: 0.7812, Batch Acc: 0.9727 at iter 9500, epoch 94, Time: 284m 13s
+29/08/2018 05:25:28 - SaltNet - INFO - train Mean IOU: 0.7240, Mean Acc: 0.9493 at epoch 94
+29/08/2018 05:25:39 - SaltNet - INFO - val Mean IOU: 0.7294, Mean Acc: 0.9363 at epoch 94
+29/08/2018 05:25:39 - SaltNet - INFO - Epoch 95/99
+29/08/2018 05:25:39 - SaltNet - INFO - --------------------
+29/08/2018 05:27:01 - SaltNet - INFO - Batch Loss: 0.1131, Running loss: 0.2186, Batch IOU: 0.6875, Batch Acc: 0.9425 at iter 9550, epoch 95, Time: 285m 48s
+29/08/2018 05:28:24 - SaltNet - INFO - Batch Loss: 0.1257, Running loss: 0.2182, Batch IOU: 0.6875, Batch Acc: 0.9340 at iter 9600, epoch 95, Time: 287m 10s
+29/08/2018 05:28:25 - SaltNet - INFO - train Mean IOU: 0.7175, Mean Acc: 0.9468 at epoch 95
+29/08/2018 05:28:37 - SaltNet - INFO - val Mean IOU: 0.7397, Mean Acc: 0.9397 at epoch 95
+29/08/2018 05:28:37 - SaltNet - INFO - Epoch 96/99
+29/08/2018 05:28:37 - SaltNet - INFO - --------------------
+29/08/2018 05:29:59 - SaltNet - INFO - Batch Loss: 0.1184, Running loss: 0.2177, Batch IOU: 0.6625, Batch Acc: 0.9053 at iter 9650, epoch 96, Time: 288m 45s
+29/08/2018 05:36:25 - SaltNet - INFO - Pushing model state to git.
