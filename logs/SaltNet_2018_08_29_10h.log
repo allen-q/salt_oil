@@ -1,0 +1,15 @@
+29/08/2018 00:39:25 - SaltNet - INFO - Start Training...
+29/08/2018 00:39:25 - SaltNet - INFO - Epoch 0/99
+29/08/2018 00:39:25 - SaltNet - INFO - --------------------
+29/08/2018 00:40:46 - SaltNet - INFO - Batch Loss: 1.0306, Running loss: 1.0306, Batch IOU: 0.2812, Batch Acc: 0.6297 at iter 50, epoch 0, Time: 1m 21s
+29/08/2018 00:41:13 - SaltNet - INFO - Start Training...
+29/08/2018 00:41:13 - SaltNet - INFO - Epoch 0/99
+29/08/2018 00:41:13 - SaltNet - INFO - --------------------
+29/08/2018 00:42:35 - SaltNet - INFO - Batch Loss: 1.2239, Running loss: 1.2239, Batch IOU: 0.4375, Batch Acc: 0.7016 at iter 50, epoch 0, Time: 1m 21s
+29/08/2018 00:43:57 - SaltNet - INFO - Batch Loss: 0.5625, Running loss: 0.8932, Batch IOU: 0.4062, Batch Acc: 0.6863 at iter 100, epoch 0, Time: 2m 43s
+29/08/2018 00:43:58 - SaltNet - INFO - train Mean IOU: 0.3467, Mean Acc: 0.7337 at epoch 0
+29/08/2018 00:44:10 - SaltNet - INFO - val Mean IOU: 0.4062, Mean Acc: 0.7562 at epoch 0
+29/08/2018 00:44:12 - SaltNet - INFO - ['Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-1-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-2-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-3-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-4-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-5-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-6-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-7-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-8-Of-8']
+29/08/2018 00:44:12 - SaltNet - INFO - Best Val Mean IOU so far: 0.40625
+29/08/2018 00:44:14 - SaltNet - INFO - ['Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-1-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-2-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-3-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-4-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-5-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-6-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-7-Of-8', 'Unet_Resnet34_scale_1.2_baseline_2018_08_29_10_41_13.ckp-chunk-8-Of-8']
+29/08/2018 00:44:14 - SaltNet - INFO - Pushing model state to git.
