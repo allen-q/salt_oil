@@ -1573,3 +1573,35 @@
 30/08/2018 10:38:41 - SaltNet - INFO - val Mean IOU: 0.7087, Mean Acc: 0.9326 at epoch 80
 30/08/2018 10:38:41 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
 30/08/2018 10:38:41 - SaltNet - INFO - Pushing model state to git.
+30/08/2018 10:38:50 - SaltNet - INFO - Epoch 81/249
+30/08/2018 10:38:50 - SaltNet - INFO - --------------------
+30/08/2018 10:40:06 - SaltNet - INFO - Batch Loss: 0.0110, Running loss: 0.0165, Batch IOU: 0.7812, Batch Acc: 0.9455 at iter 8150, epoch 81, Time: 226m 31s
+30/08/2018 10:41:22 - SaltNet - INFO - Batch Loss: 0.0118, Running loss: 0.0165, Batch IOU: 0.6531, Batch Acc: 0.9112 at iter 8200, epoch 81, Time: 227m 47s
+30/08/2018 10:41:23 - SaltNet - INFO - train Mean IOU: 0.7350, Mean Acc: 0.9288 at epoch 81
+30/08/2018 10:41:34 - SaltNet - INFO - val Mean IOU: 0.7173, Mean Acc: 0.9390 at epoch 81
+30/08/2018 10:41:34 - SaltNet - INFO - Epoch 82/249
+30/08/2018 10:41:34 - SaltNet - INFO - --------------------
+30/08/2018 10:42:50 - SaltNet - INFO - Batch Loss: 0.0115, Running loss: 0.0164, Batch IOU: 0.7156, Batch Acc: 0.9239 at iter 8250, epoch 82, Time: 229m 15s
+30/08/2018 10:44:06 - SaltNet - INFO - Batch Loss: 0.0122, Running loss: 0.0164, Batch IOU: 0.6875, Batch Acc: 0.9386 at iter 8300, epoch 82, Time: 230m 31s
+30/08/2018 10:44:07 - SaltNet - INFO - train Mean IOU: 0.7284, Mean Acc: 0.9276 at epoch 82
+30/08/2018 10:44:17 - SaltNet - INFO - val Mean IOU: 0.7249, Mean Acc: 0.9414 at epoch 82
+30/08/2018 10:44:17 - SaltNet - INFO - Epoch 83/249
+30/08/2018 10:44:17 - SaltNet - INFO - --------------------
+30/08/2018 10:45:33 - SaltNet - INFO - Batch Loss: 0.0111, Running loss: 0.0164, Batch IOU: 0.7125, Batch Acc: 0.9013 at iter 8350, epoch 83, Time: 231m 59s
+30/08/2018 10:46:49 - SaltNet - INFO - Batch Loss: 0.0121, Running loss: 0.0164, Batch IOU: 0.7188, Batch Acc: 0.9436 at iter 8400, epoch 83, Time: 233m 15s
+30/08/2018 10:46:51 - SaltNet - INFO - train Mean IOU: 0.7267, Mean Acc: 0.9292 at epoch 83
+30/08/2018 10:47:01 - SaltNet - INFO - val Mean IOU: 0.7276, Mean Acc: 0.9404 at epoch 83
+30/08/2018 10:47:01 - SaltNet - INFO - Epoch 84/249
+30/08/2018 10:47:01 - SaltNet - INFO - --------------------
+30/08/2018 10:48:17 - SaltNet - INFO - Batch Loss: 0.0113, Running loss: 0.0163, Batch IOU: 0.7312, Batch Acc: 0.9502 at iter 8450, epoch 84, Time: 234m 42s
+30/08/2018 10:49:33 - SaltNet - INFO - Batch Loss: 0.0122, Running loss: 0.0163, Batch IOU: 0.6812, Batch Acc: 0.9164 at iter 8500, epoch 84, Time: 235m 58s
+30/08/2018 10:49:34 - SaltNet - INFO - train Mean IOU: 0.7220, Mean Acc: 0.9258 at epoch 84
+30/08/2018 10:49:45 - SaltNet - INFO - val Mean IOU: 0.7144, Mean Acc: 0.9329 at epoch 84
+30/08/2018 10:49:45 - SaltNet - INFO - Epoch 85/249
+30/08/2018 10:49:45 - SaltNet - INFO - --------------------
+30/08/2018 10:51:00 - SaltNet - INFO - Batch Loss: 0.0106, Running loss: 0.0163, Batch IOU: 0.7344, Batch Acc: 0.9269 at iter 8550, epoch 85, Time: 237m 25s
+30/08/2018 10:52:16 - SaltNet - INFO - Batch Loss: 0.0113, Running loss: 0.0162, Batch IOU: 0.8031, Batch Acc: 0.9509 at iter 8600, epoch 85, Time: 238m 42s
+30/08/2018 10:52:17 - SaltNet - INFO - train Mean IOU: 0.7394, Mean Acc: 0.9302 at epoch 85
+30/08/2018 10:52:28 - SaltNet - INFO - val Mean IOU: 0.7334, Mean Acc: 0.9443 at epoch 85
+30/08/2018 10:52:28 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
+30/08/2018 10:52:28 - SaltNet - INFO - Pushing model state to git.
