@@ -1405,3 +1405,35 @@
 30/08/2018 09:29:25 - SaltNet - INFO - val Mean IOU: 0.6750, Mean Acc: 0.9259 at epoch 55
 30/08/2018 09:29:26 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
 30/08/2018 09:29:26 - SaltNet - INFO - Pushing model state to git.
+30/08/2018 09:29:42 - SaltNet - INFO - Epoch 56/249
+30/08/2018 09:29:42 - SaltNet - INFO - --------------------
+30/08/2018 09:30:58 - SaltNet - INFO - Batch Loss: 0.0134, Running loss: 0.0183, Batch IOU: 0.5875, Batch Acc: 0.9007 at iter 5650, epoch 56, Time: 157m 23s
+30/08/2018 09:32:15 - SaltNet - INFO - Batch Loss: 0.0136, Running loss: 0.0182, Batch IOU: 0.7188, Batch Acc: 0.8960 at iter 5700, epoch 56, Time: 158m 40s
+30/08/2018 09:32:16 - SaltNet - INFO - train Mean IOU: 0.7105, Mean Acc: 0.9194 at epoch 56
+30/08/2018 09:32:27 - SaltNet - INFO - val Mean IOU: 0.6890, Mean Acc: 0.9273 at epoch 56
+30/08/2018 09:32:27 - SaltNet - INFO - Epoch 57/249
+30/08/2018 09:32:27 - SaltNet - INFO - --------------------
+30/08/2018 09:33:43 - SaltNet - INFO - Batch Loss: 0.0135, Running loss: 0.0182, Batch IOU: 0.7750, Batch Acc: 0.9396 at iter 5750, epoch 57, Time: 160m 8s
+30/08/2018 09:34:59 - SaltNet - INFO - Batch Loss: 0.0135, Running loss: 0.0181, Batch IOU: 0.7375, Batch Acc: 0.9503 at iter 5800, epoch 57, Time: 161m 24s
+30/08/2018 09:35:00 - SaltNet - INFO - train Mean IOU: 0.6973, Mean Acc: 0.9167 at epoch 57
+30/08/2018 09:35:10 - SaltNet - INFO - val Mean IOU: 0.7055, Mean Acc: 0.9340 at epoch 57
+30/08/2018 09:35:10 - SaltNet - INFO - Epoch 58/249
+30/08/2018 09:35:10 - SaltNet - INFO - --------------------
+30/08/2018 09:36:27 - SaltNet - INFO - Batch Loss: 0.0131, Running loss: 0.0181, Batch IOU: 0.7406, Batch Acc: 0.9112 at iter 5850, epoch 58, Time: 162m 52s
+30/08/2018 09:37:43 - SaltNet - INFO - Batch Loss: 0.0131, Running loss: 0.0181, Batch IOU: 0.7781, Batch Acc: 0.9116 at iter 5900, epoch 58, Time: 164m 8s
+30/08/2018 09:37:44 - SaltNet - INFO - train Mean IOU: 0.7079, Mean Acc: 0.9200 at epoch 58
+30/08/2018 09:37:54 - SaltNet - INFO - val Mean IOU: 0.6745, Mean Acc: 0.9104 at epoch 58
+30/08/2018 09:37:54 - SaltNet - INFO - Epoch 59/249
+30/08/2018 09:37:54 - SaltNet - INFO - --------------------
+30/08/2018 09:39:10 - SaltNet - INFO - Batch Loss: 0.0129, Running loss: 0.0180, Batch IOU: 0.7063, Batch Acc: 0.8923 at iter 5950, epoch 59, Time: 165m 35s
+30/08/2018 09:40:27 - SaltNet - INFO - Batch Loss: 0.0131, Running loss: 0.0180, Batch IOU: 0.7844, Batch Acc: 0.9636 at iter 6000, epoch 59, Time: 166m 52s
+30/08/2018 09:40:28 - SaltNet - INFO - train Mean IOU: 0.7114, Mean Acc: 0.9180 at epoch 59
+30/08/2018 09:40:39 - SaltNet - INFO - val Mean IOU: 0.6815, Mean Acc: 0.9243 at epoch 59
+30/08/2018 09:40:39 - SaltNet - INFO - Epoch 60/249
+30/08/2018 09:40:39 - SaltNet - INFO - --------------------
+30/08/2018 09:41:54 - SaltNet - INFO - Batch Loss: 0.0154, Running loss: 0.0179, Batch IOU: 0.6937, Batch Acc: 0.9168 at iter 6050, epoch 60, Time: 168m 19s
+30/08/2018 09:43:10 - SaltNet - INFO - Batch Loss: 0.0144, Running loss: 0.0179, Batch IOU: 0.7781, Batch Acc: 0.9358 at iter 6100, epoch 60, Time: 169m 36s
+30/08/2018 09:43:12 - SaltNet - INFO - train Mean IOU: 0.6870, Mean Acc: 0.9064 at epoch 60
+30/08/2018 09:43:22 - SaltNet - INFO - val Mean IOU: 0.6947, Mean Acc: 0.9276 at epoch 60
+30/08/2018 09:43:23 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
+30/08/2018 09:43:23 - SaltNet - INFO - Pushing model state to git.
