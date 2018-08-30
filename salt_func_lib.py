@@ -239,7 +239,7 @@ class SaltDataset(Dataset):
         #print(X.dtype)
         X = np.moveaxis(X, -1,0)
 
-        pad_size = self.out_size - self.np_img.shape[2]
+        pad_size = self.out_size - X.shape[2]
         pad_first = pad_size//2
         pad_last = pad_size - pad_first
         X = np.pad(X, [(0, 0),(pad_first, pad_last), (pad_first, pad_last)], mode='reflect')
@@ -251,6 +251,7 @@ class SaltDataset(Dataset):
         #g()
         X = torch.from_numpy(X).float().type(dtype)
         X = X.repeat(self.out_ch,1,1)
+        y = transform.resize(y, (101, 101), mode='constant', preserve_range=True)
         y = torch.from_numpy(y).float().squeeze().type(dtype)
 
         return (X,y,d,idx)
@@ -556,8 +557,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
             else:
                 model.eval()   # Set model to evaluate mode
 
-            running_loss = 0.0
-            running_corrects = 0
+            epoch_loss = []
             pred_vs_true_epoch = []
 
             for X_batch, y_batch, d_batch, X_id in dataloaders[phase]:
@@ -568,8 +568,11 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
                 with torch.set_grad_enabled(phase == 'train'):
                     y_pred = model(X_batch)
                     pred_vs_true_epoch.append([y_pred, y_batch])
+                    #from boxx import g
+                    #g()
                     loss = criterion(y_pred, y_batch.float())
                     all_losses.append(loss.item())
+                    epoch_loss.append(loss.item())
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
@@ -580,11 +583,13 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
                     iou_batch = calc_mean_iou(y_pred.ge(0.5), y_batch.float())
                     iou_acc = calc_clf_accuracy(y_pred.ge(0.5), y_batch.float())
 
-                    log.info('Batch Loss: {:.4f}, Running loss: {:.4f}, Batch IOU: {:.4f}, Batch Acc: {:.4f} at iter {}, epoch {}, Time: {}'.format(
-                        np.mean(all_losses[-print_every:]), np.mean(all_losses), iou_batch, iou_acc, iter_count, epoch, timeSince(start))
+                    log.info('Batch Loss: {:.4f}, Epoch loss: {:.4f}, Batch IOU: {:.4f}, Batch Acc: {:.4f} at iter {}, epoch {}, Time: {}'.format(
+                        np.mean(all_losses[-print_every:]), np.mean(epoch_loss), iou_batch, iou_acc, iter_count, epoch, timeSince(start))
                     )
                     X_orig = X_train[X_id[0]].squeeze()
-                    X_tsfm = X_batch[0,0].squeeze().cpu().detach().numpy()[13:114,13:114] + X_train_mean_img.squeeze()
+                    X_tsfm = X_batch[0,0].squeeze().cpu().detach().numpy()
+                    X_tsfm = transform.resize(X_tsfm, (128, 128), mode='constant', preserve_range=True)
+                    X_tsfm = X_tsfm[13:114,13:114] + X_train_mean_img.squeeze()
                     #X_tsfm = X_batch[0][X_batch[0].sum((1,2)).argmax()].squeeze().cpu().detach().numpy()[:101,:101] + X_train_mean_img.squeeze()
 
                     y_orig = y_train[X_id[0]].squeeze()
@@ -599,7 +604,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
             #g()
             mean_iou_epoch = calc_mean_iou(y_pred_epoch.ge(0.5), y_true_epoch.float())
             mean_acc_epoch = calc_clf_accuracy(y_pred_epoch.ge(0.5), y_true_epoch.float())
-            log.info('{} Mean IOU: {:.4f}, Mean Acc: {:.4f} at epoch {}'.format(phase, mean_iou_epoch, mean_acc_epoch, epoch))
+            log.info('{} Mean IOU: {:.4f}, Mean Acc: {:.4f}, Best Val IOU: {:.4f} at epoch {}'.format(phase, mean_iou_epoch, mean_acc_epoch, best_iou, epoch))
             if phase == 'val' and mean_iou_epoch > best_iou:
                 best_iou = mean_iou_epoch
                 best_model_wts = copy.deepcopy(model.state_dict())
@@ -655,3 +660,32 @@ def calc_clf_accuracy(a, b):
     acc = (a==b).sum()/a.size
 
     return acc
+
+
+def dice_loss(input, target):
+    smooth = 0.
+
+    iflat = input.view(-1)
+    tflat = target.view(-1)
+    intersection = (iflat * tflat).sum()
+    
+    return 1 - ((2. * intersection + smooth) /
+              (iflat.sum() + tflat.sum() + smooth))
+    
+    
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=1, gamma=2, reduce=True):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.reduce = reduce
+
+    def forward(self, inputs, targets):
+        BCE_loss = F.binary_cross_entropy(inputs, targets, reduce=False)
+        pt = torch.exp(-BCE_loss)
+        F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
+        
+        if self.reduce:
+            return torch.mean(F_loss)
+        else:
+            return F_loss

@@ -1,0 +1,16 @@
+30/08/2018 22:03:02 - SaltNet - INFO - Start Training...
+30/08/2018 22:03:03 - SaltNet - INFO - Epoch 0/49
+30/08/2018 22:03:03 - SaltNet - INFO - --------------------
+30/08/2018 22:48:57 - SaltNet - INFO - Start Training...
+30/08/2018 22:48:58 - SaltNet - INFO - Epoch 0/49
+30/08/2018 22:48:58 - SaltNet - INFO - --------------------
+30/08/2018 23:06:09 - SaltNet - INFO - Start Training...
+30/08/2018 23:06:10 - SaltNet - INFO - Epoch 0/49
+30/08/2018 23:06:10 - SaltNet - INFO - --------------------
+30/08/2018 23:06:55 - SaltNet - INFO - Batch Loss: 10.9775, Running loss: 10.9775, Batch IOU: 0.0000, Batch Acc: 0.2684 at iter 2, epoch 0, Time: 0m 45s
+30/08/2018 23:06:56 - SaltNet - INFO - train Mean IOU: 0.0000, Mean Acc: 0.1934 at epoch 0
+30/08/2018 23:08:06 - SaltNet - INFO - Start Training...
+30/08/2018 23:08:06 - SaltNet - INFO - Epoch 0/49
+30/08/2018 23:08:06 - SaltNet - INFO - --------------------
+30/08/2018 23:09:07 - SaltNet - INFO - Batch Loss: 7.8407, Running loss: 7.8407, Batch IOU: 0.0000, Batch Acc: 0.3913 at iter 2, epoch 0, Time: 1m 1s
+30/08/2018 23:09:09 - SaltNet - INFO - train Mean IOU: 0.0000, Mean Acc: 0.3956 at epoch 0

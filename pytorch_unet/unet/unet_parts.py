@@ -64,7 +64,6 @@ class up(nn.Module):
             print('Using transpose conv for upsampling')
             self.upscale = nn.ConvTranspose2d(trans_in_ch, trans_in_ch, 2, stride=2)
 																					
-
         self.conv = double_conv(in_ch, out_ch)
 
     def forward(self, x1, x2):
@@ -179,7 +178,8 @@ def resnet18unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
     Args:
         
     """
-    model = UResNet(BasicBlock, [2, 2, 2, 2], in_ch=in_ch, bilinear=bilinear, **kwargs)
+    model = UResNet(BasicBlock, [2, 2, 2, 2], up_ch=[768, 384, 192, 128],
+                    in_ch=in_ch, bilinear=bilinear, **kwargs)
     if pretrained:
         print('Using pre-trained model')
         trained_model = torchvision.models.resnet18(pretrained=True)
@@ -198,7 +198,8 @@ def resnet34unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
     Args:
         
     """
-    model = UResNet(BasicBlock, [3, 4, 6, 3], in_ch=in_ch, bilinear=bilinear, **kwargs)
+    model = UResNet(BasicBlock, [3, 4, 6, 3], up_ch=[768, 384, 192, 128],
+                    in_ch=in_ch, bilinear=bilinear, **kwargs)
     if pretrained:
         print('Using pre-trained model')
         trained_model = torchvision.models.resnet34(pretrained=True)
@@ -217,13 +218,14 @@ def resnet50unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
     Args:
         
     """    
-    model = UResNet(BasicBlock, [3, 4, 6, 3], in_ch=in_ch, bilinear=bilinear, **kwargs)
+    model = UResNet(Bottleneck, [3, 4, 6, 3], up_ch=[3072, 1536, 768, 320],
+                    in_ch=in_ch, bilinear=bilinear, **kwargs)
     if pretrained:
         print('Using pre-trained model')
         trained_model = torchvision.models.resnet50(pretrained=True)
         params_trained = trained_model.named_parameters()
         params_new = model.named_parameters()        
-        dict_params_new = dict(params_new)        
+        dict_params_new = dict(params_new)       
         for name1, param1 in params_trained:
             if name1 in dict_params_new:
                 dict_params_new[name1].data.copy_(param1.data)
@@ -235,7 +237,8 @@ def resnet101unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
     Args:
         
     """    
-    model = UResNet(BasicBlock, [3, 4, 23, 3], in_ch=in_ch, bilinear=bilinear, **kwargs)
+    model = UResNet(Bottleneck, [3, 4, 23, 3], up_ch=[3072, 1536, 768, 320], 
+                    in_ch=in_ch, bilinear=bilinear, **kwargs)
     if pretrained:
         print('Using pre-trained model')
         trained_model = torchvision.models.resnet101(pretrained=True)
@@ -253,13 +256,15 @@ def resnet152unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
     Args:
         
     """    
-    model = UResNet(BasicBlock, [3, 8, 36, 3], in_ch=in_ch, bilinear=bilinear, **kwargs)
+    model = UResNet(Bottleneck, [3, 8, 36, 3], up_ch=[3072, 1536, 768, 320],
+                    in_ch=in_ch, bilinear=bilinear, **kwargs)
     if pretrained:
         print('Using pre-trained model')
         trained_model = torchvision.models.resnet152(pretrained=True)
         params_trained = trained_model.named_parameters()
         params_new = model.named_parameters()        
-        dict_params_new = dict(params_new)        
+        dict_params_new = dict(params_new)      
+
         for name1, param1 in params_trained:
             if name1 in dict_params_new:
                 dict_params_new[name1].data.copy_(param1.data)
@@ -267,7 +272,7 @@ def resnet152unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
     return model
 
 class UResNet(nn.Module):
-    def __init__(self, block, layers, in_ch=1, num_classes=1, bilinear=True):
+    def __init__(self, block, layers, up_ch, in_ch=1, num_classes=1, bilinear=True):
         print('Local ResNet')
         self.inplanes = 64
         super(UResNet, self).__init__()
@@ -275,7 +280,7 @@ class UResNet(nn.Module):
                                bias=False)
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU(inplace=True)
-        #self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.layer1 = self._make_layer(block, 64, layers[0])
         self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
         self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
@@ -283,10 +288,10 @@ class UResNet(nn.Module):
         #self.avgpool = nn.AvgPool2d(7, stride=1)
         #self.fc = nn.Linear(512 * block.expansion, num_classes)
         self.outc = outconv(64, num_classes)
-        self.up1 = up(768, 256, 512, bilinear=bilinear)
-        self.up2 = up(384, 128, 256, bilinear=bilinear)
-        self.up3 = up(192, 64, 128, bilinear=bilinear)
-        self.up4 = up(128, 64, 64, bilinear=bilinear)
+        self.up1 = up(up_ch[0], up_ch[0]//3, up_ch[0]//3*2, bilinear=bilinear)
+        self.up2 = up(up_ch[1], up_ch[1]//3, up_ch[1]//3*2, bilinear=bilinear)
+        self.up3 = up(up_ch[2], up_ch[2]//3, up_ch[2]//3*2, bilinear=bilinear)
+        self.up4 = up(up_ch[3], 64, up_ch[3]-64, bilinear=bilinear)
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
@@ -314,17 +319,85 @@ class UResNet(nn.Module):
     def forward(self, x):
         x = self.conv1(x)
         x = self.bn1(x)
-        x1 = self.relu(x)
-
+        #x1 = self.relu(x)
+        x1 = self.maxpool(self.relu(x))
         x2 = self.layer1(x1)
         x3 = self.layer2(x2)
         x4 = self.layer3(x3)
         x5 = self.layer4(x4)
         
-        x = self.up1(x5, x4)
-        x = self.up2(x, x3)
-        x = self.up3(x, x2)
-        x = self.up4(x, x1)
-        x = self.outc(x)
+        x_up1 = self.up1(x5, x4)
+        x_up2 = self.up2(x_up1, x3)
+        x_up3 = self.up3(x_up2, x2)
+        x_up4 = self.up4(x_up3, x1)
+        x_out = self.outc(x_up4)
         
+        return x_out
+
+class ResNet(nn.Module):
+
+    def __init__(self, block, layers, num_classes=1000):
+        self.inplanes = 64
+        super(ResNet, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
+                               bias=False)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.relu = nn.ReLU(inplace=True)
+        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        self.layer1 = self._make_layer(block, 64, layers[0])
+        self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
+        self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
+        self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
+        self.avgpool = nn.AvgPool2d(7, stride=1)
+        self.fc = nn.Linear(512 * block.expansion, num_classes)
+
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
+            elif isinstance(m, nn.BatchNorm2d):
+                nn.init.constant_(m.weight, 1)
+                nn.init.constant_(m.bias, 0)
+
+    def _make_layer(self, block, planes, blocks, stride=1):
+        downsample = None
+        if stride != 1 or self.inplanes != planes * block.expansion:
+            downsample = nn.Sequential(
+                nn.Conv2d(self.inplanes, planes * block.expansion,
+                          kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(planes * block.expansion),
+            )
+
+        layers = []
+        layers.append(block(self.inplanes, planes, stride, downsample))
+        self.inplanes = planes * block.expansion
+        for i in range(1, blocks):
+            layers.append(block(self.inplanes, planes))
+
+        return nn.Sequential(*layers)
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+
+        x = self.avgpool(x)
+        x = x.view(x.size(0), -1)
+        x = self.fc(x)
+
         return x
+    
+def resnet50(pretrained=False, **kwargs):
+    """Constructs a ResNet-50 model.
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+    """
+    model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
+    if pretrained:
+        model.load_state_dict(model_zoo.load_url(model_urls['resnet50']))
+    return model
