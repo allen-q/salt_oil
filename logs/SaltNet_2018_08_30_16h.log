@@ -1167,3 +1167,37 @@
 30/08/2018 07:52:15 - SaltNet - INFO - val Mean IOU: 0.5448, Mean Acc: 0.8952 at epoch 20
 30/08/2018 07:52:15 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
 30/08/2018 07:52:15 - SaltNet - INFO - Pushing model state to git.
+30/08/2018 07:52:25 - SaltNet - INFO - Epoch 21/249
+30/08/2018 07:52:25 - SaltNet - INFO - --------------------
+30/08/2018 07:53:41 - SaltNet - INFO - Batch Loss: 0.0202, Running loss: 0.0224, Batch IOU: 0.6625, Batch Acc: 0.8414 at iter 2150, epoch 21, Time: 60m 7s
+30/08/2018 07:54:59 - SaltNet - INFO - Batch Loss: 0.0178, Running loss: 0.0223, Batch IOU: 0.6313, Batch Acc: 0.8933 at iter 2200, epoch 21, Time: 61m 24s
+30/08/2018 07:55:00 - SaltNet - INFO - train Mean IOU: 0.6266, Mean Acc: 0.8812 at epoch 21
+30/08/2018 07:55:11 - SaltNet - INFO - val Mean IOU: 0.5903, Mean Acc: 0.8963 at epoch 21
+30/08/2018 07:55:11 - SaltNet - INFO - Epoch 22/249
+30/08/2018 07:55:11 - SaltNet - INFO - --------------------
+30/08/2018 07:56:27 - SaltNet - INFO - Batch Loss: 0.0185, Running loss: 0.0222, Batch IOU: 0.6625, Batch Acc: 0.8979 at iter 2250, epoch 22, Time: 62m 52s
+30/08/2018 07:57:43 - SaltNet - INFO - Batch Loss: 0.0181, Running loss: 0.0221, Batch IOU: 0.5875, Batch Acc: 0.8798 at iter 2300, epoch 22, Time: 64m 8s
+30/08/2018 07:57:44 - SaltNet - INFO - train Mean IOU: 0.6321, Mean Acc: 0.8841 at epoch 22
+30/08/2018 07:57:55 - SaltNet - INFO - val Mean IOU: 0.6385, Mean Acc: 0.9111 at epoch 22
+30/08/2018 07:57:55 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
+30/08/2018 07:57:55 - SaltNet - INFO - Best Val Mean IOU so far: 0.6385000000000001
+30/08/2018 07:57:56 - SaltNet - INFO - Epoch 23/249
+30/08/2018 07:57:56 - SaltNet - INFO - --------------------
+30/08/2018 07:59:13 - SaltNet - INFO - Batch Loss: 0.0197, Running loss: 0.0220, Batch IOU: 0.6687, Batch Acc: 0.9082 at iter 2350, epoch 23, Time: 65m 38s
+30/08/2018 08:00:29 - SaltNet - INFO - Batch Loss: 0.0168, Running loss: 0.0219, Batch IOU: 0.6656, Batch Acc: 0.9293 at iter 2400, epoch 23, Time: 66m 55s
+30/08/2018 08:00:30 - SaltNet - INFO - train Mean IOU: 0.6308, Mean Acc: 0.8874 at epoch 23
+30/08/2018 08:00:41 - SaltNet - INFO - val Mean IOU: 0.6112, Mean Acc: 0.9016 at epoch 23
+30/08/2018 08:00:41 - SaltNet - INFO - Epoch 24/249
+30/08/2018 08:00:41 - SaltNet - INFO - --------------------
+30/08/2018 08:01:57 - SaltNet - INFO - Batch Loss: 0.0173, Running loss: 0.0218, Batch IOU: 0.6594, Batch Acc: 0.8462 at iter 2450, epoch 24, Time: 68m 22s
+30/08/2018 08:03:14 - SaltNet - INFO - Batch Loss: 0.0183, Running loss: 0.0218, Batch IOU: 0.5312, Batch Acc: 0.8510 at iter 2500, epoch 24, Time: 69m 39s
+30/08/2018 08:03:15 - SaltNet - INFO - train Mean IOU: 0.6333, Mean Acc: 0.8868 at epoch 24
+30/08/2018 08:03:26 - SaltNet - INFO - val Mean IOU: 0.6214, Mean Acc: 0.9044 at epoch 24
+30/08/2018 08:03:26 - SaltNet - INFO - Epoch 25/249
+30/08/2018 08:03:26 - SaltNet - INFO - --------------------
+30/08/2018 08:04:42 - SaltNet - INFO - Batch Loss: 0.0179, Running loss: 0.0217, Batch IOU: 0.5969, Batch Acc: 0.8369 at iter 2550, epoch 25, Time: 71m 7s
+30/08/2018 08:05:59 - SaltNet - INFO - Batch Loss: 0.0175, Running loss: 0.0216, Batch IOU: 0.6406, Batch Acc: 0.8485 at iter 2600, epoch 25, Time: 72m 24s
+30/08/2018 08:06:00 - SaltNet - INFO - train Mean IOU: 0.6328, Mean Acc: 0.8910 at epoch 25
+30/08/2018 08:06:10 - SaltNet - INFO - val Mean IOU: 0.6206, Mean Acc: 0.9177 at epoch 25
+30/08/2018 08:06:11 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
+30/08/2018 08:06:11 - SaltNet - INFO - Pushing model state to git.
