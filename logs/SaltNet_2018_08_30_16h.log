@@ -1741,3 +1741,35 @@
 30/08/2018 11:47:39 - SaltNet - INFO - val Mean IOU: 0.7214, Mean Acc: 0.9411 at epoch 105
 30/08/2018 11:47:40 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
 30/08/2018 11:47:40 - SaltNet - INFO - Pushing model state to git.
+30/08/2018 11:47:49 - SaltNet - INFO - Epoch 106/249
+30/08/2018 11:47:49 - SaltNet - INFO - --------------------
+30/08/2018 11:49:04 - SaltNet - INFO - Batch Loss: 0.0097, Running loss: 0.0152, Batch IOU: 0.7875, Batch Acc: 0.9397 at iter 10650, epoch 106, Time: 295m 29s
+30/08/2018 11:50:21 - SaltNet - INFO - Batch Loss: 0.0106, Running loss: 0.0152, Batch IOU: 0.7344, Batch Acc: 0.9123 at iter 10700, epoch 106, Time: 296m 46s
+30/08/2018 11:50:22 - SaltNet - INFO - train Mean IOU: 0.7441, Mean Acc: 0.9378 at epoch 106
+30/08/2018 11:50:33 - SaltNet - INFO - val Mean IOU: 0.7399, Mean Acc: 0.9396 at epoch 106
+30/08/2018 11:50:33 - SaltNet - INFO - Epoch 107/249
+30/08/2018 11:50:33 - SaltNet - INFO - --------------------
+30/08/2018 11:51:48 - SaltNet - INFO - Batch Loss: 0.0103, Running loss: 0.0152, Batch IOU: 0.4938, Batch Acc: 0.8448 at iter 10750, epoch 107, Time: 298m 13s
+30/08/2018 11:53:04 - SaltNet - INFO - Batch Loss: 0.0109, Running loss: 0.0152, Batch IOU: 0.7625, Batch Acc: 0.9150 at iter 10800, epoch 107, Time: 299m 29s
+30/08/2018 11:53:05 - SaltNet - INFO - train Mean IOU: 0.7387, Mean Acc: 0.9324 at epoch 107
+30/08/2018 11:53:16 - SaltNet - INFO - val Mean IOU: 0.7383, Mean Acc: 0.9383 at epoch 107
+30/08/2018 11:53:16 - SaltNet - INFO - Epoch 108/249
+30/08/2018 11:53:16 - SaltNet - INFO - --------------------
+30/08/2018 11:54:31 - SaltNet - INFO - Batch Loss: 0.0102, Running loss: 0.0151, Batch IOU: 0.6812, Batch Acc: 0.9138 at iter 10850, epoch 108, Time: 300m 57s
+30/08/2018 11:55:47 - SaltNet - INFO - Batch Loss: 0.0104, Running loss: 0.0151, Batch IOU: 0.7625, Batch Acc: 0.9296 at iter 10900, epoch 108, Time: 302m 12s
+30/08/2018 11:55:48 - SaltNet - INFO - train Mean IOU: 0.7470, Mean Acc: 0.9350 at epoch 108
+30/08/2018 11:55:59 - SaltNet - INFO - val Mean IOU: 0.7335, Mean Acc: 0.9433 at epoch 108
+30/08/2018 11:55:59 - SaltNet - INFO - Epoch 109/249
+30/08/2018 11:55:59 - SaltNet - INFO - --------------------
+30/08/2018 11:57:14 - SaltNet - INFO - Batch Loss: 0.0112, Running loss: 0.0151, Batch IOU: 0.8375, Batch Acc: 0.9434 at iter 10950, epoch 109, Time: 303m 39s
+30/08/2018 11:58:30 - SaltNet - INFO - Batch Loss: 0.0106, Running loss: 0.0151, Batch IOU: 0.7000, Batch Acc: 0.9036 at iter 11000, epoch 109, Time: 304m 55s
+30/08/2018 11:58:31 - SaltNet - INFO - train Mean IOU: 0.7471, Mean Acc: 0.9317 at epoch 109
+30/08/2018 11:58:42 - SaltNet - INFO - val Mean IOU: 0.6109, Mean Acc: 0.9110 at epoch 109
+30/08/2018 11:58:42 - SaltNet - INFO - Epoch 110/249
+30/08/2018 11:58:42 - SaltNet - INFO - --------------------
+30/08/2018 11:59:57 - SaltNet - INFO - Batch Loss: 0.0107, Running loss: 0.0151, Batch IOU: 0.7469, Batch Acc: 0.9294 at iter 11050, epoch 110, Time: 306m 22s
+30/08/2018 12:01:14 - SaltNet - INFO - Batch Loss: 0.0109, Running loss: 0.0151, Batch IOU: 0.7312, Batch Acc: 0.9361 at iter 11100, epoch 110, Time: 307m 39s
+30/08/2018 12:01:15 - SaltNet - INFO - train Mean IOU: 0.7307, Mean Acc: 0.9322 at epoch 110
+30/08/2018 12:01:25 - SaltNet - INFO - val Mean IOU: 0.7350, Mean Acc: 0.9389 at epoch 110
+30/08/2018 12:01:26 - SaltNet - INFO - ['Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-1-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-2-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-3-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-4-Of-5', 'Unet_unet_focal_loss_baseline_2018_08_30_16_53_34.ckp-chunk-5-Of-5']
+30/08/2018 12:01:26 - SaltNet - INFO - Pushing model state to git.
