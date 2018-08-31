@@ -522,7 +522,8 @@ def save_model_state_to_chunks(epoch, model_state, optim_state, scheduler_state,
     return split_file_save(output, out_file_prefix, outputFolder, chunkSize=chunk_size)
 
 
-def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_name, other_data={}, num_epochs=25, print_every=2, push_every=None, log=get_logger('SaltNet')):
+def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_name, other_data={}, 
+                num_epochs=25, print_every=2, save_model_every=None, save_log_every=None, log=get_logger('SaltNet')):
     #args = locals()
     #args = {k:v.shape if isinstance(v, (torch.Tensor, np.ndarray)) else v for k,v in args.items()}
     #args = {k:v.shape if isinstance(v, (torch.Tensor, np.ndarray)) else v for k,v in args.items()}
@@ -548,7 +549,9 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
     for epoch in range(num_epochs):
         log.info('Epoch {}/{}'.format(epoch, num_epochs - 1))
         log.info('-' * 20)
-        push_log_to_git()
+        if save_log_every is not None:
+            if (epoch % save_log_every == 0):
+                push_log_to_git()
         # Each epoch has a training and validation phase
         for phase in ['train', 'val']:
             if phase == 'train':
@@ -624,8 +627,8 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
                 y_pred2 =  y_pred[0].squeeze().gt(0.5)
                 plot_img_mask_pred([X_orig, y_orig, y_pred2],
                                    ['Val X Original', 'Val y Original', 'Val y Predicted'])
-        if push_every is not None:
-            if (epoch % push_every == 0) | (epoch == num_epochs-1):
+        if save_model_every is not None:
+            if (epoch % save_model_every == 0) | (epoch == num_epochs-1):
                 if best_model is not None:
                     log.info(save_model_state_to_chunks(*best_model))
                 push_model_to_git()
