@@ -692,6 +692,22 @@ def dice_loss(input, target):
               (iflat.sum() + tflat.sum() + smooth))
     
     
+class Dice_Loss(nn.Module):
+    def __init__(self, smooth = 1):
+        super(Dice_Loss, self).__init__()
+        self.smooth = smooth
+
+    def forward(self, inputs, targets):
+        iflat = inputs.view(-1)
+        tflat = targets.view(-1)
+        intersection = (iflat * tflat).sum()   
+    
+        dice_loss = 1 - ((2. * intersection + self.smooth) /
+                         (iflat.sum() + tflat.sum() + self.smooth))
+        
+        return dice_loss
+        
+    
 class FocalLoss(nn.Module):
     def __init__(self, alpha=1, gamma=2, reduce=True):
         super(FocalLoss, self).__init__()
