@@ -630,8 +630,11 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
         if save_model_every is not None:
             if (epoch % save_model_every == 0) | (epoch == num_epochs-1):
                 if best_model is not None:
-                    log.info(save_model_state_to_chunks(*best_model))
-                push_model_to_git()
+                    log.info(save_model_state_to_chunks(*best_model))                
+                    push_model_to_git()
+                    best_model = None
+                else:
+                    log.info("Skip pushing model to git as there's no improvement")
 
     # load best model weights
     model.load_state_dict(best_model_wts)
