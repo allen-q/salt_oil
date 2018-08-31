@@ -546,8 +546,8 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
     y_val = other_data['y_val']
     X_train_mean_img = other_data['X_train_mean_img']
 
-    for epoch in range(num_epochs):
-        log.info('Epoch {}/{}'.format(epoch, num_epochs - 1))
+    for epoch in range(1, num_epochs+1):
+        log.info('Epoch {}/{}'.format(epoch, num_epochs))
         log.info('-' * 20)
         if save_log_every is not None:
             if (epoch % save_log_every == 0):
