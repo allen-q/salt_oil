@@ -667,7 +667,7 @@ def push_model_to_git(ckp_name='ckp'):
     get_ipython().system('git add .')
     get_ipython().system('git commit -m "save model state."')
     get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all --force')
-    get_ipython().system(f'git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *{ckp_name}*" --prune-empty --tag-name-filter cat -- --all')
+    get_ipython().system(f'git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *{ckp_name.split("/")[-1]}*" --prune-empty --tag-name-filter cat -- --all')
     os.chdir('../salt_oil')
     
     
