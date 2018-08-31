@@ -631,7 +631,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
             if (epoch % save_model_every == 0) | (epoch == num_epochs-1):
                 if best_model is not None:
                     log.info(save_model_state_to_chunks(*best_model))                
-                    push_model_to_git()
+                    push_model_to_git(ckp_name=model_save_name)
                     best_model = None
                 else:
                     log.info("Skip pushing model to git as there's no improvement")
@@ -659,7 +659,7 @@ def push_log_to_git():
     #get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filte
     
 
-def push_model_to_git():
+def push_model_to_git(ckp_name='ckp'):
     log.info('Pushing model state to git.')
     os.chdir('../salt_net')
     get_ipython().system("pwd")
@@ -667,7 +667,7 @@ def push_model_to_git():
     get_ipython().system('git add .')
     get_ipython().system('git commit -m "save model state."')
     get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all --force')
-    get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filter cat -- --all')
+    get_ipython().system(f'git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *{ckp_name}*" --prune-empty --tag-name-filter cat -- --all')
     os.chdir('../salt_oil')
     
     
