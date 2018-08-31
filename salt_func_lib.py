@@ -654,7 +654,7 @@ def push_log_to_git():
     get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")   
     get_ipython().system('git add ./logs/*')
     get_ipython().system('git commit -m "Pushing logs to git"')
-    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all --force')
+    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all')
     os.chdir('../salt_oil')
     #get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filte
     
