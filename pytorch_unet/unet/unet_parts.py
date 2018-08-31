@@ -80,17 +80,27 @@ class up(nn.Module):
 
 
 class outconv(nn.Module):
-    def __init__(self, in_ch, out_ch):
+    def __init__(self, in_ch, out_ch, pred_overall_mask=False):
         super(outconv, self).__init__()
         self.conv = nn.Conv2d(in_ch, out_ch, 1)
+        self.conv_mask = nn.Conv2d(in_ch, out_ch, 128)
         self.sig = nn.Sigmoid()
+        self.pred_overall_mask = pred_overall_mask
+            
 
     def forward(self, x):
         x_conv = self.conv(x)
-        x = self.sig(x_conv)
+        x_out = self.sig(x_conv)
         crop_start = (x.shape[-1]-101)//2
         crop_end = crop_start + 101
-        return x[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
+        x_out = x_out[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
+        
+        if self.pred_overall_mask:
+            x_conv_mask = self.conv_mask(x).squeeze()
+            x_mask_out = self.sig(x_conv_mask)            
+            return (x_out, x_mask_out)
+            
+        return x_out
 
 
 
