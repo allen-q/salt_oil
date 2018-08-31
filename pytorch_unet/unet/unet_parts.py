@@ -98,7 +98,7 @@ class outconv(nn.Module):
         if self.pred_overall_mask:
             x_conv_mask = self.conv_mask(x).squeeze()
             x_mask_out = self.sig(x_conv_mask)            
-            return (x_out, x_mask_out)
+            return (x_mask_out.lt(0.5).float().reshape(-1,1,1) * x_out, x_mask_out)
             
         return x_out
 
