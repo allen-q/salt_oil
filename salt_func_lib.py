@@ -35,7 +35,7 @@ import copy
 
 def get_logger(logger_name, level=logging.DEBUG):
     # logger
-    file_name = '{}{}'.format('logs/',
+    file_name = '{}{}'.format('../salt_net/logs/',
                                 logger_name)
     timestamp = dt.datetime.now(pytz.timezone('Australia/Melbourne'))\
         .strftime('%Y_%m_%d_%Hh')
@@ -548,7 +548,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
     for epoch in range(num_epochs):
         log.info('Epoch {}/{}'.format(epoch, num_epochs - 1))
         log.info('-' * 20)
-
+        push_log_to_git()
         # Each epoch has a training and validation phase
         for phase in ['train', 'val']:
             if phase == 'train':
@@ -628,7 +628,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
             if (epoch % push_every == 0) | (epoch == num_epochs-1):
                 if best_model is not None:
                     log.info(save_model_state_to_chunks(*best_model))
-                push_to_git()
+                push_model_to_git()
 
     # load best model weights
     model.load_state_dict(best_model_wts)
@@ -641,17 +641,30 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
     return model
 
 
+def push_log_to_git():
+    log.info('Pushing logs to git.')
+    os.chdir('../salt_net')
+    get_ipython().system("pwd")
+    get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")   
+    get_ipython().system('git add ./logs/*')
+    get_ipython().system('git commit -m "Pushing logs to git"')
+    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all --force')
+    os.chdir('../salt_oil')
+    #get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filte
+    
 
-def push_to_git():
+def push_model_to_git():
     log.info('Pushing model state to git.')
+    os.chdir('../salt_net')
+    get_ipython().system("pwd")
     get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")
-    get_ipython().system('git add *.log')
-    get_ipython().system('git add *.csv')
+    get_ipython().system('git add .')
     get_ipython().system('git commit -m "save model state."')
-    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_oil.git --all --force')
-    #get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filter cat -- --all')
-
-
+    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all --force')
+    get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filter cat -- --all')
+    os.chdir('../salt_oil')
+    
+    
 def calc_clf_accuracy(a, b):
     if isinstance(a, torch.Tensor):
         a = a.cpu().detach().numpy()
