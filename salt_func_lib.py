@@ -796,8 +796,8 @@ class LovaszHingeLoss(nn.Module):
         """
         p = len(gt_sorted)
         gts = gt_sorted.sum().float()
-        from boxx import g
-        g()
+        #from boxx import g
+        #g()
         intersection = gts - gt_sorted.float().cumsum(0)
         union = gts + (1 - gt_sorted).float().cumsum(0)
         jaccard = 1. - intersection / union
