@@ -32,6 +32,7 @@ import pickle
 import logging
 from io import BytesIO
 import copy
+from itertools import  filterfalse
 
 def get_logger(logger_name, level=logging.DEBUG):
     # logger
@@ -693,17 +694,22 @@ def dice_loss(input, target):
     
     
 class Dice_Loss(nn.Module):
-    def __init__(self, smooth = 1):
+    def __init__(self, smooth=1, alpha=1):
         super(Dice_Loss, self).__init__()
         self.smooth = smooth
+        self.alpha = alpha
 
     def forward(self, inputs, targets):
-        iflat = inputs.view(-1)
-        tflat = targets.view(-1)
-        intersection = (iflat * tflat).sum()   
-    
-        dice_loss = 1 - ((2. * intersection + self.smooth) /
-                         (iflat.sum() + tflat.sum() + self.smooth))
+        def _dice_loss(a, b):
+            iflat = a.contiguous().view(1, -1)
+            tflat = b.contiguous().view(1, -1)
+            intersection = (iflat * tflat).sum()   
+        
+            dice_loss = 1 - ((2. * intersection + self.smooth) /
+                             (iflat.sum() + tflat.sum() + self.smooth))
+            
+            return dice_loss
+        dice_loss = torch.stack([_dice_loss(a, b) for a,b in zip(inputs, targets)]).mean() * self.alpha
         
         return dice_loss
         
@@ -724,3 +730,97 @@ class FocalLoss(nn.Module):
             return torch.mean(F_loss)
         else:
             return F_loss
+
+
+class LovaszHingeLoss(nn.Module):
+    def __init__(self):
+        super(LovaszHingeLoss, self).__init__()
+
+    def forward(self, inputs, targets, per_image=True, ignore=None):
+        lovasz_loss = self.lovasz_hinge(inputs, targets, per_image=per_image, ignore=ignore)
+        
+        return lovasz_loss
+        
+    def lovasz_hinge(self, logits, labels, per_image=True, ignore=None):
+        """
+        Binary Lovasz hinge loss
+          logits: [B, H, W] Variable, logits at each pixel (between -\infty and +\infty)
+          labels: [B, H, W] Tensor, binary ground truth masks (0 or 1)
+          per_image: compute the loss per image instead of per batch
+          ignore: void class id
+        """
+        if per_image:
+            loss = self.mean(self.lovasz_hinge_flat(*self.flatten_binary_scores(log.unsqueeze(0), lab.unsqueeze(0), ignore))
+                              for log, lab in zip(logits, labels))
+        else:
+            loss = self.lovasz_hinge_flat(*self.flatten_binary_scores(logits, labels, ignore))
+        return loss
+    
+    def lovasz_hinge_flat(self, logits, labels):
+        """
+        Binary Lovasz hinge loss
+          logits: [P] Variable, logits at each prediction (between -\infty and +\infty)
+          labels: [P] Tensor, binary ground truth labels (0 or 1)
+          ignore: label to ignore
+        """
+        if len(labels) == 0:
+            # only void pixels, the gradients should be 0
+            return logits.sum() * 0.
+        signs = 2. * labels.float() - 1.
+        errors = (1. - logits * signs)
+        errors_sorted, perm = torch.sort(errors, dim=0, descending=True)
+        perm = perm.data
+        gt_sorted = labels[perm]
+        grad = self.lovasz_grad(gt_sorted)
+        loss = torch.dot(F.relu(errors_sorted), grad)
+        return loss
+
+    def flatten_binary_scores(self, scores, labels, ignore=None):
+        """
+        Flattens predictions in the batch (binary case)
+        Remove labels equal to 'ignore'
+        """
+        scores = scores.contiguous().view(-1)
+        labels = labels.contiguous().view(-1)
+        if ignore is None:
+            return scores, labels
+        valid = (labels != ignore)
+        vscores = scores[valid]
+        vlabels = labels[valid]
+        return vscores, vlabels
+    
+    def lovasz_grad(self, gt_sorted):
+        """
+        Computes gradient of the Lovasz extension w.r.t sorted errors
+        See Alg. 1 in paper
+        """
+        p = len(gt_sorted)
+        gts = gt_sorted.sum().float()
+        from boxx import g
+        g()
+        intersection = gts - gt_sorted.float().cumsum(0)
+        union = gts + (1 - gt_sorted).float().cumsum(0)
+        jaccard = 1. - intersection / union
+        if p > 1: # cover 1-pixel case
+            jaccard[1:p] = jaccard[1:p] - jaccard[0:-1]
+        return jaccard
+    
+    def mean(self, l, ignore_nan=False, empty=0):
+        """
+        nanmean compatible with generators.
+        """
+        l = iter(l)
+        if ignore_nan:
+            l = filterfalse(np.isnan, l)
+        try:
+            n = 1
+            acc = next(l)
+        except StopIteration:
+            if empty == 'raise':
+                raise ValueError('Empty mean')
+            return empty
+        for n, v in enumerate(l, 2):
+            acc += v
+        if n == 1:
+            return acc
+        return acc / n
