@@ -209,21 +209,26 @@ class UResNet(nn.Module):
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.layer1 = self._make_layer(block, 64, layers[0])
         self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
-        self.layer3 = self._make_atrous_layer(block, 256, layers[2], stride=1, dilation=2)
-        self.layer4 = self._make_atrous_layer(block, 256, layers[3], stride=1, dilation=4)
+        self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
+        self.layer4 = self._make_atrous_layer(block, 512, layers[3], stride=1, dilation=2)
         
         
-        self.pool1 = nn.Conv2d(256, 256, 1)
-        self.pool2 = Polling(in_ch=256, out_ch=256, upscale_size=16+2*2, dilation=2)
-        self.pool3 = Polling(in_ch=256, out_ch=256, upscale_size=16+2*4, dilation=4)
-        self.pool4 = Polling(in_ch=256, out_ch=256, upscale_size=16+2*8, dilation=8)        
-        self.conv_pool = nn.Conv2d(1024, 256, 1)
+        self.pool1 = nn.Conv2d(512, 256, 1)
+        self.pool2 = Polling(in_ch=512, out_ch=256, upscale_size=8+2*2, dilation=2)
+        self.pool3 = Polling(in_ch=512, out_ch=256, upscale_size=8+2*4, dilation=4)
+        self.pool4 = Polling(in_ch=512, out_ch=256, upscale_size=8+2*6, dilation=6)        
+        self.conv_pool = nn.Conv2d(1024, 256, 1)        
+        self.conv_dec_low_level = nn.Conv2d(64, 256, 1)
         
-        self.conv_decoder_1 = nn.Conv2d(64, 256, 1)
-        self.conv_decoder_2 = nn.Conv2d(64, 256, 1)
-        
-        self.conv_enc_merge1 = nn.Conv2d(512, 256, 1)
-        self.conv_enc_merge2 = nn.Conv2d(512, 1, 3, 1, 1) 
+        self.merg_conv = nn.Sequential(
+                conv3x3(512, 256, 1),
+                nn.BatchNorm2d(256),
+                nn.ReLU(inplace=True),
+                conv3x3(256, 1, 1),
+                #nn.BatchNorm2d(1),
+                #nn.ReLU(inplace=True)
+            )
+                                   
         
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -271,8 +276,7 @@ class UResNet(nn.Module):
         return nn.Sequential(*layers)
     
     
-    def forward(self, x):
-        
+    def forward(self, x):        
         #print(f'x in: {x.shape}')
         #x in: 128*128
         x = self.conv1(x) #64*64
@@ -285,25 +289,21 @@ class UResNet(nn.Module):
         #print(f'x2: {x2.shape}')
         x3 = self.layer2(x2) #16*16
         #print(f'x3: {x3.shape}')
-        x4 = self.layer3(x3) #16*16
+        x4 = self.layer3(x3) #8*8
         #print(f'x4: {x4.shape}')
-        x5 = self.layer4(x4) #16*16
-        #print(f'x5: {x5.shape}')
-        
-        
+        x5 = self.layer4(x4) #8*8
+        #print(f'x5: {x5.shape}')        
+
         x_pool1 = self.pool1(x5)
         x_pool2 = self.pool2(x5)
         x_pool3 = self.pool3(x5)
         x_pool4 = self.pool4(x5)
         
         enc_out = self.conv_pool(torch.cat((x_pool1, x_pool2, x_pool3, x_pool4), dim=1))
-        enc_out_up1 = F.upsample(enc_out, scale_factor=2, mode='bilinear', align_corners=True)
-        dec_1 = self.conv_decoder_2(x2)
-        dec_2 = self.conv_decoder_1(x)
-        enc_out_merge1 = self.conv_enc_merge1(torch.cat((enc_out_up1, dec_1), dim=1))
-        enc_out_up2 = F.upsample(enc_out_merge1, scale_factor=2, mode='bilinear', align_corners=True)
-        enc_out_merge2 = self.conv_enc_merge2(torch.cat((enc_out_up2, dec_2), dim=1))
-        enc_out_final = F.upsample(enc_out_merge2, scale_factor=2, mode='bilinear', align_corners=True)
+        enc_out_up1 = F.upsample(enc_out, scale_factor=4, mode='bilinear', align_corners=True)
+        dec_low_level = self.conv_dec_low_level(x2)
+        enc_out_merge = self.merg_conv(torch.cat((enc_out_up1, dec_low_level), dim=1))
+        enc_out_final = F.upsample(enc_out_merge, scale_factor=4, mode='bilinear', align_corners=True)
         crop_start = (enc_out_final.shape[-1]-101)//2
         crop_end = crop_start + 101
         x_out = enc_out_final[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
@@ -315,17 +315,20 @@ class UResNet(nn.Module):
 class Polling(nn.Module):
     def __init__(self, in_ch, out_ch, upscale_size, dilation):
         super(Polling, self).__init__()          
+
         self.conv1 = nn.Conv2d(in_ch, out_ch, 1)
         self.bn1 = nn.BatchNorm2d(out_ch)
         #self.relu = nn.ReLU(inplace=True)
         self.upscale = nn.Upsample(size=upscale_size, mode='bilinear', align_corners=True)																					
-        self.conv2 = conv_2d_depth_sep(in_ch, out_ch, kernel_size=3, dilation=dilation)
+        self.conv2 = conv_2d_depth_sep(out_ch, out_ch, kernel_size=3, dilation=dilation)
         self.bn2 = nn.BatchNorm2d(out_ch)
 
     def forward(self, x):
         out = self.conv1(x)
         out = self.bn1(out)
         out = self.upscale(out)
+        #from boxx import g
+        #g()
         out = self.conv2(out)
         #out = self.relu(out)
         out = self.bn2(out)
