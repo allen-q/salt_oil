@@ -325,8 +325,8 @@ class UResNet(nn.Module):
     def forward(self, x):
         x = self.conv1(x)
         x = self.bn1(x)
-        #x1 = self.relu(x)
-        x1 = self.maxpool(self.relu(x))
+        x1 = self.relu(x)
+        #x1 = self.maxpool(self.relu(x))
         x2 = self.layer1(x1)
         x3 = self.layer2(x2)
         x4 = self.layer3(x3)
