@@ -291,7 +291,7 @@ class UResNet(nn.Module):
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
         #self.avgpool = nn.AvgPool2d(7, stride=1)
         #self.fc = nn.Linear(512 * block.expansion, num_classes)
-        self.outc = outconv(64, num_classes)
+        self.outc = outconv(64, num_classes, logits=True)
 
         self.up1 = up(1024*block.expansion, 256*block.expansion, 512*block.expansion, bilinear=bilinear)
         self.up2 = up(512*block.expansion, 128*block.expansion, 256*block.expansion, bilinear=bilinear)
