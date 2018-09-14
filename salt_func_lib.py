@@ -828,3 +828,25 @@ class LovaszHingeLoss(nn.Module):
         if n == 1:
             return acc
         return acc / n
+
+
+class HingeLoss(nn.Module):
+    def __init__(self):
+        super(HingeLoss, self).__init__()
+
+    def forward(self, inputs, targets):
+        pos_y = torch.masked_select(inputs, targets.ge(0.5))
+        neg_y = torch.masked_select(inputs, targets.lt(0.5))
+        
+        if pos_y.numel() > 0:
+            pos_loss = torch.clamp(1-pos_y, 0).mean()
+        else:
+            pos_loss = torch.tensor(0.)
+            
+        if neg_y.numel() > 0:
+            neg_loss = torch.clamp(neg_y + 1, 0).mean()
+        else:
+            neg_loss = torch.tensor(0.)
+
+        loss = pos_loss + neg_loss 
+        return loss
