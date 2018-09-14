@@ -841,12 +841,12 @@ class HingeLoss(nn.Module):
         if pos_y.numel() > 0:
             pos_loss = torch.clamp(1-pos_y, 0).mean()
         else:
-            pos_loss = torch.tensor(0.)
+            pos_loss = 0.
             
         if neg_y.numel() > 0:
             neg_loss = torch.clamp(neg_y + 1, 0).mean()
         else:
-            neg_loss = torch.tensor(0.)
+            neg_loss = 0.
 
         loss = pos_loss + neg_loss 
         return loss
