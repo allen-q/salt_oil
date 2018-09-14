@@ -7,6 +7,37 @@ import torchvision
 import torch.utils.model_zoo as model_zoo
 
 
+class Seq_Ex_Block(nn.Module):
+    '''(conv => BN => ReLU) * 2'''
+    def __init__(self, in_ch, r):
+        super(Seq_Ex_Block, self).__init__()
+        self.se = nn.Sequential(
+            GlobalAvgPool(),
+            nn.Linear(in_ch, in_ch//r),
+            nn.ReLU(inplace=True),
+            nn.Linear(in_ch//r, in_ch),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        se_weight = self.se(x).unsqueeze(-1).unsqueeze(-1)
+        #print(f'x:{x.sum()}, x_se:{x.mul(se_weight).sum()}')
+        return x.mul(se_weight)
+
+
+class SqueezeTensor(nn.Module):
+    def __init__(self):
+        super(SqueezeTensor, self).__init__()
+    def forward(self, x):
+        return x.squeeze()
+
+class GlobalAvgPool(nn.Module):
+    def __init__(self):
+        super(GlobalAvgPool, self).__init__()
+    def forward(self, x):
+        return x.view(*(x.shape[:-2]),-1).mean(-1)
+
+
 class double_conv(nn.Module):
     '''(conv => BN => ReLU) * 2'''
     def __init__(self, in_ch, out_ch):
@@ -26,45 +57,59 @@ class double_conv(nn.Module):
 
 
 class inconv(nn.Module):
-    def __init__(self, in_ch, out_ch):
+    def __init__(self, in_ch, out_ch, apply_se=False, r=16):
         super(inconv, self).__init__()
         self.conv = double_conv(in_ch, out_ch)
+        self.apply_se = apply_se
+        if apply_se:
+            self.se = Seq_Ex_Block(out_ch, r)
 
     def forward(self, x):
         x = self.conv(x)
+        
+        if self.apply_se:
+            x = self.se(x)
+            
         return x
 
 
 class down(nn.Module):
-    def __init__(self, in_ch, out_ch):
+    def __init__(self, in_ch, out_ch, apply_se=False, r=16):
         super(down, self).__init__()
         self.mpconv = nn.Sequential(
             nn.MaxPool2d(2),
             double_conv(in_ch, out_ch)
         )
+        self.apply_se = apply_se
+        if apply_se:
+            self.se = Seq_Ex_Block(out_ch, r)
 
     def forward(self, x):
         #print(f'in: {x.shape}')
         x = self.mpconv(x)
         #print(f'out: {x.shape}')
+        if self.apply_se:
+            x = self.se(x)
+                    
         return x
 
 
 class up(nn.Module):
-    def __init__(self, in_ch, out_ch, trans_in_ch, bilinear=False):
+    def __init__(self, in_ch, out_ch, trans_in_ch, bilinear=False, apply_se=False, r=16):
         super(up, self).__init__()
 
         #  would be a nice idea if the upsampling could be learned too,
         #  but my machine do not have enough memory to handle all those weights
 												 
         if bilinear:
-            print('Using bilinear for upsampling')
             self.upscale = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
         else:
-            print('Using transpose conv for upsampling')
             self.upscale = nn.ConvTranspose2d(trans_in_ch, trans_in_ch, 2, stride=2)
 																					
         self.conv = double_conv(in_ch, out_ch)
+        self.apply_se = apply_se
+        if apply_se:
+            self.se = Seq_Ex_Block(out_ch, r)
 
     def forward(self, x1, x2):
         #print(f'in: {x1.shape}, {x2.shape}')
@@ -76,6 +121,9 @@ class up(nn.Module):
         x = torch.cat([x2, x1], dim=1)
         x = self.conv(x)
         #print(f'out: {x.shape}')
+        if self.apply_se:
+            x = self.se(x)
+                    
         return x
 
 
@@ -410,3 +458,4 @@ def resnet50(pretrained=False, **kwargs):
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet50']))
     return model
+
