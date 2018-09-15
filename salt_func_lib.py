@@ -839,12 +839,12 @@ class HingeLoss(nn.Module):
         neg_y = torch.masked_select(inputs, targets.lt(0.5))
         
         if pos_y.numel() > 0:
-            pos_loss = torch.clamp(1-pos_y, 0).mean()
+            pos_loss = F.relu(1-pos_y).mean()
         else:
             pos_loss = 0.
             
         if neg_y.numel() > 0:
-            neg_loss = torch.clamp(neg_y + 1, 0).mean()
+            pos_loss = F.relu(neg_y + 1).mean()
         else:
             neg_loss = 0.
 
