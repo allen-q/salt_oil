@@ -6,6 +6,45 @@ import torch.nn.functional as F
 import torchvision
 import torch.utils.model_zoo as model_zoo
 
+model_urls = {
+    'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
+    'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
+    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+    'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
+    'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
+}
+
+class Seq_Ex_Block(nn.Module):
+    '''(conv => BN => ReLU) * 2'''
+    def __init__(self, in_ch, r):
+        super(Seq_Ex_Block, self).__init__()
+        self.se = nn.Sequential(
+            GlobalAvgPool(),
+            nn.Linear(in_ch, in_ch//r),
+            nn.ReLU(inplace=True),
+            nn.Linear(in_ch//r, in_ch),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        se_weight = self.se(x).unsqueeze(-1).unsqueeze(-1)
+        #print(f'x:{x.sum()}, x_se:{x.mul(se_weight).sum()}')
+        return x.mul(se_weight)
+
+
+class SqueezeTensor(nn.Module):
+    def __init__(self):
+        super(SqueezeTensor, self).__init__()
+    def forward(self, x):
+        return x.squeeze()
+    
+
+class GlobalAvgPool(nn.Module):
+    def __init__(self):
+        super(GlobalAvgPool, self).__init__()
+    def forward(self, x):
+        return x.view(*(x.shape[:-2]),-1).mean(-1)
+
 
 class double_conv(nn.Module):
     '''(conv => BN => ReLU) * 2'''
@@ -79,11 +118,13 @@ class up(nn.Module):
         return x
 
 
-class outconv(nn.Module):
-    def __init__(self, in_ch, out_ch, logits=False):
-        super(outconv, self).__init__()
-        self.conv = nn.Conv2d(in_ch, out_ch, 1)
-        self.conv_mask = nn.Conv2d(in_ch, out_ch, 128)
+class OutConv(nn.Module):
+    def __init__(self, in_ch, logits=False):
+        super(OutConv, self).__init__()
+        self.conv = nn.Sequential(
+                nn.Conv2d(in_ch, 64, kernel_size=3, padding=1),
+                nn.ReLU(inplace=True),
+                nn.Conv2d(64, 1, kernel_size=1, padding=0))
         self.sig = nn.Sigmoid()
         self.logits = logits
             
@@ -274,30 +315,23 @@ def resnet152unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
                 dict_params_new[name1].data.copy_(param1.data)
                 
     return model
+class ResNet(nn.Module):
 
-class UResNet(nn.Module):
-    def __init__(self, block, layers, in_ch=1, num_classes=1, bilinear=True):
-        print('Local ResNet')
+    def __init__(self, block, layers, num_classes=1000):
         self.inplanes = 64
-        super(UResNet, self).__init__()
-        self.conv1 = nn.Conv2d(in_ch, 64, kernel_size=7, stride=2, padding=3,
+        super(ResNet, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
                                bias=False)
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
-        self.layer1 = self._make_layer(block, 128, layers[0])
-        self.layer2 = self._make_layer(block, 256, layers[1], stride=2)
-        self.layer3 = self._make_layer(block, 512, layers[2], stride=2)
+        self.layer1 = self._make_layer(block, 64, layers[0])
+        self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
+        self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
-        #self.avgpool = nn.AvgPool2d(7, stride=1)
-        #self.fc = nn.Linear(512 * block.expansion, num_classes)
-        self.outc = outconv(64, num_classes, logits=True)
+        self.avgpool = nn.AvgPool2d(7, stride=1)
+        self.fc = nn.Linear(512 * block.expansion, num_classes)
 
-        self.up1 = up(1024*block.expansion, 256*block.expansion, 512*block.expansion, bilinear=bilinear)
-        self.up2 = up(512*block.expansion, 128*block.expansion, 256*block.expansion, bilinear=bilinear)
-        self.up3 = up(256*block.expansion, 64, 128, bilinear=bilinear)
-        self.up4 = up(128, 64, 64, bilinear=bilinear)
-        
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
@@ -325,24 +359,128 @@ class UResNet(nn.Module):
     def forward(self, x):
         x = self.conv1(x)
         x = self.bn1(x)
-        x1 = self.relu(x)
-        #x1 = self.maxpool(self.relu(x))
-        x2 = self.layer1(x1)
-        x3 = self.layer2(x2)
-        x4 = self.layer3(x3)
-        x5 = self.layer4(x4)
+        x = self.relu(x)
+        x = self.maxpool(x)
 
-        #from boxx import g
-        #g()
-        
-        x_up1 = self.up1(x5, x4)
-        x_up2 = self.up2(x_up1, x3)
-        x_up3 = self.up3(x_up2, x2)
-        x_up4 = self.up4(x_up3, x1)
-        x_out = self.outc(x_up4)
-        
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
 
+        x = self.avgpool(x)
+        x = x.view(x.size(0), -1)
+        x = self.fc(x)
 
-        return x_out
+        return x
     
+def resnet34(pretrained=False, **kwargs):
+    """Constructs a ResNet-34 model.
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+    """
+    model = ResNet(BasicBlock, [3, 4, 6, 3], **kwargs)
+    if pretrained:
+        model.load_state_dict(model_zoo.load_url(model_urls['resnet34']))
+    return model
+
+
+class Decoder(nn.Module):
+    def __init__(self, in_ch, ch, out_ch, r=16):
+        super(Decoder, self).__init__()
+        self.conv1 = nn.Conv2d(in_ch, ch, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv2d(ch, out_ch, kernel_size=3, padding=1)
+        self.se = Seq_Ex_Block(out_ch, r)
+        
+    def forward(self, x, x2=None):
+        x = F.upsample(x, scale_factor=2, mode='bilinear', align_corners=True)
+        if x2 is not None:
+            x = torch.cat([x, x2], 1)
+            
+        x = F.relu(self.conv1(x), inplace=True)
+        x = F.relu(self.conv2(x), inplace=True)
+        x = self.se(x)
+        #print(x.shape)
+        
+        return x       
+        
+        
+        
+class UResNet(nn.Module):
+    def __init__(self):
+        print('Local ResNet')
+        self.inplanes = 64
+        super(UResNet, self).__init__()
+        self.resnet = resnet34(pretrained=False)
+        
+        self.conv1 = nn.Sequential(
+            self.resnet.conv1,
+            self.resnet.bn1,
+            self.resnet.relu,
+            #self.resnet.maxpool
+            )
+        
+        self.encoder2 = self.resnet.layer1
+        self.encoder3 = self.resnet.layer2
+        self.encoder4 = self.resnet.layer3
+        self.encoder5 = self.resnet.layer4
+        
+        self.center = nn.Sequential(
+                nn.Conv2d(512,512, kernel_size=3, padding=1),
+                nn.ReLU(inplace=True),
+                nn.Conv2d(512,256, kernel_size=3, padding=1),
+                nn.ReLU(inplace=True),
+                nn.MaxPool2d(kernel_size=2, stride=2)
+                )
+        
+        self.decoder5 = Decoder(256+512, 512, 64)
+        self.decoder4 = Decoder(64+256, 256, 64)
+        self.decoder3 = Decoder(64+128, 128, 64)
+        self.decoder2 = Decoder(64+64, 64, 64)
+        self.decoder1 = Decoder(64, 32, 64)
+        
+        self.se_f = Seq_Ex_Block(320, 16)
+        
+        self.outc = nn.Sequential(
+                nn.Conv2d(320, 64, kernel_size=3, padding=1),
+                nn.ReLU(inplace=True),
+                nn.Conv2d(64, 1, kernel_size=1, padding=0))
+        
+        self.outc = OutConv(320, logits=True)
+    def forward(self, x):
+        mean = [0.485, 0.456, 0.406]
+        std = [0.229, 0.224, 0.225]
+        
+        x = torch.cat([
+                (x-mean[2])/std[2],
+                (x-mean[1])/std[1],
+                (x-mean[0])/std[0],
+                ], 1)
+    
+        x = self.conv1(x)           #64, 64, 64
+        e2 = self.encoder2(x)       #64, 64, 64
+        e3 = self.encoder3(e2)      #128, 32, 32
+        e4 = self.encoder4(e3)      #256, 16, 16
+        e5 = self.encoder5(e4)      #512, 8, 8
+        
+        f = self.center(e5)         #256, 4, 4
+        d5 = self.decoder5(f, e5)   #64, 8, 8        
+        d4 = self.decoder4(d5, e4)  #64, 16, 16
+        d3 = self.decoder3(d4, e3)  #64, 32, 32
+        d2 = self.decoder2(d3, e2)  #64, 64, 64
+        d1 = self.decoder1(d2)      #64, 128, 128
+        
+        
+        f = torch.cat((
+                d1,
+                F.upsample(d2, scale_factor=2, mode='bilinear', align_corners=False),
+                F.upsample(d3, scale_factor=4, mode='bilinear', align_corners=False),
+                F.upsample(d4, scale_factor=8, mode='bilinear', align_corners=False),
+                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
+                ), 1)               #320, 128, 128
+        f = self.se_f(f)
+        f = F.dropout2d(f, p=0.5)
+        out = self.outc(f)          #1, 101,101
+    
+        
+        return out
     
