@@ -406,11 +406,10 @@ class Decoder(nn.Module):
         
         
 class UResNet(nn.Module):
-    def __init__(self):
-        print('Local ResNet')
-        self.inplanes = 64
+    def __init__(self,pretrained=False):
+        print(f'ResNet{"" if pretrained else "not"} using pretrained weights.')
         super(UResNet, self).__init__()
-        self.resnet = resnet34(pretrained=False)
+        self.resnet = resnet34(pretrained=pretrained)
         
         self.conv1 = nn.Sequential(
             self.resnet.conv1,
