@@ -523,7 +523,7 @@ def save_model_state_to_chunks(epoch, model_state, optim_state, scheduler_state,
     return split_file_save(output, out_file_prefix, outputFolder, chunkSize=chunk_size)
 
 
-def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_name, other_data={}, 
+def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_name, other_data={},
                 num_epochs=25, print_every=2, save_model_every=None, save_log_every=None, log=get_logger('SaltNet')):
     #args = locals()
     #args = {k:v.shape if isinstance(v, (torch.Tensor, np.ndarray)) else v for k,v in args.items()}
@@ -631,7 +631,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, model_save_
         if save_model_every is not None:
             if (epoch % save_model_every == 0) | (epoch == num_epochs-1):
                 if best_model is not None:
-                    log.info(save_model_state_to_chunks(*best_model))                
+                    log.info(save_model_state_to_chunks(*best_model))
                     push_model_to_git(ckp_name=model_save_name)
                     best_model = None
                 else:
@@ -652,13 +652,13 @@ def push_log_to_git():
     log.info('Pushing logs to git.')
     os.chdir('../salt_net')
     get_ipython().system("pwd")
-    get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")   
+    get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")
     get_ipython().system('git add ./logs/*')
     get_ipython().system('git commit -m "Pushing logs to git"')
     get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all')
     os.chdir('../salt_oil')
     #get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filte
-    
+
 
 def push_model_to_git(ckp_name='ckp'):
     log.info('Pushing model state to git.')
@@ -670,8 +670,8 @@ def push_model_to_git(ckp_name='ckp'):
     get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all --force')
     #get_ipython().system(f'git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *{ckp_name.split("/")[-1]}*" --prune-empty --tag-name-filter cat -- --all')
     os.chdir('../salt_oil')
-    
-    
+
+
 def calc_clf_accuracy(a, b):
     if isinstance(a, torch.Tensor):
         a = a.cpu().detach().numpy()
@@ -688,11 +688,11 @@ def dice_loss(input, target):
     iflat = input.view(-1)
     tflat = target.view(-1)
     intersection = (iflat * tflat).sum()
-    
+
     return 1 - ((2. * intersection + smooth) /
               (iflat.sum() + tflat.sum() + smooth))
-    
-    
+
+
 class Dice_Loss(nn.Module):
     def __init__(self, smooth=1, alpha=1):
         super(Dice_Loss, self).__init__()
@@ -703,17 +703,17 @@ class Dice_Loss(nn.Module):
         def _dice_loss(a, b):
             iflat = a.contiguous().view(1, -1)
             tflat = b.contiguous().view(1, -1)
-            intersection = (iflat * tflat).sum()   
-        
+            intersection = (iflat * tflat).sum()
+
             dice_loss = 1 - ((2. * intersection + self.smooth) /
                              (iflat.sum() + tflat.sum() + self.smooth))
-            
+
             return dice_loss
         dice_loss = torch.stack([_dice_loss(a, b) for a,b in zip(inputs, targets)]).mean() * self.alpha
-        
+
         return dice_loss
-        
-    
+
+
 class FocalLoss(nn.Module):
     def __init__(self, alpha=1, gamma=2, logits=False, reduce=True):
         super(FocalLoss, self).__init__()
@@ -729,7 +729,7 @@ class FocalLoss(nn.Module):
             BCE_loss = F.binary_cross_entropy(inputs, targets, reduce=False)
         pt = torch.exp(-BCE_loss)
         F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
-        
+
         if self.reduce:
             return torch.mean(F_loss)
         else:
@@ -742,9 +742,9 @@ class LovaszHingeLoss(nn.Module):
 
     def forward(self, inputs, targets, per_image=True, ignore=None):
         lovasz_loss = self.lovasz_hinge(inputs, targets, per_image=per_image, ignore=ignore)
-        
+
         return lovasz_loss
-        
+
     def lovasz_hinge(self, logits, labels, per_image=True, ignore=None):
         """
         Binary Lovasz hinge loss
@@ -759,7 +759,7 @@ class LovaszHingeLoss(nn.Module):
         else:
             loss = self.lovasz_hinge_flat(*self.flatten_binary_scores(logits, labels, ignore))
         return loss
-    
+
     def lovasz_hinge_flat(self, logits, labels):
         """
         Binary Lovasz hinge loss
@@ -792,7 +792,7 @@ class LovaszHingeLoss(nn.Module):
         vscores = scores[valid]
         vlabels = labels[valid]
         return vscores, vlabels
-    
+
     def lovasz_grad(self, gt_sorted):
         """
         Computes gradient of the Lovasz extension w.r.t sorted errors
@@ -808,7 +808,7 @@ class LovaszHingeLoss(nn.Module):
         if p > 1: # cover 1-pixel case
             jaccard[1:p] = jaccard[1:p] - jaccard[0:-1]
         return jaccard
-    
+
     def mean(self, l, ignore_nan=False, empty=0):
         """
         nanmean compatible with generators.
@@ -837,16 +837,177 @@ class HingeLoss(nn.Module):
     def forward(self, inputs, targets):
         pos_y = torch.masked_select(inputs, targets.ge(0.5))
         neg_y = torch.masked_select(inputs, targets.lt(0.5))
-        
+
         if pos_y.numel() > 0:
             pos_loss = F.relu(1-pos_y).mean()
         else:
             pos_loss = 0.
-            
+
         if neg_y.numel() > 0:
             pos_loss = F.relu(neg_y + 1).mean()
         else:
             neg_loss = 0.
 
-        loss = pos_loss + neg_loss 
+        loss = pos_loss + neg_loss
         return loss
+
+
+
+def calc_loss(inputs, targets, loss_fns, loss_fn_weights):
+    loss = []
+    for loss_fn, weight in zip(loss_fns, loss_fn_weights):
+        if loss_fn is not None:
+            loss.append(weight * loss_fn(inputs, targets))
+
+    total_loss = sum(loss)
+    loss_all = loss + [total_loss]
+
+    return loss_all
+
+train_params = {
+    'model_save_name': model_save_name,
+    'save_model_every': save_model_every,
+    'num_epochs': num_epochs,
+    'print_every': print_every,
+    'log': log,
+    'print_every': print_every,
+    'mask_cutoff': 0
+    }
+
+
+def log_train_stats(y_pred, y_batch, X_batch, y_batch, train_params,
+                    other_data, epoch_losses, start=start):
+    epoch_losses = [round(e.item(),4) for e in torch.stack(epoch_losses).mean(0)]
+    iou_batch = calc_mean_iou(y_pred.ge(train_params['mask_cutoff']), y_batch)
+    iou_acc = calc_clf_accuracy(y_pred.ge(train_params['mask_cutoff']), y_batch)
+
+    log.info('Losses: {}, Batch IOU: {:.4f}, Batch Acc: {:.4f} at iter {}, epoch {}, Time: {}'.format(
+            epoch_losses, iou_batch, iou_acc, iter_count, epoch, timeSince(start))
+    )
+
+    X_train = other_data['X_train']
+    X_val = other_data['X_val']
+    y_train = other_data['y_train']
+    y_val = other_data['y_val']
+    X_train_mean_img = other_data['X_train_mean_img']
+    #print(all_losses)
+    X_orig = X_train[X_id[0]].squeeze()/255
+    X_tsfm = X_batch[0,0].squeeze().cpu().detach().numpy()
+    X_tsfm = X_tsfm[13:114,13:114]
+    y_orig = y_train[X_id[0]].squeeze()
+    y_tsfm = (y_batch[0].squeeze().cpu().detach().numpy())
+    y_tsfm_pred =  y_pred[0].squeeze().gt(mask_cutoff)
+    plot_img_mask_pred([X_orig, X_tsfm, y_orig, y_tsfm, y_tsfm_pred],
+                       ['X Original', 'X Transformed', 'y Original', 'y Transformed', 'y Predicted'])
+
+def train_model(model, dataloaders, loss_fns, loss_fn_weights optimizer,
+                scheduler, train_params, other_data):
+    log.info('Start Training...')
+
+    start = time.time()
+    if torch.cuda.is_available():
+        model.cuda()
+
+    best_model_wts = copy.deepcopy(model.state_dict())
+    best_model = None
+    best_iou = 0.0
+    all_losses = []
+    iter_count = 0
+    X_train = other_data['X_train']
+    X_val = other_data['X_val']
+    y_train = other_data['y_train']
+    y_val = other_data['y_val']
+    X_train_mean_img = other_data['X_train_mean_img']
+
+
+    for epoch in range(1, num_epochs+1):
+        log.info('Epoch {}/{}'.format(epoch, num_epochs))
+        log.info('-' * 20)
+        if save_log_every is not None:
+            if (epoch % save_log_every == 0):
+                push_log_to_git()
+        # Each epoch has a training and validation phase
+        for phase in ['train', 'val']:
+            if phase == 'train':
+                scheduler.step(loss.item())
+                model.train()  # Set model to training mode
+            else:
+                model.eval()   # Set model to evaluate mode
+            epoch_losses = []
+            pred_vs_true_epoch = []
+
+            for X_batch, y_batch, d_batch, X_id in dataloaders[phase]:
+                # zero the parameter gradients
+                optimizer.zero_grad()
+                with torch.set_grad_enabled(phase == 'train'):
+                    y_pred = model(X_batch)
+                    pred_vs_true_epoch.append([y_pred, y_batch])
+                    # backward + optimize only if in training phase
+                    if phase == 'train':
+                        losses = calc_loss(y_pred, y_batch.float(), loss_fns, loss_fn_weights)
+                        epoch_losses.append(losses)
+                        all_losses.append(losses)
+                        loss = losses[-1]
+                        loss.backward()
+                        optimizer.step()
+                        iter_count += 1
+                if (phase == 'train') & (iter_count % print_every == 0):
+                    iou_batch = calc_mean_iou(y_pred.ge(train_params['mask_cutoff']), y_batch.float())
+                    iou_acc = calc_clf_accuracy(y_pred.ge(train_params['mask_cutoff']), y_batch.float())
+
+                    log.info('Batch Loss: {:.4f}, Epoch loss_1: {:.4f}, Epoch loss_2: {:.4f}, Batch IOU: {:.4f}, Batch Acc: {:.4f} at iter {}, epoch {}, Time: {}'.format(
+                        np.mean(all_losses[-print_every:]), np.mean(epoch_loss1), np.mean(epoch_loss2), iou_batch, iou_acc, iter_count, epoch, timeSince(start))
+                    )
+                    #print(all_losses)
+                    X_orig = X_train[X_id[0]].squeeze()/255
+                    X_tsfm = X_batch[0,0].squeeze().cpu().detach().numpy()
+                    X_tsfm = X_tsfm[13:114,13:114]
+                    y_orig = y_train[X_id[0]].squeeze()
+                    y_tsfm = (y_batch[0].squeeze().cpu().detach().numpy())
+                    y_tsfm_pred =  y_pred[0].squeeze().gt(mask_cutoff)
+                    plot_img_mask_pred([X_orig, X_tsfm, y_orig, y_tsfm, y_tsfm_pred],
+                                       ['X Original', 'X Transformed', 'y Original', 'y Transformed', 'y Predicted'])
+
+            y_pred_epoch = torch.cat([e[0] for e in pred_vs_true_epoch])
+            y_true_epoch = torch.cat([e[1] for e in pred_vs_true_epoch])
+
+            mean_iou_epoch = calc_mean_iou(y_pred_epoch.ge(mask_cutoff), y_true_epoch.float())
+            mean_acc_epoch = calc_clf_accuracy(y_pred_epoch.ge(mask_cutoff), y_true_epoch.float())
+            log.info('{} Mean IOU: {:.4f}, Mean Acc: {:.4f}, Best Val IOU: {:.4f} at epoch {}'.format(phase, mean_iou_epoch, mean_acc_epoch, best_iou, epoch))
+            if phase == 'val' and mean_iou_epoch > best_iou:
+                best_iou = mean_iou_epoch
+                best_model_wts = copy.deepcopy(model.state_dict())
+                stats = {'best_iou': best_iou,
+                         'all_losses': all_losses,
+                         'iter_count': iter_count}
+                log.info(save_model_state_to_chunks(epoch, copy.deepcopy(model.state_dict()),
+                                                    copy.deepcopy(optimizer.state_dict()),
+                                                    copy.deepcopy(scheduler.state_dict()), stats, model_save_name, '.'))
+                best_model = (epoch, copy.deepcopy(model.state_dict()),
+                                                    copy.deepcopy(optimizer.state_dict()),
+                                                    copy.deepcopy(scheduler.state_dict()), stats, model_save_name, '.')
+                log.info('Best Val Mean IOU so far: {}'.format(best_iou))
+                # Visualize 1 val sample and predictions
+                X_orig = X_val[X_id[0]].squeeze()/255
+                y_orig = y_val[X_id[0]].squeeze()
+                y_pred2 =  y_pred[0].squeeze().gt(mask_cutoff)
+                plot_img_mask_pred([X_orig, y_orig, y_pred2],
+                                   ['Val X Original', 'Val y Original', 'Val y Predicted'])
+        if save_model_every is not None:
+            if (epoch % save_model_every == 0) | (epoch == num_epochs-1):
+                if (best_model is not None) and (best_iou>0.8):
+                    log.info(save_model_state_to_chunks(*best_model))
+                    push_model_to_git(ckp_name=model_save_name)
+                    best_model = None
+                else:
+                    log.info("Skip pushing model to git as there's no improvement")
+
+    # load best model weights
+    model.load_state_dict(best_model_wts)
+    log.info('-' * 20)
+    time_elapsed = time.time() - start
+    log.info('Training complete in {:.0f}m {:.0f}s'.format(
+        time_elapsed // 60, time_elapsed % 60))
+    log.info('Best val IOU: {:4f}'.format(best_iou))
+
+    return model
