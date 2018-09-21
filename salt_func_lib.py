@@ -660,16 +660,26 @@ def push_log_to_git():
     os.chdir('../salt_oil')
     #get_ipython().system('git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *ckp*" --prune-empty --tag-name-filte
 
-
+def push_log_to_git():
+    log.info('Pushing logs to git.')
+    os.chdir('../salt_net')
+    get_ipython().system("pwd")
+    get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")    
+    get_ipython().system('git pull')
+    get_ipython().system('git add ./logs/*')
+    get_ipython().system('git commit -m "Pushing logs to git"')    
+    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all')
+    os.chdir('../salt_oil')
+    
 def push_model_to_git(ckp_name='ckp'):
     log.info('Pushing model state to git.')
     os.chdir('../salt_net')
     get_ipython().system("pwd")
     get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")
-    get_ipython().system('git add .')
-    get_ipython().system('git commit -m "save model state."')
     get_ipython().system('git pull')
-    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all --force')
+    get_ipython().system('git add .')
+    get_ipython().system('git commit -m "save model state."')    
+    get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all')
     #get_ipython().system(f'git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *{ckp_name.split("/")[-1]}*" --prune-empty --tag-name-filter cat -- --all')
     os.chdir('../salt_oil')
 
