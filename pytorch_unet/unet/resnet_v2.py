@@ -509,6 +509,9 @@ class UResNet(nn.Module):
                 ), 1)               #320, 128, 128
         f = self.secs_f(f)
         f = F.dropout2d(f, p=0.5)
+
         out = self.outc(f)          #1, 101,101
 
         return out
+
+
