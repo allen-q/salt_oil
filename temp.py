@@ -139,4 +139,3 @@ def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, schedu
 
     return model
 
-print('done')
