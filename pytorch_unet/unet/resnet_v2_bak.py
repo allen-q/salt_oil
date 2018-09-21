@@ -185,7 +185,7 @@ def conv3x3(in_planes, out_planes, stride=1):
 class BasicBlock(nn.Module):
     expansion = 1
 
-    def __init__(self, inplanes, planes, stride=1, downsample=None):
+    def __init__(self, inplanes, planes, stride=1, downsample=None, r=16):
         super(BasicBlock, self).__init__()
         self.conv1 = conv3x3(inplanes, planes, stride)
         self.bn1 = nn.BatchNorm2d(planes)
@@ -194,6 +194,7 @@ class BasicBlock(nn.Module):
         self.bn2 = nn.BatchNorm2d(planes)
         self.downsample = downsample
         self.stride = stride
+        self.secs = Seq_Ex_Block_CS(planes, r)
 
     def forward(self, x):
         residual = x
@@ -203,13 +204,16 @@ class BasicBlock(nn.Module):
         out = self.relu(out)
 
         out = self.conv2(out)
+        out = self.secs(out)
         out = self.bn2(out)
 
         if self.downsample is not None:
             residual = self.downsample(x)
-
         out += residual
         out = self.relu(out)
+
+        #from boxx import g
+        #g()
 
         return out
 
@@ -346,6 +350,8 @@ def resnet152unet(in_ch=1, bilinear=True, pretrained=False, **kwargs):
                 dict_params_new[name1].data.copy_(param1.data)
 
     return model
+
+
 class ResNet(nn.Module):
 
     def __init__(self, block, layers, num_classes=1000):
@@ -440,7 +446,9 @@ class UResNet(nn.Module):
     def __init__(self,pretrained=False):
         print(f'ResNet{"" if pretrained else "not"} using pretrained weights.')
         super(UResNet, self).__init__()
-        self.resnet = resnet34(pretrained=pretrained)
+        if pretrained:
+            print(f'pretrained resnet model is not supported in this version! Create a new model...')
+        self.resnet = resnet34(pretrained=False)
 
         self.conv1 = nn.Sequential(
             self.resnet.conv1,
@@ -468,7 +476,7 @@ class UResNet(nn.Module):
         self.decoder2 = Decoder(64+64, 64, 64)
         self.decoder1 = Decoder(64, 32, 64)
 
-        self.secs_f = Seq_Ex_Block_CS(320, 16)
+        self.se_f = Seq_Ex_Block_CS(320, 16)
 
         self.outc = nn.Sequential(
                 nn.Conv2d(320, 64, kernel_size=3, padding=1),
@@ -507,10 +515,9 @@ class UResNet(nn.Module):
                 F.upsample(d4, scale_factor=8, mode='bilinear', align_corners=False),
                 F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
                 ), 1)               #320, 128, 128
-        f = self.secs_f(f)
+        f = self.se_f(f)
         f = F.dropout2d(f, p=0.5)
         out = self.outc(f)          #1, 101,101
 
 
         return out
-
