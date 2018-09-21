@@ -205,11 +205,10 @@ class BasicBlock(nn.Module):
 
         out = self.conv2(out)
         out = self.bn2(out)
-
+        out = self.secs(out)
         if self.downsample is not None:
             residual = self.downsample(x)
-        residual_se = self.secs(residual)
-        out += residual_se
+        out += residual
         out = self.relu(out)
 
         #from boxx import g
