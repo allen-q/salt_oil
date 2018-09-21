@@ -212,8 +212,8 @@ class BasicBlock(nn.Module):
         out += residual_se
         out = self.relu(out)
 
-        from boxx import g
-        g()
+        #from boxx import g
+        #g()
 
         return out
 
