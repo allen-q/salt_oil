@@ -138,3 +138,5 @@ def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, schedu
     log.info('Best val IOU: {:4f}'.format(best_iou))
 
     return model
+
+print('done')
