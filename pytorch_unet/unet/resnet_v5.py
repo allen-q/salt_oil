@@ -337,10 +337,10 @@ class OutConv(nn.Module):
         super(OutConv, self).__init__()
         self.conv = nn.Sequential(
                 nn.Conv2d(in_ch, 64, kernel_size=3, padding=1),
-                NONLocalBlock2D(64, mode='dot_product', sub_sample=True, bn_layer=True),
+                NONLocalBlock2D(64, mode='concatenation', sub_sample=True, bn_layer=True),
                 nn.ReLU(inplace=True),
                 nn.Conv2d(64, 1, kernel_size=1, padding=0),
-                NONLocalBlock2D(1, mode='dot_product', sub_sample=True, bn_layer=True))
+                NONLocalBlock2D(1, mode='concatenation', sub_sample=True, bn_layer=True))
         self.sig = nn.Sigmoid()
         self.logits = logits
 
