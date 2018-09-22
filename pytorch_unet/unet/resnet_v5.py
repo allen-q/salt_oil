@@ -635,10 +635,10 @@ class UResNet(nn.Module):
             self.resnet.relu,
             #self.resnet.maxpool
             )
-        #self.conv1_nl = NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+        #self.conv1_nl = NONLocalBlock2D(64, mode='dot_product', sub_sample=True, bn_layer=True)
         self.encoder2 = self.resnet.layer1
         self.encoder3 = self.resnet.layer2
-        self.encoder3_nl = NONLocalBlock2D(128, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+        self.encoder3_nl = NONLocalBlock2D(128, mode='dot_product', sub_sample=True, bn_layer=True)
         self.encoder4 = self.resnet.layer3
         self.encoder5 = self.resnet.layer4
         #self.encoder5_nl = NONLocalBlock2D(512, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
@@ -654,7 +654,7 @@ class UResNet(nn.Module):
         self.decoder5 = Decoder(256+512, 512, 64)
         self.decoder4 = Decoder(64+256, 256, 64)
         self.decoder3 = Decoder(64+128, 128, 64)
-        self.decoder3_nl = NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+        self.decoder3_nl = NONLocalBlock2D(64, mode='dot_product', sub_sample=True, bn_layer=True)
         self.decoder2 = Decoder(64+64, 64, 64)
         self.decoder1 = Decoder(64, 32, 64)
 
