@@ -1,10 +1,11 @@
-# Create a residule based Decoder Architectur
+# Non Local Neural Network
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
 import torch.utils.model_zoo as model_zoo
+from non_local_nn import *
 
 model_urls = {
     'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
@@ -155,7 +156,9 @@ class OutConv(nn.Module):
         self.conv = nn.Sequential(
                 nn.Conv2d(in_ch, 64, kernel_size=3, padding=1),
                 nn.ReLU(inplace=True),
-                nn.Conv2d(64, 1, kernel_size=1, padding=0))
+                nn.Conv2d(64, 1, kernel_size=1, padding=0),
+                NONLocalBlock2D(1, mode='embedded_gaussian', sub_sample=True, bn_layer=True))
+
         self.sig = nn.Sigmoid()
         self.logits = logits
 
@@ -425,13 +428,20 @@ class UResNet(nn.Module):
             self.resnet.conv1,
             self.resnet.bn1,
             self.resnet.relu,
+            NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True),
             #self.resnet.maxpool
             )
 
         self.encoder2 = self.resnet.layer1
-        self.encoder3 = self.resnet.layer2
+        self.encoder3 = nn.Sequential(
+                self.resnet.layer2,
+                NONLocalBlock2D(128, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+                )
         self.encoder4 = self.resnet.layer3
-        self.encoder5 = self.resnet.layer4
+        self.encoder5 = nn.Sequential(
+                self.resnet.layer4,
+                NONLocalBlock2D(512, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+                )
 
         self.center = nn.Sequential(
                 nn.Conv2d(512,512, kernel_size=3, padding=1),
@@ -446,15 +456,10 @@ class UResNet(nn.Module):
         self.decoder4 = Decoder(32, 256, 32, 1, 8, 16)       #torch.Size([2, 32, 128, 128])
         self.decoder3 = Decoder(32, 128, 32, 1, 4, 16)       #torch.Size([2, 32, 128, 128])
         self.decoder2 = Decoder(32, 64, 32, 1, 2, 16)        #torch.Size([2, 32, 128, 128])
-        self.decoder1 = Decoder(32, 64, 32, 1, 2, 16)        #torch.Size([2, 32, 128, 128])
+        self.decoder1 = Decoder(32, 64, 32, 1, 2, 16, True)  #torch.Size([2, 32, 128, 128])
 
         self.secs_f = Seq_Ex_Block_CS(32, 16)
-
-        self.outc = nn.Sequential(
-                nn.Conv2d(32, 64, kernel_size=3, padding=1),
-                nn.ReLU(inplace=True),
-                nn.Conv2d(64, 1, kernel_size=1, padding=0))
-
+        self.nlnn_f = NONLocalBlock2D(32, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
         self.outc = OutConv(32, logits=True)
     def forward(self, x):
         mean = [0.485, 0.456, 0.406]
@@ -488,6 +493,7 @@ class UResNet(nn.Module):
 #                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
 #                ), 1)               #320, 128, 128
         f = self.secs_f(d1)
+        f = self.nlnn_f(f)
         f = F.dropout2d(f, p=0.5)
 
         out = self.outc(f)          #1, 101,101
@@ -496,7 +502,7 @@ class UResNet(nn.Module):
 
 
 class Decoder(nn.Module):
-    def __init__(self, in_ch1, in_ch2, out_ch, scale_factor1, scale_factor2, r=16):
+    def __init__(self, in_ch1, in_ch2, out_ch, scale_factor1, scale_factor2, r=16, nlnn=False):
         super(Decoder, self).__init__()
         self.conv1 = nn.Conv2d(in_ch1, out_ch, 1)
         self.conv2 = nn.Sequential(
@@ -512,6 +518,7 @@ class Decoder(nn.Module):
         self.upsampler2 = nn.Upsample(scale_factor=scale_factor2, mode='bilinear', align_corners=False)
         self.relu = nn.ReLU(inplace=True)
         self.secs = Seq_Ex_Block_CS(out_ch, r)
+        self.nlnn = NONLocalBlock2D(out_ch, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
 
     def forward(self, x, x2=None):
         x1 = self.conv1(x)
@@ -523,5 +530,8 @@ class Decoder(nn.Module):
 
         out = x1 + x2
         out = self.relu(out)
+
+        if self.nlnn:
+            out = self.nlnn(out)
 
         return out

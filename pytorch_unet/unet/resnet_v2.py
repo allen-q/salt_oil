@@ -1,4 +1,4 @@
-# sub-parts of the U-Net model
+# Added Spatial and Channel Wise Sequeeze and Excitation blocks
 
 import torch
 import torch.nn as nn
