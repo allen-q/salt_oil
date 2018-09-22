@@ -635,13 +635,13 @@ class UResNet(nn.Module):
             self.resnet.relu,
             #self.resnet.maxpool
             )
-        self.conv1_nl = NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+        #self.conv1_nl = NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
         self.encoder2 = self.resnet.layer1
         self.encoder3 = self.resnet.layer2
         self.encoder3_nl = NONLocalBlock2D(128, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
         self.encoder4 = self.resnet.layer3
         self.encoder5 = self.resnet.layer4
-        self.encoder5_nl = NONLocalBlock2D(512, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+        #self.encoder5_nl = NONLocalBlock2D(512, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
 
         self.center = nn.Sequential(
                 nn.Conv2d(512,512, kernel_size=3, padding=1),
@@ -654,12 +654,13 @@ class UResNet(nn.Module):
         self.decoder5 = Decoder(256+512, 512, 64)
         self.decoder4 = Decoder(64+256, 256, 64)
         self.decoder3 = Decoder(64+128, 128, 64)
+        self.decoder3_nl = NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
         self.decoder2 = Decoder(64+64, 64, 64)
         self.decoder1 = Decoder(64, 32, 64)
-        self.decoder1_nl = NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+
 
         self.se_f = Seq_Ex_Block(320, 16)
-        self.nlnn_f = NONLocalBlock2D(320, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+        #self.nlnn_f = NONLocalBlock2D(320, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
 
         self.outc = OutConv(320, logits=True)
     def forward(self, x):
@@ -673,8 +674,10 @@ class UResNet(nn.Module):
                 ], 1)
 
         x = self.conv1(x)           #64, 64, 64
+
         e2 = self.encoder2(x)       #64, 64, 64
         e3 = self.encoder3(e2)      #128, 32, 32
+        e3 = self.encoder3_nl(e3)   #128, 32, 32
         e4 = self.encoder4(e3)      #256, 16, 16
         e5 = self.encoder5(e4)      #512, 8, 8
 
@@ -682,6 +685,7 @@ class UResNet(nn.Module):
         d5 = self.decoder5(f, e5)   #64, 8, 8
         d4 = self.decoder4(d5, e4)  #64, 16, 16
         d3 = self.decoder3(d4, e3)  #64, 32, 32
+        d3 = self.decoder3_nl(d3)  #64, 32, 32
         d2 = self.decoder2(d3, e2)  #64, 64, 64
         d1 = self.decoder1(d2)      #64, 128, 128
 
