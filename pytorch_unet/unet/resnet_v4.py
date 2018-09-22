@@ -428,20 +428,16 @@ class UResNet(nn.Module):
             self.resnet.conv1,
             self.resnet.bn1,
             self.resnet.relu,
-            NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True),
             #self.resnet.maxpool
             )
+        self.conv1_nl = NONLocalBlock2D(64, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
 
         self.encoder2 = self.resnet.layer1
-        self.encoder3 = nn.Sequential(
-                self.resnet.layer2,
-                NONLocalBlock2D(128, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
-                )
+        self.encoder3 = self.resnet.layer2
+        self.encoder3_nl = NONLocalBlock2D(128, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
         self.encoder4 = self.resnet.layer3
-        self.encoder5 = nn.Sequential(
-                self.resnet.layer4,
-                NONLocalBlock2D(512, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
-                )
+        self.encoder5 = self.resnet.layer4
+        self.encoder5_nl = NONLocalBlock2D(512, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
 
         self.center = nn.Sequential(
                 nn.Conv2d(512,512, kernel_size=3, padding=1),
@@ -456,7 +452,8 @@ class UResNet(nn.Module):
         self.decoder4 = Decoder(32, 256, 32, 1, 8, 16)       #torch.Size([2, 32, 128, 128])
         self.decoder3 = Decoder(32, 128, 32, 1, 4, 16)       #torch.Size([2, 32, 128, 128])
         self.decoder2 = Decoder(32, 64, 32, 1, 2, 16)        #torch.Size([2, 32, 128, 128])
-        self.decoder1 = Decoder(32, 64, 32, 1, 2, 16, True)  #torch.Size([2, 32, 128, 128])
+        self.decoder1 = Decoder(32, 64, 32, 1, 2, 16)  #torch.Size([2, 32, 128, 128])
+        self.decoder1_nl = NONLocalBlock2D(32, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
 
         self.secs_f = Seq_Ex_Block_CS(32, 16)
         self.nlnn_f = NONLocalBlock2D(32, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
@@ -472,10 +469,13 @@ class UResNet(nn.Module):
                 ], 1)
 
         x = self.conv1(x)           #64, 64, 64
+        x = self.conv1_nl(x)
         e2 = self.encoder2(x)       #64, 64, 64
         e3 = self.encoder3(e2)      #128, 32, 32
+        e3 = self.encoder3_nl(e3)   #128, 32, 32
         e4 = self.encoder4(e3)      #256, 16, 16
         e5 = self.encoder5(e4)      #512, 8, 8
+        e5 = self.encoder5_nl(e5)      #512, 8, 8
 
         f = self.center(e5)         #256, 4, 4
         d5 = self.decoder5(f, e5)   #torch.Size([2, 32, 128, 128])
@@ -484,14 +484,6 @@ class UResNet(nn.Module):
         d2 = self.decoder2(d3, e2)  #torch.Size([2, 32, 128, 128])
         d1 = self.decoder1(d2, x)   #torch.Size([2, 32, 128, 128])
 
-
-#        f = torch.cat((
-#                d1,
-#                F.upsample(d2, scale_factor=2, mode='bilinear', align_corners=False),
-#                F.upsample(d3, scale_factor=4, mode='bilinear', align_corners=False),
-#                F.upsample(d4, scale_factor=8, mode='bilinear', align_corners=False),
-#                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
-#                ), 1)               #320, 128, 128
         f = self.secs_f(d1)
         f = self.nlnn_f(f)
         f = F.dropout2d(f, p=0.5)
@@ -502,7 +494,7 @@ class UResNet(nn.Module):
 
 
 class Decoder(nn.Module):
-    def __init__(self, in_ch1, in_ch2, out_ch, scale_factor1, scale_factor2, r=16, nlnn=False):
+    def __init__(self, in_ch1, in_ch2, out_ch, scale_factor1, scale_factor2, r=16):
         super(Decoder, self).__init__()
         self.conv1 = nn.Conv2d(in_ch1, out_ch, 1)
         self.conv2 = nn.Sequential(
@@ -518,7 +510,7 @@ class Decoder(nn.Module):
         self.upsampler2 = nn.Upsample(scale_factor=scale_factor2, mode='bilinear', align_corners=False)
         self.relu = nn.ReLU(inplace=True)
         self.secs = Seq_Ex_Block_CS(out_ch, r)
-        self.nlnn = NONLocalBlock2D(out_ch, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+
 
     def forward(self, x, x2=None):
         x1 = self.conv1(x)
@@ -530,8 +522,5 @@ class Decoder(nn.Module):
 
         out = x1 + x2
         out = self.relu(out)
-
-        if self.nlnn:
-            out = self.nlnn(out)
 
         return out
