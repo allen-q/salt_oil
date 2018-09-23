@@ -337,7 +337,7 @@ class OutConv(nn.Module):
         super(OutConv, self).__init__()
         self.conv = nn.Sequential(
                 nn.Conv2d(in_ch, 64, kernel_size=3, padding=1),
-                NONLocalBlock2D(64, mode='dot_product', sub_sample=True, bn_layer=True),
+                #NONLocalBlock2D(64, mode='dot_product', sub_sample=True, bn_layer=True),
                 nn.ReLU(inplace=True),
                 nn.Conv2d(64, 1, kernel_size=1, padding=0),
                 NONLocalBlock2D(1, mode='dot_product', sub_sample=True, bn_layer=True))
@@ -642,7 +642,7 @@ class UResNet(nn.Module):
         #self.encoder3_nl = NONLocalBlock2D(128, mode='dot_product', sub_sample=True, bn_layer=True)
         self.encoder4 = self.resnet.layer3
         self.encoder5 = self.resnet.layer4
-        #self.encoder5_nl = NONLocalBlock2D(512, mode='embedded_gaussian', sub_sample=True, bn_layer=True)
+        self.encoder5_nl = NONLocalBlock2D(512, mode='dot_product', sub_sample=True, bn_layer=True)
 
         self.center = nn.Sequential(
                 nn.Conv2d(512,512, kernel_size=3, padding=1),
@@ -655,7 +655,7 @@ class UResNet(nn.Module):
         self.decoder5 = Decoder(256+512, 512, 64)
         self.decoder4 = Decoder(64+256, 256, 64)
         self.decoder3 = Decoder(64+128, 128, 64)
-        #self.decoder3_nl = NONLocalBlock2D(64, mode='dot_product', sub_sample=True, bn_layer=True)
+        self.decoder3_nl = NONLocalBlock2D(64, mode='dot_product', sub_sample=True, bn_layer=True)
         self.decoder2 = Decoder(64+64, 64, 64)
         self.decoder1 = Decoder(64, 32, 64)
 
@@ -681,12 +681,13 @@ class UResNet(nn.Module):
         #e3 = self.encoder3_nl(e3)   #128, 32, 32
         e4 = self.encoder4(e3)      #256, 16, 16
         e5 = self.encoder5(e4)      #512, 8, 8
+        e5 = self.encoder5_nl(e5)
 
         f = self.center(e5)         #256, 4, 4
         d5 = self.decoder5(f, e5)   #64, 8, 8
         d4 = self.decoder4(d5, e4)  #64, 16, 16
         d3 = self.decoder3(d4, e3)  #64, 32, 32
-        #d3 = self.decoder3_nl(d3)  #64, 32, 32
+        d3 = self.decoder3_nl(d3)  #64, 32, 32
         d2 = self.decoder2(d3, e2)  #64, 64, 64
         d1 = self.decoder1(d2)      #64, 128, 128
 
