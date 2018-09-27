@@ -646,8 +646,7 @@ class UResNet(nn.Module):
         f = F.dropout2d(f, p=0.5)
         out = self.outc(f)          #1, 101,101
 
-        from boxx import g
-        g()
+
         return out
 
 
