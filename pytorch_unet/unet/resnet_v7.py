@@ -125,7 +125,7 @@ class OutConv(nn.Module):
     def __init__(self, in_ch, logits=False):
         super(OutConv, self).__init__()
         self.conv = nn.Sequential(
-                nn.ConvTranspose2d(in_ch, in_ch, 2, stride=2),
+                nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True),
                 nn.Conv2d(in_ch, 64, kernel_size=3, padding=1),
                 nn.ReLU(inplace=True),
                 nn.Conv2d(64, 1, kernel_size=1, padding=0))
@@ -439,13 +439,15 @@ class UResNet(nn.Module):
         self.encoder4 = self.resnet.layer4
        
         self.center = nn.Sequential(
-            nn.Conv2d(2048, 2048, 3, padding=1),
-            nn.BatchNorm2d(2048),
+            nn.Conv2d(2048, 256, 1, padding=0),
+            nn.Conv2d(256, 256, 3, padding=1),
+            nn.BatchNorm2d(256),
             nn.ReLU(inplace=True),
-            nn.Conv2d(2048, 2048, 3, padding=1),
-            nn.BatchNorm2d(2048),
+            nn.Conv2d(256, 256, 3, padding=1),
+            nn.BatchNorm2d(256),
             nn.ReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
+            nn.Conv2d(256, 2048, 1, padding=0),
             Seq_Ex_Block(2048, 16)
         )
 
