@@ -418,11 +418,14 @@ class HyperColumn(nn.Module):
         return f_out  
         
 class UResNet(nn.Module):
-    def __init__(self,pretrained=False):
+    def __init__(self,pretrained=False, pretrained_model=None):
         print(f'ResNet{"" if pretrained else " not"} using pretrained weights.')
         super(UResNet, self).__init__()
-        self.resnet = resnet50(pretrained=pretrained)
-        
+
+        if pretrained_model is None:
+            self.resnet = resnet50(pretrained=pretrained)
+        else:
+            self.resnet = pretrained_model
         self.conv1 = nn.Sequential(
             self.resnet.conv1,
             self.resnet.bn1,
