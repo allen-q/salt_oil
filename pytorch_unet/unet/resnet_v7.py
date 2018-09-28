@@ -90,20 +90,21 @@ class down(nn.Module):
 
 
 class up(nn.Module):
-    def __init__(self, in_ch, out_ch, trans_in_ch, bilinear=False):
+    def __init__(self, in_ch, out_ch, trans_in_ch, bilinear=False, apply_se=False, r=16):
         super(up, self).__init__()
 
         #  would be a nice idea if the upsampling could be learned too,
         #  but my machine do not have enough memory to handle all those weights
 												 
         if bilinear:
-            print('Using bilinear for upsampling')
             self.upscale = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
         else:
-            print('Using transpose conv for upsampling')
             self.upscale = nn.ConvTranspose2d(trans_in_ch, trans_in_ch, 2, stride=2)
 																					
         self.conv = double_conv(in_ch, out_ch)
+        self.apply_se = apply_se
+        if apply_se:
+            self.se = Seq_Ex_Block(out_ch, r)
 
     def forward(self, x1, x2):
         #print(f'in: {x1.shape}, {x2.shape}')
@@ -115,16 +116,20 @@ class up(nn.Module):
         x = torch.cat([x2, x1], dim=1)
         x = self.conv(x)
         #print(f'out: {x.shape}')
+        if self.apply_se:
+            x = self.se(x)
+        
         return x
-
 
 class OutConv(nn.Module):
     def __init__(self, in_ch, logits=False):
         super(OutConv, self).__init__()
         self.conv = nn.Sequential(
+                nn.ConvTranspose2d(in_ch, in_ch, 2, stride=2),
                 nn.Conv2d(in_ch, 64, kernel_size=3, padding=1),
                 nn.ReLU(inplace=True),
                 nn.Conv2d(64, 1, kernel_size=1, padding=0))
+        
         self.sig = nn.Sigmoid()
         self.logits = logits
             
@@ -136,7 +141,7 @@ class OutConv(nn.Module):
         else:
             x_out = x_conv
             
-        crop_start = (x.shape[-1]-101)//2
+        crop_start = (x_out.shape[-1]-101)//2
         crop_end = crop_start + 101
         x_out = x_out[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
         
@@ -393,30 +398,28 @@ def resnet50(pretrained=False, **kwargs):
         model.load_state_dict(model_zoo.load_url(model_urls['resnet50']))
     return model
 
-class Decoder(nn.Module):
-    def __init__(self, in_ch, ch, out_ch, r=16):
-        super(Decoder, self).__init__()
-        self.conv1 = nn.Conv2d(in_ch, ch, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(ch, out_ch, kernel_size=3, padding=1)
-        self.se = Seq_Ex_Block(out_ch, r)
-        
-    def forward(self, x, x2=None):
-        x = F.upsample(x, scale_factor=2, mode='bilinear', align_corners=True)
-        if x2 is not None:
-            x = torch.cat([x, x2], 1)
-            
-        x = F.relu(self.conv1(x), inplace=True)
-        x = F.relu(self.conv2(x), inplace=True)
-        x = self.se(x)
-        #print(x.shape)
-        
-        return x       
-        
-        
+
+class HyperColumn(nn.Module):
+    def __init__(self):
+        super(HyperColumn, self).__init__()
+        self.conv2 = nn.Conv2d(256, 64, kernel_size=1)
+        self.conv3 = nn.Conv2d(512, 32, kernel_size=1)
+        self.conv4 = nn.Conv2d(1024, 32, kernel_size=1)
+        self.se_f = Seq_Ex_Block(256, 16)
+
+    def forward(self, d1, d2, d3, d4):
+        f = torch.cat((d1, 
+                       F.interpolate(self.conv2(d2), scale_factor=2, mode='bilinear', align_corners=False),
+                       F.interpolate(self.conv3(d3), scale_factor=4, mode='bilinear', align_corners=False),
+                       F.interpolate(self.conv4(d4), scale_factor=8, mode='bilinear', align_corners=False))
+                    ,1)
+        f_out = self.se_f(f)
+
+        return f_out  
         
 class UResNet(nn.Module):
     def __init__(self,pretrained=False):
-        print(f'ResNet{"" if pretrained else "not"} using pretrained weights.')
+        print(f'ResNet{"" if pretrained else " not"} using pretrained weights.')
         super(UResNet, self).__init__()
         self.resnet = resnet50(pretrained=pretrained)
         
@@ -427,34 +430,29 @@ class UResNet(nn.Module):
             #self.resnet.maxpool
             )
         
-        self.encoder2 = self.resnet.layer1
-        self.encoder3 = self.resnet.layer2
-        self.encoder4 = self.resnet.layer3
-        self.encoder5 = self.resnet.layer4
-        
+        self.encoder1 = self.resnet.layer1
+        self.encoder2 = self.resnet.layer2
+        self.encoder3 = self.resnet.layer3
+        self.encoder4 = self.resnet.layer4
+       
         self.center = nn.Sequential(
-                nn.Conv2d(2048,512, kernel_size=3, padding=1),
-                nn.ReLU(inplace=True),
-                nn.Conv2d(512,256, kernel_size=3, padding=1),
-                nn.ReLU(inplace=True),
-                nn.MaxPool2d(kernel_size=2, stride=2),
-                Seq_Ex_Block(256, 16)
-                )
-        
-        self.decoder5 = Decoder(256+512*4, 512, 64)
-        self.decoder4 = Decoder(64+256*4, 256, 64)
-        self.decoder3 = Decoder(64+128*4, 128, 64)
-        self.decoder2 = Decoder(64+64*4, 64, 64)
-        self.decoder1 = Decoder(64, 32, 64)
-        
-        self.se_f = Seq_Ex_Block(320, 16)
-        
-        self.outc = nn.Sequential(
-                nn.Conv2d(320, 64, kernel_size=3, padding=1),
-                nn.ReLU(inplace=True),
-                nn.Conv2d(64, 1, kernel_size=1, padding=0))
-        
-        self.outc = OutConv(320, logits=True)
+            nn.Conv2d(2048, 2048, 3, padding=1),
+            nn.BatchNorm2d(2048),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(2048, 2048, 3, padding=1),
+            nn.BatchNorm2d(2048),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            Seq_Ex_Block(2048, 16)
+        )
+
+        self.decoder4 = up(4096, 1024, 2048, bilinear=True, apply_se=True, r=16)
+        self.decoder3 = up(2048, 512, 1024, bilinear=True, apply_se=True, r=16)
+        self.decoder2 = up(1024, 256, 512, bilinear=True, apply_se=True, r=16)
+        self.decoder1 = up(512, 128, 256, bilinear=True, apply_se=True, r=16)
+    
+        self.hyper_column = HyperColumn()
+        self.outc = OutConv(256, logits=True)
     def forward(self, x):
         mean = [0.485, 0.456, 0.406]
         std = [0.229, 0.224, 0.225]
@@ -465,31 +463,22 @@ class UResNet(nn.Module):
                 (x-mean[0])/std[0],
                 ], 1)
     
-        x = self.conv1(x)           #64, 64, 64
-        e2 = self.encoder2(x)       #64, 64, 64
-        e3 = self.encoder3(e2)      #128, 32, 32
-        e4 = self.encoder4(e3)      #256, 16, 16
-        e5 = self.encoder5(e4)      #512, 8, 8
-        e5 = F.dropout2d(e5, p=0.5)
-        
+        x = self.conv1(x)           #2, 64, 64, 64
+        e1 = self.encoder1(x)       #2, 256, 64, 64
+        e2 = self.encoder2(e1)      #2, 512, 32, 32
+        e3 = self.encoder3(e2)      #2, 1024, 16, 16
+        e4 = self.encoder4(e3)      #2, 2048, 8, 8
+        e4 = F.dropout2d(e4, p=0.5)
 
-        f = self.center(e5)         #256, 4, 4
-        d5 = self.decoder5(f, e5)   #64, 8, 8        
-        d4 = self.decoder4(d5, e4)  #64, 16, 16
-        d3 = self.decoder3(d4, e3)  #64, 32, 32
-        d2 = self.decoder2(d3, e2)  #64, 64, 64
-        d1 = self.decoder1(d2)      #64, 128, 128
+        c = self.center(e4)         #2, 2048, 4, 4
+        d4 = self.decoder4(c, e4)   #2, 1024, 8, 8        
+        d3 = self.decoder3(d4, e3)  #2, 512, 16, 16
+        d2 = self.decoder2(d3, e2)  #2, 256, 32, 32
+        d1 = self.decoder1(d2, e1)  #2, 128, 64, 64
         
-        
-        f = torch.cat((
-                d1,
-                F.upsample(d2, scale_factor=2, mode='bilinear', align_corners=False),
-                F.upsample(d3, scale_factor=4, mode='bilinear', align_corners=False),
-                F.upsample(d4, scale_factor=8, mode='bilinear', align_corners=False),
-                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
-                ), 1)               #320, 128, 128
-        f = self.se_f(f)
+        f = self.hyper_column(d1, d2, d3, d4)
         f = F.dropout2d(f, p=0.5)
+
         out = self.outc(f)          #1, 101,101
     
 
