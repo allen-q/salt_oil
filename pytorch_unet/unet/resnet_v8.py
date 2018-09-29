@@ -14,11 +14,224 @@ model_urls = {
     'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
 }
 
-class Seq_Ex_Block(nn.Module):
+class _NonLocalBlockND(nn.Module):
+    def __init__(self, in_channels, inter_channels=None, dimension=3, mode='embedded_gaussian',
+                 sub_sample=True, bn_layer=True):
+        super(_NonLocalBlockND, self).__init__()
+
+        assert dimension in [1, 2, 3]
+        assert mode in ['embedded_gaussian', 'gaussian', 'dot_product', 'concatenation']
+
+        # print('Dimension: %d, mode: %s' % (dimension, mode))
+
+        self.mode = mode
+        self.dimension = dimension
+        self.sub_sample = sub_sample
+
+        self.in_channels = in_channels
+        self.inter_channels = inter_channels
+
+        if self.inter_channels is None:
+            self.inter_channels = in_channels // 4
+            if self.inter_channels == 0:
+                self.inter_channels = 1
+
+        if dimension == 3:
+            conv_nd = nn.Conv3d
+            max_pool = nn.MaxPool3d
+            bn = nn.BatchNorm3d
+        elif dimension == 2:
+            conv_nd = nn.Conv2d
+            max_pool = nn.MaxPool2d
+            bn = nn.BatchNorm2d
+        else:
+            conv_nd = nn.Conv1d
+            max_pool = nn.MaxPool1d
+            bn = nn.BatchNorm1d
+
+        self.g = conv_nd(in_channels=self.in_channels, out_channels=self.inter_channels,
+                         kernel_size=1, stride=1, padding=0)
+
+        if bn_layer:
+            self.W = nn.Sequential(
+                conv_nd(in_channels=self.inter_channels, out_channels=self.in_channels,
+                        kernel_size=1, stride=1, padding=0),
+                bn(self.in_channels)
+            )
+            nn.init.constant_(self.W[1].weight, 0)
+            nn.init.constant_(self.W[1].bias, 0)
+        else:
+            self.W = conv_nd(in_channels=self.inter_channels, out_channels=self.in_channels,
+                             kernel_size=1, stride=1, padding=0)
+            nn.init.constant_(self.W.weight, 0)
+            nn.init.constant_(self.W.bias, 0)
+
+        self.theta = None
+        self.phi = None
+        self.concat_project = None
+
+        if mode in ['embedded_gaussian', 'dot_product', 'concatenation']:
+            self.theta = conv_nd(in_channels=self.in_channels, out_channels=self.inter_channels,
+                                 kernel_size=1, stride=1, padding=0)
+            self.phi = conv_nd(in_channels=self.in_channels, out_channels=self.inter_channels,
+                               kernel_size=1, stride=1, padding=0)
+
+            if mode == 'embedded_gaussian':
+                self.operation_function = self._embedded_gaussian
+            elif mode == 'dot_product':
+                self.operation_function = self._dot_product
+            elif mode == 'concatenation':
+                self.operation_function = self._concatenation
+                self.concat_project = nn.Sequential(
+                    nn.Conv2d(self.inter_channels * 2, 1, 1, 1, 0, bias=False),
+                    nn.ReLU()
+                )
+        elif mode == 'gaussian':
+            self.operation_function = self._gaussian
+
+        if sub_sample:
+            self.g = nn.Sequential(self.g, max_pool(kernel_size=2))
+            if self.phi is None:
+                self.phi = max_pool(kernel_size=2)
+            else:
+                self.phi = nn.Sequential(self.phi, max_pool(kernel_size=2))
+
+    def forward(self, x):
+        '''
+        :param x: (b, c, t, h, w)
+        :return:
+        '''
+
+        output = self.operation_function(x)
+        return output
+
+    def _embedded_gaussian(self, x):
+        batch_size = x.size(0)
+
+        # g=>(b, c, t, h, w)->(b, 0.5c, t, h, w)->(b, thw, 0.5c)
+        g_x = self.g(x).view(batch_size, self.inter_channels, -1)
+        g_x = g_x.permute(0, 2, 1)
+
+        # theta=>(b, c, t, h, w)[->(b, 0.5c, t, h, w)]->(b, thw, 0.5c)
+        # phi  =>(b, c, t, h, w)[->(b, 0.5c, t, h, w)]->(b, 0.5c, thw)
+        # f=>(b, thw, 0.5c)dot(b, 0.5c, twh) = (b, thw, thw)
+        theta_x = self.theta(x).view(batch_size, self.inter_channels, -1)
+        theta_x = theta_x.permute(0, 2, 1)
+        phi_x = self.phi(x).view(batch_size, self.inter_channels, -1)
+        f = torch.matmul(theta_x, phi_x)
+        f_div_C = F.softmax(f, dim=-1)
+
+        # (b, thw, thw)dot(b, thw, 0.5c) = (b, thw, 0.5c)->(b, 0.5c, t, h, w)->(b, c, t, h, w)
+        y = torch.matmul(f_div_C, g_x)
+        y = y.permute(0, 2, 1).contiguous()
+        y = y.view(batch_size, self.inter_channels, *x.size()[2:])
+        W_y = self.W(y)
+        z = W_y + x
+
+        return z
+
+    def _gaussian(self, x):
+        batch_size = x.size(0)
+        g_x = self.g(x).view(batch_size, self.inter_channels, -1)
+        g_x = g_x.permute(0, 2, 1)
+
+        theta_x = x.view(batch_size, self.in_channels, -1)
+        theta_x = theta_x.permute(0, 2, 1)
+
+        if self.sub_sample:
+            phi_x = self.phi(x).view(batch_size, self.in_channels, -1)
+        else:
+            phi_x = x.view(batch_size, self.in_channels, -1)
+
+        f = torch.matmul(theta_x, phi_x)
+        f_div_C = F.softmax(f, dim=-1)
+
+        y = torch.matmul(f_div_C, g_x)
+        y = y.permute(0, 2, 1).contiguous()
+        y = y.view(batch_size, self.inter_channels, *x.size()[2:])
+        W_y = self.W(y)
+        z = W_y + x
+
+        return z
+
+    def _dot_product(self, x):
+        batch_size = x.size(0)
+
+        g_x = self.g(x).view(batch_size, self.inter_channels, -1)
+        g_x = g_x.permute(0, 2, 1)
+
+        theta_x = self.theta(x).view(batch_size, self.inter_channels, -1)
+        theta_x = theta_x.permute(0, 2, 1)
+        phi_x = self.phi(x).view(batch_size, self.inter_channels, -1)
+        f = torch.matmul(theta_x, phi_x)
+        N = f.size(-1)
+        f_div_C = f / N
+
+        y = torch.matmul(f_div_C, g_x)
+        y = y.permute(0, 2, 1).contiguous()
+        y = y.view(batch_size, self.inter_channels, *x.size()[2:])
+        W_y = self.W(y)
+        z = W_y + x
+
+        return z
+
+    def _concatenation(self, x):
+        batch_size = x.size(0)
+
+        g_x = self.g(x).view(batch_size, self.inter_channels, -1)
+        g_x = g_x.permute(0, 2, 1)
+
+        # (b, c, N, 1)
+        theta_x = self.theta(x).view(batch_size, self.inter_channels, -1, 1)
+        # (b, c, 1, N)
+        phi_x = self.phi(x).view(batch_size, self.inter_channels, 1, -1)
+
+        h = theta_x.size(2)
+        w = phi_x.size(3)
+        theta_x = theta_x.repeat(1, 1, 1, w)
+        phi_x = phi_x.repeat(1, 1, h, 1)
+
+        concat_feature = torch.cat([theta_x, phi_x], dim=1)
+        f = self.concat_project(concat_feature)
+        b, _, h, w = f.size()
+        f = f.view(b, h, w)
+
+        N = f.size(-1)
+        f_div_C = f / N
+
+        y = torch.matmul(f_div_C, g_x)
+        y = y.permute(0, 2, 1).contiguous()
+        y = y.view(batch_size, self.inter_channels, *x.size()[2:])
+        W_y = self.W(y)
+        z = W_y + x
+
+        return z
+
+
+class NONLocalBlock1D(_NonLocalBlockND):
+    def __init__(self, in_channels, inter_channels=None, mode='embedded_gaussian', sub_sample=True, bn_layer=True):
+        super(NONLocalBlock1D, self).__init__(in_channels,
+                                              inter_channels=inter_channels,
+                                              dimension=1, mode=mode,
+                                              sub_sample=sub_sample,
+                                              bn_layer=bn_layer)
+
+
+class NONLocalBlock2D(_NonLocalBlockND):
+    def __init__(self, in_channels, inter_channels=None, mode='embedded_gaussian', sub_sample=True, bn_layer=True):
+        super(NONLocalBlock2D, self).__init__(in_channels,
+                                              inter_channels=inter_channels,
+                                              dimension=2, mode=mode,
+                                              sub_sample=sub_sample,
+                                              bn_layer=bn_layer)
+        
+        
+class Seq_Ex_Block_C(nn.Module):
     '''(conv => BN => ReLU) * 2'''
     def __init__(self, in_ch, r):
-        super(Seq_Ex_Block, self).__init__()
-        self.se = nn.Sequential(
+        super(Seq_Ex_Block_C, self).__init__()
+        # channel squeeze
+        self.cs = nn.Sequential(
             GlobalAvgPool(),
             nn.Linear(in_ch, in_ch//r),
             nn.ReLU(inplace=True),
@@ -27,9 +240,40 @@ class Seq_Ex_Block(nn.Module):
         )
 
     def forward(self, x):
-        se_weight = self.se(x).unsqueeze(-1).unsqueeze(-1)
+        cs_weight = self.cs(x).unsqueeze(-1).unsqueeze(-1)
         #print(f'x:{x.sum()}, x_se:{x.mul(se_weight).sum()}')
-        return x.mul(se_weight)
+        return x.mul(cs_weight)
+
+
+class Seq_Ex_Block_S(nn.Module):
+    '''(conv => BN => ReLU) * 2'''
+    def __init__(self, in_ch):
+        super(Seq_Ex_Block_S, self).__init__()
+        # spacial squeeze
+        self.ss = nn.Sequential(
+            nn.Conv2d(in_ch, 1, 1),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        ss_weight = self.ss(x)
+        #print(f'x:{x.sum()}, x_se:{x.mul(se_weight).sum()}')
+        return x.mul(ss_weight)
+
+
+class Seq_Ex_Block_CS(nn.Module):
+    '''(conv => BN => ReLU) * 2'''
+    def __init__(self, in_ch, r):
+        super(Seq_Ex_Block_CS, self).__init__()
+        # spacial squeeze
+        self.ss = Seq_Ex_Block_S(in_ch)
+        self.cs = Seq_Ex_Block_C(in_ch, r)
+
+
+    def forward(self, x):
+        out = self.ss(x) + self.cs(x)
+        #print(f'x:{x.sum()}, x_se:{x.mul(se_weight).sum()}')
+        return out
 
 
 class SqueezeTensor(nn.Module):
@@ -37,7 +281,6 @@ class SqueezeTensor(nn.Module):
         super(SqueezeTensor, self).__init__()
     def forward(self, x):
         return x.squeeze()
-    
 
 class GlobalAvgPool(nn.Module):
     def __init__(self):
@@ -387,27 +630,36 @@ def resnet34(pretrained=False, **kwargs):
 class Decoder(nn.Module):
     def __init__(self, in_ch, ch, out_ch, r=16):
         super(Decoder, self).__init__()
-        self.conv1 = nn.Conv2d(in_ch, ch, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(ch, out_ch, kernel_size=3, padding=1)
-        self.se = Seq_Ex_Block(out_ch, r)
+        self.conv1 = nn.Sequential(
+                nn.Conv2d(in_ch, ch, kernel_size=3, padding=1),
+                nn.BatchNorm2d(ch),
+                nn.ReLU(inplace=True)
+            )
+        self.conv2 = nn.Sequential(
+                nn.Conv2d(ch, out_ch, kernel_size=3, padding=1),
+                nn.BatchNorm2d(out_ch),
+                nn.ReLU(inplace=True)
+            )   
+                
+        self.secs = Seq_Ex_Block_CS(out_ch, r)
         
     def forward(self, x, x2=None):
         x = F.upsample(x, scale_factor=2, mode='bilinear', align_corners=True)
         if x2 is not None:
             x = torch.cat([x, x2], 1)
             
-        x = F.relu(self.conv1(x), inplace=True)
-        x = F.relu(self.conv2(x), inplace=True)
-        x = self.se(x)
+        x_conv1 = self.conv1(x)
+        x_conv2 = self.conv2(x_conv1)
+        x_sesc = self.secs(x_conv2)
         #print(x.shape)
         
-        return x       
+        return x_sesc      
         
         
         
 class UResNet(nn.Module):
     def __init__(self,pretrained=False):
-        print(f'ResNet{"" if pretrained else "not"} using pretrained weights.')
+        print(f'ResNet{"" if pretrained else " not"} using pretrained weights.')
         super(UResNet, self).__init__()
         self.resnet = resnet34(pretrained=pretrained)
         
@@ -428,17 +680,16 @@ class UResNet(nn.Module):
                 nn.ReLU(inplace=True),
                 nn.Conv2d(512,256, kernel_size=3, padding=1),
                 nn.ReLU(inplace=True),
-                nn.MaxPool2d(kernel_size=2, stride=2)
+                nn.MaxPool2d(kernel_size=2, stride=2),
+                NONLocalBlock2D(256, mode='embedded_gaussian', sub_sample=False, bn_layer=True)
                 )
         
         self.decoder5 = Decoder(256+512, 512, 64)
         self.decoder4 = Decoder(64+256, 256, 64)
         self.decoder3 = Decoder(64+128, 128, 64)
         self.decoder2 = Decoder(64+64, 64, 64)
-        self.decoder1 = Decoder(64, 32, 64)
-        
-        self.se_f = Seq_Ex_Block(320, 16)
-               
+        self.decoder1 = Decoder(64, 32, 64)        
+        #self.se_f = Seq_Ex_Block_CS(320, 16)               
         self.outc = OutConv(320, logits=True)
     def forward(self, x):
         mean = [0.485, 0.456, 0.406]
@@ -457,6 +708,7 @@ class UResNet(nn.Module):
         e5 = self.encoder5(e4)      #512, 8, 8
         
         f = self.center(e5)         #256, 4, 4
+        
         d5 = self.decoder5(f, e5)   #64, 8, 8        
         d4 = self.decoder4(d5, e4)  #64, 16, 16
         d3 = self.decoder3(d4, e3)  #64, 32, 32
@@ -471,10 +723,10 @@ class UResNet(nn.Module):
                 F.upsample(d4, scale_factor=8, mode='bilinear', align_corners=False),
                 F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
                 ), 1)               #320, 128, 128
-        f = self.se_f(f)
+        #f = self.se_f(f)
         f = F.dropout2d(f, p=0.5)
         out = self.outc(f)          #1, 101,101
     
-        
+
         return out
     
