@@ -706,7 +706,7 @@ class UResNet(nn.Module):
         e3 = self.encoder3(e2)      #128, 32, 32
         e4 = self.encoder4(e3)      #256, 16, 16
         e5 = self.encoder5(e4)      #512, 8, 8
-        
+        e5 = F.dropout2d(e5, p=0.5)
         f = self.center(e5)         #256, 4, 4
         
         d5 = self.decoder5(f, e5)   #64, 8, 8        
