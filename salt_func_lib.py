@@ -45,6 +45,7 @@ from Augmentor import *
 global log
 
 def get_logger(logger_name, level=logging.DEBUG):
+    global log
     # logger
     file_name = '{}{}'.format('../salt_net/logs/',
                                 logger_name)
@@ -73,8 +74,10 @@ def get_logger(logger_name, level=logging.DEBUG):
     logger.handlers = []
     logger.addHandler(fileHandler)
     logger.addHandler(streamHandler)
+    
+    log = logging.getLogger(logger_name)
 
-    return logging.getLogger(logger_name)
+    return log
 
 if torch.cuda.is_available():
     dtype = torch.cuda.FloatTensor ## UNCOMMENT THIS LINE IF YOU'RE ON A GPU!
