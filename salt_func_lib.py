@@ -41,6 +41,7 @@ import ipykernel
 import Augmentor
 from Augmentor.Operations import *
 from Augmentor import *
+import PIL
 
 global log
 
