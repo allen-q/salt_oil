@@ -33,6 +33,16 @@ import logging
 from io import BytesIO
 import copy
 from itertools import  filterfalse
+from notebook import notebookapp
+import urllib
+import json
+import os
+import ipykernel
+import Augmentor
+from Augmentor.Operations import *
+from Augmentor import *
+
+global log
 
 def get_logger(logger_name, level=logging.DEBUG):
     # logger
@@ -66,8 +76,6 @@ def get_logger(logger_name, level=logging.DEBUG):
 
     return logging.getLogger(logger_name)
 
-log = get_logger('SaltNet')
-
 if torch.cuda.is_available():
     dtype = torch.cuda.FloatTensor ## UNCOMMENT THIS LINE IF YOU'RE ON A GPU!
 else:
@@ -89,204 +97,6 @@ class IOU_Loss(nn.Module):
         #g()
 
         return iou_loss
-
-
-
-class Rescale(object):
-    """Rescale the image in a sample to a given size.
-
-    Args:
-        output_size (int): Desired output size.
-    """
-
-    def __init__(self, scale='random', min_scale=1, max_scale=3):
-        self.scale = scale
-        self.min_scale = min_scale
-        self.max_scale = max_scale
-
-    def __call__(self, sample):
-        image, mask = sample['image'], sample['mask']
-
-        if self.scale == 'random':
-            current_scale = np.random.uniform(low=self.min_scale, high=self.max_scale)
-        else:
-            current_scale = self.scale
-
-        output_size = round(np.max(image.shape) * current_scale)
-
-        if mask is not None:
-            image = np.concatenate([image,mask],2)
-        #print(output_size)
-        resized_img = transform.resize(image, (output_size, output_size), mode='constant', preserve_range=True)
-        #print(resized_img.shape)
-        img_final = resized_img[:,:,0:1]
-        if mask is not None:
-            mask_final = resized_img[:,:,1:]
-
-        return {'image':img_final, 'mask':mask_final}
-
-class RandomCrop(object):
-    """Crop randomly the image in a sample.
-
-    Args:
-        output_size (int): Desired output size.
-    """
-
-    def __init__(self, output_size):
-        assert isinstance(output_size, int)
-        self.output_size = output_size
-
-    def __call__(self, sample):
-        image, mask = sample['image'], sample['mask']
-        if mask is not None:
-            image = np.concatenate([image,mask],2)
-
-        h, w = image.shape[:2]
-
-        new_h = new_w = self.output_size
-        top = 0 if h == new_h else np.random.randint(0, h - new_h)
-        left = 0 if w == new_w else np.random.randint(0, w - new_w)
-
-        #print(f'top: {top}, left: {left}')
-        cropped_image = image[top: top + new_h,
-                      left: left + new_w]
-
-        img_final = cropped_image[:,:,0:1]
-        if mask is not None:
-            mask_final = cropped_image[:,:,1:]
-
-        return {'image':img_final, 'mask':mask_final}
-
-class Flip(object):
-    """Crop randomly the image in a sample.
-
-    Args:
-        output_size (int): Desired output size.
-    """
-
-    def __init__(self, orient='random'):
-        assert orient in ['H', 'V', 'NA', 'random']
-        self.orient = orient
-
-    def __call__(self, sample):
-        image, mask = sample['image'], sample['mask']
-        if self.orient=='random':
-            current_orient = np.random.choice(['H', 'W', 'NA', 'NA'])
-        else:
-            current_orient = self.orient
-        #print(current_orient)
-        if mask is not None:
-            image = np.concatenate([image,mask],2)
-
-        if current_orient == 'H':
-            flipped_image = image[:,::-1,:] - np.zeros_like(image)
-        elif current_orient == 'W':
-            flipped_image = image[::-1,:,:] - np.zeros_like(image)
-        else:
-            # do not flip if orient is NA
-            flipped_image = image
-        img_final = flipped_image[:,:,0:1]
-        if mask is not None:
-            mask_final = flipped_image[:,:,1:]
-
-        return {'image':img_final, 'mask':mask_final}
-
-'''composed = transforms.Compose([Rescale(scale='random', max_scale=5),
-                               RandomCrop(101),
-                               Flip(orient='random')])
-
-
-transformed = composed({'image':image, 'mask':mask})
-x_final, m_final = transformed['image'], transformed['mask']'''
-
-
-class SaltDataset(Dataset):
-    """Face Landmarks dataset."""
-
-    def __init__(self, np_img, np_mask, df_depth, mean_img, out_size=101, out_ch=1, transform=None):
-        """
-        Args:
-            data_dir (string): Path to the image files.
-            train (bool): Load train or test data
-            transform (callable, optional): Optional transform to be applied
-                on a sample.
-        """
-        self.np_img = np_img
-        self.np_mask = np_mask.clip(0,1)
-        self.df_depth = df_depth
-        self.mean_img = mean_img
-        self.out_size = out_size
-        self.out_ch = out_ch
-        self.transform = transform
-
-    def __len__(self):
-        return len(self.np_img)
-
-    def __getitem__(self, idx):
-
-        X_orig = self.np_img[idx]
-        X = X_orig - self.mean_img
-
-        if self.np_mask is None:
-            y = np.zeros((101,101,1))
-        else:
-            y = self.np_mask[idx]
-
-        if self.transform:
-            transformed = self.transform({'image':X, 'mask': y})
-            X = transformed['image']
-            y = transformed['mask']
-
-        #print(X.dtype)
-        X = np.moveaxis(X, -1,0)
-
-        pad_size = self.out_size - X.shape[2]
-        pad_first = pad_size//2
-        pad_last = pad_size - pad_first
-        X = np.pad(X, [(0, 0),(pad_first, pad_last), (pad_first, pad_last)], mode='reflect')
-        #print(X.dtype)
-
-        d = self.df_depth.iloc[idx,0]
-        #id = self.df_depth.index[idx]
-        #from boxx import g
-        #g()
-        X = torch.from_numpy(X).float().type(dtype)
-        X = X.repeat(self.out_ch,1,1)
-        y = transform.resize(y, (101, 101), mode='constant', preserve_range=True)
-        y = torch.from_numpy(y).float().squeeze().type(dtype)
-
-        return (X,y,d,idx)
-
-
-class SaltNet(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.seq = nn.Sequential(
-            nn.Conv2d(1,64,3, padding=10),
-            nn.MaxPool2d(2, 2),
-            nn.ReLU(),
-            nn.BatchNorm2d(64),
-            nn.Conv2d(64,128,3),
-            nn.MaxPool2d(2, 2),
-            nn.ReLU(),
-            nn.BatchNorm2d(128),
-            nn.Conv2d(128,256,3),
-            nn.MaxPool2d(2, 2),
-            nn.ReLU(),
-            nn.BatchNorm2d(256),
-            nn.ConvTranspose2d(256, 128, 2, stride=2),
-            nn.ReLU(),
-            nn.BatchNorm2d(128),
-            nn.ConvTranspose2d(128, 64, 2, stride=2),
-            nn.ReLU(),
-            nn.BatchNorm2d(64),
-            nn.ConvTranspose2d(64, 1, 2, stride=2, padding=1),
-            nn.Sigmoid()
-        )
-
-    def forward(self, X):
-        out = self.seq(X)
-        return torch.clamp(out[:,:,:-1,:-1].squeeze(), 0.0, 1.0)
 
 
 def load_all_data():
@@ -865,4 +675,404 @@ class HingeLoss(nn.Module):
 
 
 
+def get_notebook_name():
+    """Returns the absolute path of the Notebook or None if it cannot be determined
+    NOTE: works only when the security is token-based or there is also no password
+    """
+    connection_file = os.path.basename(ipykernel.get_connection_file())
+    kernel_id = connection_file.split('-', 1)[1].split('.')[0]
 
+    for srv in notebookapp.list_running_servers():
+        try:
+            if srv['token']=='' and not srv['password']:  # No token and no password, ahem...
+                req = urllib.request.urlopen(srv['url']+'api/sessions')
+            else:
+                req = urllib.request.urlopen(srv['url']+'api/sessions?token='+srv['token'])
+            sessions = json.load(req)
+            for sess in sessions:
+                if sess['kernel']['id'] == kernel_id:                    
+                    return ''.join(sess['notebook']['name'].split('.')[:-1])
+        except:
+            pass  # There may be stale entries in the runtime directory 
+    return None
+
+
+def adjust_brightness(img, alpha=None, beta=None):
+    if alpha is None:
+        # get a random num from 0.75 to 1.25
+        alpha = (random.random()/2)+0.75
+    if beta is None:
+        # get a random num from -30 to 30
+        beta = round((random.random()-0.5)*60)
+    #print(f'a:{alpha}, b:{beta}')
+    img_new = cv.convertScaleAbs(img, alpha=alpha, beta=beta)
+    return img_new.reshape(img.shape)
+
+class SaltDataset(Dataset):
+    """Face Landmarks dataset."""
+
+    def __init__(self, np_img, np_mask, df_depth, mean_img, out_size=101, 
+                 out_ch=1, transform=None, random_brightness=0):
+        """
+        Args:
+            data_dir (string): Path to the image files.
+            train (bool): Load train or test data
+            transform (callable, optional): Optional transform to be applied
+                on a sample.
+        """
+        self.np_img = np_img
+        self.np_mask = np_mask.clip(0,1)
+        self.df_depth = df_depth
+        self.mean_img = mean_img
+        self.out_size = out_size
+        self.out_ch = out_ch
+        self.transform = transform
+        self.random_brightness = random_brightness
+
+    def __len__(self):
+        return len(self.np_img)
+
+    def __getitem__(self, idx):
+        if isinstance(idx, torch.Tensor):
+            idx = idx.item()
+            
+        X = self.np_img[idx]
+        #X = X - self.mean_img
+
+        if self.np_mask is None:
+            y = np.zeros((101,101,1))
+        else:
+            y = self.np_mask[idx]
+
+        if self.transform:
+            img_in = PIL.Image.fromarray(np.c_[np.tile(X, 2), y*255])
+            #img_in = PIL.Image.fromarray(np.tile(y, 3)*255)
+            transformed = np.array(self.transform(img_in))
+            #X = np.clip(transformed[:,:,0:1]/255, 0., 1.) - self.mean_img
+            X = transformed[:,:,0:1]
+            y = np.clip(transformed[:,:,2:3]/255, 0., 1.)
+            
+        if self.random_brightness > random.random():            
+            X = adjust_brightness(X)
+            X = np.clip(X/255, 0., 1.) - self.mean_img
+        else:
+            X = np.clip(X/255, 0., 1.) - self.mean_img            
+        #from boxx import g
+        #g()
+        X = np.moveaxis(X, -1,0)
+
+        pad_size = self.out_size - X.shape[2]
+        pad_first = pad_size//2
+        pad_last = pad_size - pad_first
+        X = np.pad(X, [(0, 0),(pad_first, pad_last), (pad_first, pad_last)], mode='reflect')
+
+        d = self.df_depth.iloc[idx,0]
+
+        X = torch.from_numpy(X).float().type(dtype)
+        X = X.repeat(self.out_ch,1,1)
+        y = transform.resize(y, (101, 101), mode='constant', preserve_range=True)
+        y = torch.from_numpy(y).ge(0.5).float().squeeze().type(dtype)
+
+        return (X,y,d,idx)
+    
+    
+class Pipeline_Salt(Augmentor.Pipeline):
+    def __init__(self, source_directory=None, output_directory="output", save_format=None):
+        super(Pipeline_Salt, self).__init__(source_directory, output_directory, save_format)
+
+    def torch_transform(self):
+        def _transform(image):
+            for operation in self.operations:
+                r = round(random.uniform(0, 1), 1)
+                if r <= operation.probability:
+                    if not isinstance(image, list):
+                        image = [image]                        
+                    #print(type(operation))
+                    #print(np.array(image[0]).shape)                        
+                    image = operation.perform_operation(image)[0]
+
+            return image
+
+            
+        return _transform
+    
+    def crop_random_align(self, probability, min_factor, max_factor, mask_diff_pct, resample_filter="BICUBIC"):     
+        if not 0 < probability <= 1:
+            raise ValueError(Pipeline._probability_error_text)
+        elif not (min_factor>0) and (min_factor<=1):
+            raise ValueError("min_factor must be between 0 and 1.")
+        elif not (max_factor>0) and (min_factor<=1):
+            raise ValueError("max_factor must be between 0 and 1.")
+        elif resample_filter not in Pipeline._legal_filters:
+            raise ValueError("The save_filter argument must be one of %s." % Pipeline._legal_filters)
+        else:
+            self.add_operation(CropRandomAlign(probability, min_factor, max_factor, mask_diff_pct, resample_filter))
+            
+    def resize_random(self, probability, min_factor, max_factor, resample_filter="BICUBIC"):
+        if not 0 < probability <= 1:
+            raise ValueError(Pipeline._probability_error_text)
+        elif resample_filter not in Pipeline._legal_filters:
+            raise ValueError("The save_filter argument must be one of %s." % Pipeline._legal_filters)
+        else:
+            self.add_operation(ResizeRandom(probability=probability, min_factor=min_factor,
+                                            max_factor=max_factor, resample_filter=resample_filter))
+            
+class ResizeRandom(Operation):
+    """
+    This class is used to resize an image by a random factor between min_factor and max_factor.
+    """
+    def __init__(self, probability, min_factor, max_factor, resample_filter="BICUBIC"):
+        Operation.__init__(self, probability)
+        self.min_factor = min_factor
+        self.max_factor = max_factor
+        self.resample_filter = resample_filter
+
+    def perform_operation(self, images):
+        """
+        Resize the passed image and returns the resized image. Uses the
+        parameters passed to the constructor to resize the passed image.
+
+        :param images: The image to resize.
+        :type images: List containing PIL.Image object(s).
+        :return: The transformed image(s) as a list of object(s) of type
+         PIL.Image.
+        """
+
+        def do(image):
+            width, height = image.size
+            resize_factor = random.randrange(round(self.min_factor*100), round(self.max_factor*100), 1)/100
+            width = round(width*resize_factor) 
+            height = round(height*resize_factor) 
+            print(f'New Width: {width}, New Height: {height}')
+            return image.resize((width, height), eval("Image.%s" % self.resample_filter))
+
+        augmented_images = []
+
+        for image in images:
+            augmented_images.append(do(image))
+
+        return augmented_images
+    
+class CropRandomAlign(Operation):
+    """
+    This class is used to crop images a random factor between min_factor and max_factor and resize it to its original size.
+    """
+    def __init__(self, probability, min_factor, max_factor, mask_diff_pct, resample_filter="BICUBIC"):
+        Operation.__init__(self, probability)
+        self.min_factor = min_factor
+        self.max_factor = max_factor
+        self.mask_diff_pct = mask_diff_pct
+        self.resample_filter = resample_filter
+
+    def perform_operation(self, images):
+        """
+        Crop the passed :attr:`images` by percentage area, returning the crop as an
+        image.
+
+        :param images: The image(s) to crop an area from.
+        :type images: List containing PIL.Image object(s).
+        :return: The transformed image(s) as a list of object(s) of type
+         PIL.Image.
+        """
+
+        resize_factor = random.randrange(round(self.min_factor*100), round(self.max_factor*100), 1)/100
+
+        # The images must be of identical size, which is checked by Pipeline.ground_truth().
+        w, h = images[0].size
+
+        w_new = int(floor(w * resize_factor))  # TODO: Floor might return 0, so we need to check this.
+        h_new = int(floor(h * resize_factor))
+
+        def do(image, w, h):
+            img_np = np.array(image)
+            mask_in = img_np[:,:,2]
+            mask_in_pct = (mask_in>0).sum()/mask_in.size
+            img_out_candidate = None
+            lowest_diff = 1
+            for i in range(20):  
+                left_shift = random.randint(0, int((w - w_new)))
+                down_shift = random.randint(0, int((h - h_new)))
+                img_out = image.crop((left_shift, down_shift, w_new + left_shift, h_new + down_shift))
+                mask_out = np.array(img_out)[:,:,2]
+                mask_out_pct = (mask_out>0).sum()/mask_out.size
+                #print(f'mask_in_pct:{mask_in_pct}, mask_out_pct:{mask_out_pct}')
+                if (mask_in_pct==0) or (abs((mask_out_pct/mask_in_pct)-1) <= self.mask_diff_pct):                    
+                    img_out_candidate = img_out
+                    break
+                if (abs((mask_out_pct/mask_in_pct)-1)) <= lowest_diff:
+                    lowest_diff = abs((mask_out_pct/mask_in_pct)-1)
+                    img_out_candidate = img_out
+            if img_out_candidate is None:
+                img_out_candidate = image
+                print('Failed to crop image to fit requirements. Use orignal image.')
+            #print(f'Image Size after crop:{img_out_candidate.size}')
+            mask_out = np.array(img_out_candidate)[:,:,2]
+            #print(f'image mask pct:{(mask_out>0).sum()/mask_out.size}')
+            img_out_final = img_out_candidate.resize((w, h), eval("Image.%s" % self.resample_filter))
+            #print(f'Image Size after resize:{img_out_final.size}')            
+            
+            return img_out_final
+            
+        augmented_images = []
+
+        for image in images:
+            augmented_images.append(do(image, w, h))
+
+        return augmented_images
+    
+def log_iter_stats(y_pred, y_batch, X_batch, X_id, train_params, other_data, epoch_losses, epoch, iter_count, start):
+    #from boxx import g
+    #g(), 
+    epoch_losses = [round(e.item(),4) for e in torch.stack(epoch_losses).mean(0)]
+    iou_batch = calc_mean_iou(y_pred.ge(train_params['mask_cutoff']), y_batch)
+    iou_acc = calc_clf_accuracy(y_pred.ge(train_params['mask_cutoff']), y_batch)
+
+    log.info('Losses: {}, Batch IOU: {:.4f}, Batch Acc: {:.4f} at iter {}, epoch {}, Time: {}'.format(
+            epoch_losses, iou_batch, iou_acc, iter_count, epoch, timeSince(start))
+    )
+
+    X_train = other_data['X_train']
+    y_train = other_data['y_train']
+    X_train_mean_img = other_data['X_train_mean_img']
+    #print(all_losses)
+    X_orig = X_train[X_id[0]].squeeze()/255
+    X_tsfm = X_batch[0,0].squeeze().cpu().detach().numpy()
+    X_tsfm = X_tsfm[13:114,13:114] + X_train_mean_img.squeeze()
+    y_orig = y_train[X_id[0]].squeeze()
+    y_tsfm = (y_batch[0].squeeze().cpu().detach().numpy())
+    y_tsfm_pred =  y_pred[0].squeeze().gt(train_params['mask_cutoff'])
+    plot_img_mask_pred([X_orig, X_tsfm, y_orig, y_tsfm, y_tsfm_pred],
+                       ['X Original', 'X Transformed', 'y Original', 'y Transformed', 'y Predicted'])
+    
+
+def log_epoch_stats(model, optimizer, scheduler, y_pred, y_batch, X_batch, X_id, other_data, pred_vs_true_epoch, train_params, phase, epoch, iter_count, best_iou, all_losses, epoch_losses, best_model):    
+    y_pred_epoch = torch.cat([e[0] for e in pred_vs_true_epoch])
+    y_true_epoch = torch.cat([e[1] for e in pred_vs_true_epoch])
+
+    mean_iou_epoch = calc_mean_iou(y_pred_epoch.ge(train_params['mask_cutoff']), y_true_epoch.float())
+    mean_acc_epoch = calc_clf_accuracy(y_pred_epoch.ge(train_params['mask_cutoff']), y_true_epoch.float())
+    mean_loss_epoch = [round(e.item(),4) for e in torch.stack(epoch_losses).mean(0)]
+
+    if phase == 'val':        
+        X_val = other_data['X_val']
+        y_val = other_data['y_val']
+        X_orig = X_val[X_id[0]].squeeze()/255
+        y_orig = y_val[X_id[0]].squeeze()
+        y_pred2 =  y_pred[0].squeeze().gt(train_params['mask_cutoff'])
+        plot_img_mask_pred([X_orig, y_orig, y_pred2],
+                           ['Val X Original', 'Val y Original', 'Val y Predicted'])
+        if mean_iou_epoch > best_iou:
+            best_iou = mean_iou_epoch
+            stats = {'best_iou': best_iou,
+                   'all_losses': all_losses,
+                   'iter_count': iter_count}
+            best_model = (epoch, copy.deepcopy(model.state_dict()),
+                                              copy.deepcopy(optimizer.state_dict()),
+                                              copy.deepcopy(scheduler.state_dict()), stats, train_params['model_save_name'], '.')
+            log.info(save_model_state_to_chunks(*best_model))
+            log.info('Best Val Mean IOU so far: {}'.format(best_iou))        
+        log.info('Val   IOU: {:.4f}, Acc: {:.4f}, Best Val IOU: {:.4f} at epoch {}'.format(mean_iou_epoch, mean_acc_epoch, best_iou, epoch))
+    else:
+        log.info('Train IOU: {:.4f}, Acc: {:.4f}, Loss: {} at epoch {}'.format(mean_iou_epoch, mean_acc_epoch, mean_loss_epoch, epoch))
+        X_train = other_data['X_train']
+        y_train = other_data['y_train']
+        X_train_mean_img = other_data['X_train_mean_img']
+        X_orig = X_train[X_id[0]].squeeze()/255
+        X_tsfm = X_batch[0,0].squeeze().cpu().detach().numpy()
+        X_tsfm = X_tsfm[13:114,13:114] + X_train_mean_img.squeeze()
+        y_orig = y_train[X_id[0]].squeeze()
+        y_tsfm = (y_batch[0].squeeze().cpu().detach().numpy())
+        y_tsfm_pred =  y_pred[0].squeeze().gt(train_params['mask_cutoff'])
+        plot_img_mask_pred([X_orig, X_tsfm, y_orig, y_tsfm, y_tsfm_pred],
+                           ['X Original', 'X Transformed', 'y Original', 'y Transformed', 'y Predicted'])
+        
+    return best_iou, best_model
+
+def save_model_to_git(epoch, train_params, num_epochs, prev_best_iou, best_iou, best_model):    
+    if (epoch % train_params['save_model_every']== 0) | (epoch == num_epochs-1):
+        if train_params['model_save_name'] is None:
+            log.info("Skip pushing model to git as model_save_name is None.")
+        elif (best_model is not None) and (best_iou > prev_best_iou):
+            log.info(save_model_state_to_chunks(*best_model))
+            push_model_to_git(ckp_name=train_params['model_save_name'])
+            prev_best_iou = best_iou
+        else:
+            log.info("Skip pushing model to git as there's no improvement")
+            
+    return prev_best_iou
+
+def calc_loss(y_pred, y_batch, loss_fns, loss_fn_weights):
+     losses = []
+     for loss_fn, loss_fn_weight in zip(loss_fns, loss_fn_weights):
+         loss = loss_fn_weight * loss_fn(y_pred, y_batch)
+         losses.append(loss)  
+
+     return torch.stack(losses + [torch.stack(losses).sum()])
+
+def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, scheduler, train_params, other_data):
+    global log 
+    log = train_params['log']
+    log.info('Start Training...')    
+    log.info((dataloaders, loss_fns, loss_fn_weights, optimizer, scheduler, train_params))
+    num_epochs = train_params['num_epochs']
+    start = time.time()
+    if torch.cuda.is_available():
+        model.cuda()
+    best_model = None
+    best_iou = 0.0    
+    prev_best_iou = train_params['model_save_iou_threshold']
+    all_losses = []
+    iter_count = 0
+
+    for epoch in range(1, num_epochs+1):
+        log.info('Epoch {}/{}'.format(epoch, num_epochs))
+        log.info('-' * 20)
+        if (epoch % train_params['save_log_every'] == 0):
+            push_log_to_git()
+        epoch_losses = []
+        for phase in ['train', 'val']:
+            model.train() if phase == 'train' else model.eval()      
+            pred_vs_true_epoch = []
+            for X_batch, y_batch, d_batch, X_id in dataloaders[phase]:
+                # zero the parameter gradients
+                optimizer.zero_grad()
+                with torch.set_grad_enabled(phase == 'train'):
+                    y_pred = model(X_batch)
+                    pred_vs_true_epoch.append([y_pred, y_batch])
+                    # backward + optimize only if in training phase
+                    if phase == 'train':
+                        losses = calc_loss(y_pred, y_batch.float(), loss_fns, loss_fn_weights)
+                        epoch_losses.append(losses)
+                        all_losses.append(losses)
+                        loss = losses[-1]
+                        loss.backward()
+                        optimizer.step()
+                        iter_count += 1
+            best_iou, best_model = (
+                    log_epoch_stats(model, optimizer, scheduler, y_pred, 
+                                    y_batch, X_batch, X_id, other_data, 
+                                    pred_vs_true_epoch, train_params, 
+                                    phase, epoch, iter_count, best_iou, 
+                                    all_losses, epoch_losses, best_model)
+                    )
+            
+        prev_best_iou = save_model_to_git(epoch, train_params, num_epochs, prev_best_iou, best_iou, best_model)
+        #from boxx import g
+        #g()
+        epoch_avg_loss = np.mean([e[-1].item() for e in epoch_losses])
+        log.info(f'scheduler best: {scheduler.best} num_bad_epochs:{scheduler.num_bad_epochs}')
+        log.info(scheduler.step(epoch_avg_loss))
+
+
+    # load best model weights
+    model.load_state_dict(best_model[1])
+    log.info('-' * 20)
+    log.info(f'Training complete in {(time.time() - start) // 60} mins. Best Val IOU {round(best_iou, 4)}')
+
+    return model
+
+def setup_train(config_list):
+    for conf in config_list:
+        log.info(conf)
+    for conf in config_list:
+        exec(conf)
