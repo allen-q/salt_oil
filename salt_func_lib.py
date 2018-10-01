@@ -42,6 +42,7 @@ import Augmentor
 from Augmentor.Operations import *
 from Augmentor import *
 import PIL
+import cv2 as cv
 
 global log
 
