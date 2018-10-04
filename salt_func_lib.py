@@ -76,7 +76,7 @@ def get_logger(logger_name, level=logging.DEBUG):
     logger.handlers = []
     logger.addHandler(fileHandler)
     logger.addHandler(streamHandler)
-    
+
     log = logging.getLogger(logger_name)
 
     return log
@@ -695,10 +695,10 @@ def get_notebook_name():
                 req = urllib.request.urlopen(srv['url']+'api/sessions?token='+srv['token'])
             sessions = json.load(req)
             for sess in sessions:
-                if sess['kernel']['id'] == kernel_id:                    
+                if sess['kernel']['id'] == kernel_id:
                     return ''.join(sess['notebook']['name'].split('.')[:-1])
         except:
-            pass  # There may be stale entries in the runtime directory 
+            pass  # There may be stale entries in the runtime directory
     return None
 
 
@@ -716,7 +716,7 @@ def adjust_brightness(img, alpha=None, beta=None):
 class SaltDataset(Dataset):
     """Face Landmarks dataset."""
 
-    def __init__(self, np_img, np_mask, df_depth, mean_img, out_size=101, 
+    def __init__(self, np_img, np_mask, df_depth, mean_img, out_size=101,
                  out_ch=1, transform=None, random_brightness=0):
         """
         Args:
@@ -740,7 +740,7 @@ class SaltDataset(Dataset):
     def __getitem__(self, idx):
         if isinstance(idx, torch.Tensor):
             idx = idx.item()
-            
+
         X = self.np_img[idx]
         #X = X - self.mean_img
 
@@ -756,12 +756,13 @@ class SaltDataset(Dataset):
             #X = np.clip(transformed[:,:,0:1]/255, 0., 1.) - self.mean_img
             X = transformed[:,:,0:1]
             y = np.clip(transformed[:,:,2:3]/255, 0., 1.)
-            
-        if self.random_brightness > random.random():            
-            X = adjust_brightness(X)
+
+        if self.random_brightness > random.random():
+            # disable brightness adjustment
+            #X = adjust_brightness(X)
             X = np.clip(X/255, 0., 1.) - self.mean_img
         else:
-            X = np.clip(X/255, 0., 1.) - self.mean_img            
+            X = np.clip(X/255, 0., 1.) - self.mean_img
         #from boxx import g
         #g()
         X = np.moveaxis(X, -1,0)
@@ -779,8 +780,8 @@ class SaltDataset(Dataset):
         y = torch.from_numpy(y).ge(0.5).float().squeeze().type(dtype)
 
         return (X,y,d,idx)
-    
-    
+
+
 class Pipeline_Salt(Augmentor.Pipeline):
     def __init__(self, source_directory=None, output_directory="output", save_format=None):
         super(Pipeline_Salt, self).__init__(source_directory, output_directory, save_format)
@@ -791,17 +792,17 @@ class Pipeline_Salt(Augmentor.Pipeline):
                 r = round(random.uniform(0, 1), 1)
                 if r <= operation.probability:
                     if not isinstance(image, list):
-                        image = [image]                        
+                        image = [image]
                     #print(type(operation))
-                    #print(np.array(image[0]).shape)                        
+                    #print(np.array(image[0]).shape)
                     image = operation.perform_operation(image)[0]
 
             return image
 
-            
+
         return _transform
-    
-    def crop_random_align(self, probability, min_factor, max_factor, mask_diff_pct, resample_filter="BICUBIC"):     
+
+    def crop_random_align(self, probability, min_factor, max_factor, mask_diff_pct, resample_filter="BICUBIC"):
         if not 0 < probability <= 1:
             raise ValueError(Pipeline._probability_error_text)
         elif not (min_factor>0) and (min_factor<=1):
@@ -812,8 +813,8 @@ class Pipeline_Salt(Augmentor.Pipeline):
             raise ValueError("The save_filter argument must be one of %s." % Pipeline._legal_filters)
         else:
             self.add_operation(CropRandomAlign(probability, min_factor, max_factor, mask_diff_pct, resample_filter))
-            
-    def resize_random(self, probability, min_factor, max_factor, resample_filter="BICUBIC"):
+
+    def resize_random(self, probability, min_factor, max_factor, resample_filter="BILINEAR"):
         if not 0 < probability <= 1:
             raise ValueError(Pipeline._probability_error_text)
         elif resample_filter not in Pipeline._legal_filters:
@@ -821,7 +822,86 @@ class Pipeline_Salt(Augmentor.Pipeline):
         else:
             self.add_operation(ResizeRandom(probability=probability, min_factor=min_factor,
                                             max_factor=max_factor, resample_filter=resample_filter))
-            
+    def rotate_random_align(self, probability):
+        if not 0 < probability <= 1:
+            raise ValueError(Pipeline._probability_error_text)
+        else:
+            self.add_operation(RotateRandomAlign(probability=probability))
+
+
+class RotateRandomAlign(Operation):
+    """
+    This class is used to crop images a random factor between min_factor and max_factor and resize it to its original size.
+    """
+    def __init__(self, probability):
+        Operation.__init__(self, probability)
+
+
+    def perform_operation(self, images):
+        def do(image):
+            img_np = np.array(image)
+            mask_in = img_np[:,:,2]
+            mask_in_pct = (mask_in>0).sum()/mask_in.size
+            #print(f'mask_in_pct: {mask_in_pct}')
+            # if mask area is too small, do not rotate otherwise mask will become all black.
+            if (mask_in_pct > 0) and (mask_in_pct <= 0.02):
+                #print('No Change')
+                return image
+            elif mask_in_pct==0:
+                #for iamge with black mask, rotate it up to 15 degree.
+                mask_in_pct = 1
+            # rotate between 2 to 15 degree based on mask area. Rotate more if mask area is bigger.
+            rotation_bound = np.clip(mask_in_pct*100, 5, 15).round().astype(int)
+            rotation = random.randint(2, rotation_bound)
+            left_or_right = random.randint(0, 1)
+            if left_or_right == 0:
+                rotation = -rotation
+            #print(f'rotation: {rotation}')
+            # Get size before we rotate
+            x = image.size[0]
+            y = image.size[1]
+
+            # Rotate, while expanding the canvas size
+            image = image.rotate(rotation, expand=True, resample=Image.BILINEAR)
+
+            # Get size after rotation, which includes the empty space
+            X = image.size[0]
+            Y = image.size[1]
+
+            # Get our two angles needed for the calculation of the largest area
+            angle_a = abs(rotation)
+            angle_b = 90 - angle_a
+
+            # Python deals in radians so get our radians
+            angle_a_rad = math.radians(angle_a)
+            angle_b_rad = math.radians(angle_b)
+
+            # Calculate the sins
+            angle_a_sin = math.sin(angle_a_rad)
+            angle_b_sin = math.sin(angle_b_rad)
+
+            # Find the maximum area of the rectangle that could be cropped
+            E = (math.sin(angle_a_rad)) / (math.sin(angle_b_rad)) * \
+                (Y - X * (math.sin(angle_a_rad) / math.sin(angle_b_rad)))
+            E = E / 1 - (math.sin(angle_a_rad) ** 2 / math.sin(angle_b_rad) ** 2)
+            B = X - E
+            A = (math.sin(angle_a_rad) / math.sin(angle_b_rad)) * B
+
+            # Crop this area from the rotated image
+            # image = image.crop((E, A, X - E, Y - A))
+            image = image.crop((int(round(E)), int(round(A)), int(round(X - E)), int(round(Y - A))))
+
+            # Return the image, re-sized to the size of the image passed originally
+            return image.resize((x, y), resample=Image.BILINEAR)
+
+        augmented_images = []
+
+        for image in images:
+            augmented_images.append(do(image))
+
+        return augmented_images
+
+
 class ResizeRandom(Operation):
     """
     This class is used to resize an image by a random factor between min_factor and max_factor.
@@ -846,8 +926,8 @@ class ResizeRandom(Operation):
         def do(image):
             width, height = image.size
             resize_factor = random.randrange(round(self.min_factor*100), round(self.max_factor*100), 1)/100
-            width = round(width*resize_factor) 
-            height = round(height*resize_factor) 
+            width = round(width*resize_factor)
+            height = round(height*resize_factor)
             print(f'New Width: {width}, New Height: {height}')
             return image.resize((width, height), eval("Image.%s" % self.resample_filter))
 
@@ -857,7 +937,7 @@ class ResizeRandom(Operation):
             augmented_images.append(do(image))
 
         return augmented_images
-    
+
 class CropRandomAlign(Operation):
     """
     This class is used to crop images a random factor between min_factor and max_factor and resize it to its original size.
@@ -894,14 +974,14 @@ class CropRandomAlign(Operation):
             mask_in_pct = (mask_in>0).sum()/mask_in.size
             img_out_candidate = None
             lowest_diff = 1
-            for i in range(20):  
+            for i in range(20):
                 left_shift = random.randint(0, int((w - w_new)))
                 down_shift = random.randint(0, int((h - h_new)))
                 img_out = image.crop((left_shift, down_shift, w_new + left_shift, h_new + down_shift))
                 mask_out = np.array(img_out)[:,:,2]
                 mask_out_pct = (mask_out>0).sum()/mask_out.size
                 #print(f'mask_in_pct:{mask_in_pct}, mask_out_pct:{mask_out_pct}')
-                if (mask_in_pct==0) or (abs((mask_out_pct/mask_in_pct)-1) <= self.mask_diff_pct):                    
+                if (mask_in_pct==0) or (abs((mask_out_pct/mask_in_pct)-1) <= self.mask_diff_pct):
                     img_out_candidate = img_out
                     break
                 if (abs((mask_out_pct/mask_in_pct)-1)) <= lowest_diff:
@@ -914,20 +994,20 @@ class CropRandomAlign(Operation):
             mask_out = np.array(img_out_candidate)[:,:,2]
             #print(f'image mask pct:{(mask_out>0).sum()/mask_out.size}')
             img_out_final = img_out_candidate.resize((w, h), eval("Image.%s" % self.resample_filter))
-            #print(f'Image Size after resize:{img_out_final.size}')            
-            
+            #print(f'Image Size after resize:{img_out_final.size}')
+
             return img_out_final
-            
+
         augmented_images = []
 
         for image in images:
             augmented_images.append(do(image, w, h))
 
         return augmented_images
-    
+
 def log_iter_stats(y_pred, y_batch, X_batch, X_id, train_params, other_data, epoch_losses, epoch, iter_count, start):
     #from boxx import g
-    #g(), 
+    #g(),
     epoch_losses = [round(e.item(),4) for e in torch.stack(epoch_losses).mean(0)]
     iou_batch = calc_mean_iou(y_pred.ge(train_params['mask_cutoff']), y_batch)
     iou_acc = calc_clf_accuracy(y_pred.ge(train_params['mask_cutoff']), y_batch)
@@ -948,9 +1028,9 @@ def log_iter_stats(y_pred, y_batch, X_batch, X_id, train_params, other_data, epo
     y_tsfm_pred =  y_pred[0].squeeze().gt(train_params['mask_cutoff'])
     plot_img_mask_pred([X_orig, X_tsfm, y_orig, y_tsfm, y_tsfm_pred],
                        ['X Original', 'X Transformed', 'y Original', 'y Transformed', 'y Predicted'])
-    
 
-def log_epoch_stats(model, optimizer, scheduler, y_pred, y_batch, X_batch, X_id, other_data, pred_vs_true_epoch, train_params, phase, epoch, iter_count, best_iou, all_losses, epoch_losses, best_model):    
+
+def log_epoch_stats(model, optimizer, scheduler, y_pred, y_batch, X_batch, X_id, other_data, pred_vs_true_epoch, train_params, phase, epoch, iter_count, best_iou, all_losses, epoch_losses, best_model):
     y_pred_epoch = torch.cat([e[0] for e in pred_vs_true_epoch])
     y_true_epoch = torch.cat([e[1] for e in pred_vs_true_epoch])
 
@@ -958,7 +1038,7 @@ def log_epoch_stats(model, optimizer, scheduler, y_pred, y_batch, X_batch, X_id,
     mean_acc_epoch = calc_clf_accuracy(y_pred_epoch.ge(train_params['mask_cutoff']), y_true_epoch.float())
     mean_loss_epoch = [round(e.item(),4) for e in torch.stack(epoch_losses).mean(0)]
 
-    if phase == 'val':        
+    if phase == 'val':
         X_val = other_data['X_val']
         y_val = other_data['y_val']
         X_orig = X_val[X_id[0]].squeeze()/255
@@ -975,7 +1055,7 @@ def log_epoch_stats(model, optimizer, scheduler, y_pred, y_batch, X_batch, X_id,
                                               copy.deepcopy(optimizer.state_dict()),
                                               copy.deepcopy(scheduler.state_dict()), stats, train_params['model_save_name'], '.')
             log.info(save_model_state_to_chunks(*best_model))
-            log.info('Best Val Mean IOU so far: {}'.format(best_iou))        
+            log.info('Best Val Mean IOU so far: {}'.format(best_iou))
         log.info('Val   IOU: {:.4f}, Acc: {:.4f}, Best Val IOU: {:.4f} at epoch {}'.format(mean_iou_epoch, mean_acc_epoch, best_iou, epoch))
     else:
         log.info('Train IOU: {:.4f}, Acc: {:.4f}, Loss: {} at epoch {}'.format(mean_iou_epoch, mean_acc_epoch, mean_loss_epoch, epoch))
@@ -990,10 +1070,10 @@ def log_epoch_stats(model, optimizer, scheduler, y_pred, y_batch, X_batch, X_id,
         y_tsfm_pred =  y_pred[0].squeeze().gt(train_params['mask_cutoff'])
         plot_img_mask_pred([X_orig, X_tsfm, y_orig, y_tsfm, y_tsfm_pred],
                            ['X Original', 'X Transformed', 'y Original', 'y Transformed', 'y Predicted'])
-        
+
     return best_iou, best_model
 
-def save_model_to_git(epoch, train_params, num_epochs, prev_best_iou, best_iou, best_model):    
+def save_model_to_git(epoch, train_params, num_epochs, prev_best_iou, best_iou, best_model):
     if (epoch % train_params['save_model_every']== 0) | (epoch == num_epochs-1):
         if train_params['model_save_name'] is None:
             log.info("Skip pushing model to git as model_save_name is None.")
@@ -1003,28 +1083,28 @@ def save_model_to_git(epoch, train_params, num_epochs, prev_best_iou, best_iou, 
             prev_best_iou = best_iou
         else:
             log.info("Skip pushing model to git as there's no improvement")
-            
+
     return prev_best_iou
 
 def calc_loss(y_pred, y_batch, loss_fns, loss_fn_weights):
      losses = []
      for loss_fn, loss_fn_weight in zip(loss_fns, loss_fn_weights):
          loss = loss_fn_weight * loss_fn(y_pred, y_batch)
-         losses.append(loss)  
+         losses.append(loss)
 
      return torch.stack(losses + [torch.stack(losses).sum()])
 
 def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, scheduler, train_params, other_data):
-    global log 
+    global log
     log = train_params['log']
-    log.info('Start Training...')    
+    log.info('Start Training...')
     log.info((dataloaders, loss_fns, loss_fn_weights, optimizer, scheduler, train_params))
     num_epochs = train_params['num_epochs']
     start = time.time()
     if torch.cuda.is_available():
         model.cuda()
     best_model = None
-    best_iou = 0.0    
+    best_iou = 0.0
     prev_best_iou = train_params['model_save_iou_threshold']
     all_losses = []
     iter_count = 0
@@ -1036,7 +1116,7 @@ def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, schedu
             push_log_to_git()
         epoch_losses = []
         for phase in ['train', 'val']:
-            model.train() if phase == 'train' else model.eval()      
+            model.train() if phase == 'train' else model.eval()
             pred_vs_true_epoch = []
             for X_batch, y_batch, d_batch, X_id in dataloaders[phase]:
                 # zero the parameter gradients
@@ -1054,19 +1134,24 @@ def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, schedu
                         optimizer.step()
                         iter_count += 1
             best_iou, best_model = (
-                    log_epoch_stats(model, optimizer, scheduler, y_pred, 
-                                    y_batch, X_batch, X_id, other_data, 
-                                    pred_vs_true_epoch, train_params, 
-                                    phase, epoch, iter_count, best_iou, 
+                    log_epoch_stats(model, optimizer, scheduler, y_pred,
+                                    y_batch, X_batch, X_id, other_data,
+                                    pred_vs_true_epoch, train_params,
+                                    phase, epoch, iter_count, best_iou,
                                     all_losses, epoch_losses, best_model)
                     )
-            
+
         prev_best_iou = save_model_to_git(epoch, train_params, num_epochs, prev_best_iou, best_iou, best_model)
         #from boxx import g
         #g()
         epoch_avg_loss = np.mean([e[-1].item() for e in epoch_losses])
-        log.info(f'scheduler best: {scheduler.best} num_bad_epochs:{scheduler.num_bad_epochs}')
-        log.info(scheduler.step(epoch_avg_loss))
+        if isinstance(scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
+            log.info(f'scheduler best: {scheduler.best} num_bad_epochs:{scheduler.num_bad_epochs}')
+            scheduler.step(epoch_avg_loss)
+            log.info([p['lr'] for p in optimizer.param_groups])
+        else:
+            scheduler.step(epoch)
+            log.info(f"LR: {[round(p['lr'],4) for p in optimizer.param_groups]}")
 
 
     # load best model weights
@@ -1076,8 +1161,28 @@ def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, schedu
 
     return model
 
-def setup_train(config_list):
-    for conf in config_list:
-        log.info(conf)
-    for conf in config_list:
-        exec(conf)
+class PolyLR(object):
+    def __init__(self, optimizer, init_lr, lr_decay_iter=1, max_iter=150, power=0.9):
+        super(PolyLR, self).__init__()
+        self.optimizer = optimizer
+        self.init_lr = init_lr
+        self.lr_decay_iter = lr_decay_iter
+        self.max_iter = max_iter
+        self.power = power
+
+    def state_dict(self):
+        return {}
+    def step(self,iter):
+        """Polynomial decay of learning rate
+            :param init_lr is base learning rate
+            :param iter is a current iteration
+            :param lr_decay_iter how frequently decay occurs, default is 1
+            :param max_iter is number of maximum iterations
+            :param power is a polymomial power
+        """
+        if iter % self.lr_decay_iter or iter > self.max_iter:
+            return self.optimizer
+        if not isinstance(self.init_lr, list):
+            self.init_lr = [self.init_lr]
+        for i in range(len(self.init_lr)):
+            self.optimizer.param_groups[i]['lr'] = self.init_lr[i]*(1 - iter/self.max_iter)**self.power
