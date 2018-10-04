@@ -1151,7 +1151,7 @@ def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, schedu
             log.info([p['lr'] for p in optimizer.param_groups])
         else:
             scheduler.step(epoch)
-            log.info(f"LR: {[round(p['lr'],4) for p in optimizer.param_groups]}")
+            log.info(f"LR: {[round(p['lr'],7) for p in optimizer.param_groups]}")
 
 
     # load best model weights
