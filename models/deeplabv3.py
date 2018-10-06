@@ -12,9 +12,11 @@ from .aspp import ASPP, ASPP_Bottleneck
 class DeepLabV3(nn.Module):
     def __init__(self, model_id, project_dir, resnet_layer):
         super(DeepLabV3, self).__init__()
-        assert resnet_layer in [18,34,50]
-        resnet = {18:ResNet18_OS8, 34:ResNet34_OS8, 50:ResNet50_OS16}[resnet_layer]
-        aspp_net = {18:ASPP, 34:ASPP, 50:ASPP_Bottleneck}[resnet_layer]
+        assert resnet_layer in [18,34,50,101,152]
+        resnet = {18:ResNet18_OS8, 34:ResNet34_OS8, 50:ResNet50_OS16,
+                  101:ResNet101_OS16, 152:ResNet152_OS16}[resnet_layer]
+        aspp_net = {18:ASPP, 34:ASPP, 50:ASPP_Bottleneck,
+                    101:ASPP_Bottleneck, 152:ASPP_Bottleneck}[resnet_layer]
         self.num_classes = 1
 
         self.model_id = model_id
