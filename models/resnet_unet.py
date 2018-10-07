@@ -170,11 +170,11 @@ class ResNet_BasicBlock_OS16(nn.Module):
         return output
 
 class ResNet_BasicBlock_OS8(nn.Module):
-    def __init__(self, num_layers):
+    def __init__(self, num_layers, pretrained=True):
         super(ResNet_BasicBlock_OS8, self).__init__()
 
         if num_layers == 18:
-            resnet = models.resnet18(pretrained=True)
+            resnet = models.resnet18(pretrained=pretrained)
             # load pretrained model:
             #resnet.load_state_dict(torch.load("./resnet18-5c106cde.pth"))
             # remove fully connected layer, avg pool, layer4 and layer5:
@@ -184,11 +184,22 @@ class ResNet_BasicBlock_OS8(nn.Module):
             num_blocks_layer_5 = 2
             print ("pretrained resnet, 18")
         elif num_layers == 34:
-            resnet = models.resnet34(pretrained=True)
+            resnet = models.resnet34(pretrained=pretrained)
             # load pretrained model:
             #resnet.load_state_dict(torch.load("./resnet34-333f7ec4.pth"))
             # remove fully connected layer, avg pool, layer4 and layer5:
             self.resnet = nn.Sequential(*list(resnet.children())[:-4])
+
+            self.conv1 = nn.Sequential(
+                resnet.conv1,
+                resnet.bn1,
+                resnet.relu,
+                resnet.maxpool
+                )
+            num_blocks_layer_4 = 6
+            num_blocks_layer_5 = 3
+            self.encoder2 = resnet.layer1
+            self.encoder3 = resnet.layer2
 
             num_blocks_layer_4 = 6
             num_blocks_layer_5 = 3
@@ -196,21 +207,19 @@ class ResNet_BasicBlock_OS8(nn.Module):
         else:
             raise Exception("num_layers must be in {18, 34}!")
 
-        self.layer4 = make_layer(BasicBlock, in_channels=128, channels=256, num_blocks=num_blocks_layer_4, stride=1, dilation=2)
+        self.encoder4 = make_layer(BasicBlock, in_channels=128, channels=256, num_blocks=num_blocks_layer_4, stride=1, dilation=2)
 
-        self.layer5 = make_layer(BasicBlock, in_channels=256, channels=512, num_blocks=num_blocks_layer_5, stride=1, dilation=4)
+        self.encoder5 = make_layer(BasicBlock, in_channels=256, channels=512, num_blocks=num_blocks_layer_5, stride=1, dilation=4)
 
     def forward(self, x):
-        # (x has shape (batch_size, 3, h, w))
+        #Input shape:           #2, 3, 128, 128
+        x = self.conv1(x)       #2, 64, 32, 32
+        e2 = self.encoder2(x)   #2, 64, 32, 32
+        e3 = self.encoder3(e2)  #2, 128, 16, 16
+        e4 = self.encoder4(e3)  #2, 256, 16, 16
+        e5 = self.encoder5(e4)  #2, 512, 16, 16
 
-        # pass x through (parts of) the pretrained ResNet:
-        c3 = self.resnet(x) # (shape: (batch_size, 128, h/8, w/8)) (it's called c3 since 8 == 2^3)
-        from boxx import g
-        g()
-        output = self.layer4(c3) # (shape: (batch_size, 256, h/8, w/8))
-        output = self.layer5(output) # (shape: (batch_size, 512, h/8, w/8))
-
-        return output
+        return [e2,e3,e4,e5]
 
 def ResNet18_OS16():
     return ResNet_BasicBlock_OS16(num_layers=18)
@@ -230,5 +239,5 @@ def ResNet152_OS16():
 def ResNet18_OS8():
     return ResNet_BasicBlock_OS8(num_layers=18)
 
-def ResNet34_OS8():
-    return ResNet_BasicBlock_OS8(num_layers=34)
+def ResNet34_OS8(pretrained=True):
+    return ResNet_BasicBlock_OS8(num_layers=34, pretrained=pretrained)
