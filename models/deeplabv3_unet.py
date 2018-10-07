@@ -6,8 +6,8 @@ import torch.nn.functional as F
 
 import os
 
-from resnet_unet import ResNet18_OS16, ResNet34_OS16, ResNet50_OS16, ResNet101_OS16, ResNet152_OS16, ResNet18_OS8, ResNet34_OS8
-from aspp_unet import ASPP, ASPP_Bottleneck
+from .resnet_unet import ResNet18_OS16, ResNet34_OS16, ResNet50_OS16, ResNet101_OS16, ResNet152_OS16, ResNet18_OS8, ResNet34_OS8
+from .aspp_unet import ASPP, ASPP_Bottleneck
 
 class OutConv(nn.Module):
     def __init__(self, in_ch, logits=False):
