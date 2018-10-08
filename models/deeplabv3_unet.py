@@ -6,8 +6,8 @@ import torch.nn.functional as F
 
 import os
 
-from resnet_unet import ResNet18_OS16, ResNet34_OS16, ResNet50_OS16, ResNet101_OS16, ResNet152_OS16, ResNet18_OS8, ResNet34_OS8
-from aspp_unet import ASPP, ASPP_Bottleneck
+from .resnet_unet import ResNet18_OS16, ResNet34_OS16, ResNet50_OS16, ResNet101_OS16, ResNet152_OS16, ResNet18_OS8, ResNet34_OS8
+from .aspp_unet import ASPP, ASPP_Bottleneck
 
 class OutConv(nn.Module):
     def __init__(self, in_ch, logits=False):
@@ -26,10 +26,6 @@ class OutConv(nn.Module):
             x_out = self.sig(x_conv)
         else:
             x_out = x_conv
-
-        crop_start = (x.shape[-1]-101)//2
-        crop_end = crop_start + 101
-        x_out = x_out[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
 
         return x_out
 
@@ -156,6 +152,12 @@ class DeepLabV3(nn.Module):
         output = F.dropout2d(output, p=0.5)
         output = self.outc(output)          #1, 101,101
 
+
+        # crop prediction to the same shapse as input in eval mode.
+        if not self.training:
+            crop_start = (x.shape[-1]-101)//2
+            crop_end = crop_start + 101
+            output = output[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
 
         return output
 

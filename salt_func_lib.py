@@ -717,7 +717,7 @@ class SaltDataset(Dataset):
     """Face Landmarks dataset."""
 
     def __init__(self, np_img, np_mask, df_depth, mean_img, out_size=101,
-                 out_ch=1, transform=None, random_brightness=0):
+                 out_ch=1, transform=None, random_brightness=0, resize_y=False):
         """
         Args:
             data_dir (string): Path to the image files.
@@ -733,6 +733,7 @@ class SaltDataset(Dataset):
         self.out_ch = out_ch
         self.transform = transform
         self.random_brightness = random_brightness
+        self.resize_y = resize_y
 
     def __len__(self):
         return len(self.np_img)
@@ -755,7 +756,7 @@ class SaltDataset(Dataset):
             transformed = np.array(self.transform(img_in))
             #X = np.clip(transformed[:,:,0:1]/255, 0., 1.) - self.mean_img
             X = transformed[:,:,0:1]
-            y = np.clip(transformed[:,:,2:3]/255, 0., 1.)
+            y = np.clip(transformed[:,:,2:3]/255, 0., 1.).squeeze()
 
         if self.random_brightness > random.random():
             # disable brightness adjustment
@@ -776,7 +777,9 @@ class SaltDataset(Dataset):
 
         X = torch.from_numpy(X).float().type(dtype)
         X = X.repeat(self.out_ch,1,1)
-        y = transform.resize(y, (101, 101), mode='constant', preserve_range=True)
+
+        if self.resize_y:
+            y = np.pad(y, [(pad_first, pad_last), (pad_first, pad_last)], mode='reflect')
         y = torch.from_numpy(y).ge(0.5).float().squeeze().type(dtype)
 
         return (X,y,d,idx)
@@ -1067,6 +1070,8 @@ def log_epoch_stats(model, optimizer, scheduler, y_pred, y_batch, X_batch, X_id,
         X_tsfm = X_tsfm[13:114,13:114] + X_train_mean_img.squeeze()
         y_orig = y_train[X_id[0]].squeeze()
         y_tsfm = (y_batch[0].squeeze().cpu().detach().numpy())
+        if y_tsfm.shape[-1] == 128:
+            y_tsfm = y_tsfm[13:114,13:114]
         y_tsfm_pred =  y_pred[0].squeeze().gt(train_params['mask_cutoff'])
         plot_img_mask_pred([X_orig, X_tsfm, y_orig, y_tsfm, y_tsfm_pred],
                            ['X Original', 'X Transformed', 'y Original', 'y Transformed', 'y Predicted'])
