@@ -757,6 +757,8 @@ class SaltDataset(Dataset):
             #X = np.clip(transformed[:,:,0:1]/255, 0., 1.) - self.mean_img
             X = transformed[:,:,0:1]
             y = np.clip(transformed[:,:,2:3]/255, 0., 1.).squeeze()
+        else:
+            y = y.squeeze()
 
         if self.random_brightness > random.random():
             # disable brightness adjustment
@@ -764,8 +766,7 @@ class SaltDataset(Dataset):
             X = np.clip(X/255, 0., 1.) - self.mean_img
         else:
             X = np.clip(X/255, 0., 1.) - self.mean_img
-        #from boxx import g
-        #g()
+
         X = np.moveaxis(X, -1,0)
 
         pad_size = self.out_size - X.shape[2]
@@ -780,7 +781,7 @@ class SaltDataset(Dataset):
 
         if self.resize_y:
             y = np.pad(y, [(pad_first, pad_last), (pad_first, pad_last)], mode='reflect')
-        y = torch.from_numpy(y).ge(0.5).float().squeeze().type(dtype)
+        y = torch.from_numpy(y).float().ge(0.5).float().type(dtype)
 
         return (X,y,d,idx)
 
