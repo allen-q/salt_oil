@@ -157,7 +157,7 @@ class DeepLabV3(nn.Module):
         if not self.training:
             crop_start = (x.shape[-1]-101)//2
             crop_end = crop_start + 101
-            output = output[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
+            output = output[:,:,crop_start:crop_end,crop_start:crop_end]
 
-        return output
+        return output.squeeze()
 
