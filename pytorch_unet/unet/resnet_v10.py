@@ -140,7 +140,7 @@ class OutConv(nn.Module):
         #crop_end = crop_start + 101
         #x_out = x_out[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
         
-        return x_out
+        return x_out.squeeze()
 
 
 
