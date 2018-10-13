@@ -205,8 +205,8 @@ class ResNet_BasicBlock_OS8(nn.Module):
 
         # pass x through (parts of) the pretrained ResNet:
         c3 = self.resnet(x) # (shape: (batch_size, 128, h/8, w/8)) (it's called c3 since 8 == 2^3)
-        from boxx import g
-        g()
+        #from boxx import g
+        #g()
         output = self.layer4(c3) # (shape: (batch_size, 256, h/8, w/8))
         output = self.layer5(output) # (shape: (batch_size, 512, h/8, w/8))
 
