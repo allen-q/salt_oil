@@ -29,6 +29,11 @@ class DeepLabV3(nn.Module):
         self.aspp = aspp_net(num_classes=self.num_classes)
     def forward(self, x):
         # (x has shape (batch_size, 1, h, w))
+        x_crop_start = (x.shape[-1]-101)//2
+        x_crop_end = x_crop_start + 101
+        x = x[:,:,x_crop_start:x_crop_end,x_crop_start:x_crop_end]
+        #resize image to 256*256
+        x = F.upsample(x, size=(256, 256), mode="bilinear")
         mean = [0.485, 0.456, 0.406]
         std = [0.229, 0.224, 0.225]
 
@@ -45,11 +50,12 @@ class DeepLabV3(nn.Module):
         feature_map = self.resnet(x) # (shape: (batch_size, 512, h/16, w/16)) (assuming self.resnet is ResNet18_OS16 or ResNet34_OS16. If self.resnet is ResNet18_OS8 or ResNet34_OS8, it will be (batch_size, 512, h/8, w/8). If self.resnet is ResNet50-152, it will be (batch_size, 4*512, h/16, w/16))
 
         output = self.aspp(feature_map) # (shape: (batch_size, num_classes, h/16, w/16))
+        output = F.upsample(output, size=(101, 101), mode="bilinear")
 
-        output = F.upsample(output, size=(h, w), mode="bilinear") # (shape: (batch_size, num_classes, h, w))
-        crop_start = (output.shape[-1]-101)//2
-        crop_end = crop_start + 101
-        output = output[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
+        #output = F.upsample(output, size=(h, w), mode="bilinear") # (shape: (batch_size, num_classes, h, w))
+        #crop_start = (output.shape[-1]-101)//2
+        #crop_end = crop_start + 101
+        #output = output[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
 
         return output
 
