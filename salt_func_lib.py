@@ -1167,6 +1167,77 @@ def train_model(model, dataloaders, loss_fns, loss_fn_weights, optimizer, schedu
 
     return model
 
+def train_model_ds(model, dataloaders, loss_fns, loss_fn_weights, optimizer, scheduler, train_params, other_data):
+    global log
+    log = train_params['log']
+    log.info('Start Training...')
+    log.info((dataloaders, loss_fns, loss_fn_weights, optimizer, scheduler, train_params))
+    num_epochs = train_params['num_epochs']
+    start = time.time()
+    if torch.cuda.is_available():
+        model.cuda()
+    best_model = None
+    best_iou = 0.0
+    prev_best_iou = train_params['model_save_iou_threshold']
+    all_losses = []
+    iter_count = 0
+
+    for epoch in range(1, num_epochs+1):
+        log.info('Epoch {}/{}'.format(epoch, num_epochs))
+        log.info('-' * 20)
+        if (epoch % train_params['save_log_every'] == 0):
+            push_log_to_git()
+        epoch_losses = []
+        for phase in ['train', 'val']:
+            model.train() if phase == 'train' else model.eval()
+            pred_vs_true_epoch = []
+            for X_batch, y_batch, d_batch, X_id in dataloaders[phase]:
+                # zero the parameter gradients
+                optimizer.zero_grad()
+                with torch.set_grad_enabled(phase == 'train'):
+
+                    y_pred_fuse = model(X_batch)
+                    y_pred = y_pred_fuse[:,0].squeeze()
+                    pred_vs_true_epoch.append([y_pred, y_batch])
+                    # backward + optimize only if in training phase
+                    if phase == 'train':
+                        y_batch_fuse = y_batch.repeat(y_pred_fuse.shape[1],1,1).view(len(y_batch),y_pred_fuse.shape[1],101,101)
+                        losses = calc_loss(y_pred_fuse, y_batch_fuse.float(), loss_fns, loss_fn_weights)
+                        epoch_losses.append(losses)
+                        all_losses.append(losses)
+                        loss = losses[-1]
+                        loss.backward()
+                        optimizer.step()
+                        iter_count += 1
+            best_iou, best_model = (
+                    log_epoch_stats(model, optimizer, scheduler, y_pred,
+                                    y_batch, X_batch, X_id, other_data,
+                                    pred_vs_true_epoch, train_params,
+                                    phase, epoch, iter_count, best_iou,
+                                    all_losses, epoch_losses, best_model)
+                    )
+
+        prev_best_iou = save_model_to_git(epoch, train_params, num_epochs, prev_best_iou, best_iou, best_model)
+        #from boxx import g
+        #g()
+        epoch_avg_loss = np.mean([e[-1].item() for e in epoch_losses])
+        if isinstance(scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
+            log.info(f'scheduler best: {scheduler.best} num_bad_epochs:{scheduler.num_bad_epochs}')
+            scheduler.step(epoch_avg_loss)
+            log.info([p['lr'] for p in optimizer.param_groups])
+        else:
+            scheduler.step(epoch)
+            log.info(f"LR: {[round(p['lr'],7) for p in optimizer.param_groups]}")
+
+
+    # load best model weights
+    model.load_state_dict(best_model[1])
+    log.info('-' * 20)
+    log.info(f'Training complete in {(time.time() - start) // 60} mins. Best Val IOU {round(best_iou, 4)}')
+
+    return model
+
+
 class PolyLR(object):
     def __init__(self, optimizer, init_lr, lr_decay_iter=1, max_iter=150, power=0.9):
         super(PolyLR, self).__init__()
