@@ -138,7 +138,7 @@ class OutConv(nn.Module):
             
         crop_start = (x.shape[-1]-101)//2
         crop_end = crop_start + 101
-        x_out = x_out[:,:,crop_start:crop_end,crop_start:crop_end].squeeze()
+        x_out = x_out[:,:,crop_start:crop_end,crop_start:crop_end]
         
         return x_out
 
@@ -392,7 +392,7 @@ class Decoder(nn.Module):
         self.se = Seq_Ex_Block(out_ch, r)
         
     def forward(self, x, x2=None):
-        x = F.upsample(x, scale_factor=2, mode='bilinear', align_corners=True)
+        x = F.upsample(x, scale_factor=x2.shape[-1]//x.shape[-1], mode='bilinear', align_corners=False)
         if x2 is not None:
             x = torch.cat([x, x2], 1)
             
@@ -411,14 +411,16 @@ class UResNet(nn.Module):
         super(UResNet, self).__init__()
         self.resnet = resnet34(pretrained=pretrained)
         
-        self.conv1 = nn.Sequential(
-            self.resnet.conv1,
-            self.resnet.bn1,
-            self.resnet.relu,
-            #self.resnet.maxpool
-            )
+        self.encoder1 = nn.Sequential(
+            nn.Conv2d(3, 64, kernel_size=7, stride=1, padding=3, bias=False),
+            nn.BatchNorm2d(64),
+            nn.ReLU(inplace=True),
+        )
         
-        self.encoder2 = self.resnet.layer1
+        self.encoder2 = nn.Sequential(
+            nn.MaxPool2d(kernel_size=2, stride=2),
+            self.resnet.layer1,
+        )
         self.encoder3 = self.resnet.layer2
         self.encoder4 = self.resnet.layer3
         self.encoder5 = self.resnet.layer4
@@ -435,12 +437,30 @@ class UResNet(nn.Module):
         self.decoder4 = Decoder(64+256, 256, 64)
         self.decoder3 = Decoder(64+128, 128, 64)
         self.decoder2 = Decoder(64+64, 64, 64)
-        self.decoder1 = Decoder(64, 32, 64)
+        self.decoder1 = Decoder(64+64, 32, 64)
         
-        self.se_f = Seq_Ex_Block(320, 16)
                
-        self.outc = OutConv(320, logits=True)
+        self.outc = OutConv(5, logits=True)
+        
+        self.logit_pixel  = nn.Sequential(
+            nn.Conv2d(320, 64, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d( 64,  1, kernel_size=1, padding=0),
+        )
+        
+        self.logit_decoder  = nn.Sequential(
+            nn.Conv2d(64, 32, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d( 32,  1, kernel_size=1, padding=0),
+        )
+    
+        self.logit_image = nn.Sequential(
+            nn.Linear(512, 128),
+            nn.ReLU(inplace=True),
+            nn.Linear(128, 1),
+        )
     def forward(self, x):
+        batch_size,C,H,W = x.shape
         mean = [0.485, 0.456, 0.406]
         std = [0.229, 0.224, 0.225]
         
@@ -450,8 +470,9 @@ class UResNet(nn.Module):
                 (x-mean[0])/std[0],
                 ], 1)
     
-        x = self.conv1(x)           #64, 64, 64
-        e2 = self.encoder2(x)       #64, 64, 64
+        
+        e1 = self.encoder1(x)           #64, 64, 64
+        e2 = self.encoder2(e1)       #64, 64, 64
         e3 = self.encoder3(e2)      #128, 32, 32
         e4 = self.encoder4(e3)      #256, 16, 16
         e5 = self.encoder5(e4)      #512, 8, 8
@@ -461,21 +482,31 @@ class UResNet(nn.Module):
         d4 = self.decoder4(d5, e4)  #64, 16, 16
         d3 = self.decoder3(d4, e3)  #64, 32, 32
         d2 = self.decoder2(d3, e2)  #64, 64, 64
-        d1 = self.decoder1(d2)      #64, 128, 128
+        d1 = self.decoder1(d2, e1)  #64, 128, 128
         
+        d5 = self.logit_decoder(d5)
+        d4 = self.logit_decoder(d4)
+        d3 = self.logit_decoder(d3)
+        d2 = self.logit_decoder(d2)
+        d1 = self.logit_decoder(d1)
+
         
-        f = torch.cat((
+        decoder_logit = torch.cat((
                 d1,
                 F.upsample(d2, scale_factor=2, mode='bilinear', align_corners=False),
                 F.upsample(d3, scale_factor=4, mode='bilinear', align_corners=False),
                 F.upsample(d4, scale_factor=8, mode='bilinear', align_corners=False),
-                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
+                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False)
                 ), 1)               #320, 128, 128
-        f = self.se_f(f)
-        f = F.dropout2d(f, p=0.5)
+
+        f = F.dropout2d(decoder_logit, p=0.5, training=self.training)
+        
+        
         out = self.outc(f)          #1, 101,101
     
-        from boxx import g
-        g()
-        return out
+        x_crop_start = (x.shape[-1]-101)//2
+        x_crop_end = x_crop_start + 101
+        decoder_logit = decoder_logit[:,:,x_crop_start:x_crop_end,x_crop_start:x_crop_end]
+        
+        return torch.cat((out, decoder_logit),1)
     
