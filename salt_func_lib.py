@@ -1267,10 +1267,10 @@ def train_model_ds(model, dataloaders, loss_fns, loss_fn_weights, optimizer, sch
                 optimizer.zero_grad()
                 with torch.set_grad_enabled(phase == 'train'):
                     y_pred_fuse = model(X_batch)
-                    y_pred = y_pred_fuse[:,0].squeeze()
+                    y_pred = y_pred_fuse[0]
                     pred_vs_true_epoch.append([y_pred, y_batch])
                     # backward + optimize only if in training phase
-                    if phase == 'train':                        
+                    if phase == 'train':    
                         losses = calc_loss(y_pred_fuse, y_batch.float(), loss_fns, loss_fn_weights)
                         epoch_losses.append(losses)
                         all_losses.append(losses)
