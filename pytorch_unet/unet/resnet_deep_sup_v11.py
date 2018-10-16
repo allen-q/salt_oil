@@ -439,12 +439,12 @@ class UResNet(nn.Module):
         self.decoder2 = Decoder(64+64, 64, 64)
         self.decoder1 = Decoder(64+64, 32, 64)
 
-        self.se_f = Seq_Ex_Block(320, 16)
+        self.se_f = Seq_Ex_Block(832, 16)
 
         self.outc = OutConv(320, logits=True)
 
         self.logit_pixel  = nn.Sequential(
-            nn.Conv2d(320, 64, kernel_size=3, padding=1),
+            nn.Conv2d(832, 64, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
             nn.Conv2d( 64,  1, kernel_size=1, padding=0),
         )
@@ -511,21 +511,24 @@ class UResNet(nn.Module):
                          self.crop_tensor(d1_logit, x_crop_start, x_crop_end)])
                  .squeeze().permute(1,0,2,3)
             )
+    
+        img_clf = F.adaptive_avg_pool2d(e5, output_size=1)
         f = torch.cat((
                 d1,
                 F.upsample(d2, scale_factor=2, mode='bilinear', align_corners=False),
                 F.upsample(d3, scale_factor=4, mode='bilinear', align_corners=False),
                 F.upsample(d4, scale_factor=8, mode='bilinear', align_corners=False),
-                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False)
+                F.upsample(d5, scale_factor=16, mode='bilinear', align_corners=False),
+                F.upsample(img_clf, scale_factor=128, mode='nearest')                
                 ), 1)               #320, 128, 128
 
         f = self.se_f(f)
         f = F.dropout2d(f, p=0.5, training=self.training)
         logit_pixel = self.logit_pixel(f)
         logit_pixel = self.crop_tensor(logit_pixel, x_crop_start, x_crop_end).squeeze()
-        img_clf = F.adaptive_avg_pool2d(e5, output_size=1).view(batch_size,-1)
-        img_clf = F.dropout(img_clf, p=0.50, training=self.training)
-        logit_image = self.logit_image(img_clf).view(-1)
+        
+        #img_clf = F.dropout(img_clf, p=0.50, training=self.training)
+        logit_image = self.logit_image(img_clf.view(batch_size,-1)).view(-1)
 
 
         #out = self.outc(f)          #1, 101,101
