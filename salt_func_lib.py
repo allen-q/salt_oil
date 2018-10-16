@@ -563,9 +563,9 @@ class FocalLoss(nn.Module):
             return F_loss
 
 
-class TripleLoss(nn.Module):
+class TripleBCELoss(nn.Module):
     def __init__(self, pix_w, img_w, dec_w):
-        super(TripleLoss, self).__init__()
+        super(TripleBCELoss, self).__init__()
         self.pix_w = pix_w
         self.img_w = img_w
         self.dec_w = dec_w
@@ -577,22 +577,62 @@ class TripleLoss(nn.Module):
         pix_target = targets
         img_target = targets.view(B,-1).mean(1)
         dec_target = targets.repeat(dec_layers,1,1).reshape(B,dec_layers,W,H)
-        dec = dec[img_target.eq(0)]
-        dec_target = dec_target[img_target.eq(0)]
-
-        if self.logits:
-            BCE_loss = F.binary_cross_entropy_with_logits(inputs, targets, reduce=False)
+        if img_target.gt(0).sum()==0:
+            dec_loss = 0
         else:
-            BCE_loss = F.binary_cross_entropy(inputs, targets, reduce=False)
-        pt = torch.exp(-BCE_loss)
-        F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
+            dec = dec[img_target.gt(0)]
+            dec_target = dec_target[img_target.gt(0)]
+            dec_loss = F.binary_cross_entropy_with_logits(dec, dec_target, reduction='elementwise_mean')
+        pix_loss = F.binary_cross_entropy_with_logits(pix, pix_target, reduction='elementwise_mean')
+        img_loss = F.binary_cross_entropy_with_logits(img, img_target, reduction='elementwise_mean')
+        
 
-        if self.reduce:
-            return torch.mean(F_loss)
-        else:
-            return F_loss
+        loss = pix_loss*self.pix_w + img_loss*self.img_w + dec_loss*self.dec_w
+        
+        return loss
+    
+class TripleLovaszLoss_bak(nn.Module):
+    def __init__(self, pix_w, img_w, dec_w):
+        super(TripleLovaszLoss_bak, self).__init__()
+        self.pix_w = pix_w
+        self.img_w = img_w
+        self.dec_w = dec_w
 
+    def forward(self, inputs, targets):
+        B,W,H = targets.shape
+        pix, img, dec = inputs
+        dec_layers = dec.shape[1]
+        pix_target = targets
+        img_target = targets.view(B,-1).mean(1)
+        dec_target = targets.repeat(dec_layers,1,1).reshape(B,dec_layers,W,H)
+        dec = dec[img_target.gt(0)]
+        dec_target = dec_target[img_target.gt(0)]
+        
+        pix_loss_lovasz = LovaszHingeLoss()
+        img_loss_lovasz = LovaszHingeLoss()
+        dec_loss_lovasz = LovaszHingeLoss()
+        
+        pix_loss = pix_loss_lovasz(pix, pix_target)
+        img_loss = img_loss_lovasz(img, img_target)
+        dec_loss = dec_loss_lovasz(dec, dec_target)
 
+        loss = pix_loss*self.pix_w + img_loss*self.img_w + dec_loss*self.dec_w
+        
+        return loss
+
+class TripleLovaszLoss(nn.Module):
+    def __init__(self):
+        super(TripleLovaszLoss, self).__init__()
+
+    def forward(self, inputs, targets):
+        B,W,H = targets.shape
+        pix, img, dec = inputs
+        pix_target = targets
+        pix_loss_lovasz = LovaszHingeLoss()
+        pix_loss = pix_loss_lovasz(pix, pix_target)
+        
+        return pix_loss
+    
 
 class LovaszHingeLoss(nn.Module):
     def __init__(self):
@@ -1226,14 +1266,12 @@ def train_model_ds(model, dataloaders, loss_fns, loss_fn_weights, optimizer, sch
                 # zero the parameter gradients
                 optimizer.zero_grad()
                 with torch.set_grad_enabled(phase == 'train'):
-
                     y_pred_fuse = model(X_batch)
                     y_pred = y_pred_fuse[:,0].squeeze()
                     pred_vs_true_epoch.append([y_pred, y_batch])
                     # backward + optimize only if in training phase
-                    if phase == 'train':
-                        y_batch_fuse = y_batch.repeat(y_pred_fuse.shape[1],1,1).view(len(y_batch),y_pred_fuse.shape[1],101,101)
-                        losses = calc_loss(y_pred_fuse, y_batch_fuse.float(), loss_fns, loss_fn_weights)
+                    if phase == 'train':                        
+                        losses = calc_loss(y_pred_fuse, y_batch.float(), loss_fns, loss_fn_weights)
                         epoch_losses.append(losses)
                         all_losses.append(losses)
                         loss = losses[-1]
