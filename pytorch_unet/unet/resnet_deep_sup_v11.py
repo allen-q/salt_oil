@@ -392,8 +392,6 @@ class Decoder(nn.Module):
         self.se = Seq_Ex_Block(out_ch, r)
 
     def forward(self, x, x2=None):
-        from boxx import g
-        g()
         x = F.upsample(x, scale_factor=x2.shape[-1]//x.shape[-1], mode='bilinear', align_corners=False)
         if x2 is not None:
             x = torch.cat([x, x2], 1)
