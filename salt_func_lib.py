@@ -563,6 +563,37 @@ class FocalLoss(nn.Module):
             return F_loss
 
 
+class TripleLoss(nn.Module):
+    def __init__(self, pix_w, img_w, dec_w):
+        super(TripleLoss, self).__init__()
+        self.pix_w = pix_w
+        self.img_w = img_w
+        self.dec_w = dec_w
+
+    def forward(self, inputs, targets):
+        B,W,H = targets.shape
+        pix, img, dec = inputs
+        dec_layers = dec.shape[1]
+        pix_target = targets
+        img_target = targets.view(B,-1).mean(1)
+        dec_target = targets.repeat(dec_layers,1,1).reshape(B,dec_layers,W,H)
+        dec = dec[img_target.eq(0)]
+        dec_target = dec_target[img_target.eq(0)]
+
+        if self.logits:
+            BCE_loss = F.binary_cross_entropy_with_logits(inputs, targets, reduce=False)
+        else:
+            BCE_loss = F.binary_cross_entropy(inputs, targets, reduce=False)
+        pt = torch.exp(-BCE_loss)
+        F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
+
+        if self.reduce:
+            return torch.mean(F_loss)
+        else:
+            return F_loss
+
+
+
 class LovaszHingeLoss(nn.Module):
     def __init__(self):
         super(LovaszHingeLoss, self).__init__()
