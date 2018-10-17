@@ -583,7 +583,9 @@ class TripleBCELoss(nn.Module):
             dec = dec[img_target.gt(0)]
             dec_target = dec_target[img_target.gt(0)]
             dec_loss = F.binary_cross_entropy_with_logits(dec, dec_target, reduction='elementwise_mean')
-        pix_loss = F.binary_cross_entropy_with_logits(pix, pix_target, reduction='elementwise_mean')
+        pix_loss = F.binary_cross_entropy_with_logits(pix, pix_target, 
+                                                      pos_weight=torch.tensor(2.0).type(dtype),
+                                                      reduction='elementwise_mean')
         img_loss = F.binary_cross_entropy_with_logits(img, img_target, reduction='elementwise_mean')
         
 
