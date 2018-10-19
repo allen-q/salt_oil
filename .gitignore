@@ -8,6 +8,7 @@ Code/.ipynb_checkpoints/
 !depths.csv
 !misc_data.pickle
 !df_train_img_iou.pickle
+!manual_masks.pickle
 =======
 # Byte-compiled / optimized / DLL files
 __pycache__/
