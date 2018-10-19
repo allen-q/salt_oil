@@ -281,7 +281,7 @@ def join_files(filePrefix, filePath, newFileName=None, returnFileObject=False, r
         fileOut = open(newFileName, 'wb')
         for data in dataList:
             fileOut.write(data)
-        f2.close()
+        fileOut.close()
         print(f'File parts merged to {newFileName} successfully.')
 
 
@@ -493,7 +493,7 @@ def push_model_to_git(ckp_name='ckp'):
     get_ipython().system("git config user.email 'allen.qin.au@gmail.com'")
     get_ipython().system('git pull --no-edit')
     get_ipython().system('git add .')
-    get_ipython().system('git commit -m "save model state."')
+     
     get_ipython().system('git push https://allen.qin.au%40gmail.com:github0mygod@github.com/allen-q/salt_net.git --all')
     #get_ipython().system(f'git filter-branch --force --index-filter "git rm --cached --ignore-unmatch *{ckp_name.split("/")[-1]}*" --prune-empty --tag-name-filter cat -- --all')
     os.chdir('../salt_oil')
